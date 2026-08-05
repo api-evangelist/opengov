@@ -1,0 +1,94 @@
+generated: '2026-08-04'
+method: searched
+source: npm registry search, PyPI, pkg.go.dev, RubyGems, Packagist, crates.io, https://github.com/opengov,
+  https://developer.opengov.com/docs
+summary:
+  official_api_client_sdks: 0
+  official_packages_found: 3
+  third_party_packages_noted: 3
+finding: >-
+  OpenGov publishes NO first-party API client SDK in any language. The developer portal ships no SDK page,
+  no code-generation instructions and no client library links; the quickstart teaches raw curl against each
+  base URL. The github.com/opengov organization holds 47 repositories, all of which are infrastructure
+  forks (terraform providers, helm charts, Ruby gems like roo/cancancan/acts_as_paranoid, EKS AMI packer
+  configs) — none is an OpenGov API client. The @opengov npm scope is real and first-party but publishes
+  internal front-end libraries (design tokens, React components), not API clients. Recorded honestly: no
+  `SDKs` pointer is wired in apis.yml, because wiring one for a design-token package would credit an SDK
+  surface that does not exist.
+
+packages:
+- language: javascript
+  registry: npm
+  name: '@opengov/capital-style'
+  url: https://www.npmjs.com/package/@opengov/capital-style
+  install: npm install @opengov/capital-style
+  official: true
+  kind: design-system
+  api_client: false
+  description: Design tokens and styles for the OpenGov Capital Design System
+- language: javascript
+  registry: npm
+  name: '@opengov/mention-component'
+  url: https://www.npmjs.com/package/@opengov/mention-component
+  install: npm install @opengov/mention-component
+  official: true
+  kind: ui-component
+  api_client: false
+  description: React component library for user mentions with typeahead search
+- language: javascript
+  registry: npm
+  name: '@opengov/ppf-backend-types'
+  url: https://www.npmjs.com/package/@opengov/ppf-backend-types
+  install: npm install @opengov/ppf-backend-types
+  official: true
+  kind: types
+  api_client: false
+  description: PPF backend TypeScript types
+
+third_party:
+- language: javascript
+  registry: npm
+  name: opengov-mcp-server
+  url: https://www.npmjs.com/package/opengov-mcp-server
+  official: false
+  author: srobbin (third party)
+  note: >-
+    Named "opengov" but targets Socrata-powered open-data portals, NOT the OpenGov Public Service Platform.
+    Not an OpenGov product and not an MCP server for any of the ten APIs in this profile.
+- language: python
+  registry: pypi
+  name: opengov
+  url: https://pypi.org/project/opengov/
+  official: false
+  author: Brandon Jin (third party)
+  note: Unrelated US-government open-data datahub package; not an OpenGov, Inc. client.
+- language: javascript
+  registry: npm
+  name: opengov-meetings
+  url: https://www.npmjs.com/package/opengov-meetings
+  official: false
+  note: Third-party client for a different "360 OpenGov Meetings" product.
+
+registries_checked:
+- registry: npm
+  result: '@opengov scope exists (front-end libraries only); no API client'
+- registry: pypi
+  result: no first-party package (opengov is third-party; opengov-api 404)
+- registry: rubygems
+  result: no first-party API client (the opengov GitHub org forks community gems but publishes no client)
+- registry: pkg.go.dev
+  result: none
+- registry: maven-central
+  result: none
+- registry: nuget
+  result: none
+- registry: packagist
+  result: none
+- registry: crates.io
+  result: none
+
+gap: >-
+  Ten OpenAPI 3.x definitions and roughly 358 operations are published with no generated client in any
+  language. Because the specs are already public at stable /catalog/<api>/<version>/schema.yaml URLs, an
+  openapi-generator pipeline producing TypeScript, Python and C# clients would be a small step for OpenGov
+  and would close both the sdk_count_1 and sdk_count_3 checks at once.

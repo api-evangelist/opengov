@@ -1,23 +1,322 @@
 aid: opengov
 name: OpenGov
-description: 'OpenGov is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: OpenGov builds cloud enterprise resource planning and public service software for state and
+  local government, serving more than 2,000 communities across budgeting and performance, financial management,
+  procurement and contract management, vendor management, permitting and licensing, enterprise asset management,
+  tax and revenue, utility billing, grants management, 311 request management and open data. The OpenGov
+  Public Service Platform exposes a public developer portal at developer.opengov.com with a catalog of
+  ten OpenAPI 3.x definitions covering roughly 358 operations, an integration/app model with scoped permissions
+  and per-integration API keys, a JSON:API-shaped Permitting & Licensing API, a webhook event catalog
+  of 31 Permitting & Licensing events, SCIM 2.0 identity provisioning, and an in-browser API test console.
 url: https://raw.githubusercontent.com/api-evangelist/opengov/refs/heads/main/apis.yml
+image: https://opengov.com/wp-content/uploads/2025/02/opengov-2025.svg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Company
-apis: []
+- Government
+- GovTech
+- Public Sector
+- Permitting
+- Licensing
+- Procurement
+- Budgeting
+- Asset Management
+- Vendor Management
+- Open Data
+- ERP
+- Local Government
+apis:
+- aid: opengov:permitting-licensing-v2
+  name: OpenGov Permitting & Licensing API v2
+  description: 'The Permitting & Licensing (PLC) public API v2 provides programmatic access to permitting,
+    licensing and code enforcement workflows for a community: records, record types, workflow steps (approval,
+    document, inspection, payment), inspections and checklists, locations, projects, ledger entries, transactions,
+    files and attachments with versioning, change requests, collections, guests and users, and activity
+    logs. It is JSON:API shaped (application/vnd.api+json), uses filter[] query syntax with gt/lt comparison
+    operators, and is community-scoped via a {community} path parameter.'
+  humanURL: https://developer.opengov.com/catalog/plc-api
+  baseURL: https://api.plce.opengov.com/plce
+  tags:
+  - Permitting
+  - Licensing
+  - Code Enforcement
+  - Inspections
+  - Government
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-permitting-licensing-v2-openapi.yml
+  - type: Documentation
+    url: https://developer.opengov.com/docs/plc/overview
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/plc-api
+  - type: ChangeLog
+    url: https://developer.opengov.com/docs/plc/changelog
+  - type: Overlay
+    url: overlays/opengov-permitting-licensing-v2-overlay.yaml
+  - type: Webhooks
+    url: asyncapi/opengov-permitting-licensing-webhooks.yml
+  - type: AgentSkill
+    url: skills/opengov-lookup-permit-record.md
+- aid: opengov:permitting-licensing-v1
+  name: OpenGov Permitting & Licensing API v1
+  description: The v1 Permitting, Licensing & Code Enforcement API covering records, record form fields,
+    record contacts, record locations, workflow steps and step comments. Superseded by v2 for new integrations.
+  humanURL: https://developer.opengov.com/catalog/plc-api
+  baseURL: https://api.plce.opengov.com/plce
+  tags:
+  - Permitting
+  - Licensing
+  - Government
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-permitting-licensing-v1-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/plc-api
+  - type: Overlay
+    url: overlays/opengov-permitting-licensing-v1-overlay.yaml
+- aid: opengov:budgeting-performance
+  name: OpenGov Budgeting & Performance API
+  description: The Budgeting & Performance API exposes budget data and the chart of accounts for an OpenGov
+    budgeting entity, authenticated with an X-API-KEY header key generated in the product Control Panel
+    or a bearer token.
+  humanURL: https://developer.opengov.com/catalog/bnp-api
+  baseURL: https://api.bnp.opengov.com
+  tags:
+  - Budgeting
+  - Performance
+  - Chart of Accounts
+  - Government Finance
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-budgeting-performance-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/bnp-api
+  - type: Overlay
+    url: overlays/opengov-budgeting-performance-overlay.yaml
+- aid: opengov:procurement-v2
+  name: OpenGov Procurement & Contract Management API v2
+  description: The Procurement & Contract Management API v2 covers contracts, contract categories, tags
+    and procurement datasets for an OpenGov procurement entity.
+  humanURL: https://developer.opengov.com/catalog/pro-api
+  baseURL: https://api.procurement.opengov.com
+  tags:
+  - Procurement
+  - Contract Management
+  - Government
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-procurement-v2-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/pro-api
+  - type: Overlay
+    url: overlays/opengov-procurement-v2-overlay.yaml
+- aid: opengov:procurement-v1
+  name: OpenGov Procurement & Contract Management API v1
+  description: The v1 Procurement & Contract Management API covering contracts, categories, tags and datasets.
+    Superseded by v2.
+  humanURL: https://developer.opengov.com/catalog/pro-api
+  baseURL: https://api.procurement.opengov.com
+  tags:
+  - Procurement
+  - Contract Management
+  - Government
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-procurement-v1-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/pro-api
+  - type: Overlay
+    url: overlays/opengov-procurement-v1-overlay.yaml
+- aid: opengov:purchase-order
+  name: OpenGov Purchase Order API
+  description: 'The Purchase Order API is the largest surface in the OpenGov catalog: purchase orders
+    and purchase order types, line items, change orders, terms and terms attachments, comments, attachments
+    and attachment limits, revisions and surface versions, GL suggestions, spend summaries, invoice and
+    receipt sync, activity and admin settings.'
+  humanURL: https://developer.opengov.com/catalog/pro-purchase-order-api
+  baseURL: https://api-purchase-order.procurement.opengov.com
+  tags:
+  - Purchase Orders
+  - Procurement
+  - Government Finance
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-purchase-order-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/pro-purchase-order-api
+  - type: Overlay
+    url: overlays/opengov-purchase-order-overlay.yaml
+  - type: Idempotency
+    url: conventions/opengov-conventions.yml
+  - type: AgentSkill
+    url: skills/opengov-purchase-order-approval.md
+- aid: opengov:receipt
+  name: OpenGov Receipt API
+  description: The Receipt API manages goods and services receipts against purchase orders, including
+    receipt attachments, comments, activity and surface versions.
+  humanURL: https://developer.opengov.com/catalog/pro-receipt-api
+  baseURL: https://api-receipts.procurement.opengov.com
+  tags:
+  - Receipts
+  - Procurement
+  - Government Finance
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-receipt-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/pro-receipt-api
+  - type: Overlay
+    url: overlays/opengov-receipt-overlay.yaml
+- aid: opengov:vendor-management
+  name: OpenGov Vendor Management API
+  description: The Vendor Management API manages the vendor lifecycle end to end — vendor CRUD, search
+    and export, submission and promotion workflows, taskmaster approval actions, contacts, addresses,
+    payment methods, certificates, attachments, notes, categories, saved views, entity custom fields and
+    settings, bulk vendor import with validation and field remapping, and vendor recommendations and claims.
+  humanURL: https://developer.opengov.com/catalog/vm-api
+  baseURL: https://api.vendor.opengov.com
+  tags:
+  - Vendor Management
+  - Procurement
+  - Government
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-vendor-management-openapi.yml
+  - type: Documentation
+    url: https://developer.opengov.com/docs/vm/overview
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/vm-api
+  - type: ChangeLog
+    url: https://developer.opengov.com/docs/vm/changelog
+  - type: Overlay
+    url: overlays/opengov-vendor-management-overlay.yaml
+  - type: AgentSkill
+    url: skills/opengov-onboard-vendor.md
+- aid: opengov:enterprise-asset-management
+  name: OpenGov Enterprise Asset Management API
+  description: The Enterprise Asset Management (EAM, formerly Cartegraph) REST API provides generic business-object
+    CRUD over classes (assets, work orders, requests, resources), class metadata and layouts, targeted
+    lists, attachments, file import/export, scenario commands and asset swaps. It authenticates with a
+    session cookie rather than the platform integration API key used by the rest of the OpenGov catalog.
+  humanURL: https://developer.opengov.com/catalog/eam-api
+  x-baseURL-note: OpenGov publishes no default production host for EAM — the OpenAPI servers[] entry is
+    the tenant template {serverURL}, which each customer replaces with their own EAM server URL.
+  tags:
+  - Enterprise Asset Management
+  - Public Works
+  - Government
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-enterprise-asset-management-openapi.yml
+  - type: Documentation
+    url: https://developer.opengov.com/docs/eam/overview
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/eam-api
+  - type: ChangeLog
+    url: https://developer.opengov.com/docs/eam/changes-log
+  - type: Overlay
+    url: overlays/opengov-enterprise-asset-management-overlay.yaml
+- aid: opengov:open-data
+  name: OpenGov Open Data CKAN Action API
+  description: OpenGov Open Data portals expose the CKAN Action API (v2.9) at /api/3/action — package,
+    resource, organization, group, tag and system actions for publishing and querying open government
+    datasets. Each customer runs it on their own Open Data portal hostname; the published spec uses cloudcity.ogopendata.com
+    as the example server.
+  humanURL: https://developer.opengov.com/catalog/opendata-public-api
+  baseURL: https://cloudcity.ogopendata.com/api/3/action
+  tags:
+  - Open Data
+  - CKAN
+  - Datasets
+  - Transparency
+  properties:
+  - type: OpenAPI
+    url: openapi/opengov-open-data-ckan-openapi.yml
+  - type: APIReference
+    url: https://developer.opengov.com/catalog/opendata-public-api
+  - type: Overlay
+    url: overlays/opengov-open-data-ckan-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/opengov-trust-center.yml
+- type: DomainSecurity
+  url: security/opengov-domain-security.yml
+- type: Authentication
+  url: authentication/opengov-authentication.yml
 - type: Website
-  url: https://forgeglobal.com/opengov_stock/
+  url: https://opengov.com
+- type: DeveloperPortal
+  url: https://developer.opengov.com
+- type: Documentation
+  url: https://developer.opengov.com/docs/overview
+- type: APIReference
+  url: https://developer.opengov.com/catalog
+- type: GettingStarted
+  url: https://developer.opengov.com/docs/quickstart
+- type: Support
+  url: https://support.opengov.com
+- type: Blog
+  url: https://opengov.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/opengov
+- type: SignUp
+  url: https://developer.opengov.com/applications
+- type: TermsOfService
+  url: https://developer.opengov.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://opengov.com/privacy-policy/
+- type: StatusPage
+  url: https://status.opengov.com/
+- type: Compliance
+  url: https://trust.opengov.com/
+- type: Security
+  url: https://opengov.com/security/
+- type: Sandbox
+  url: sandbox/opengov-sandbox.yml
+- type: ChangeLog
+  url: changelog/opengov-changelog.yml
+- type: Webhooks
+  url: asyncapi/opengov-permitting-licensing-webhooks.yml
+- type: Conventions
+  url: conventions/opengov-conventions.yml
+- type: ErrorCatalog
+  url: errors/opengov-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/opengov-lifecycle.yml
+- type: Conformance
+  url: conformance/opengov-conformance.yml
+- type: DataModel
+  url: data-model/opengov-data-model.yml
+- type: Packages
+  url: packages/opengov-packages.yml
+- type: WellKnown
+  url: well-known/opengov-well-known.yml
+- type: LLMsTxt
+  url: llms/opengov-llms.txt
+- type: MCPServer
+  url: mcp/opengov-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Idempotency
+  url: conventions/opengov-conventions.yml
+- type: VulnerabilityDisclosure
+  url: security/opengov-vulnerability-disclosure.yml
+- type: OAuthScopes
+  url: scopes/opengov-scopes.yml
+- type: RateLimits
+  url: rate-limits/opengov-rate-limits.yml
+- type: OpenIDConnect
+  url: well-known/opengov-openid-configuration.json
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 48
+  pass: local-v1

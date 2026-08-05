@@ -1,0 +1,220 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/ (10 OpenAPI 3.x definitions harvested from developer.opengov.com)
+docs:
+- https://developer.opengov.com/docs/plc/error-handling
+- https://developer.opengov.com/docs/vm/error-handling
+- https://developer.opengov.com/docs/eam/error-handling
+format: vendor-json
+note: 'OpenGov does not use RFC 9457 application/problem+json. Two envelopes are in use: a JSON:API errors[] array
+  ({status,title,detail}) on the Permitting & Licensing API (application/vnd.api+json), and a flat application/json
+  object ({status,code,detail}) with a machine-readable code on the Procurement, Purchase Order, Receipt and Vendor
+  Management APIs.'
+envelopes:
+- name: json-api
+  media_type: application/vnd.api+json
+  shape: '{"errors":[{"status":"403","title":"Forbidden","detail":"No access to requested record type"}]}'
+  apis:
+  - opengov:permitting-licensing-v2
+  - opengov:permitting-licensing-v1
+  source: https://developer.opengov.com/docs/plc/access-control
+- name: coded-json
+  media_type: application/json
+  shape: '{"status":409,"code":"IDEMPOTENCY_CONFLICT","detail":"..."}'
+  fields:
+  - status
+  - code
+  - detail
+  apis:
+  - opengov:purchase-order
+  - opengov:receipt
+  - opengov:procurement-v2
+  - opengov:vendor-management
+problems:
+- status: 400
+  title: The request did not match the expected schema
+  occurrences: 307
+  named_errors:
+  - The request did not match the expected schema
+  - Bad Request
+  - Bad Request - The request could not be understood by the server due to malformed
+  - The request parameters are invalid.
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-open-data-ckan-openapi.yml
+  - openapi/opengov-permitting-licensing-v1-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+  - openapi/opengov-vendor-management-openapi.yml
+- status: 401
+  title: AuthError
+  occurrences: 326
+  named_errors:
+  - AuthError
+  - Unauthorized, invalid or missing API token.
+  - Unauthorized
+  - Unauthorized - Authentication credentials missing or invalid.
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-permitting-licensing-v1-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+  - openapi/opengov-vendor-management-openapi.yml
+- status: 403
+  title: UnauthorizedError
+  occurrences: 337
+  named_errors:
+  - UnauthorizedError
+  - UnauthorizedHttpError
+  - Receipt action forbidden
+  - Forbidden
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-open-data-ckan-openapi.yml
+  - openapi/opengov-permitting-licensing-v1-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+  - openapi/opengov-vendor-management-openapi.yml
+- status: 404
+  title: EntityNotFoundError
+  occurrences: 328
+  named_errors:
+  - EntityNotFoundError
+  - Government not found or resource does not exist.
+  - Resource not found
+  - '**Resource not found**: The server has not found anything matching the Request-U'
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-open-data-ckan-openapi.yml
+  - openapi/opengov-permitting-licensing-v1-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+  - openapi/opengov-vendor-management-openapi.yml
+- status: 406
+  title: Not Acceptable - The request could not be understood by the server due to a clie
+  occurrences: 121
+  named_errors:
+  - Not Acceptable - The request could not be understood by the server due to a clie
+  - '**Not Acceptable**: The server cannot produce a response matching the list of ac'
+  media_types:
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+- status: 409
+  title: ConflictError
+  occurrences: 90
+  named_errors:
+  - ConflictError
+  - Conflict
+  - Attachment invalid state
+  - '**Conflict**: The request could not be completed due to a conflict with the curr'
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-open-data-ckan-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+- status: 413
+  title: PayloadTooLargeHttpError
+  occurrences: 5
+  named_errors:
+  - PayloadTooLargeHttpError
+  media_types:
+  - application/json
+  sources:
+  - openapi/opengov-vendor-management-openapi.yml
+- status: 415
+  title: '**Unsupported Media Type**'
+  occurrences: 30
+  named_errors:
+  - '**Unsupported Media Type**'
+  - Unsupported Media Type - The request could not be understood by the server due t
+  media_types:
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+- status: 422
+  title: Validation error
+  occurrences: 4
+  named_errors:
+  - Validation error
+  - Comment is empty
+  - Comment body too large
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+- status: 500
+  title: InfrastructureError
+  occurrences: 337
+  named_errors:
+  - InfrastructureError
+  - Internal server error.
+  - Internal Server Error
+  - Internal Server Error - An unexpected condition was encountered.
+  media_types:
+  - application/json
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-open-data-ckan-openapi.yml
+  - openapi/opengov-permitting-licensing-v1-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+  - openapi/opengov-vendor-management-openapi.yml
+- status: 501
+  title: '**Not Implemented**: The server does not support the functionality required to f'
+  occurrences: 12
+  named_errors:
+  - '**Not Implemented**: The server does not support the functionality required to f'
+  media_types:
+  - application/vnd.api+json
+  sources:
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+machine_readable_codes:
+- INVALID_ENUM_VALUE
+- IDEMPOTENCY_CONFLICT
+- BUDGET_INSUFFICIENT
+named_error_types:
+- AuthError
+- EntityNotFoundError
+- UnauthorizedError
+- UnauthorizedHttpError
+- ValidationError
+- ConflictError
+- IdempotencyConflictError
+- PayloadTooLargeHttpError
+- InfrastructureError

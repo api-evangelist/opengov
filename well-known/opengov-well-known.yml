@@ -1,0 +1,129 @@
+generated: '2026-08-04'
+method: probed
+source: live GET of /.well-known/* across every OpenGov host in apis.yml and every OpenAPI servers[] host
+note: >-
+  developer.opengov.com and support.opengov.com are single-page applications whose catch-all route answers
+  HTTP 200 with the same 12,012-byte HTML shell for EVERY /.well-known/* path. Those 200s are NOT documents
+  and are recorded here as `spa_catch_all: true` so a later run does not mistake them for hits. The only real
+  well-known documents on the OpenGov surface are the Auth0 OIDC/OAuth discovery documents at
+  accounts.viewpointcloud.com, the issuer referenced by the Permitting & Licensing API's openIdConnect
+  security scheme.
+hosts:
+- host: https://accounts.viewpointcloud.com
+  role: OAuth 2.0 / OIDC issuer for the Permitting & Licensing API (auth0Prod securityScheme)
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: opengov-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: opengov-oauth-authorization-server.json
+  - path: /.well-known/jwks.json
+    status: 200
+    note: referenced as jwks_uri; not archived (rotating key material)
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://developer.opengov.com
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/agent.json
+    status: 200
+    rejected: html-spa-shell
+- host: https://support.opengov.com
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    rejected: html-spa-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    rejected: html-spa-shell
+- host: https://api.plce.opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://api.bnp.opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://api.procurement.opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://api.vendor.opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://api-purchase-order.procurement.opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://api-receipts.procurement.opengov.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+gaps:
+- No /.well-known/security.txt (RFC 9116) is served on any OpenGov host, even though opengov.com/security/
+  publishes a full responsible-disclosure policy with a security@opengov.com contact and safe-harbor terms.
+  Publishing security.txt at https://opengov.com/.well-known/security.txt would make that policy
+  machine-discoverable.
+- No /.well-known/api-catalog (RFC 9727) is served, even though developer.opengov.com publishes ten OpenAPI
+  definitions at stable /catalog/<api>/<version>/schema.yaml URLs — an api-catalog document would make the
+  whole catalog discoverable without scraping the portal bundle.
+- No A2A agent card at /.well-known/agent-card.json on any host.

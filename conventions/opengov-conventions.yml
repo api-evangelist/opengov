@@ -1,0 +1,182 @@
+generated: '2026-08-04'
+method: searched
+source: https://developer.opengov.com/docs/overview
+docs:
+- https://developer.opengov.com/docs/quickstart
+- https://developer.opengov.com/docs/app-management/api-key
+- https://developer.opengov.com/docs/app-management/permissions
+- https://developer.opengov.com/docs/plc/access-control
+- https://developer.opengov.com/docs/plc/use-cases
+- https://developer.opengov.com/docs/webhooks/overview
+note: >-
+  OpenGov does not publish one platform-wide conventions page — the semantics below were read out of the
+  developer-portal guides and derived from the ten published OpenAPI definitions. The platform is not
+  uniform: Permitting & Licensing is JSON:API shaped, the Procurement family (Procurement, Purchase Order,
+  Receipt, Vendor Management) uses a flat coded-JSON envelope, and Enterprise Asset Management is a
+  cookie-session Cartegraph API that shares almost none of the platform conventions.
+
+authentication:
+  style: multiple — see authentication/opengov-authentication.yml
+  primary: >-
+    Integration API key in an `Authorization: Token <key>` header, issued per OpenGov integration in the
+    Developer Portal
+  header_example: 'Authorization: Token YOUR_API_KEY'
+  variants:
+  - api: Permitting & Licensing v2
+    schemes: [bearerAuth, basicHttpAuthentication, openIdConnect Auth0 client_credentials]
+    issuer: https://accounts.viewpointcloud.com/
+  - api: Budgeting & Performance
+    schemes: [apiKey X-API-KEY, bearer]
+    note: key generated in the product Control Panel, not the Developer Portal
+  - api: Procurement & Contract Management / Purchase Order / Receipt
+    schemes: [apiKey Authorization, apiKey x-api-key, bearer, basic]
+    note: key generated in the product Control Panel
+  - api: Vendor Management
+    schemes: [bearer JWT]
+  - api: Enterprise Asset Management
+    schemes: [session cookie via POST /api/v1/authenticate]
+    note: does NOT use the platform integration API key
+  - api: Open Data (CKAN)
+    schemes: [apiKey Authorization or X-CKAN-API-Key]
+  scim:
+    spec: SCIM 2.0
+    auth: 'Authorization: Bearer <API key>'
+    docs: https://developer.opengov.com/docs/access-control/authentication
+    note: OAuth and Basic Auth are explicitly not supported for SCIM
+
+authorization:
+  model: per-integration permission grants plus per-record-type access
+  permissions_reference: https://developer.opengov.com/docs/app-management/permissions
+  record_type_scoping: >-
+    Permitting & Licensing integrations only reach Record Types they have been explicitly enabled for, in
+    Permitting & Licensing System Settings > Record Types > Access. Webhook events respect the same
+    boundary — an integration only receives events for records it may read.
+  delegation_rule: An admin can only grant an integration permissions that the admin personally holds.
+  denial: 403 Forbidden on missing permission, wrong entity, or an unenabled record type
+
+idempotency:
+  supported: true
+  mechanism: request-body idempotency key (not a header)
+  field: idempotencyKey
+  format: UUID
+  location: JSON request body, `required` on the operations that support it
+  scope: per operation
+  apis: [opengov:purchase-order]
+  behaviour:
+  - Replayed request with the same idempotencyKey returns 200 with the original result instead of 202
+  - Concurrent replay while the first request is still in flight returns 409 IDEMPOTENCY_CONFLICT
+  error_code: IDEMPOTENCY_CONFLICT
+  error_detail: A request with this idempotency key is currently being processed. Retry after the in-flight
+    request completes.
+  operations_with_409_idempotency_conflict: 39
+  representative_operations:
+  - invoiceSync
+  - receiptSync
+  - purchaseOrder.submit
+  - purchaseOrder.approve
+  - purchaseOrder.issue
+  - purchaseOrder.cancel
+  - purchaseOrder.bulkCreateApproved
+  source: openapi/opengov-purchase-order-openapi.yml
+  gap: >-
+    Idempotency is real but confined to the Purchase Order API and expressed as a body field rather than the
+    conventional Idempotency-Key request header. The Permitting & Licensing, Vendor Management, Procurement
+    and Receipt write operations expose no idempotency contract at all.
+
+pagination:
+  styles:
+  - style: json-api-page
+    apis: [opengov:permitting-licensing-v2]
+    params: ['page[size]', 'page[number]']
+    note: JSON:API bracketed page parameters
+  - style: cursor
+    apis: [opengov:purchase-order, opengov:receipt]
+    params: [first, after]
+  - style: offset-limit
+    apis: [opengov:vendor-management, opengov:procurement-v2]
+    params: [limit, offset]
+  gap: Three different pagination styles across one platform; no single documented pagination guide.
+
+filtering:
+  style: JSON:API bracketed filters
+  apis: [opengov:permitting-licensing-v2]
+  syntax: 'filter[<field>]=<value>'
+  comparison_operators:
+    syntax: 'filter[<field>][<op>]=<value>'
+    operators: [gt, lt]
+    example: 'GET /v2/{community}/records?filter[createdAt][gt]=2025-03-01'
+  common_filters: [number, mbl, streetNumber, name, archived, unit, applicantUserID, locationID, createdAt]
+  docs: https://developer.opengov.com/docs/plc/use-cases
+
+field_expansion:
+  supported: true
+  apis: [opengov:permitting-licensing-v2]
+  param: include
+  style: JSON:API compound documents
+
+sorting:
+  supported: true
+  param: sort
+  apis: [opengov:permitting-licensing-v2]
+
+tenancy:
+  model: path-scoped multi-tenancy
+  patterns:
+  - api: opengov:permitting-licensing-v2
+    param: '{community}'
+    example: /v2/sampletown/records
+  - api: opengov:purchase-order
+    param: '{entityId}'
+    example: /api/v1/po/entities/{entityId}/purchase-orders
+  - api: opengov:open-data
+    param: per-customer Open Data portal hostname
+  - api: opengov:enterprise-asset-management
+    param: per-customer '{serverURL}' server template
+
+media_types:
+  request:
+  - application/vnd.api+json  # Permitting & Licensing
+  - application/json          # Procurement family, Vendor Management, Budgeting, Open Data, EAM
+  note: The Test Console guide warns that Content-Type must be set explicitly per operation because the
+    platform mixes the two.
+
+error_envelope:
+  see: errors/opengov-problem-types.yml
+  rfc9457: false
+  shapes:
+  - json-api errors[] array — {status, title, detail}
+  - flat coded object — {status, code, detail}
+
+rate_limits:
+  signalled: partial
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining]
+  responses_declaring_headers: 58
+  apis: [opengov:permitting-licensing-v2]
+  retry_after: not declared
+  status_429_declared: false
+  published_quota: none
+  gap: >-
+    Rate-limit headers are declared on 58 Permitting & Licensing responses but OpenGov publishes no numeric
+    quota anywhere in the developer portal, declares no 429 response in any of the ten OpenAPI definitions,
+    and sends no Retry-After. An integrator cannot compute a safe call rate from public material.
+
+request_tracing:
+  request_id_header: not documented
+  gap: No correlation/request-id header is documented or declared in any spec.
+
+versioning:
+  see: lifecycle/opengov-lifecycle.yml
+  scheme: uri-path
+  examples:
+  - /v1/...
+  - '/v2/{community}/...'
+  - /api/v1/po/...
+
+webhooks:
+  see: asyncapi/opengov-permitting-licensing-webhooks.yml
+  ack: respond 2xx to confirm receipt
+  transport: HTTPS POST to a subscriber-configured endpoint
+  access_control: events respect the integration's record-type permissions
+
+sandbox:
+  see: sandbox/opengov-sandbox.yml

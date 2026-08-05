@@ -1,0 +1,62 @@
+generated: '2026-08-04'
+method: searched
+source: https://developer.opengov.com/docs/plc/changelog
+note: >-
+  OpenGov keeps a separate changelog per product suite rather than one platform changelog. /docs/changelog
+  is a one-line stub. Only the Permitting & Licensing changelog carries dated entries; Vendor Management
+  lists an undated initial release and Enterprise Asset Management states no changes since 2021. Recent
+  window only — the live pages are the source of truth.
+scheme: dated-entries (per suite), no semantic version tags on the platform APIs
+changelogs:
+- api: opengov:permitting-licensing-v2
+  url: https://developer.opengov.com/docs/plc/changelog
+  dated: true
+  declared_source_of_truth: 'This page is the source of truth for updates, enhancements, and bug fixes to
+    the Permitting & Licensing public APIs.'
+  entries:
+  - date: '2026-04-16'
+    breaking: false
+    additions:
+    - POST /records/{recordID}/attachments/{attachmentID}/versions — add a new version to an existing record
+      attachment
+    - DELETE /records/{recordID}/attachments/{attachmentID}/versions/{fileID} — delete a specific version of
+      an existing record attachment
+  - date: '2026-03-30'
+    breaking: false
+    additions:
+    - GET /locations gains filters for mbl, streetNumber, name, archived and unit
+    - GET /records gains filters for applicantUserID and locationID
+    - Support for fetching the documents associated with a document step
+- api: opengov:vendor-management
+  url: https://developer.opengov.com/docs/vm/changelog
+  dated: false
+  entries:
+  - version: 1.0.0
+    date: null
+    label: Initial Release
+    breaking: false
+    highlights:
+    - Vendor CRUD operations
+    - Vendor search, filtering and export
+    - Vendor submission and promotion workflows
+    - Taskmaster actions and approval workflows
+    - Contact, address and certificate management
+    - Attachment upload with bulk delete support
+    - Payment method management
+    - Category assignment and management
+    - Vendor notes
+    - Saved views for search configurations
+    - Entity settings and custom field configuration
+    - Vendor import with CSV template, validation and remapping
+    - Vendor recommendations and claims
+    - Entity user listing
+- api: opengov:enterprise-asset-management
+  url: https://developer.opengov.com/docs/eam/changes-log
+  dated: false
+  entries: []
+  statement: No API changes since 2021. Any new changes will be displayed here.
+gaps:
+- No aggregate platform changelog — /docs/changelog only links out to the per-suite pages.
+- No changelog at all for the Budgeting & Performance, Procurement, Purchase Order, Receipt or Open Data
+  APIs, which together account for 156 of the roughly 358 published operations.
+- No RSS/Atom feed on any changelog page, so changes cannot be watched programmatically.

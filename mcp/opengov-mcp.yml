@@ -1,0 +1,304 @@
+generated: '2026-08-04'
+method: derived
+status: candidate
+source: openapi/ (operationIds verified against the harvested specs)
+published_by_provider: false
+note: OpenGov publishes NO first-party Model Context Protocol server. The npm package named opengov-mcp-server is third-party
+  (srobbin) and targets Socrata open-data portals, not the OpenGov Public Service Platform — it is NOT this. The tool list
+  below is a CANDIDATE derived from a curated subset of the 358 published OpenAPI operations, offered as a starting point;
+  every tool names the real operationId it would bind to, and each tool inherits that operation's parameters + requestBody
+  as its input schema. Nothing here is claimed to exist.
+server:
+  name: opengov
+  transport: http
+  url: null
+  status: not published
+third_party_confusion:
+- package: opengov-mcp-server
+  registry: npm
+  targets: Socrata open data portals
+  official: false
+  url: https://www.npmjs.com/package/opengov-mcp-server
+auth:
+  note: 'A real OpenGov MCP server would need to carry the per-integration API key (Authorization: Token) or an Auth0 client_credentials
+    bearer token, and would inherit the integration permission grants and per-record-type access described in scopes/opengov-scopes.yml.'
+coverage:
+  rest_operations_published: 358
+  tools_proposed: 46
+tools:
+- name: listRecords
+  description: List records
+  method: GET
+  path: /v2/{community}/records
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#listRecords
+  input_schema_source: parameters + requestBody of listRecords in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getRecord
+  description: Retrieve a record
+  method: GET
+  path: /v2/{community}/records/{recordID}
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getRecord
+  input_schema_source: parameters + requestBody of getRecord in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: createRecord
+  description: Create a record
+  method: POST
+  path: /v2/{community}/records
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#createRecord
+  input_schema_source: parameters + requestBody of createRecord in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: updateRecord
+  description: Update a record
+  method: PATCH
+  path: /v2/{community}/records/{recordID}
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#updateRecord
+  input_schema_source: parameters + requestBody of updateRecord in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: listApprovalTasks
+  description: List approval steps
+  method: GET
+  path: /v2/{community}/approval-steps
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#listApprovalTasks
+  input_schema_source: parameters + requestBody of listApprovalTasks in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getApprovalTask
+  description: Get approval step
+  method: GET
+  path: /v2/{community}/approval-steps/{approvalStepID}
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getApprovalTask
+  input_schema_source: parameters + requestBody of getApprovalTask in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: updateApprovalTask
+  description: Update approval step
+  method: PATCH
+  path: /v2/{community}/approval-steps/{approvalStepID}
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#updateApprovalTask
+  input_schema_source: parameters + requestBody of updateApprovalTask in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getInspectionEvents
+  description: List inspection events
+  method: GET
+  path: /v2/{community}/inspection-events
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getInspectionEvents
+  input_schema_source: parameters + requestBody of getInspectionEvents in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getInspectionEvent
+  description: Get inspection event
+  method: GET
+  path: /v2/{community}/inspection-events/{inspectionEventID}
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getInspectionEvent
+  input_schema_source: parameters + requestBody of getInspectionEvent in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getLocations
+  description: List locations
+  method: GET
+  path: /v2/{community}/locations
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getLocations
+  input_schema_source: parameters + requestBody of getLocations in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getLocation
+  description: Retrieve a location
+  method: GET
+  path: /v2/{community}/locations/{locationID}
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getLocation
+  input_schema_source: parameters + requestBody of getLocation in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: listFiles
+  description: List files
+  method: GET
+  path: /v2/{community}/files
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#listFiles
+  input_schema_source: parameters + requestBody of listFiles in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: createFileUpload
+  description: Upload a file
+  method: POST
+  path: /v2/{community}/files
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#createFileUpload
+  input_schema_source: parameters + requestBody of createFileUpload in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getRecordTypes
+  description: List record types
+  method: GET
+  path: /v2/{community}/record-types
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getRecordTypes
+  input_schema_source: parameters + requestBody of getRecordTypes in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: listPaymentTasks
+  description: List payment steps
+  method: GET
+  path: /v2/{community}/payment-steps
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#listPaymentTasks
+  input_schema_source: parameters + requestBody of listPaymentTasks in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: getUsers
+  description: List users
+  method: GET
+  path: /v2/{community}/users
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#getUsers
+  input_schema_source: parameters + requestBody of getUsers in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: listRecordSteps
+  description: List record workflow steps
+  method: GET
+  path: /v2/{community}/records/{recordID}/workflow-steps
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#listRecordSteps
+  input_schema_source: parameters + requestBody of listRecordSteps in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: listRecordStepComments
+  description: List comments
+  method: GET
+  path: /v2/{community}/records/{recordID}/workflow-steps/{stepID}/comments
+  source_operation: openapi/opengov-permitting-licensing-v2-openapi.yml#listRecordStepComments
+  input_schema_source: parameters + requestBody of listRecordStepComments in openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: purchaseOrder_search
+  description: Search Purchase Orders
+  method: POST
+  path: /api/v1/po/entities/{entityId}/purchase-orders/search
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.search
+  input_schema_source: parameters + requestBody of purchaseOrder.search in openapi/opengov-purchase-order-openapi.yml
+- name: purchaseOrder_findById
+  description: Find Purchase Order by ID
+  method: GET
+  path: /api/v1/po/entities/{entityId}/purchase-orders/{id}
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.findById
+  input_schema_source: parameters + requestBody of purchaseOrder.findById in openapi/opengov-purchase-order-openapi.yml
+- name: purchaseOrder_create
+  description: Create a Draft Purchase Order
+  method: POST
+  path: /api/v1/po/entities/{entityId}/purchase-orders
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.create
+  input_schema_source: parameters + requestBody of purchaseOrder.create in openapi/opengov-purchase-order-openapi.yml
+- name: purchaseOrder_submit
+  description: Submit Purchase Order for Approval
+  method: POST
+  path: /api/v1/po/entities/{entityId}/purchase-orders/{id}/submit
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.submit
+  input_schema_source: parameters + requestBody of purchaseOrder.submit in openapi/opengov-purchase-order-openapi.yml
+- name: purchaseOrder_approve
+  description: Approve Purchase Order
+  method: POST
+  path: /api/v1/po/entities/{entityId}/purchase-orders/{id}/approve
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.approve
+  input_schema_source: parameters + requestBody of purchaseOrder.approve in openapi/opengov-purchase-order-openapi.yml
+- name: purchaseOrder_issue
+  description: Issue Purchase Order
+  method: POST
+  path: /api/v1/po/entities/{entityId}/purchase-orders/{id}/issue
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.issue
+  input_schema_source: parameters + requestBody of purchaseOrder.issue in openapi/opengov-purchase-order-openapi.yml
+- name: purchaseOrder_cancel
+  description: Cancel Purchase Order
+  method: POST
+  path: /api/v1/po/entities/{entityId}/purchase-orders/{id}/cancel
+  source_operation: openapi/opengov-purchase-order-openapi.yml#purchaseOrder.cancel
+  input_schema_source: parameters + requestBody of purchaseOrder.cancel in openapi/opengov-purchase-order-openapi.yml
+- name: receipts_search
+  description: Search Receipts
+  method: POST
+  path: /api/v1/entities/{entityId}/receipts/search
+  source_operation: openapi/opengov-receipt-openapi.yml#receipts.search
+  input_schema_source: parameters + requestBody of receipts.search in openapi/opengov-receipt-openapi.yml
+- name: receipts_findById
+  description: Find Receipt by ID
+  method: GET
+  path: /api/v1/entities/{entityId}/receipts/{id}
+  source_operation: openapi/opengov-receipt-openapi.yml#receipts.findById
+  input_schema_source: parameters + requestBody of receipts.findById in openapi/opengov-receipt-openapi.yml
+- name: receipts_create
+  description: Create Receipt
+  method: POST
+  path: /api/v1/entities/{entityId}/receipts
+  source_operation: openapi/opengov-receipt-openapi.yml#receipts.create
+  input_schema_source: parameters + requestBody of receipts.create in openapi/opengov-receipt-openapi.yml
+- name: receipts_submit
+  description: Submit Receipt
+  method: POST
+  path: /api/v1/entities/{entityId}/receipts/{id}/submit
+  source_operation: openapi/opengov-receipt-openapi.yml#receipts.submit
+  input_schema_source: parameters + requestBody of receipts.submit in openapi/opengov-receipt-openapi.yml
+- name: receipts_approve
+  description: Approve Receipt
+  method: POST
+  path: /api/v1/entities/{entityId}/receipts/{id}/approve
+  source_operation: openapi/opengov-receipt-openapi.yml#receipts.approve
+  input_schema_source: parameters + requestBody of receipts.approve in openapi/opengov-receipt-openapi.yml
+- name: vendor_search_searchVendors
+  description: POST /api/v1/entities/{entityId}/vendors/search
+  method: POST
+  path: /api/v1/entities/{entityId}/vendors/search
+  source_operation: openapi/opengov-vendor-management-openapi.yml#vendor-search.searchVendors
+  input_schema_source: parameters + requestBody of vendor-search.searchVendors in openapi/opengov-vendor-management-openapi.yml
+- name: vendors_getVendorById
+  description: GET /api/v1/entities/{entityId}/vendors/{vendorKey}
+  method: GET
+  path: /api/v1/entities/{entityId}/vendors/{vendorKey}
+  source_operation: openapi/opengov-vendor-management-openapi.yml#vendors.getVendorById
+  input_schema_source: parameters + requestBody of vendors.getVendorById in openapi/opengov-vendor-management-openapi.yml
+- name: vendors_createVendor
+  description: POST /api/v1/entities/{entityId}/vendors
+  method: POST
+  path: /api/v1/entities/{entityId}/vendors
+  source_operation: openapi/opengov-vendor-management-openapi.yml#vendors.createVendor
+  input_schema_source: parameters + requestBody of vendors.createVendor in openapi/opengov-vendor-management-openapi.yml
+- name: vendors_submitVendor
+  description: POST /api/v1/entities/{entityId}/vendors/{vendorKey}/submit
+  method: POST
+  path: /api/v1/entities/{entityId}/vendors/{vendorKey}/submit
+  source_operation: openapi/opengov-vendor-management-openapi.yml#vendors.submitVendor
+  input_schema_source: parameters + requestBody of vendors.submitVendor in openapi/opengov-vendor-management-openapi.yml
+- name: vendors_promoteVendor
+  description: POST /api/v1/entities/{entityId}/vendors/{vendorKey}/promote
+  method: POST
+  path: /api/v1/entities/{entityId}/vendors/{vendorKey}/promote
+  source_operation: openapi/opengov-vendor-management-openapi.yml#vendors.promoteVendor
+  input_schema_source: parameters + requestBody of vendors.promoteVendor in openapi/opengov-vendor-management-openapi.yml
+- name: listBudgetsByEntity
+  description: List Budgets by Entity
+  method: GET
+  path: /api/v1/budgets
+  source_operation: openapi/opengov-budgeting-performance-openapi.yml#listBudgetsByEntity
+  input_schema_source: parameters + requestBody of listBudgetsByEntity in openapi/opengov-budgeting-performance-openapi.yml
+- name: getBudgetById
+  description: Get Budget by ID
+  method: GET
+  path: /api/v1/budgets/{budgetId}
+  source_operation: openapi/opengov-budgeting-performance-openapi.yml#getBudgetById
+  input_schema_source: parameters + requestBody of getBudgetById in openapi/opengov-budgeting-performance-openapi.yml
+- name: getBudgetAmountsSummary
+  description: Get the Amounts Summary for a Budget by ID
+  method: GET
+  path: /api/v1/budgets/{budgetId}/amounts-summary
+  source_operation: openapi/opengov-budgeting-performance-openapi.yml#getBudgetAmountsSummary
+  input_schema_source: parameters + requestBody of getBudgetAmountsSummary in openapi/opengov-budgeting-performance-openapi.yml
+- name: listChartOfAccountsByEntity
+  description: List Chart Of Accounts by Entity
+  method: GET
+  path: /api/v1/chart-of-accounts
+  source_operation: openapi/opengov-budgeting-performance-openapi.yml#listChartOfAccountsByEntity
+  input_schema_source: parameters + requestBody of listChartOfAccountsByEntity in openapi/opengov-budgeting-performance-openapi.yml
+- name: ListContractsV2Controller_listContracts
+  description: List of Contracts
+  method: GET
+  path: /public/api/v2/entities/{entityUuid}/contracts
+  source_operation: openapi/opengov-procurement-v2-openapi.yml#ListContractsV2Controller_listContracts
+  input_schema_source: parameters + requestBody of ListContractsV2Controller_listContracts in openapi/opengov-procurement-v2-openapi.yml
+- name: ListContractsV2Controller_getContractById
+  description: Contract by ID
+  method: GET
+  path: /public/api/v2/entities/{entityUuid}/contracts/{id}
+  source_operation: openapi/opengov-procurement-v2-openapi.yml#ListContractsV2Controller_getContractById
+  input_schema_source: parameters + requestBody of ListContractsV2Controller_getContractById in openapi/opengov-procurement-v2-openapi.yml
+- name: getContractsWithSpendDatasetV2
+  description: Contracts with Spend
+  method: GET
+  path: /gateway/v2/entities/{entityUuid}/datasets/contracts-with-spend
+  source_operation: openapi/opengov-procurement-v2-openapi.yml#getContractsWithSpendDatasetV2
+  input_schema_source: parameters + requestBody of getContractsWithSpendDatasetV2 in openapi/opengov-procurement-v2-openapi.yml
+- name: packageSearch
+  description: Searches for datasets (packages) satisfying a given search criteria.
+  method: GET
+  path: /package_search
+  source_operation: openapi/opengov-open-data-ckan-openapi.yml#packageSearch
+  input_schema_source: parameters + requestBody of packageSearch in openapi/opengov-open-data-ckan-openapi.yml
+- name: packageShow
+  description: Return the metadata of a dataset (package) and its resources.
+  method: GET
+  path: /package_show
+  source_operation: openapi/opengov-open-data-ckan-openapi.yml#packageShow
+  input_schema_source: parameters + requestBody of packageShow in openapi/opengov-open-data-ckan-openapi.yml
+- name: packageList
+  description: Return a list of the names of the site's datasets (packages).
+  method: GET
+  path: /package_list
+  source_operation: openapi/opengov-open-data-ckan-openapi.yml#packageList
+  input_schema_source: parameters + requestBody of packageList in openapi/opengov-open-data-ckan-openapi.yml
+- name: organizationList
+  description: Return a list of the names of the site's organizations.
+  method: GET
+  path: /organization_list
+  source_operation: openapi/opengov-open-data-ckan-openapi.yml#organizationList
+  input_schema_source: parameters + requestBody of organizationList in openapi/opengov-open-data-ckan-openapi.yml

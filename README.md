@@ -42,5 +42,38 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-OpenGov is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/opengov_stock/
+OpenGov builds cloud ERP and public service software for state and local government, serving more than
+2,000 communities across budgeting and performance, financial management, procurement and contract
+management, vendor management, permitting and licensing, enterprise asset management, tax and revenue,
+utility billing, grants management, 311 request management and open data.
+
+## API surface
+
+OpenGov runs a public developer portal at [developer.opengov.com](https://developer.opengov.com) with an
+API catalog of **ten OpenAPI 3.x definitions covering roughly 358 operations**:
+
+| API | Operations | Base URL |
+|---|---|---|
+| Permitting & Licensing v2 | 113 | `https://api.plce.opengov.com/plce` |
+| Permitting & Licensing v1 | 10 | `https://api.plce.opengov.com/plce` |
+| Purchase Order | 82 | `https://api-purchase-order.procurement.opengov.com` |
+| Vendor Management | 44 | `https://api.vendor.opengov.com` |
+| Receipt | 26 | `https://api-receipts.procurement.opengov.com` |
+| Procurement & Contract Management v2 | 22 | `https://api.procurement.opengov.com` |
+| Procurement & Contract Management v1 | 22 | `https://api.procurement.opengov.com` |
+| Open Data (CKAN Action API 2.9) | 16 | per-customer Open Data portal host |
+| Enterprise Asset Management | 13 | per-tenant `{serverURL}` |
+| Budgeting & Performance | 10 | `https://api.bnp.opengov.com` |
+
+Also published: 31 HMAC-signed Permitting & Licensing webhook events, SCIM 2.0 identity provisioning,
+an in-browser API Test Console on every operation, a per-integration permission model, and an `llms.txt`
+at [developer.opengov.com/llms.txt](https://developer.opengov.com/llms.txt).
+
+## Links
+
+- Website: https://opengov.com
+- Developer portal: https://developer.opengov.com
+- API catalog: https://developer.opengov.com/catalog
+- Status: https://status.opengov.com/
+- Trust center: https://trust.opengov.com/
+- Security / responsible disclosure: https://opengov.com/security/

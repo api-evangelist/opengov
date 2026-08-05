@@ -1,0 +1,97 @@
+generated: '2026-08-04'
+method: searched
+source: https://developer.opengov.com/docs/app-management/permissions
+docs: https://developer.opengov.com/docs/app-management/permissions
+note: >-
+  OpenGov's authorization surface is two-layered and neither layer is an OAuth scopes map in the OpenAPI.
+  (1) The platform authorizes integrations with named PERMISSIONS granted per integration in the Developer
+  Portal — this is the surface an integrator actually reasons about, and it is published as a table rather
+  than in any spec. (2) Underneath, the Permitting & Licensing API's openIdConnect scheme points at an Auth0
+  tenant whose discovery document advertises standard OIDC scopes. derive-oauth-scopes.py returns zero
+  because no oauth2 securityScheme with a `scopes` map exists in any of the ten definitions — the OIDC
+  scheme carries only an openIdConnectUrl. Captured here by hand from the published permissions reference.
+
+authorization_model: per-integration permission grants, further narrowed by per-record-type access
+delegation_rule: An administrator may only grant an integration permissions the administrator personally
+  holds (e.g. granting "Workflow Write" requires an Employee role in Permitting & Licensing).
+denial_status: 403 Forbidden
+record_type_scoping:
+  docs: https://developer.opengov.com/docs/plc/access-control
+  rule: >-
+    A Permitting & Licensing integration only reaches Record Types explicitly enabled for it under
+    Permitting & Licensing System Settings > Record Types > Access. Webhook events respect the same
+    boundary.
+
+permissions:
+- suite: Permitting & Licensing
+  items:
+  - permission: Record Read
+    description: Read record data
+  - permission: Record Write
+    description: Create and modify records
+  - permission: Record Archive
+    description: Archive records
+  - permission: Workflow Read
+    description: Read record workflow steps
+  - permission: Workflow Write
+    description: Add and modify record workflow steps
+  - permission: Comment Read
+    description: Read comments on record workflow steps
+  - permission: Comment Write
+    description: Write comments on record workflow steps
+  - permission: Location Read
+    description: Read location data
+  - permission: Location Write
+    description: Create and modify locations
+  - permission: Users Read
+    description: Read user data
+  - permission: Users Write
+    description: Create and modify users
+  - permission: Files Read
+    description: List files
+  - permission: Files Write
+    description: Create files
+  - permission: System Read
+    description: Read system configuration objects
+  - permission: Payment Read
+    description: Read payment data
+  - permission: Record Type Read
+    description: Read record type data
+- suite: Access Control
+  items:
+  - permission: SCIM Administration
+    description: Manage user and group provisioning via SCIM 2.0 on behalf of an entity
+
+oidc_scopes:
+  issuer: https://accounts.viewpointcloud.com/
+  discovery: well-known/opengov-openid-configuration.json
+  source: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+  used_by: [opengov:permitting-licensing-v2]
+  primary_grant: client_credentials
+  scopes_supported:
+  - openid
+  - profile
+  - offline_access
+  - name
+  - given_name
+  - family_name
+  - nickname
+  - email
+  - email_verified
+  - picture
+  - created_at
+  - identities
+  - phone
+  - address
+  note: >-
+    These are the identity-provider scopes the Auth0 tenant advertises, not OpenGov API scopes. No
+    API-resource scope (e.g. records:read) is advertised anywhere, so an agent cannot request least
+    privilege at token time — least privilege is configured out-of-band in the Developer Portal instead.
+
+gaps:
+- No oauth2 securityScheme with a scopes map exists in any of the ten OpenAPI definitions, so the permission
+  each operation requires is not machine-readable. The docs say "Each API operation requires a certain
+  Permission" but the operation-to-permission mapping is not published in a table or in the specs.
+- No API-resource scopes are advertised by the Auth0 authorization server, only OIDC identity scopes.
+- Webhook event subscriptions have a "Required Permission" column in the product UI, but that mapping is
+  also not published.

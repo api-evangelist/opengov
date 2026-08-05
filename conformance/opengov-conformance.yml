@@ -1,0 +1,107 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/ + https://developer.opengov.com/docs + https://trust.opengov.com/ + https://opengov.com/security/
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    Nine of the ten published definitions declare openapi 3.1.0 (Vendor Management declares 3.0.3), served
+    at https://developer.opengov.com/catalog/<api>/<version>/schema.yaml
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi/opengov-vendor-management-openapi.yml declares openapi 3.0.3
+- id: json-api
+  conforms: true
+  evidence: 'Permitting & Licensing declares itself JSON:API in the docs overview, serves
+    application/vnd.api+json, uses filter[]/page[]/include/sort query syntax and the errors[] envelope'
+  reference: https://jsonapi.org/
+  apis: [opengov:permitting-licensing-v2, opengov:permitting-licensing-v1]
+- id: oauth2
+  conforms: true
+  evidence: Permitting & Licensing openIdConnect scheme auth0Prod resolves to an Auth0 issuer advertising
+    client_credentials, authorization_code, refresh_token and device_code grants
+  authorization_server: https://accounts.viewpointcloud.com/
+- id: oidc-discovery
+  conforms: true
+  evidence: well-known/opengov-openid-configuration.json (HTTP 200) at
+    https://accounts.viewpointcloud.com/.well-known/openid-configuration
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: well-known/opengov-oauth-authorization-server.json (HTTP 200)
+- id: scim-2.0
+  conforms: true
+  evidence: OpenGov publishes SCIM 2.0 user and group provisioning with documented Okta, Microsoft Entra ID
+    and Oracle Cloud configuration
+  docs: https://developer.opengov.com/docs/access-control/overview
+- id: ckan-action-api-2.9
+  conforms: true
+  evidence: openapi/opengov-open-data-ckan-openapi.yml declares the CKAN Action API v2.9 surface at
+    /api/3/action
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No operation in any of the ten definitions returns application/problem+json; errors use a
+    JSON:API errors[] array or a flat {status, code, detail} object
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every OpenGov host despite a published responsible
+    disclosure policy at https://opengov.com/security/
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404 (or an SPA HTML shell) on every host
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy is published, despite two
+    suites already shipping a superseded v1
+- id: idempotency-key-header
+  conforms: false
+  partial: true
+  evidence: Idempotency is implemented as a required `idempotencyKey` UUID in the JSON request body of the
+    Purchase Order API (39 operations declare a 409 IDEMPOTENCY_CONFLICT), not as the conventional
+    Idempotency-Key request header, and it exists on only one of the ten APIs
+- id: rate-limit-headers
+  conforms: false
+  partial: true
+  evidence: X-RateLimit-Limit and X-RateLimit-Remaining are declared on 58 Permitting & Licensing responses,
+    but no 429 response is declared anywhere, no Retry-After is sent, and no numeric quota is published
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document is published; the event surface is a portal-documented webhook catalog of
+    31 Permitting & Licensing events with payload schemas carried inside the PLC v2 OpenAPI
+- id: webhook-abuse-protection
+  conforms: true
+  evidence: OPTIONS handshake using WebHook-Request-Origin / WebHook-Allowed-Origin against
+    https://webhooks.opengov.com, plus HMAC-SHA256 request signing with a 5-minute replay window
+  docs: https://developer.opengov.com/docs/webhooks/managing-subscriptions
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 on every real host; the two
+    developer/support hosts answer 200 with an SPA HTML shell for every path, which is not a card
+- id: mcp
+  conforms: false
+  evidence: OpenGov publishes no first-party Model Context Protocol server; the third-party
+    opengov-mcp-server on npm targets Socrata open-data portals, not the OpenGov Public Service Platform
+compliance:
+  published: true
+  trust_center: https://trust.opengov.com/
+  security_page: https://opengov.com/security/
+  certifications:
+  - SOC 2 Type 2
+  - SOC 3
+  - TX-RAMP
+  - AZ RAMP
+  - GovRAMP
+  - GDPR
+  - CCPA
+  - CPRA
+  - VPAT
+  frameworks:
+  - NIST CSF 2.0
+  - NIST 800-53 Rev. 5
+  cryptography:
+  - AES-256 at rest
+  - TLS 1.2+ in transit
+  - FIPS 140-2 validated cryptography
+  assurance:
+  - Annual third-party penetration test and risk assessment
+  - Managed security service provider for threat detection and incident response
+  - AWS Government Competency Program accreditation

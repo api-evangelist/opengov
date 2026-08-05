@@ -1,0 +1,46 @@
+generated: '2026-08-04'
+method: generated
+source: openapi/ (every operationId below verified verbatim against the harvested specs) +
+  https://developer.opengov.com/docs
+note: >-
+  OpenGov publishes no AGENTS.md, no skills directory and no agent guidance of any kind — searched
+  first, found nothing, so these are generated. Every step is grounded in a real operationId from the
+  ten harvested OpenAPI definitions; nothing is invented. Each skill carries the platform's real
+  constraints: no sandbox, JSON:API vs coded-JSON error envelopes, per-integration permissions plus
+  per-record-type access, and idempotency that exists only on the Purchase Order API.
+skills:
+- file: opengov-lookup-permit-record.md
+  name: Look up a permit record by its public record number
+  api: openapi/opengov-permitting-licensing-v2-openapi.yml
+  operations: [listRecords, getRecord, listRecordSteps, listRecordAttachments, getRecordAttachment,
+    listRecordStepComments]
+  risk: read-only
+- file: opengov-record-inspection-result.md
+  name: Schedule and record an inspection result
+  api: openapi/opengov-permitting-licensing-v2-openapi.yml
+  operations: [listInspectionTasks, getInspectionTask, getInspectionTypes, postInspectionEvent,
+    getInspectionEvents, getInspectionResults, updateInspectionResult, getChecklistResults,
+    postChecklistResults, patchChecklistResults]
+  risk: write — no idempotency contract on this API
+- file: opengov-purchase-order-approval.md
+  name: Create, submit and issue a purchase order
+  api: openapi/opengov-purchase-order-openapi.yml
+  operations: [purchaseOrder.create, purchaseOrder.search, purchaseOrder.findById, purchaseOrder.update,
+    purchaseOrder.submit, purchaseOrder.approve, purchaseOrder.reject, purchaseOrder.issue,
+    purchaseOrder.cancel, purchaseOrder.close, purchaseOrder.delete]
+  risk: write — commits public funds; supports dryRun and idempotencyKey
+- file: opengov-onboard-vendor.md
+  name: Onboard and promote a vendor
+  api: openapi/opengov-vendor-management-openapi.yml
+  operations: [vendor-search.searchVendors, vendors.createVendor, vendors.getVendorById,
+    vendors.updateVendor, attachments.createAttachment, vendors.submitVendor,
+    vendor-taskmaster.getVendorApprovalPending, vendor-taskmaster.getVendorTaskMasterActions,
+    vendor-taskmaster.submitVendorTaskMasterOutcome, vendors.promoteVendor,
+    vendor-imports.downloadTemplate, vendor-imports.requestPresignedUpload, vendor-imports.processImport,
+    vendor-imports.validateJob, vendor-imports.remapColumns, vendor-imports.triggerImport]
+  risk: write — vendor master data; no idempotency contract
+- file: opengov-subscribe-to-webhooks.md
+  name: Subscribe to OpenGov webhook events and verify signatures
+  api: asyncapi/opengov-permitting-licensing-webhooks.yml
+  operations: []
+  risk: configuration + receiver

@@ -1,0 +1,41 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/opengov-permitting-licensing-v2-openapi.yml
+published_quota: false
+note: >-
+  OpenGov publishes no numeric rate limit anywhere — not on developer.opengov.com, not in any of the ten
+  OpenAPI definitions, and not on the pricing or status pages. The only rate-limit signal that exists is a
+  pair of response headers declared on 58 Permitting & Licensing responses. No 429 response is declared in
+  any spec and no Retry-After is documented, so a client cannot compute a safe call rate or a correct
+  backoff from public material. Recorded as an honest absence, not a zero.
+signaling:
+  headers:
+  - name: X-RateLimit-Limit
+    description: Number of requests allowed
+    responses_declaring: 58
+    apis: [opengov:permitting-licensing-v2]
+  - name: X-RateLimit-Remaining
+    description: Number of remaining requests
+    responses_declaring: 58
+    apis: [opengov:permitting-licensing-v2]
+  - name: Retry-After
+    present: false
+  standard: informal X-RateLimit-* (not RFC 9331 / draft-ietf-httpapi-ratelimit-headers)
+  status_429_declared: false
+  window_documented: false
+  reset_header: false
+apis_without_any_rate_limit_signal:
+- opengov:permitting-licensing-v1
+- opengov:budgeting-performance
+- opengov:procurement-v1
+- opengov:procurement-v2
+- opengov:purchase-order
+- opengov:receipt
+- opengov:vendor-management
+- opengov:enterprise-asset-management
+- opengov:open-data
+rate_limits: []
+guidance: >-
+  Read X-RateLimit-Remaining on Permitting & Licensing responses and throttle against it. For the other
+  nine APIs, assume nothing is guaranteed, use conservative concurrency, and treat any 5xx as a possible
+  throttle since no 429 is declared.

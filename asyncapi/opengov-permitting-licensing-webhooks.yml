@@ -1,0 +1,164 @@
+generated: '2026-08-04'
+method: searched
+source: https://developer.opengov.com/docs/webhooks/event-payloads
+spec_type: Webhooks
+note: OpenGov publishes NO AsyncAPI document. It publishes a webhook event catalog in the developer portal and carries the
+  31 Permitting & Licensing event payload schemas inside the Permitting & Licensing v2 OpenAPI as components.schemas (*WebhookV2).
+  This artifact captures that webhook surface verbatim; it is not an AsyncAPI conversion and none was fabricated.
+transport:
+  protocol: https
+  method: POST
+  ack: respond with a 2xx status code to confirm receipt
+subscription:
+  model: per-integration event subscriptions configured in the Developer Portal
+  docs: https://developer.opengov.com/docs/webhooks/managing-subscriptions
+  url_verification:
+    method: OPTIONS handshake (WebSub-style abuse-protection)
+    request_header: WebHook-Request-Origin
+    response_header: WebHook-Allowed-Origin
+    expected_origin: https://webhooks.opengov.com
+    manual_alternative: WebHook-Request-Callback header, visited via GET
+  access_control: events require the same integration permissions as the equivalent read operation; an integration only receives
+    events for record types it may access
+security:
+  signing: HMAC-SHA256
+  secret: per-subscription, generated at subscription creation
+  headers:
+  - X-Webhook-Timestamp
+  - X-Webhook-Signature
+  signature_format: sha256=<hex_digest>
+  signed_payload: '"<timestamp>.<raw_body>"'
+  replay_tolerance_seconds: 300
+coverage:
+  permitting_licensing: 31
+  enterprise_asset_management: 0
+  procurement: 0
+  vendor_management: 0
+  note: The developer portal explicitly states "No events available yet" for Enterprise Asset Management, Procurement and
+    Vendor Management.
+events:
+- event: opengov.plc.changeRequest.canceled.v2
+  description: A change request is canceled
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#change-request-canceled-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/ChangeRequestCanceledWebhookV2
+- event: opengov.plc.changeRequest.completed.v2
+  description: A change request is completed
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#change-request-completed-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/ChangeRequestCompletedWebhookV2
+- event: opengov.plc.changeRequest.created.v2
+  description: A change request is created
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#change-request-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/ChangeRequestCreatedWebhookV2
+- event: opengov.plc.comment.created.v2
+  description: A comment is made on a step
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#comment-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/CommentCreatedWebhookV2
+- event: opengov.plc.file.uploaded.v2
+  description: A file is uploaded
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#file-uploaded-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/FileCreatedWebhookV2
+  note: documented anchor is file-uploaded-webhook-v2; the schema component is named FileCreatedWebhookV2
+- event: opengov.plc.inspection.created.v2
+  description: An inspection event is created
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#inspection-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/InspectionCreatedWebhookV2
+- event: opengov.plc.inspection.updated.v2
+  description: An inspection event is updated
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#inspection-updated-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/InspectionUpdatedWebhookV2
+- event: opengov.plc.location.created.v2
+  description: A location is created
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#location-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/LocationCreatedWebhookV2
+- event: opengov.plc.location.updated.v2
+  description: A location is modified
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#location-updated-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/LocationUpdatedWebhookV2
+- event: opengov.plc.payment.made.v2
+  description: A payment or refund is made
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#payment-made-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/PaymentMadeWebhookV2
+- event: opengov.plc.payment.updated.v2
+  description: A payment’s status changed (Pending, Failed, Disputed, Lost, Voided)
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#payment-updated-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/PaymentUpdatedWebhookV2
+- event: opengov.plc.record.additionalLocations.added.v2
+  description: An additional location is added on a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-additional-locations-added-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordAdditionalLocationsAddedWebhookV2
+- event: opengov.plc.record.additionalLocations.removed.v2
+  description: An additional location is removed on a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-additional-locations-removed-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordAdditionalLocationsRemovedWebhookV2
+- event: opengov.plc.record.applicant-added.v2
+  description: A record applicant was added
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#applicant-user-id-added-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/ApplicantUserIdAddedWebhookV2
+- event: opengov.plc.record.applicant-removed.v2
+  description: A record applicant was removed
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#applicant-user-id-removed-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/ApplicantUserIdRemovedWebhookV2
+- event: opengov.plc.record.applicant-updated.v2
+  description: A record applicant changes
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#applicant-user-id-updated-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/ApplicantUserIdUpdatedWebhookV2
+- event: opengov.plc.record.archived.v2
+  description: A record is archived
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-archived-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordArchivedWebhookV2
+- event: opengov.plc.record.attachment-created.v2
+  description: A record attachment is created
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-attachment-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordAttachmentCreatedWebhookV2
+- event: opengov.plc.record.attachment-deleted.v2
+  description: A record attachment is deleted
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-attachment-deleted-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordAttachmentDeletedWebhookV2
+- event: opengov.plc.record.attachment-updated.v2
+  description: A record attachment has a new version
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-attachment-updated-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordAttachmentUpdatedWebhookV2
+- event: opengov.plc.record.primaryLocation.added.v2
+  description: A primary location is added to a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-primary-location-added-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordPrimaryLocationAddedWebhookV2
+- event: opengov.plc.record.primaryLocation.removed.v2
+  description: A primary location is removed from a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-primary-location-removed-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordPrimaryLocationRemovedWebhookV2
+- event: opengov.plc.record.primaryLocation.updated.v2
+  description: A record’s primary location location changes
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-primary-location-updated-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordPrimaryLocationUpdatedWebhookV2
+- event: opengov.plc.record.submitted.v2
+  description: A record is submitted
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-submitted-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordSubmittedWebhookV2
+- event: opengov.plc.record.unarchived.v2
+  description: A record is unarchived
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#record-unarchived-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/RecordUnarchivedWebhookV2
+- event: opengov.plc.workflowStep.assigned.v2
+  description: A step is assigned or reassigned
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#workflow-step-assigned-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/WorkflowStepAssignedWebhookV2
+- event: opengov.plc.workflowStep.comment.created.v2
+  description: A comment is made on a step
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#workflow-step-comment-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/WorkflowStepCommentCreatedWebhookV2
+- event: opengov.plc.workflowStep.created.v2
+  description: A workflow step is created on a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#workflow-step-created-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/WorkflowStepCreatedWebhookV2
+- event: opengov.plc.workflowStep.deleted.v2
+  description: A workflow step is deleted on a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#workflow-step-deleted-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/WorkflowStepDeletedWebhookV2
+- event: opengov.plc.workflowStep.restored.v2
+  description: A workflow step is restored on a record
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#workflow-step-restored-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/WorkflowStepRestoredWebhookV2
+- event: opengov.plc.workflowStep.status.changed.v2
+  description: A workflow step changes status
+  schema: https://developer.opengov.com/catalog/plc-api/~schemas#workflow-step-status-changed-webhook-v2
+  payload_schema: openapi/opengov-permitting-licensing-v2-openapi.yml#/components/schemas/WorkflowStepStatusChangedWebhookV2

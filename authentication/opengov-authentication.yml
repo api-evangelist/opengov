@@ -1,0 +1,66 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/opengov-budgeting-performance-openapi.yml, openapi/opengov-open-data-ckan-openapi.yml,
+  openapi/opengov-permitting-licensing-v1-openapi.yml, openapi/opengov-permitting-licensing-v2-openapi.yml,
+  openapi/opengov-procurement-v1-openapi.yml, openapi/opengov-procurement-v2-openapi.yml, openapi/opengov-purchase-order-openapi.yml,
+  openapi/opengov-receipt-openapi.yml, openapi/opengov-vendor-management-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - openIdConnect
+  api_key_in:
+  - header
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+  - openapi/opengov-permitting-licensing-v1-openapi.yml
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+  - openapi/opengov-vendor-management-openapi.yml
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  sources:
+  - openapi/opengov-budgeting-performance-openapi.yml
+- name: ApiTokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/opengov-open-data-ckan-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+  - openapi/opengov-purchase-order-openapi.yml
+  - openapi/opengov-receipt-openapi.yml
+- name: basicHttpAuthentication
+  type: http
+  scheme: basic
+  description: Basic HTTP Authentication
+  sources:
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml
+- name: auth0Prod
+  type: openIdConnect
+  openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+  description: |-
+    The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+    To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+  sources:
+  - openapi/opengov-permitting-licensing-v2-openapi.yml
+- name: xApiKeyHeaderAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/opengov-procurement-v1-openapi.yml
+  - openapi/opengov-procurement-v2-openapi.yml

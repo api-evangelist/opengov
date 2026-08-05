@@ -1,0 +1,1188 @@
+openapi: 3.1.0
+info:
+  title: Open Data CKAN Action API
+  version: "2.9"
+  description: >
+    Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.
+
+
+    Datasets are managed as packages of metadata and resources.
+
+
+    All endpoints are available under `/api/3/action/<action_name>`.
+
+
+    Endpoints support POST requests with an application/json or a multipart/form-data body.
+      - Use an application/json POST request when nested json parameters are required
+      - Use a multipart/form-data POST request when file uploads are required
+
+    Read-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.
+
+    Responses are returned in a JSON envelope on success:
+
+    ```json
+
+    {
+      "help": "url to complete endpoint help",
+      "success": true,
+      "result": {...}
+    }
+
+    ```
+
+    or on errors:
+
+    ```json
+
+    {
+      "help": "url to complete endpoint help",
+      "success": false,
+      "error": {
+        "__type": "error type",
+        "message": "error message",
+        "field-with-error": ["first-error", "second-error"],
+        ...
+      }
+    }
+
+    ```
+  contact:
+    name: CKAN Community
+    url: https://ckan.org/community
+  license:
+    name: GNU Affero General Public License (AGPL) v3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+tags:
+- name: package
+  description: "On early CKAN versions, datasets were called packages and this name has stuck in some places,\
+  \ specially internally and on API calls. Package has exactly the same meaning as dataset."
+- name: resource
+  description: "A resource holds the data itself. A resource can be a CSV or Excel spreadsheet,\
+  \ XML file, PDF document, image file, linked data, etc.\
+  \ A dataset can contain any number of resources."
+- name: organization
+  description: "Organizations are used to create, manage and publish datasets."
+- name: group
+  description: "Groups are used to group datasets together in categories."
+- name: tag
+servers:
+- url: https://cloudcity.ogopendata.com/api/3/action
+  description: Cloud City Open Data
+components:
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: "https://demo.ckan.org/api/3/action/help_show?name={action_name}"
+                success: false
+                error:
+                  __type: "Authorization Error"
+                  message: "Access denied: User not authorized to perform this action"
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: "https://demo.ckan.org/api/3/action/help_show?name={action_name}"
+                success: false
+                error:
+                  __type: "Not Found Error" 
+                  message: "Not found"
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: "https://demo.ckan.org/api/3/action/help_show?name={action_name}"
+                success: false
+                error:
+                  __type: "Validation Error"
+                  name_or_id: ['Missing value']
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+    Dataset:
+      type: object
+      description: CKAN Dataset (Package)
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        notes:
+          type: string
+        url:
+          type: string
+        version:
+          type: string
+        author:
+          type: string
+        author_email:
+          type: string
+        maintainer:
+          type: string
+        maintainer_email:
+          type: string
+        license_id:
+          type: string
+        owner_org:
+          type: string
+        private:
+          type: boolean
+        state:
+          type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    Resource:
+      type: object
+      description: CKAN Resource
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        package_id:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        format:
+          type: string
+        size:
+          type: integer
+        mimetype:
+          type: string
+        hash:
+          type: string
+        created:
+          type: string
+          format: date-time
+        last_modified:
+          type: string
+          format: date-time
+    ResourceCreateMultipart:
+      type: object
+      description: Resource create multipart form-data
+      required:
+      - package_id
+      - upload
+      properties:
+        package_id:
+          type: string
+          description: The package ID to add a new resource to
+        name:
+          type: string
+          description: The name of the resource
+        description:
+          type: string
+          description: The description of the resource
+        format:
+          type: string
+          description: The format of the resource
+        upload:
+          type: string
+          format: binary
+          description: The file to upload
+    ResourcePatchMultipart:
+      type: object
+      description: Resource patch multipart form-data
+      required:
+      - id
+      - upload
+      properties:
+        id:
+          type: string
+          description: The ID of an existing resource to update
+        name:
+          type: string
+          description: The name of the resource
+        description:
+          type: string
+          description: The description of the resource
+        format:
+          type: string
+          description: The format of the resource
+        upload:
+          type: string
+          format: binary
+          description: The file to upload
+    Organization:
+      type: object
+      description: CKAN Organization
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        state:
+          type: string
+        approval_status:
+          type: string
+        package_count:
+          type: integer
+    Group:
+      type: object
+      description: CKAN Group
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        state:
+          type: string
+        package_count:
+          type: integer
+    User:
+      type: object
+      description: CKAN User
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        fullname:
+          type: string
+        email:
+          type: string
+        about:
+          type: string
+        sysadmin:
+          type: boolean
+        state:
+          type: string
+        created:
+          type: string
+          format: date-time
+    Tag:
+      type: object
+      description: CKAN Tag
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        vocabulary_id:
+          type: string
+        state:
+          type: string
+paths:
+  /package_list:
+    get:
+      operationId: packageList
+      summary: "Return a list of the names of the site's datasets (packages)."
+      tags:
+      - package
+      responses:
+        '200':
+          description: Envelope with string array under `result`
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /package_search:
+    get:
+      operationId: packageSearch
+      summary: "Searches for datasets (packages) satisfying a given search criteria."
+      description: "This action accepts solr search query parameters (details below),\
+      \ and returns a dictionary of results, including dictized datasets that match the search criteria,\
+      \ a search count and also facet information."
+      tags:
+      - package
+      parameters:
+      - in: query
+        name: q
+        schema:
+          type: string
+        description: A solr query string that will be used to filter and score results
+        required: false
+      - in: query
+        name: fq
+        schema:
+          type: string
+        description: A solr filter query that will facet results by removing non-matching items.
+        required: false
+      - in: query
+        name: sort
+        schema:
+          type: string
+        description: Sort order for the search results, defaults to `score desc, metadata_modified desc`.
+        required: false
+      - in: query
+        name: rows
+        schema:
+          type: integer
+          default: 10
+          maximum: 1000
+        description: The maximum number of results to return
+      - in: query
+        name: start
+        schema:
+          type: integer
+          default: 0
+        description: The offset from the beginning of results for pagination
+      - in: query
+        name: include_private
+        schema:
+          type: boolean
+          default: false
+        description: "Include private datasets in the search results.\
+          \ Only private datasets from the user's organizations will be returned.\
+          \ Sysadmins will be returned all private datasets."
+      responses:
+        '200':
+          description: Search results envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                        results:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Dataset'
+              examples:
+                search_results:
+                  summary: Search results
+                  value:
+                    help: "https://demo.ckan.org/api/3/action/help_show?name=package_search"
+                    success: true
+                    result:
+                      count: 2
+                      results:
+                      - id: "dataset-1"
+                        name: "dataset-1"
+                        title: "First Dataset"
+                        notes: "Description of first dataset"
+                        url: "https://example.com/dataset1"
+                        version: "1.0"
+                        author: "Author One"
+                        author_email: "author1@example.com"
+                        maintainer: "Maintainer One"
+                        maintainer_email: "maintainer1@example.com"
+                        license_id: "cc-by"
+                        owner_org: "org-1"
+                        private: false
+                        state: "active"
+                        resources: []
+                        tags: []
+                        groups: []
+                      - id: "dataset-2"
+                        name: "dataset-2"
+                        title: "Second Dataset"
+                        notes: "Description of second dataset"
+                        url: "https://example.com/dataset2"
+                        version: "2.0"
+                        author: "Author Two"
+                        author_email: "author2@example.com"
+                        maintainer: "Maintainer Two"
+                        maintainer_email: "maintainer2@example.com"
+                        license_id: "cc-by"
+                        owner_org: "org-2"
+                        private: false
+                        state: "active"
+                        resources: []
+                        tags: []
+                        groups: []
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /package_show:
+    get:
+      operationId: packageShow
+      summary: "Return the metadata of a dataset (package) and its resources."
+      tags:
+      - package
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          type: string
+        description: Dataset id or name
+      - in: query
+        name: use_default_schema
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: include_tracking
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Envelope with dataset object under `result`
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Dataset'
+              examples:
+                success:
+                  summary: Successful dataset retrieval
+                  value:
+                    help: "https://demo.ckan.org/api/3/action/help_show?name=package_show"
+                    success: true
+                    result:
+                      id: "test-dataset"
+                      name: "test-dataset"
+                      title: "Test Dataset"
+                      notes: "A test dataset for demonstration"
+                      url: "https://example.com"
+                      version: "1.0"
+                      author: "Test Author"
+                      author_email: "test@example.com"
+                      maintainer: "Test Maintainer"
+                      maintainer_email: "maintainer@example.com"
+                      license_id: "cc-by"
+                      owner_org: "test-org"
+                      private: false
+                      state: "active"
+                      resources:
+                      - id: "resource-1"
+                        package_id: "test-dataset"
+                        url: "https://example.com/data.csv"
+                        name: "Data CSV"
+                        description: "Main data file"
+                        format: "CSV"
+                        size: 1024
+                        mimetype: "text/csv"
+                        created: "2024-01-01T00:00:00Z"
+                        last_modified: "2024-01-01T00:00:00Z"
+                      tags:
+                      - id: "tag-1"
+                        name: "test"
+                        display_name: "Test"
+                        vocabulary_id: ""
+                        state: "active"
+                      groups: []
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /package_create:
+    post:
+      operationId: packageCreate
+      summary: "Create a new dataset (package)."
+      description: "You must be authorized to create new datasets."
+      tags:
+      - package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dataset'
+            examples:
+              basic_dataset:
+                summary: Basic dataset creation
+                value:
+                  name: "my-new-dataset"
+                  title: "My New Dataset"
+                  notes: "Description of my dataset"
+                  url: "https://example.com"
+                  version: "1.0"
+                  author: "John Doe"
+                  author_email: "john@example.com"
+                  maintainer: "Jane Smith"
+                  maintainer_email: "jane@example.com"
+                  license_id: "cc-by"
+                  owner_org: "my-organization"
+                  private: false
+                  resources:
+                  - url: "https://example.com/data.csv"
+                    name: "Data File"
+                    description: "Main data file"
+                    format: "CSV"
+                  tags:
+                  - name: "environment"
+                  - name: "data"
+      responses:
+        '200':
+          description: Pacakge create result envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Dataset'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /package_patch:
+    post:
+      operationId: packagePatch
+      summary: Update only specific fields of an existing dataset
+      description: Any fields not passed will retain their original values.
+      tags:
+      - package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dataset'
+            examples:
+              basic_dataset:
+                summary: Basic dataset patch
+                value:
+                  name: "my-new-dataset"
+                  title: "My New Dataset"
+                  notes: "Description of my dataset"
+                  url: "https://example.com"
+                  version: "1.0"
+                  author: "John Doe"
+                  author_email: "john@example.com"
+                  maintainer: "Jane Smith"
+                  license_id: "cc-by"
+                  owner_org: "my-organization"
+                  private: false
+      responses:
+        '200':
+          description: Package patch result envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Dataset'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /resource_show:
+    get:
+      operationId: resourceShow
+      summary: "Return the metadata of a resource."
+      tags:
+      - resource
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: include_tracking
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Resource envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Resource'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /resource_create:
+    post:
+      operationId: resourceCreate
+      summary: "Add a new resource to a dataset"
+      description: "Add a resource to a dataset (package). POST using multipart/form-data to upload a file."
+      tags:
+      - resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Resource'
+            examples:
+              basic_resource_create:
+                summary: Basic resource creation with linked file
+                value:
+                  package_id: "<package_id>"
+                  name: "Data File"
+                  description: "Main data file"
+                  format: "CSV"
+                  url: "https://example.com/data.csv"
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResourceCreateMultipart'
+            examples:
+              basic_resource_create_with_file:
+                summary: Basic resource creation with file upload
+                value:
+                  package_id: "<package_id>"
+                  name: "Data File"
+                  description: "Main data file"
+                  format: "CSV"
+                  upload: "data.csv"
+      responses:
+        '200':
+          description: Resource create result envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Resource'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /resource_patch:
+    post:
+      operationId: resourcePatch
+      summary: "Update only specific fields of an existing resource."
+      description: "Use multipart/form-data when uploading a file."
+      tags:
+      - resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Resource'
+            examples:
+              update_resource_metadata:
+                summary: Update resource metadata
+                value:
+                  id: "<resource_id>"
+                  name: "Data File"
+                  description: "Updated data file"
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResourcePatchMultipart'
+            examples:
+              update_with_file:
+                summary: Update resource with file upload
+                value:
+                  id: "<resource_id>"
+                  name: "Data File"
+                  description: "Updated data file"
+                  upload: "updated_file.csv"
+      responses:
+        '200':
+          description: Resource patch result envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Resource'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /organization_list:
+    get:
+      operationId: organizationList
+      summary: "Return a list of the names of the site's organizations."
+      tags:
+      - organization
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Organization list envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Organization'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /organization_show:
+    get:
+      operationId: organizationShow
+      summary: "Return the details of a organization."
+      tags:
+      - organization
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: include_datasets
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: include_dataset_count
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Organization envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Organization'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /group_list:
+    get:
+      operationId: groupList
+      summary: "Return a list of the names of the site's groups."
+      tags:
+      - group
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Envelope with group array under `result`
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Group'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /group_show:
+    get:
+      operationId: groupShow
+      summary: "Return the details of a group."
+      tags:
+      - group
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: Group envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Group'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /tag_list:
+    get:
+      operationId: tagList
+      summary: "Return a list of the site's tags."
+      tags:
+      - tag
+      parameters:
+      - in: query
+        name: query
+        schema:
+          type: string
+      - in: query
+        name: vocabulary_id
+        schema:
+          type: string
+      - in: query
+        name: all_fields
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Tag list envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Tag'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /tag_search:
+    get:
+      operationId: tagSearch
+      summary: "Return a list of tags whose names contain a given string."
+      tags:
+      - tag
+      parameters:
+      - in: query
+        name: query
+        schema:
+          type: string
+      - in: query
+        name: vocabulary_id
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Envelope with tag search results under `result`
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: object
+                      additionalProperties: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /tag_show:
+    get:
+      operationId: tagShow
+      summary: "Return the details of a tag and its datasets."
+      tags:
+      - tag
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: vocabulary_id
+        schema:
+          type: string
+      - in: query
+        name: include_datasets
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Tag envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Tag'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /status_show:
+    get:
+      operationId: statusShow
+      summary: Get the CKAN version and a list of installed extensions
+      tags:
+      - system
+      parameters: []
+      responses:
+        '200':
+          description: Status envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: object
+                      additionalProperties: true
+              examples:
+                success:
+                  summary: Successful status show
+                  value:
+                    help: "https://demo.ckan.org/api/3/action/help_show?name=status_show"
+                    success: true
+                    result:
+                      site_title: "CKAN Demo"
+                      site_url: "https://demo.ckan.org"
+                      extensions: ['stats', 'resource_proxy', 'image_view', 'webpage_view', 'datastore']
+                      ckan_version: "2.9.11"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security: []

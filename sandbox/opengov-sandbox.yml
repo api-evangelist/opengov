@@ -1,0 +1,90 @@
+generated: '2026-08-04'
+method: searched
+source: https://developer.opengov.com/docs/using-test-console
+docs:
+- https://developer.opengov.com/docs/using-test-console
+- https://developer.opengov.com/docs/app-management/api-key
+- https://developer.opengov.com/docs/quickstart
+summary: >-
+  OpenGov ships an in-browser API Test Console on every operation page in the API Catalog, but it does NOT
+  ship a sandbox in the usual sense: there is no test-mode key prefix, no separate test tenant a developer
+  can self-serve, and no magic test values. The console executes against whatever environment the supplied
+  credential belongs to, which for most customers is production — the docs repeat a "Caution: Production
+  Environment / all actions are live and may affect real data for your community" warning on the console
+  page and on the Permitting & Licensing and Enterprise Asset Management overviews.
+
+console:
+  present: true
+  name: API Test Console
+  location: right sidebar "Test" button on every operation page in https://developer.opengov.com/catalog
+  auth_methods:
+  - logged-in OpenGov user account (select your email address)
+  - stored API keys ("Test Console Keys")
+  key_storage: browser Local Storage
+  key_types:
+  - type: Integration API Key
+    fields: [label, API key]
+    note: automatically added to Test Console Keys on that device when the integration key is created
+  - type: Personal API Key
+    fields: [label, API key, username]
+  content_type_note: For operations with a request body the Content-Type header must be set explicitly —
+    usually application/json or application/vnd.api+json depending on the API.
+  limitations:
+  - api: opengov:enterprise-asset-management
+    working: false
+    statement: 'The EAM API is not callable within the API Catalog, an external platform is required for
+      testing. The "Test" button in the API reference UI does not work for executing actual API calls
+      against the EAM API.'
+    workaround: Use the reference UI to build and copy the URL, then call it from an external tool.
+
+test_vs_live:
+  separated: false
+  test_key_prefix: none published
+  live_key_prefix: none published
+  self_serve_test_tenant: false
+  warning_published: true
+  warning_text: Be careful when using the production API! All actions are live and may affect real data for
+    your community. Double-check your credentials and endpoints before making changes.
+
+non_production_environments:
+  note: >-
+    Non-production hosts appear in the published OpenAPI servers[] arrays but are internal OpenGov
+    environments, not a developer-accessible sandbox. Recorded because they are published, not because they
+    are usable by a third party.
+  hosts:
+  - https://api.plce.ogstaging.us/plce
+  - https://api.bnp.ogintegration.us
+  - https://api.vendor.ogstaging.us
+  - https://api-vendor.procurement.ogintegration.us
+  - https://api-purchase-order.procurement.ogstaging.us
+  - https://api-purchase-order.procurement.ogintegration.us
+  - https://api-receipts.procurement.ogstaging.us
+  - https://api-receipts.procurement.ogintegration.us
+
+test_values:
+  cards: none — OpenGov is not a card acquirer
+  magic_identifiers: none published
+  fixtures: none published
+  time_simulation: none published
+  dry_run:
+    supported: true
+    mechanism: '`dryRun: boolean` in the request body of Purchase Order state-transition operations
+      (purchaseOrder.submit, approve, reject, issue, cancel, close)'
+    source: openapi/opengov-purchase-order-openapi.yml
+    note: The closest thing OpenGov publishes to a safe-to-run test path — it validates a transition without
+      committing it.
+
+access:
+  self_serve: false
+  requirement: An OpenGov account in a customer entity, plus the Entity Admin role to create integrations.
+  no_account_path: https://opengov.com/contact-us/
+  docs: https://developer.opengov.com/docs/granting-developer-access
+  note: >-
+    A developer who is not already inside an OpenGov customer organization cannot obtain credentials at all —
+    the only route is a contact-us sales form. The specs, docs and console UI are fully public; the calls
+    are not.
+
+gap: >-
+  OpenGov documents production danger loudly but offers no safe place to be dangerous. A self-serve sandbox
+  community with seeded record types, or test-mode integration keys that route to ogstaging, would let
+  integrators build against Permitting & Licensing without touching a real municipality's permit records.

@@ -1,0 +1,86 @@
+generated: '2026-08-04'
+method: searched
+source: https://developer.opengov.com/docs/plc/changelog
+versioning:
+  scheme: uri-path
+  note: >-
+    Each product suite versions independently in the URI path. There is no platform-wide version train and
+    no version header or date-based versioning anywhere in the catalog.
+  current:
+  - api: opengov:permitting-licensing-v2
+    version: v2
+    path_prefix: /v2/{community}
+  - api: opengov:permitting-licensing-v1
+    version: v1
+    path_prefix: /v1
+    status: superseded by v2
+  - api: opengov:procurement-v2
+    version: v2
+  - api: opengov:procurement-v1
+    version: v1
+    status: superseded by v2
+  - api: opengov:purchase-order
+    version: 1.0.0
+    path_prefix: /api/v1/po
+  - api: opengov:receipt
+    version: 1.0.0
+  - api: opengov:vendor-management
+    version: 1.0.0
+  - api: opengov:budgeting-performance
+    version: 1.0.0
+  - api: opengov:enterprise-asset-management
+    version: 1.0.0
+    path_prefix: /api/v1
+  - api: opengov:open-data
+    version: '2.9'
+    note: CKAN Action API version
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  gap: >-
+    OpenGov publishes no deprecation policy, no sunset timeline, and declares no `deprecated: true`
+    operation in any of the ten OpenAPI definitions — even though two suites (Permitting & Licensing and
+    Procurement) already ship a superseded v1 alongside a current v2. There is no RFC 8594 Sunset or
+    Deprecation header support. An integrator on v1 has no published signal about when it goes away.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment is published on opengov.com or the developer portal. The status page
+    reports observed 90-day uptime (100.0% for most suites, 99.88% for Government App Builder, #311 and
+    Grants Management as observed on 2026-08-04) but that is a measurement, not a commitment.
+status_page:
+  url: https://status.opengov.com/
+  resolves_to: https://www.opengovstatus.com/
+  platform: Atlassian Statuspage
+  components:
+  - Budgeting & Performance
+  - Reporting & Transparency
+  - Financials
+  - Procurement
+  - Tax & Revenue
+  - Permitting & Licensing
+  - Utility Billing
+  - Government App Builder
+  - '#311'
+  - Grants Management
+  uptime_window: 90 days
+  rss: not advertised on the page
+changelog:
+  see: changelog/opengov-changelog.yml
+  urls:
+  - https://developer.opengov.com/docs/plc/changelog
+  - https://developer.opengov.com/docs/vm/changelog
+  - https://developer.opengov.com/docs/eam/changes-log
+  gap: >-
+    Changelogs are per-suite, undated for two of the three, and there is no aggregate platform changelog —
+    /docs/changelog is a stub that only points at the per-suite pages. The Enterprise Asset Management
+    changelog states "No API changes since 2021."
+support:
+  help_center: https://support.opengov.com
+  ideas_portal: https://ideas.opengov.com
+  contact: https://opengov.com/contact-us/
+  developer_access: https://developer.opengov.com/docs/granting-developer-access

@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: OpenGov Enterprise Asset Management API
+  version: 1.0.0
+  description: |
+    OpenGov Enterprise Asset Management API
+  contact:
+    name: OpenGov Enterprise Asset Management API
+    url: developers@opengov.com
+  license:
+    name: OpenGov Enterprise Asset Management API
+    url: https://opengov.com
+
+servers:
+  - url: '{serverURL}'
+    description: Your EAM Server Instance
+
+tags:
+  - name: Authentication
+    description: |
+      Required to use REST API
+
+      For more details about session cookie management, see the [Cookie Handling guide](/docs/eam/cookie-handling).
+  - name: User
+    description: Read information about the current REST API user
+  - name: Discover
+    description: Simplified view of metadata
+  - name: Meta/Classes
+    x-displayName: Classes
+    description: Data that describes recordset data — class and property metadata
+  - name: Meta/TargetedLists
+    x-displayName: TargetedLists
+    description: Data that describes recordset data — targeted list / PageLibraryDictionary metadata
+  - name: BusinessObjects/Create
+    x-displayName: Create
+    description: Create, Read, Update, and Delete recordset data
+  - name: BusinessObjects/Read
+    x-displayName: Read
+    description: Create, Read, Update, and Delete recordset data
+  - name: BusinessObjects/Update
+    x-displayName: Update
+    description: Create, Read, Update, and Delete recordset data
+  - name: BusinessObjects/Delete
+    x-displayName: Delete
+    description: Create, Read, Update, and Delete recordset data
+  - name: Attachments/Create
+    x-displayName: Create
+    description: Create, Read and Delete attachments associated with recordset data
+  - name: Attachments/Read
+    x-displayName: Read
+    description: Create, Read and Delete attachments associated with recordset data
+  - name: Attachments/Delete
+    x-displayName: Delete
+    description: Create, Read and Delete attachments associated with recordset data
+  - name: Security
+    description: Read recordsets permissions for current REST API user
+  - name: Layout
+    description: Read screen layout views
+  - name: Commands/ScenarioCommands
+    x-displayName: Scenario Commands
+    description: Start, Stop and view the status of various jobs
+  - name: Commands/AssetCommands
+    x-displayName: Asset Commands
+    description: Start, Stop and view the status of various jobs
+  - name: Files
+    description: Create and Read files for import export
+  - name: Structure
+    description: Read Publish information
+
+x-tagGroups:
+  - name: Authentication
+    tags:
+      - Authentication
+  - name: User
+    tags:
+      - User
+  - name: Discover
+    tags:
+      - Discover
+  - name: Metadata
+    tags:
+      - Meta/Classes
+      - Meta/TargetedLists
+  - name: Business Objects
+    tags:
+      - BusinessObjects/Create
+      - BusinessObjects/Read
+      - BusinessObjects/Update
+      - BusinessObjects/Delete
+  - name: Attachments
+    tags:
+      - Attachments/Create
+      - Attachments/Read
+      - Attachments/Delete
+  - name: Security
+    tags:
+      - Security
+  - name: Layout
+    tags:
+      - Layout
+  - name: Commands
+    tags:
+      - Commands/ScenarioCommands
+      - Commands/AssetCommands
+  - name: Files
+    tags:
+      - Files
+  - name: Structure
+    tags:
+      - Structure
+
+paths:
+  '/api/v1/authenticate':
+    $ref: components/Authentication/authentication.yaml#/~1authenticate
+  '/api/v1/authenticate/signout':
+    $ref: components/Authentication/authentication.yaml#/~1authenticate~1signout
+  '/api/v1/discover':
+    $ref: components/Discover/discover.yaml
+  '/api/v1/files/importexport/{filename}':
+    $ref: components/Files/files.yaml
+  '/api/v1/layout':
+    $ref: components/Layout/layout.yaml#/~1layout
+  '/api/v1/layout/{className}/{viewType}':
+    $ref: components/Layout/layout.yaml#/~1layout~1{className}~1{viewType}
+  '/api/v1/layout/{className}/{viewType}/{viewName}':
+    $ref: components/Layout/layout.yaml#/~1layout~1{className}~1{viewType}~1{viewName}
+  '/api/v1/meta/Classes/{className}':
+    $ref: components/MetaData/Classes/classesSingle.yaml
+  '/api/v1/meta/Classes':
+    $ref: components/MetaData/Classes/classesMultiplePaginated.yaml
+  '/api/v1/meta/targetedlists':
+    $ref: components/MetaData/TargetedLists/targetedLists.yaml
+  '/api/v1/structure/publish':
+    $ref: components/Structure/structure.yaml
+  '/api/v1/user':
+    $ref: components/User/user.yaml
+  '/api/v1/Security/Classes':
+    $ref: components/Security/security.yaml
+  '/api/v1/commands/scenarios/runscenarioasync':
+    $ref: components/Commands/Scenarios/startScenario.yaml
+  '/api/v1/commands/scenarios/runscenarioasync/jobs':
+    $ref: components/Commands/Scenarios/getScenarioJobs.yaml
+  '/api/v1/commands/scenarios/runscenarioasync/jobs/{JobId}':
+    get:
+      $ref: components/Commands/Scenarios/getScenarioJob.yaml#/get
+    delete:
+      $ref: components/Commands/Scenarios/cancelScenarioJob.yaml#/delete
+  '/api/v1/commands/assets/swap':
+    $ref: components/Commands/Assets/assetSwap.yaml
+  '/api/v1/classes/{className}/{oid}':
+    get:
+      $ref: components/BusinessObjects/getSingleRecord.yaml#/get
+    put:
+      $ref: components/BusinessObjects/updateSingleRecord.yaml#/put
+    delete:
+      $ref: components/BusinessObjects/deleteSingleRecord.yaml#/delete
+  '/api/v1/classes/{className}':
+    get:
+      $ref: components/BusinessObjects/getMultipleRecords.yaml#/get
+    post:
+      $ref: components/BusinessObjects/createOneOrMoreRecords.yaml#/post
+    put:
+      $ref: components/BusinessObjects/updateMultipleRecords.yaml#/put
+    delete:
+      $ref: components/BusinessObjects/deleteMultipleRecords.yaml#/delete
+  '/api/v1/classes/{className}/{oid}/{childClassName}':
+    get:
+      $ref: components/BusinessObjects/getChildRecords.yaml#/get
+    post:
+      $ref: components/BusinessObjects/createChildRecord.yaml#/post
+  '/api/v1/classes/{className}/new':
+    $ref: components/BusinessObjects/getNewRecord.yaml
+  '/api/v1/attachments/{className}/{oid}':
+    get:
+      $ref: components/Attachments/getAttachment.yaml#/get
+    delete:
+      $ref: components/Attachments/deleteAttachment.yaml#/delete
+  '/api/v1/attachments/primary/{className}/{oid}':
+    $ref: components/Attachments/getPrimaryAttachment.yaml
+  '/api/v1/attachments/thumbnail/{className}/{oid}':
+    $ref: components/Attachments/getThumbnail.yaml
+  '/api/v1/attachments/primary/thumbnail/{className}/{oid}':
+    $ref: components/Attachments/getPrimaryThumbnail.yaml
+  '/api/v1/attachments/{className}/{oid}/{childClassName}':
+    $ref: components/Attachments/createAttachment.yaml

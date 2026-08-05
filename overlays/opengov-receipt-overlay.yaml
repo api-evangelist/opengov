@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for OpenGov Receipt API
+  version: 1.0.0
+extends: openapi/opengov-receipt-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-aid: opengov:receipt
+    x-apievangelist-provider: opengov
+    x-apievangelist-source: https://developer.opengov.com/catalog
+    x-apievangelist-harvested: '2026-08-04'
+    x-apievangelist-artifacts:
+      authentication: authentication/opengov-authentication.yml
+      conventions: conventions/opengov-conventions.yml
+      errors: errors/opengov-problem-types.yml
+      lifecycle: lifecycle/opengov-lifecycle.yml
+      scopes: scopes/opengov-scopes.yml
+      data_model: data-model/opengov-data-model.yml
+- target: $.info
+  update:
+    x-apievangelist-conventions:
+      style: coded-json
+      media_type: application/json
+      idempotency: none
+      tenancy: '{entityId} / {entityUuid} path parameter'
