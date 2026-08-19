@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Document Steps API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Document Steps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List document generation steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/document-steps"
+          },
+          "docs": "List document generation steps that match the specified filters.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Get a document generation step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/document-steps/:documentStepID",
+            "params": [
+              {
+                "name": "documentStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a document step"
+              }
+            ]
+          },
+          "docs": "Retrieve a document generation step.\n### Permissions Required\n`Workflow Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

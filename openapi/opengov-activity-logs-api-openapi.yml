@@ -1,0 +1,928 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Activity Logs API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Activity Logs
+  description: Activity Log APIs allow you to retrieve historical changes and actions performed on entities in the system. Activity logs track create, update, soft delete, and hard delete operations. Employee access required.
+paths:
+  /v2/{community}/activity-logs:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    get:
+      summary: List activity logs
+      description: 'List all activity logs in the community with optional filtering, sorting, and pagination.
+
+        This endpoint requires employee access.
+
+
+        ### Permissions Required
+
+        `Activity Log Read`'
+      operationId: listActivityLogs
+      x-og-claims-required:
+      - PLC_ACTIVITY_LOG_READ
+      tags:
+      - Activity Logs
+      parameters:
+      - name: filter[timestamp]
+        in: query
+        description: Filter by activity timestamp
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+            format: date-time
+          - type: object
+            properties:
+              lt:
+                type: string
+                format: date-time
+                description: Less than the specified timestamp
+              lte:
+                type: string
+                format: date-time
+                description: Less than or equal to the specified timestamp
+              gt:
+                type: string
+                format: date-time
+                description: Greater than the specified timestamp
+              gte:
+                type: string
+                format: date-time
+                description: Greater than or equal to the specified timestamp
+      - name: filter[userId]
+        in: query
+        description: Filter by user ID who performed the activity
+        required: false
+        schema:
+          type: string
+        example: '12345'
+      - name: filter[entityTypeId]
+        in: query
+        description: Filter by entity type ID (e.g., Records, Attachments, Record_Steps)
+        required: false
+        schema:
+          type: string
+        example: Records
+      - name: filter[entityName]
+        in: query
+        description: Filter by entity name
+        required: false
+        schema:
+          type: string
+        example: Building Permit Application
+      - name: filter[operationName]
+        in: query
+        description: Filter by operation name/description
+        required: false
+        schema:
+          type: string
+        example: Status Changed
+      - name: filter[recordTypeName]
+        in: query
+        description: Filter by record type name (for record-related activities)
+        required: false
+        schema:
+          type: string
+        example: Building Permit
+      - name: filter[recordNumber]
+        in: query
+        description: Filter by record number (for record-related activities)
+        required: false
+        schema:
+          type: string
+        example: BP-2024-001
+      - name: filter[entityId]
+        in: query
+        description: Filter by specific entity ID
+        required: false
+        schema:
+          type: string
+        example: Records|12345
+      - name: sort[field]
+        in: query
+        description: Field to sort by
+        required: false
+        schema:
+          type: string
+          enum:
+          - TIMESTAMP
+          - ENTITYTYPEID
+          - ENTITYNAME
+          - OPERATIONNAME
+          - USERNAME
+          - RECORDTYPENAME
+          - RECORDNUMBER
+          default: TIMESTAMP
+        example: TIMESTAMP
+      - name: sort[direction]
+        in: query
+        description: Sort direction
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: DESC
+        example: DESC
+      - name: page[current]
+        in: query
+        description: Cursor for the current page (opaque string returned from previous response)
+        required: false
+        schema:
+          type: string
+        example: eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0=
+      - name: page[size]
+        in: query
+        description: 'Number of records to return per page. (Default: 20)'
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 20
+      responses:
+        '200':
+          description: List of Activity Logs
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Activity Logs
+                      title: Activity Log
+                      description: An activity log entry represents a change or action performed on an entity in the system. Activity logs track create, update, soft delete, and hard delete operations across various entity types.
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier of the activity, represented as {entityTypeId}|{entityId}|{timestamp|idempotenceKey}
+                        type:
+                          type: string
+                          enum:
+                          - activityLog
+                        attributes:
+                          type: object
+                          required:
+                          - entityId
+                          - entityPK
+                          - entityTypeId
+                          - entityName
+                          - entityKey
+                          - timestamp
+                          - operation
+                          - operationName
+                          - updatedBy
+                          properties:
+                            entityId:
+                              type: string
+                              description: Entity identifier
+                            entityPK:
+                              type: string
+                              description: Entity primary key
+                            entityTypeId:
+                              type: string
+                              description: Entity type identifier (e.g., Records, Attachments, Record_Steps)
+                            parentEntityId:
+                              type: string
+                              nullable: true
+                              description: Parent entity identifier, if applicable
+                            parentPK:
+                              type: string
+                              nullable: true
+                              description: Parent entity primary key
+                            parentEntityTypeId:
+                              type: string
+                              nullable: true
+                              description: Parent entity type identifier
+                            entityName:
+                              type: string
+                              description: Human-readable name of the entity
+                            entityKey:
+                              type: string
+                              description: Key parameter of the entity (e.g., RecordNumber, AttachmentID)
+                            timestamp:
+                              type: string
+                              format: date-time
+                              description: Date and time (UTC) when the activity occurred
+                              readOnly: true
+                            operation:
+                              type: string
+                              description: Type of operation performed on the entity
+                              enum:
+                              - CREATE
+                              - UPDATE
+                              - SOFTDELETE
+                              - HARDDELETE
+                              - OTHER
+                            operationName:
+                              type: string
+                              description: Extended description of the operation/action performed
+                            updatedBy:
+                              type: object
+                              description: Information about who initiated this activity
+                              properties:
+                                updatedById:
+                                  type: string
+                                  nullable: true
+                                  description: ID of the user who performed the action
+                                updatedByName:
+                                  type: string
+                                  nullable: true
+                                  description: Name of the user who performed the action
+                            recordTypeName:
+                              type: string
+                              nullable: true
+                              description: Name of the record type (for record-related activities)
+                            recordNumber:
+                              type: string
+                              nullable: true
+                              description: Record number (for record-related activities)
+                            values:
+                              type: array
+                              description: Values that were changed
+                              items:
+                                type: object
+                                x-tags:
+                                - Activity Logs
+                                title: Activity Log Field Value
+                                description: Represents a field value change in an activity log entry. Shows the old and new values for a specific field that was modified.
+                                required:
+                                - id
+                                - type
+                                - attributes
+                                properties:
+                                  id:
+                                    type: string
+                                    description: Unique identifier for this field value change
+                                  type:
+                                    type: string
+                                    enum:
+                                    - activityLogFieldValue
+                                  attributes:
+                                    type: object
+                                    required:
+                                    - fieldName
+                                    - tracked
+                                    properties:
+                                      fieldName:
+                                        type: string
+                                        description: Name of the field that changed
+                                      tracked:
+                                        type: boolean
+                                        description: Indicates if this field is tracked in the activity log configuration
+                                      order:
+                                        type: integer
+                                        nullable: true
+                                        description: Order/sequence number for tracked fields
+                                      oldValue:
+                                        type: string
+                                        nullable: true
+                                        description: Previous value of the field before the change
+                                      newValue:
+                                        type: string
+                                        nullable: true
+                                        description: New value of the field after the change
+                  included:
+                    type: array
+                    description: Optional included resources (entities, field values)
+                    items:
+                      oneOf:
+                      - type: object
+                        x-tags:
+                        - Activity Logs
+                        title: Activity Log Entity
+                        description: Represents an entity in the activity log system. Entities are tracked objects that can have activities recorded against them.
+                        required:
+                        - id
+                        - type
+                        - attributes
+                        properties:
+                          id:
+                            type: string
+                            description: Entity identifier, usually consists of {entityTypeId}|{entityId}
+                          type:
+                            type: string
+                            enum:
+                            - activityLogEntity
+                          attributes:
+                            type: object
+                            required:
+                            - entityTypeId
+                            - name
+                            - lastUpdatedInfo
+                            - overflown
+                            properties:
+                              entityTypeId:
+                                type: string
+                                description: Entity type identifier (e.g., Records, Attachments, Record_Steps)
+                              name:
+                                type: string
+                                description: Human-readable name of the entity
+                              parentId:
+                                type: string
+                                nullable: true
+                                description: Parent entity identifier, if applicable
+                              lastUpdatedInfo:
+                                type: object
+                                description: Information about when and by whom the entity was last updated
+                                required:
+                                - updatedAt
+                                properties:
+                                  updatedAt:
+                                    type: string
+                                    format: date-time
+                                    description: Date and time (UTC) when the entity was last updated
+                                    readOnly: true
+                                  updatedBy:
+                                    type: object
+                                    nullable: true
+                                    description: Information about who last updated the entity
+                                    properties:
+                                      updatedById:
+                                        type: string
+                                        nullable: true
+                                        description: ID of the user who last updated the entity
+                                      updatedByName:
+                                        type: string
+                                        nullable: true
+                                        description: Name of the user who last updated the entity
+                              overflown:
+                                type: boolean
+                                description: Indicates when not all activities fit inside the entity model
+                      - type: object
+                        x-tags:
+                        - Activity Logs
+                        title: Activity Log Field Value
+                        description: Represents a field value change in an activity log entry. Shows the old and new values for a specific field that was modified.
+                        required:
+                        - id
+                        - type
+                        - attributes
+                        properties:
+                          id:
+                            type: string
+                            description: Unique identifier for this field value change
+                          type:
+                            type: string
+                            enum:
+                            - activityLogFieldValue
+                          attributes:
+                            type: object
+                            required:
+                            - fieldName
+                            - tracked
+                            properties:
+                              fieldName:
+                                type: string
+                                description: Name of the field that changed
+                              tracked:
+                                type: boolean
+                                description: Indicates if this field is tracked in the activity log configuration
+                              order:
+                                type: integer
+                                nullable: true
+                                description: Order/sequence number for tracked fields
+                              oldValue:
+                                type: string
+                                nullable: true
+                                description: Previous value of the field before the change
+                              newValue:
+                                type: string
+                                nullable: true
+                                description: New value of the field after the change
+                  page:
+                    type: object
+                    required:
+                    - pageSize
+                    properties:
+                      current:
+                        type: string
+                        nullable: true
+                        description: Cursor for the current page (opaque string)
+                      next:
+                        type: string
+                        nullable: true
+                        description: Cursor for the next page (null if no more pages)
+                      pageSize:
+                        type: integer
+                        description: Number of items per page
+                  limitReached:
+                    type: boolean
+                    description: Indicates if the query result limit was reached
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/activity-logs/entities/{entityTypeId}/{entityId}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: entityTypeId
+      in: path
+      description: Entity type ID of activity
+      required: true
+      schema:
+        type: string
+    - name: entityId
+      in: path
+      description: ID of the entity for the activity log
+      required: true
+      schema:
+        type: string
+    get:
+      summary: List activity logs for an entity
+      description: 'List all activity logs for a specific entity (of any type) with optional filtering, sorting, and pagination.
+
+        This endpoint requires employee access and returns activities related to the entity and its child entities.
+
+        Works for any entity type (Records, Attachments, Record_Steps, etc.).
+
+
+        ### Permissions Required
+
+        `Activity Log Read`'
+      operationId: listEntityActivityLogs
+      x-og-claims-required:
+      - PLC_ACTIVITY_LOG_READ
+      tags:
+      - Activity Logs
+      parameters:
+      - name: filter[timestamp]
+        in: query
+        description: Filter by activity timestamp
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+            format: date-time
+          - type: object
+            properties:
+              lt:
+                type: string
+                format: date-time
+                description: Less than the specified timestamp
+              lte:
+                type: string
+                format: date-time
+                description: Less than or equal to the specified timestamp
+              gt:
+                type: string
+                format: date-time
+                description: Greater than the specified timestamp
+              gte:
+                type: string
+                format: date-time
+                description: Greater than or equal to the specified timestamp
+      - name: filter[userId]
+        in: query
+        description: Filter by user ID who performed the activity
+        required: false
+        schema:
+          type: string
+        example: '12345'
+      - name: filter[entityTypeId]
+        in: query
+        description: Filter by entity type ID (e.g., Records, Attachments, Record_Steps)
+        required: false
+        schema:
+          type: string
+        example: Records
+      - name: filter[entityName]
+        in: query
+        description: Filter by entity name
+        required: false
+        schema:
+          type: string
+        example: Building Permit Application
+      - name: filter[operationName]
+        in: query
+        description: Filter by operation name/description
+        required: false
+        schema:
+          type: string
+        example: Status Changed
+      - name: sort[field]
+        in: query
+        description: Field to sort by
+        required: false
+        schema:
+          type: string
+          enum:
+          - TIMESTAMP
+          - ENTITYTYPEID
+          - ENTITYNAME
+          - OPERATIONNAME
+          - USERNAME
+          - RECORDTYPENAME
+          - RECORDNUMBER
+          default: TIMESTAMP
+        example: TIMESTAMP
+      - name: sort[direction]
+        in: query
+        description: Sort direction
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: DESC
+        example: DESC
+      - name: page[current]
+        in: query
+        description: Cursor for the current page (opaque string returned from previous response)
+        required: false
+        schema:
+          type: string
+        example: eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0=
+      - name: page[size]
+        in: query
+        description: 'Number of records to return per page. (Default: 20)'
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 20
+      responses:
+        '200':
+          description: List of Activity Logs for the entity {entityTypeId} with ID {entityId}
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Activity Logs
+                      title: Activity Log
+                      description: An activity log entry represents a change or action performed on an entity in the system. Activity logs track create, update, soft delete, and hard delete operations across various entity types.
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier of the activity, represented as {entityTypeId}|{entityId}|{timestamp|idempotenceKey}
+                        type:
+                          type: string
+                          enum:
+                          - activityLog
+                        attributes:
+                          type: object
+                          required:
+                          - entityId
+                          - entityPK
+                          - entityTypeId
+                          - entityName
+                          - entityKey
+                          - timestamp
+                          - operation
+                          - operationName
+                          - updatedBy
+                          properties:
+                            entityId:
+                              type: string
+                              description: Entity identifier
+                            entityPK:
+                              type: string
+                              description: Entity primary key
+                            entityTypeId:
+                              type: string
+                              description: Entity type identifier (e.g., Records, Attachments, Record_Steps)
+                            parentEntityId:
+                              type: string
+                              nullable: true
+                              description: Parent entity identifier, if applicable
+                            parentPK:
+                              type: string
+                              nullable: true
+                              description: Parent entity primary key
+                            parentEntityTypeId:
+                              type: string
+                              nullable: true
+                              description: Parent entity type identifier
+                            entityName:
+                              type: string
+                              description: Human-readable name of the entity
+                            entityKey:
+                              type: string
+                              description: Key parameter of the entity (e.g., RecordNumber, AttachmentID)
+                            timestamp:
+                              type: string
+                              format: date-time
+                              description: Date and time (UTC) when the activity occurred
+                              readOnly: true
+                            operation:
+                              type: string
+                              description: Type of operation performed on the entity
+                              enum:
+                              - CREATE
+                              - UPDATE
+                              - SOFTDELETE
+                              - HARDDELETE
+                              - OTHER
+                            operationName:
+                              type: string
+                              description: Extended description of the operation/action performed
+                            updatedBy:
+                              type: object
+                              description: Information about who initiated this activity
+                              properties:
+                                updatedById:
+                                  type: string
+                                  nullable: true
+                                  description: ID of the user who performed the action
+                                updatedByName:
+                                  type: string
+                                  nullable: true
+                                  description: Name of the user who performed the action
+                            recordTypeName:
+                              type: string
+                              nullable: true
+                              description: Name of the record type (for record-related activities)
+                            recordNumber:
+                              type: string
+                              nullable: true
+                              description: Record number (for record-related activities)
+                            values:
+                              type: array
+                              description: Values that were changed
+                              items:
+                                $ref: '#/paths/~1v2~1{community}~1activity-logs/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/values/items'
+                  included:
+                    type: array
+                    description: Optional included resources (entities, field values)
+                    items:
+                      oneOf:
+                      - type: object
+                        x-tags:
+                        - Activity Logs
+                        title: Activity Log Entity
+                        description: Represents an entity in the activity log system. Entities are tracked objects that can have activities recorded against them.
+                        required:
+                        - id
+                        - type
+                        - attributes
+                        properties:
+                          id:
+                            type: string
+                            description: Entity identifier, usually consists of {entityTypeId}|{entityId}
+                          type:
+                            type: string
+                            enum:
+                            - activityLogEntity
+                          attributes:
+                            type: object
+                            required:
+                            - entityTypeId
+                            - name
+                            - lastUpdatedInfo
+                            - overflown
+                            properties:
+                              entityTypeId:
+                                type: string
+                                description: Entity type identifier (e.g., Records, Attachments, Record_Steps)
+                              name:
+                                type: string
+                                description: Human-readable name of the entity
+                              parentId:
+                                type: string
+                                nullable: true
+                                description: Parent entity identifier, if applicable
+                              lastUpdatedInfo:
+                                type: object
+                                description: Information about when and by whom the entity was last updated
+                                required:
+                                - updatedAt
+                                properties:
+                                  updatedAt:
+                                    type: string
+                                    format: date-time
+                                    description: Date and time (UTC) when the entity was last updated
+                                    readOnly: true
+                                  updatedBy:
+                                    type: object
+                                    nullable: true
+                                    description: Information about who last updated the entity
+                                    properties:
+                                      updatedById:
+                                        type: string
+                                        nullable: true
+                                        description: ID of the user who last updated the entity
+                                      updatedByName:
+                                        type: string
+                                        nullable: true
+                                        description: Name of the user who last updated the entity
+                              overflown:
+                                type: boolean
+                                description: Indicates when not all activities fit inside the entity model
+                      - $ref: '#/paths/~1v2~1{community}~1activity-logs/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/values/items'
+                  page:
+                    type: object
+                    required:
+                    - pageSize
+                    properties:
+                      current:
+                        type: string
+                        nullable: true
+                        description: Cursor for the current page (opaque string)
+                      next:
+                        type: string
+                        nullable: true
+                        description: Cursor for the next page (null if no more pages)
+                      pageSize:
+                        type: integer
+                        description: Number of items per page
+                  limitReached:
+                    type: boolean
+                    description: Indicates if the query result limit was reached
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

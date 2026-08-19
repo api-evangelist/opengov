@@ -1,0 +1,1651 @@
+{
+  "item": [
+    {
+      "id": "217bda76-1e2c-410e-bffc-8b0093011655",
+      "name": "package",
+      "description": {
+        "content": "On early CKAN versions, datasets were called packages and this name has stuck in some places, specially internally and on API calls. Package has exactly the same meaning as dataset.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0500ec91-bd7f-4b18-88ef-931d2ca18ab9",
+          "name": "Return a list of the names of the site's datasets (packages).",
+          "request": {
+            "name": "Return a list of the names of the site's datasets (packages).",
+            "description": {},
+            "url": {
+              "path": [
+                "package_list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af94602e-535a-4702-ad88-e55a9c69f136",
+              "name": "Envelope with string array under `result`",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94430fdb-752e-478d-ac31-da77344dd383",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65070f95-5148-466e-8c28-481081eafd4c",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2985d0d-3633-44ea-8135-214785c06c37",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b12ea8cb-23d2-4957-bd33-c8e0e0253c64",
+          "name": "Searches for datasets (packages) satisfying a given search criteria.",
+          "request": {
+            "name": "Searches for datasets (packages) satisfying a given search criteria.",
+            "description": {
+              "content": "This action accepts solr search query parameters (details below), and returns a dictionary of results, including dictized datasets that match the search criteria, a search count and also facet information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "package_search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "A solr query string that will be used to filter and score results"
+                },
+                {
+                  "disabled": false,
+                  "key": "fq",
+                  "value": "<string>",
+                  "description": "A solr filter query that will facet results by removing non-matching items."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order for the search results, defaults to `score desc, metadata_modified desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "10",
+                  "description": "The maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0",
+                  "description": "The offset from the beginning of results for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_private",
+                  "value": "false",
+                  "description": "Include private datasets in the search results. Only private datasets from the user's organizations will be returned. Sysadmins will be returned all private datasets."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4541d2e1-e26a-4bfb-9d5d-f2174d5675ae",
+              "name": "Search results envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "include_private",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name=package_search\",\n  \"success\": true,\n  \"result\": {\n    \"count\": 2,\n    \"results\": [\n      {\n        \"id\": \"dataset-1\",\n        \"name\": \"dataset-1\",\n        \"title\": \"First Dataset\",\n        \"notes\": \"Description of first dataset\",\n        \"url\": \"https://example.com/dataset1\",\n        \"version\": \"1.0\",\n        \"author\": \"Author One\",\n        \"author_email\": \"author1@example.com\",\n        \"maintainer\": \"Maintainer One\",\n        \"maintainer_email\": \"maintainer1@example.com\",\n        \"license_id\": \"cc-by\",\n        \"owner_org\": \"org-1\",\n        \"private\": false,\n        \"state\": \"active\",\n        \"resources\": [],\n        \"tags\": [],\n        \"groups\": []\n      },\n      {\n        \"id\": \"dataset-2\",\n        \"name\": \"dataset-2\",\n        \"title\": \"Second Dataset\",\n        \"notes\": \"Description of second dataset\",\n        \"url\": \"https://example.com/dataset2\",\n        \"version\": \"2.0\",\n        \"author\": \"Author Two\",\n        \"author_email\": \"author2@example.com\",\n        \"maintainer\": \"Maintainer Two\",\n        \"maintainer_email\": \"maintainer2@example.com\",\n        \"license_id\": \"cc-by\",\n        \"owner_org\": \"org-2\",\n        \"private\": false,\n        \"state\": \"active\",\n        \"resources\": [],\n        \"tags\": [],\n        \"groups\": []\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aea5d925-7b65-42dc-bc01-22d2e93434c3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "include_private",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3585c720-d5b9-4c26-9a02-51479177e219",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "include_private",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af428799-5b8f-46dc-b98a-2ed06386a5be",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "include_private",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f5fa70a-dd39-4e1b-add1-798c081043f5",
+          "name": "Return the metadata of a dataset (package) and its resources.",
+          "request": {
+            "name": "Return the metadata of a dataset (package) and its resources.",
+            "description": {},
+            "url": {
+              "path": [
+                "package_show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Dataset id or name"
+                },
+                {
+                  "disabled": false,
+                  "key": "use_default_schema",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_tracking",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "39044510-1e60-412d-aab0-15ac63945b98",
+              "name": "Envelope with dataset object under `result`",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name=package_show\",\n  \"success\": true,\n  \"result\": {\n    \"id\": \"test-dataset\",\n    \"name\": \"test-dataset\",\n    \"title\": \"Test Dataset\",\n    \"notes\": \"A test dataset for demonstration\",\n    \"url\": \"https://example.com\",\n    \"version\": \"1.0\",\n    \"author\": \"Test Author\",\n    \"author_email\": \"test@example.com\",\n    \"maintainer\": \"Test Maintainer\",\n    \"maintainer_email\": \"maintainer@example.com\",\n    \"license_id\": \"cc-by\",\n    \"owner_org\": \"test-org\",\n    \"private\": false,\n    \"state\": \"active\",\n    \"resources\": [\n      {\n        \"id\": \"resource-1\",\n        \"package_id\": \"test-dataset\",\n        \"url\": \"https://example.com/data.csv\",\n        \"name\": \"Data CSV\",\n        \"description\": \"Main data file\",\n        \"format\": \"CSV\",\n        \"size\": 1024,\n        \"mimetype\": \"text/csv\",\n        \"created\": \"2024-01-01T00:00:00Z\",\n        \"last_modified\": \"2024-01-01T00:00:00Z\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"id\": \"tag-1\",\n        \"name\": \"test\",\n        \"display_name\": \"Test\",\n        \"vocabulary_id\": \"\",\n        \"state\": \"active\"\n      }\n    ],\n    \"groups\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cfb747f-6a43-4935-937a-18d18022b6cd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df2bbfb4-3359-43c2-92e4-61fd52bc7f23",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feabfff9-0cc7-4ada-acea-4cfd2d824f91",
+              "name": "Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Not Found Error\",\n    \"message\": \"Not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6536f98c-58e7-408d-9fb8-4aef74b13ad0",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Validation Error\",\n    \"name_or_id\": [\n      \"Missing value\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cd7db59-d4ed-415b-ae63-56e3c6f1b951",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ad9a150-8359-452c-8f31-c031dfeba5d4",
+          "name": "Create a new dataset (package).",
+          "request": {
+            "name": "Create a new dataset (package).",
+            "description": {
+              "content": "You must be authorized to create new datasets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "package_create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"url\": \"<string>\",\n  \"version\": \"<string>\",\n  \"author\": \"<string>\",\n  \"author_email\": \"<string>\",\n  \"maintainer\": \"<string>\",\n  \"maintainer_email\": \"<string>\",\n  \"license_id\": \"<string>\",\n  \"owner_org\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"state\": \"<string>\",\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"package_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"mimetype\": \"<string>\",\n      \"hash\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"last_modified\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"package_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"mimetype\": \"<string>\",\n      \"hash\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"last_modified\": \"<dateTime>\",\n      \"key_0\": 1588.0890097882616,\n      \"key_1\": \"string\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"vocabulary_id\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"vocabulary_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"key_0\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image_url\": \"<string>\",\n      \"state\": \"<string>\",\n      \"package_count\": \"<integer>\",\n      \"key_0\": 7589.790096036625,\n      \"key_1\": \"string\",\n      \"key_2\": 1734\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image_url\": \"<string>\",\n      \"state\": \"<string>\",\n      \"package_count\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55c415f8-b402-4a27-b6dd-b3317ae34a84",
+              "name": "Pacakge create result envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"maintainer_email\": \"jane@example.com\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false,\n  \"resources\": [\n    {\n      \"url\": \"https://example.com/data.csv\",\n      \"name\": \"Data File\",\n      \"description\": \"Main data file\",\n      \"format\": \"CSV\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"environment\"\n    },\n    {\n      \"name\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": true,\n  \"result\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"url\": \"<string>\",\n    \"version\": \"<string>\",\n    \"author\": \"<string>\",\n    \"author_email\": \"<string>\",\n    \"maintainer\": \"<string>\",\n    \"maintainer_email\": \"<string>\",\n    \"license_id\": \"<string>\",\n    \"owner_org\": \"<string>\",\n    \"private\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"resources\": [\n      {\n        \"id\": \"<string>\",\n        \"package_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"format\": \"<string>\",\n        \"size\": \"<integer>\",\n        \"mimetype\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"created\": \"<dateTime>\",\n        \"last_modified\": \"<dateTime>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"package_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"format\": \"<string>\",\n        \"size\": \"<integer>\",\n        \"mimetype\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"created\": \"<dateTime>\",\n        \"last_modified\": \"<dateTime>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"display_name\": \"<string>\",\n        \"vocabulary_id\": \"<string>\",\n        \"state\": \"<string>\",\n        \"key_0\": 7255.57246727326,\n        \"key_1\": \"string\",\n        \"key_2\": 4120,\n        \"key_3\": 8307.304850852344\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"display_name\": \"<string>\",\n        \"vocabulary_id\": \"<string>\",\n        \"state\": \"<string>\",\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": 1911,\n        \"key_3\": 5290.1012952324645\n      }\n    ],\n    \"groups\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"image_url\": \"<string>\",\n        \"state\": \"<string>\",\n        \"package_count\": \"<integer>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"image_url\": \"<string>\",\n        \"state\": \"<string>\",\n        \"package_count\": \"<integer>\",\n        \"key_0\": true,\n        \"key_1\": 3383,\n        \"key_2\": false,\n        \"key_3\": 6863.074369697812\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c046d01-e2d4-4362-bb20-46701b985a6a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"maintainer_email\": \"jane@example.com\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false,\n  \"resources\": [\n    {\n      \"url\": \"https://example.com/data.csv\",\n      \"name\": \"Data File\",\n      \"description\": \"Main data file\",\n      \"format\": \"CSV\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"environment\"\n    },\n    {\n      \"name\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65ddb22b-b0a3-4c1a-8105-2256acdbca7e",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"maintainer_email\": \"jane@example.com\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false,\n  \"resources\": [\n    {\n      \"url\": \"https://example.com/data.csv\",\n      \"name\": \"Data File\",\n      \"description\": \"Main data file\",\n      \"format\": \"CSV\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"environment\"\n    },\n    {\n      \"name\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63a3e79c-0ff6-437c-adfb-c34cc160c03f",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"maintainer_email\": \"jane@example.com\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false,\n  \"resources\": [\n    {\n      \"url\": \"https://example.com/data.csv\",\n      \"name\": \"Data File\",\n      \"description\": \"Main data file\",\n      \"format\": \"CSV\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"environment\"\n    },\n    {\n      \"name\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Validation Error\",\n    \"name_or_id\": [\n      \"Missing value\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5feeed4c-b851-484f-aff4-ec86d3b86da2",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"maintainer_email\": \"jane@example.com\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false,\n  \"resources\": [\n    {\n      \"url\": \"https://example.com/data.csv\",\n      \"name\": \"Data File\",\n      \"description\": \"Main data file\",\n      \"format\": \"CSV\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"environment\"\n    },\n    {\n      \"name\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2e5a2c6-6651-4ad4-85fa-54674ed7b836",
+          "name": "Update only specific fields of an existing dataset",
+          "request": {
+            "name": "Update only specific fields of an existing dataset",
+            "description": {
+              "content": "Any fields not passed will retain their original values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "package_patch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"url\": \"<string>\",\n  \"version\": \"<string>\",\n  \"author\": \"<string>\",\n  \"author_email\": \"<string>\",\n  \"maintainer\": \"<string>\",\n  \"maintainer_email\": \"<string>\",\n  \"license_id\": \"<string>\",\n  \"owner_org\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"state\": \"<string>\",\n  \"resources\": [\n    {\n      \"id\": \"<string>\",\n      \"package_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"mimetype\": \"<string>\",\n      \"hash\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"last_modified\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"package_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"mimetype\": \"<string>\",\n      \"hash\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"last_modified\": \"<dateTime>\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"vocabulary_id\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"vocabulary_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"key_0\": \"string\",\n      \"key_1\": 2523.3899235488257\n    }\n  ],\n  \"groups\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image_url\": \"<string>\",\n      \"state\": \"<string>\",\n      \"package_count\": \"<integer>\",\n      \"key_0\": false,\n      \"key_1\": 8215\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"image_url\": \"<string>\",\n      \"state\": \"<string>\",\n      \"package_count\": \"<integer>\",\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe866ebf-0f8e-4421-9bed-e486e3b9225c",
+              "name": "Package patch result envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": true,\n  \"result\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"url\": \"<string>\",\n    \"version\": \"<string>\",\n    \"author\": \"<string>\",\n    \"author_email\": \"<string>\",\n    \"maintainer\": \"<string>\",\n    \"maintainer_email\": \"<string>\",\n    \"license_id\": \"<string>\",\n    \"owner_org\": \"<string>\",\n    \"private\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"resources\": [\n      {\n        \"id\": \"<string>\",\n        \"package_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"format\": \"<string>\",\n        \"size\": \"<integer>\",\n        \"mimetype\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"created\": \"<dateTime>\",\n        \"last_modified\": \"<dateTime>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"package_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"format\": \"<string>\",\n        \"size\": \"<integer>\",\n        \"mimetype\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"created\": \"<dateTime>\",\n        \"last_modified\": \"<dateTime>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"display_name\": \"<string>\",\n        \"vocabulary_id\": \"<string>\",\n        \"state\": \"<string>\",\n        \"key_0\": 7255.57246727326,\n        \"key_1\": \"string\",\n        \"key_2\": 4120,\n        \"key_3\": 8307.304850852344\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"display_name\": \"<string>\",\n        \"vocabulary_id\": \"<string>\",\n        \"state\": \"<string>\",\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": 1911,\n        \"key_3\": 5290.1012952324645\n      }\n    ],\n    \"groups\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"image_url\": \"<string>\",\n        \"state\": \"<string>\",\n        \"package_count\": \"<integer>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"image_url\": \"<string>\",\n        \"state\": \"<string>\",\n        \"package_count\": \"<integer>\",\n        \"key_0\": true,\n        \"key_1\": 3383,\n        \"key_2\": false,\n        \"key_3\": 6863.074369697812\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c99f540c-f6f5-4331-ba24-f23ea6450b56",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37e26ac3-1ce2-439f-b9ee-5ada89e496c7",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2815d9d0-429f-41c7-b27b-b5bb0a1c1c9c",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Validation Error\",\n    \"name_or_id\": [\n      \"Missing value\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4053faaf-b9de-47b1-832b-7f4584081ce4",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "package_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-new-dataset\",\n  \"title\": \"My New Dataset\",\n  \"notes\": \"Description of my dataset\",\n  \"url\": \"https://example.com\",\n  \"version\": \"1.0\",\n  \"author\": \"John Doe\",\n  \"author_email\": \"john@example.com\",\n  \"maintainer\": \"Jane Smith\",\n  \"license_id\": \"cc-by\",\n  \"owner_org\": \"my-organization\",\n  \"private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloudcity.ogopendata.com/api/3/action",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7d7b9857-5c7f-4b91-9e85-f274cb8a61c1",
+    "name": "Open Data CKAN Action Package API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n\n\nContact Support:\n Name: CKAN Community",
+      "type": "text/plain"
+    }
+  }
+}

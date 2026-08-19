@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Claims API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current user's PO and CO claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/claims",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the current user's raw PRO-domain claims (PO and CO), expanded effective claims after hierarchy resolution. Any authenticated user can call this endpoint."
+        },
+        {
+          "info": {
+            "name": "Get User Claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/entities/:entityId/claims",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve all claims and effective claims for the authenticated user within the current entity context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

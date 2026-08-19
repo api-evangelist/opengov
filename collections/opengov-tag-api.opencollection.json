@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Data CKAN Action Tag API",
+    "version": "2.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tag",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a list of the site's tags.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/tag_list",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "vocabulary_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_fields",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return a list of the site's tags."
+        },
+        {
+          "info": {
+            "name": "Return a list of tags whose names contain a given string.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/tag_search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "vocabulary_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return a list of tags whose names contain a given string."
+        },
+        {
+          "info": {
+            "name": "Return the details of a tag and its datasets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/tag_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "vocabulary_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_datasets",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return the details of a tag and its datasets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

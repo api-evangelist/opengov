@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting Licensing & Code Enforcement Step Comments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Step Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List step comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/workflow-steps/:stepID/comments",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              },
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of workflow step on a record"
+              }
+            ]
+          },
+          "docs": "List step comments"
+        },
+        {
+          "info": {
+            "name": "Post a step comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/workflow-steps/:stepID/comments",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              },
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of workflow step on a record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post a step comment"
+        },
+        {
+          "info": {
+            "name": "Delete a step comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/workflow-steps/:stepID/comments/:commentID",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              },
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of workflow step on a record"
+              },
+              {
+                "name": "commentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a comment on a workflow step of a record"
+              }
+            ]
+          },
+          "docs": "Delete a step comment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

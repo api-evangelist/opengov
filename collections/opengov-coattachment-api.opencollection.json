@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Co Attachment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coAttachment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initialize a CO-scoped general file upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/attachments/upload",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a po_attachments row with purpose=GENERAL, po_change_order_id=:coId, upload_status=INITIATED and returns a presigned S3 PUT URL. The CO must belong to the PO and be in Draft. Storage key uses the CO-scoped key shape (`${entityId}/${poId}/co/${coId}/general/...`)."
+        },
+        {
+          "info": {
+            "name": "Complete a CO-scoped general file upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/attachments/:attachmentId/complete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "CO-scoped sibling of POST /purchase-orders/:poId/attachments/:id/complete. The attachment row's stored purpose stays `GENERAL`; the CO scope is enforced by the service layer via `requireCoBelongsToPo` + the row's `po_change_order_id`."
+        },
+        {
+          "info": {
+            "name": "Delete a CO-scoped general attachment (soft-delete)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/attachments/:attachmentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes a CO-scoped general attachment. Service verifies the row's `po_change_order_id` matches `:coId` (`requireAttachmentBelongsToCo`). Standalone rows hide their activity log entry; comment-linked rows leave the comment visible."
+        },
+        {
+          "info": {
+            "name": "Bulk-delete orphaned CO-scoped general attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/attachments/bulk-delete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "CO-scoped variant of POST /purchase-orders/:poId/attachments/bulk-delete. Service-layer guard verifies every id belongs to this CO before soft-deleting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

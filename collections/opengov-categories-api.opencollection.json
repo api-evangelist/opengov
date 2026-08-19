@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Categories API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v1/contracts/categories",
+            "params": [
+              {
+                "name": "set",
+                "value": "",
+                "type": "query",
+                "description": "The category set to retrieve."
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "The number of categories to return."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for use in pagination."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches a paginated list of categories for a given category set (NIGP, NAICS, or UNSPSC), ordered by ID, with cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "List Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v2/entities/:entityUuid/contracts/categories",
+            "params": [
+              {
+                "name": "set",
+                "value": "",
+                "type": "query",
+                "description": "The category set to retrieve."
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "The number of categories to return."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for use in pagination."
+              },
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches a paginated list of categories for a given category set (NIGP, NAICS, or UNSPSC), ordered by ID, with cursor-based pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

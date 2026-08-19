@@ -1,0 +1,263 @@
+openapi: 3.2.0
+info:
+  title: Open Data CKAN Action Tag API
+  version: '2.9'
+  description: "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n"
+  contact:
+    name: CKAN Community
+    url: https://ckan.org/community
+  license:
+    name: GNU Affero General Public License (AGPL) v3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+servers:
+- url: https://cloudcity.ogopendata.com/api/3/action
+  description: Cloud City Open Data
+tags:
+- name: tag
+paths:
+  /tag_list:
+    get:
+      operationId: tagList
+      summary: Return a list of the site's tags.
+      tags:
+      - tag
+      parameters:
+      - in: query
+        name: query
+        schema:
+          type: string
+      - in: query
+        name: vocabulary_id
+        schema:
+          type: string
+      - in: query
+        name: all_fields
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Tag list envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Tag'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /tag_search:
+    get:
+      operationId: tagSearch
+      summary: Return a list of tags whose names contain a given string.
+      tags:
+      - tag
+      parameters:
+      - in: query
+        name: query
+        schema:
+          type: string
+      - in: query
+        name: vocabulary_id
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Envelope with tag search results under `result`
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: object
+                      additionalProperties: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /tag_show:
+    get:
+      operationId: tagShow
+      summary: Return the details of a tag and its datasets.
+      tags:
+      - tag
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: vocabulary_id
+        schema:
+          type: string
+      - in: query
+        name: include_datasets
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Tag envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Tag'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+components:
+  schemas:
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
+    Tag:
+      type: object
+      description: CKAN Tag
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        vocabulary_id:
+          type: string
+        state:
+          type: string
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Authorization Error
+                  message: 'Access denied: User not authorized to perform this action'
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization

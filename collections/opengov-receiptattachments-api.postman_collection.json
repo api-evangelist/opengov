@@ -1,0 +1,3438 @@
+{
+  "item": [
+    {
+      "id": "e339f024-0f96-4e97-bfc5-dfd5861fed84",
+      "name": "receiptAttachments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9131f3f2-1b93-4855-8a3f-a7393326e03c",
+          "name": "Initialize a file upload (get presigned PUT URL)",
+          "request": {
+            "name": "Initialize a file upload (get presigned PUT URL)",
+            "description": {
+              "content": "Creates an rcp_attachments row with upload_status=INITIATED and returns a presigned S3 PUT URL. Client uploads the file directly to S3. Allowed only while the receipt is in Draft or Submitted status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "receipts",
+                ":id",
+                "attachments",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) a string to be decoded into a number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07b47a82-f3b3-4a14-ac2f-cdfed0448197",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attachmentId\": 277,\n    \"uploadUrl\": \"string\",\n    \"storageKey\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f962d729-cc70-4816-ae5d-065f20f278ca",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1db89a81-b676-4441-86ec-b17bfa9f3fc8",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0d7c244-e711-46f3-8874-8b9a14e1222c",
+              "name": "Receipt action forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "818993cf-f0a4-48ce-a51f-32ea6937a1f1",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43839b4c-9c8f-4285-8fc9-5eba20fc1ccb",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf7b231-de4c-4b0f-bb68-3eb9583c0506",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "653a0303-23d6-47c9-a892-bd014fe8e4b1",
+          "name": "Complete a file upload (confirm S3 object)",
+          "request": {
+            "name": "Complete a file upload (confirm S3 object)",
+            "description": {
+              "content": "Client calls this after uploading to S3. If success=true (default), server verifies the S3 object exists via HeadObject and transitions INITIATED → UPLOADED. If success=false, server transitions INITIATED → FAILED (client-signaled failure).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "receipts",
+                ":id",
+                "attachments",
+                ":attachmentId",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) a string to be decoded into a number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attachmentId",
+                  "description": "(Required) a string to be decoded into a number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"success\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c627eef-e139-409d-908e-5068c4637e3f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attachment\": {\n      \"id\": 546,\n      \"fileName\": \"string\",\n      \"mimeType\": \"string\",\n      \"sizeBytes\": 8968,\n      \"storageKey\": \"string\",\n      \"createdAt\": \"string\",\n      \"uploadStatus\": \"FAILED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6720400-6471-4b4d-83af-d8aa2eb79f48",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c61cc5e-b0e4-4417-b852-9c64a98e0ef4",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0802fbad-a847-496b-962a-ea85948bd4f3",
+              "name": "Receipt action forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3cdad72-2bbb-4a5c-8bbe-6f4d6b62c6e0",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90efc47e-59b3-4276-90d9-629cb015c7e3",
+              "name": "Attachment invalid state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb129b37-d188-4627-b3d3-ba1be5e350e2",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"success\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ff8c15c-a41c-411f-ae67-b7a0efe8313b",
+          "name": "Get a presigned download URL for an attachment",
+          "request": {
+            "name": "Get a presigned download URL for an attachment",
+            "description": {
+              "content": "Returns a short-lived presigned S3 GET URL with Content-Disposition. The client fetches the URL directly from S3. Soft-deleted attachments and non-UPLOADED rows return 404.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "receipts",
+                ":id",
+                "attachments",
+                ":attachmentId",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) a string to be decoded into a number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attachmentId",
+                  "description": "(Required) a string to be decoded into a number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ebf6d76b-51eb-4795-9c42-86e5e3e23fc5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"downloadUrl\": \"string\",\n    \"fileName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f1a3ce1-b6d6-4607-ac45-483ba1fe58aa",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88ba4063-60ac-4aec-83a1-93082bf44f11",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "974b4bea-6ac3-4627-869c-c0bffd760212",
+              "name": "Receipt permission denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a23c13c0-f419-4601-92a9-519516dbe113",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a4d1a2a-2829-4684-9e19-aa38924cd85b",
+              "name": "Attachment invalid state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be84617a-d67a-4ba4-95ed-145981c5f7ae",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "291e35a9-2142-4023-8821-c55654089815",
+          "name": "Delete an attachment (soft-delete)",
+          "request": {
+            "name": "Delete an attachment (soft-delete)",
+            "description": {
+              "content": "Soft-deletes the attachment. If standalone (not linked to a comment), the associated activity log entry is hidden. If linked to a comment, the comment remains visible. Uploader-only. Allowed only while the receipt is in Draft or Submitted status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "receipts",
+                ":id",
+                "attachments",
+                ":attachmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) a string to be decoded into a number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attachmentId",
+                  "description": "(Required) a string to be decoded into a number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b858cd48-de34-4fa1-b37a-4e3aa7444b41",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6d7605a-9836-41a3-b9ec-e0bee77fbc87",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39d8cb47-2106-477e-87cc-05d6e8975c3c",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5815de17-507e-4082-b585-4208d985f0f4",
+              "name": "Receipt action forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d96fa3d-567c-4267-a3d3-5f9d98aa9265",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ca202cc-fce4-438d-9c3a-1fcb2fa8ce30",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44612ae0-f6cd-4284-b4aa-4d8da2df43bd",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachmentId",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5297a816-1b2b-4e9f-8488-b0841a838576",
+          "name": "Bulk-delete orphaned (unlinked) attachments",
+          "request": {
+            "name": "Bulk-delete orphaned (unlinked) attachments",
+            "description": {
+              "content": "Soft-deletes and removes S3 objects for multiple unlinked attachments in a single request. Only attachments owned by the caller that are not yet linked to a comment or group are eligible. Silently skips ineligible IDs. Used by the frontend to clean up abandoned uploads on dialog cancel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "receipts",
+                ":id",
+                "attachments",
+                "bulk-delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) a string to be decoded into a number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a16e127-5874-4868-9b5e-2e2c78c08cbc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e37f846e-b67a-4bc0-b6d7-639f91f86225",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01811db7-512f-45d7-bdf0-74fceb9f0e62",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3699a3b-64db-429d-ad40-0e2f7f0517aa",
+              "name": "Receipt permission denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c38f511-0c79-440b-a900-919f451e53b0",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c396cb60-f26c-43f3-a26c-cc49ce959393",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attachmentIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63454ee8-46e7-4e23-a9f9-f2ee9acb86f9",
+          "name": "List active attachments for a receipt",
+          "request": {
+            "name": "List active attachments for a receipt",
+            "description": {
+              "content": "Returns all attachments in uploadStatus IN (ATTACHED, UPLOADED) for the receipt, newest first. `storageKey` is omitted (internal). Used by the frontend Copy flow and attachment tiles to avoid walking the activity feed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "receipts",
+                ":id",
+                "attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) a string to be decoded into a number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "203864a6-dd40-4de0-a80c-1aed9970dbc0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attachments\": [\n      {\n        \"id\": 7167,\n        \"fileName\": \"string\",\n        \"mimeType\": \"string\",\n        \"sizeBytes\": 4444.137499755405,\n        \"uploadStatus\": \"INITIATED\",\n        \"createdAt\": \"string\",\n        \"commentId\": 1832,\n        \"attachmentGroupId\": 1776\n      },\n      {\n        \"id\": 8732,\n        \"fileName\": \"string\",\n        \"mimeType\": \"string\",\n        \"sizeBytes\": 6212.5166864154135,\n        \"uploadStatus\": \"UPLOADED\",\n        \"createdAt\": \"string\",\n        \"commentId\": 8388,\n        \"attachmentGroupId\": 41\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5780896-8f4e-46bd-ada5-82cda7e47155",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0ebb0fc-2b41-4e21-a9cb-0f1b38b334a1",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4ce0a2-d944-4f5b-b4f8-237f63cc9401",
+              "name": "Receipt permission denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77e4a3de-453e-4416-8ec0-b16448274fad",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71e85beb-c1a4-493c-abb2-802a163a38fa",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "receipts",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) a string to be decoded into a number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 4089,\n        \"key_1\": false,\n        \"key_2\": 501,\n        \"key_3\": 5537\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-receipts.procurement.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2cf868a7-75d2-4c24-b6c9-e594373c90a3",
+    "name": "OpenGov Receipt Receipt Attachments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing receipts.",
+      "type": "text/plain"
+    }
+  }
+}

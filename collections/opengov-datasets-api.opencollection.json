@@ -1,0 +1,396 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Datasets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/contracts",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of contracts data. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| ter"
+        },
+        {
+          "info": {
+            "name": "Contract Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/contract-documents",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of contract document projects. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | Carroll Bog Boardwalk Construction |\n| project_id | P-2024-001 |\n| template | Standard Construction Template |\n| template_abbreviation | SCT |\n| requisition_id | REQ-45678 |\n| department | Facilities Management |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| status | Review |\n| status_sort | 2 |\n| workload_points_remaining | 50"
+        },
+        {
+          "info": {
+            "name": "Contracts with Spend",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/contracts-with-spend",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of contracts with spend data. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ"
+        },
+        {
+          "info": {
+            "name": "Intakes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/intakes",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of intake projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | FIN-2024-001 |\n| type | Construction |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre_proposal_date | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n|"
+        },
+        {
+          "info": {
+            "name": "Solicitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/solicitations",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of solicitation projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | RFP-2024-001 |\n| template | Standard RFP Template |\n| template_abbreviation | RFP-T |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre-proposal_meeting | 2024-03-15 10:00:00 |\n"
+        },
+        {
+          "info": {
+            "name": "Vendor Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/vendor-companies",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of vendor companies.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC123 |\n| duns | 123456789 |\n| nigp_categories | 05500, 06006 |\n| naics_categories | 541330 |\n| unspsc_categories | 80141600 |\n| state_of_incorporation | CA |\n| business_type | LLC |\n| languages | English, Spanish |\n| no_dbe | WBE |\n| self_reported_certifications | MBE"
+        },
+        {
+          "info": {
+            "name": "Vendor Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/datasets/v1/vendor-subscribers",
+            "params": [
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of vendor subscribers joined with vendor company profile data.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| subscriber_id | u_12345 |\n| subscriber_name | Alice Johnson |\n| subscriber_title | Purchasing Manager |\n| subscriber_email | alice@example.nil |\n| subscriber_phone | +1 (415) 555-1234 x22 |\n| subscriber_status | Active |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC12"
+        },
+        {
+          "info": {
+            "name": "Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/contracts",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of contracts data. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| ter"
+        },
+        {
+          "info": {
+            "name": "Contract Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/contract-documents",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of contract document projects. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | Carroll Bog Boardwalk Construction |\n| project_id | P-2024-001 |\n| template | Standard Construction Template |\n| template_abbreviation | SCT |\n| requisition_id | REQ-45678 |\n| department | Facilities Management |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| status | Review |\n| status_sort | 2 |\n| workload_points_remaining | 50"
+        },
+        {
+          "info": {
+            "name": "Contracts with Spend",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/contracts-with-spend",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of contracts with spend data. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ"
+        },
+        {
+          "info": {
+            "name": "Intakes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/intakes",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of intake projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | FIN-2024-001 |\n| type | Construction |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre_proposal_date | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n|"
+        },
+        {
+          "info": {
+            "name": "Solicitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/solicitations",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of solicitation projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | RFP-2024-001 |\n| template | Standard RFP Template |\n| template_abbreviation | RFP-T |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre-proposal_meeting | 2024-03-15 10:00:00 |\n"
+        },
+        {
+          "info": {
+            "name": "Vendor Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/vendor-companies",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of vendor companies.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC123 |\n| duns | 123456789 |\n| nigp_categories | 05500, 06006 |\n| naics_categories | 541330 |\n| unspsc_categories | 80141600 |\n| state_of_incorporation | CA |\n| business_type | LLC |\n| languages | English, Spanish |\n| no_dbe | WBE |\n| self_reported_certifications | MBE"
+        },
+        {
+          "info": {
+            "name": "Vendor Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/datasets/vendor-subscribers",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              },
+              {
+                "name": "utcTime",
+                "value": "",
+                "type": "query",
+                "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generates a csv of vendor subscribers joined with vendor company profile data.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| subscriber_id | u_12345 |\n| subscriber_name | Alice Johnson |\n| subscriber_title | Purchasing Manager |\n| subscriber_email | alice@example.nil |\n| subscriber_phone | +1 (415) 555-1234 x22 |\n| subscriber_status | Active |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC12"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

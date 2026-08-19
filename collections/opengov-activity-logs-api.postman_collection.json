@@ -1,0 +1,1339 @@
+{
+  "item": [
+    {
+      "id": "53c01736-317e-407c-90c0-20638898e5b6",
+      "name": "Activity Logs",
+      "description": {
+        "content": "Activity Log APIs allow you to retrieve historical changes and actions performed on entities in the system. Activity logs track create, update, soft delete, and hard delete operations. Employee access required.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0cd6ab41-6597-49b1-a30e-67f45431c0d4",
+          "name": "List activity logs",
+          "request": {
+            "name": "List activity logs",
+            "description": {
+              "content": "List all activity logs in the community with optional filtering, sorting, and pagination.\nThis endpoint requires employee access.\n\n### Permissions Required\n`Activity Log Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "activity-logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[userId]",
+                  "value": "<string>",
+                  "description": "Filter by user ID who performed the activity"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[entityTypeId]",
+                  "value": "<string>",
+                  "description": "Filter by entity type ID (e.g., Records, Attachments, Record_Steps)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[entityName]",
+                  "value": "<string>",
+                  "description": "Filter by entity name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[operationName]",
+                  "value": "<string>",
+                  "description": "Filter by operation name/description"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[recordTypeName]",
+                  "value": "<string>",
+                  "description": "Filter by record type name (for record-related activities)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[recordNumber]",
+                  "value": "<string>",
+                  "description": "Filter by record number (for record-related activities)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[entityId]",
+                  "value": "<string>",
+                  "description": "Filter by specific entity ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[field]",
+                  "value": "TIMESTAMP",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[direction]",
+                  "value": "DESC",
+                  "description": "Sort direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[current]",
+                  "value": "<string>",
+                  "description": "Cursor for the current page (opaque string returned from previous response)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "20",
+                  "description": "Number of records to return per page. (Default: 20)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0eb89fb-89fd-46b1-9cf7-b7576fffdd09",
+              "name": "List of Activity Logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "filter[recordTypeName]",
+                      "value": "Building Permit"
+                    },
+                    {
+                      "key": "filter[recordNumber]",
+                      "value": "BP-2024-001"
+                    },
+                    {
+                      "key": "filter[entityId]",
+                      "value": "Records|12345"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLog\",\n      \"attributes\": {\n        \"entityId\": \"string\",\n        \"entityPK\": \"string\",\n        \"entityTypeId\": \"string\",\n        \"entityName\": \"string\",\n        \"entityKey\": \"string\",\n        \"timestamp\": \"1989-04-05T14:18:51.147Z\",\n        \"operation\": \"CREATE\",\n        \"operationName\": \"string\",\n        \"updatedBy\": {\n          \"updatedById\": \"string\",\n          \"updatedByName\": \"string\"\n        },\n        \"parentEntityId\": \"string\",\n        \"parentPK\": \"string\",\n        \"parentEntityTypeId\": \"string\",\n        \"recordTypeName\": \"string\",\n        \"recordNumber\": \"string\",\n        \"values\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": false,\n              \"order\": 6464,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": true,\n              \"order\": 2062,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLog\",\n      \"attributes\": {\n        \"entityId\": \"string\",\n        \"entityPK\": \"string\",\n        \"entityTypeId\": \"string\",\n        \"entityName\": \"string\",\n        \"entityKey\": \"string\",\n        \"timestamp\": \"2015-08-15T00:47:11.167Z\",\n        \"operation\": \"UPDATE\",\n        \"operationName\": \"string\",\n        \"updatedBy\": {\n          \"updatedById\": \"string\",\n          \"updatedByName\": \"string\"\n        },\n        \"parentEntityId\": \"string\",\n        \"parentPK\": \"string\",\n        \"parentEntityTypeId\": \"string\",\n        \"recordTypeName\": \"string\",\n        \"recordNumber\": \"string\",\n        \"values\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": false,\n              \"order\": 239,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": false,\n              \"order\": 8533,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLogEntity\",\n      \"attributes\": {\n        \"entityTypeId\": \"string\",\n        \"name\": \"string\",\n        \"lastUpdatedInfo\": {\n          \"updatedAt\": \"1969-10-21T23:31:02.958Z\",\n          \"updatedBy\": {\n            \"updatedById\": \"string\",\n            \"updatedByName\": \"string\"\n          }\n        },\n        \"overflown\": false,\n        \"parentId\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLogEntity\",\n      \"attributes\": {\n        \"entityTypeId\": \"string\",\n        \"name\": \"string\",\n        \"lastUpdatedInfo\": {\n          \"updatedAt\": \"2026-06-17T18:46:29.529Z\",\n          \"updatedBy\": {\n            \"updatedById\": \"string\",\n            \"updatedByName\": \"string\"\n          }\n        },\n        \"overflown\": false,\n        \"parentId\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 782,\n    \"current\": \"string\",\n    \"next\": \"string\"\n  },\n  \"limitReached\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14f9ad93-16e4-4212-be8f-16d95953dbab",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "filter[recordTypeName]",
+                      "value": "Building Permit"
+                    },
+                    {
+                      "key": "filter[recordNumber]",
+                      "value": "BP-2024-001"
+                    },
+                    {
+                      "key": "filter[entityId]",
+                      "value": "Records|12345"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a141050a-75e2-4a3e-98c4-e85bc51d79a2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "filter[recordTypeName]",
+                      "value": "Building Permit"
+                    },
+                    {
+                      "key": "filter[recordNumber]",
+                      "value": "BP-2024-001"
+                    },
+                    {
+                      "key": "filter[entityId]",
+                      "value": "Records|12345"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "65f2bdf0-b464-4bb6-a758-10cf1d77ec31",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "filter[recordTypeName]",
+                      "value": "Building Permit"
+                    },
+                    {
+                      "key": "filter[recordNumber]",
+                      "value": "BP-2024-001"
+                    },
+                    {
+                      "key": "filter[entityId]",
+                      "value": "Records|12345"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a0c33c0-713d-44cc-bdab-8e178b725365",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "filter[recordTypeName]",
+                      "value": "Building Permit"
+                    },
+                    {
+                      "key": "filter[recordNumber]",
+                      "value": "BP-2024-001"
+                    },
+                    {
+                      "key": "filter[entityId]",
+                      "value": "Records|12345"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "074409f1-3e8b-434e-b55a-54abd08f1abb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "filter[recordTypeName]",
+                      "value": "Building Permit"
+                    },
+                    {
+                      "key": "filter[recordNumber]",
+                      "value": "BP-2024-001"
+                    },
+                    {
+                      "key": "filter[entityId]",
+                      "value": "Records|12345"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "799c47ef-c985-4c34-a7b6-165cad5620cf",
+          "name": "List activity logs for an entity",
+          "request": {
+            "name": "List activity logs for an entity",
+            "description": {
+              "content": "List all activity logs for a specific entity (of any type) with optional filtering, sorting, and pagination.\nThis endpoint requires employee access and returns activities related to the entity and its child entities.\nWorks for any entity type (Records, Attachments, Record_Steps, etc.).\n\n### Permissions Required\n`Activity Log Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "activity-logs",
+                "entities",
+                ":entityTypeId",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[userId]",
+                  "value": "<string>",
+                  "description": "Filter by user ID who performed the activity"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[entityTypeId]",
+                  "value": "<string>",
+                  "description": "Filter by entity type ID (e.g., Records, Attachments, Record_Steps)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[entityName]",
+                  "value": "<string>",
+                  "description": "Filter by entity name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[operationName]",
+                  "value": "<string>",
+                  "description": "Filter by operation name/description"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[field]",
+                  "value": "TIMESTAMP",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[direction]",
+                  "value": "DESC",
+                  "description": "Sort direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[current]",
+                  "value": "<string>",
+                  "description": "Cursor for the current page (opaque string returned from previous response)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "20",
+                  "description": "Number of records to return per page. (Default: 20)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityTypeId",
+                  "description": "(Required) Entity type ID of activity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) ID of the entity for the activity log"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7fbc5f9-90a4-4a86-9a52-d90e12584011",
+              "name": "List of Activity Logs for the entity {entityTypeId} with ID {entityId}",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs",
+                    "entities",
+                    ":entityTypeId",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityTypeId",
+                      "description": "(Required) Entity type ID of activity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) ID of the entity for the activity log"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLog\",\n      \"attributes\": {\n        \"entityId\": \"string\",\n        \"entityPK\": \"string\",\n        \"entityTypeId\": \"string\",\n        \"entityName\": \"string\",\n        \"entityKey\": \"string\",\n        \"timestamp\": \"1989-04-05T14:18:51.147Z\",\n        \"operation\": \"CREATE\",\n        \"operationName\": \"string\",\n        \"updatedBy\": {\n          \"updatedById\": \"string\",\n          \"updatedByName\": \"string\"\n        },\n        \"parentEntityId\": \"string\",\n        \"parentPK\": \"string\",\n        \"parentEntityTypeId\": \"string\",\n        \"recordTypeName\": \"string\",\n        \"recordNumber\": \"string\",\n        \"values\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": false,\n              \"order\": 6464,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": true,\n              \"order\": 2062,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLog\",\n      \"attributes\": {\n        \"entityId\": \"string\",\n        \"entityPK\": \"string\",\n        \"entityTypeId\": \"string\",\n        \"entityName\": \"string\",\n        \"entityKey\": \"string\",\n        \"timestamp\": \"2015-08-15T00:47:11.167Z\",\n        \"operation\": \"UPDATE\",\n        \"operationName\": \"string\",\n        \"updatedBy\": {\n          \"updatedById\": \"string\",\n          \"updatedByName\": \"string\"\n        },\n        \"parentEntityId\": \"string\",\n        \"parentPK\": \"string\",\n        \"parentEntityTypeId\": \"string\",\n        \"recordTypeName\": \"string\",\n        \"recordNumber\": \"string\",\n        \"values\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": false,\n              \"order\": 239,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"activityLogFieldValue\",\n            \"attributes\": {\n              \"fieldName\": \"string\",\n              \"tracked\": false,\n              \"order\": 8533,\n              \"oldValue\": \"string\",\n              \"newValue\": \"string\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLogEntity\",\n      \"attributes\": {\n        \"entityTypeId\": \"string\",\n        \"name\": \"string\",\n        \"lastUpdatedInfo\": {\n          \"updatedAt\": \"1969-10-21T23:31:02.958Z\",\n          \"updatedBy\": {\n            \"updatedById\": \"string\",\n            \"updatedByName\": \"string\"\n          }\n        },\n        \"overflown\": false,\n        \"parentId\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"activityLogEntity\",\n      \"attributes\": {\n        \"entityTypeId\": \"string\",\n        \"name\": \"string\",\n        \"lastUpdatedInfo\": {\n          \"updatedAt\": \"2026-06-17T18:46:29.529Z\",\n          \"updatedBy\": {\n            \"updatedById\": \"string\",\n            \"updatedByName\": \"string\"\n          }\n        },\n        \"overflown\": false,\n        \"parentId\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 782,\n    \"current\": \"string\",\n    \"next\": \"string\"\n  },\n  \"limitReached\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a663bb22-7a5e-499e-a7c9-6362774c9f1a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs",
+                    "entities",
+                    ":entityTypeId",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityTypeId",
+                      "description": "(Required) Entity type ID of activity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) ID of the entity for the activity log"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbdc3f3b-5cc3-4060-9fc4-8ebeecf9ef81",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs",
+                    "entities",
+                    ":entityTypeId",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityTypeId",
+                      "description": "(Required) Entity type ID of activity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) ID of the entity for the activity log"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1c94a91-4a13-4e6c-b966-8b6abe7a647c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs",
+                    "entities",
+                    ":entityTypeId",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityTypeId",
+                      "description": "(Required) Entity type ID of activity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) ID of the entity for the activity log"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef9c25dc-3eef-4578-8a44-d1e0faf01a14",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs",
+                    "entities",
+                    ":entityTypeId",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityTypeId",
+                      "description": "(Required) Entity type ID of activity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) ID of the entity for the activity log"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ad46566-7299-4ec1-938a-9ef64c42d670",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "activity-logs",
+                    "entities",
+                    ":entityTypeId",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[userId]",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "filter[entityTypeId]",
+                      "value": "Records"
+                    },
+                    {
+                      "key": "filter[entityName]",
+                      "value": "Building Permit Application"
+                    },
+                    {
+                      "key": "filter[operationName]",
+                      "value": "Status Changed"
+                    },
+                    {
+                      "key": "sort[field]",
+                      "value": "TIMESTAMP"
+                    },
+                    {
+                      "key": "sort[direction]",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "page[current]",
+                      "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0="
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityTypeId",
+                      "description": "(Required) Entity type ID of activity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) ID of the entity for the activity log"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e9943a4d-b9f3-4318-a8bd-cd949dd39a0d",
+    "name": "Permitting & Licensing Activity Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

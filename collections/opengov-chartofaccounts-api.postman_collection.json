@@ -1,0 +1,1310 @@
+{
+  "item": [
+    {
+      "id": "cfed553b-6e7d-4c71-8234-758a5420bf27",
+      "name": "ChartOfAccounts",
+      "description": {
+        "content": "Operations for retrieving Chart of Accounts data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2b5d7f01-56ee-4b84-99b0-013f76c0c94b",
+          "name": "List Chart Of Accounts by Entity",
+          "request": {
+            "name": "List Chart Of Accounts by Entity",
+            "description": {
+              "content": "Retrieve a list of Chart Of Accounts filtered by the associated Entity ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "chart-of-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[entityId]",
+                  "value": "<uuid>",
+                  "description": "(Required) Filter chart of accounts by entity ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "061bfbc1-52a1-4a07-9a15-39c159c9cb48",
+              "name": "A list of Chart Of Accounts resources matching the filter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"86eba0c5-3eed-ddad-bbbb-5190492b65d4\",\n      \"attributes\": {\n        \"name\": \"City General Fund CoA\",\n        \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n        \"accountNumberSeparators\": [\n          \"-\",\n          \".\"\n        ],\n        \"segments\": [\n          {\n            \"attributes\": {\n              \"label\": \"Fund\",\n              \"segmentType\": \"urn:opengov:coa/segment/fund\",\n              \"enabled\": true,\n              \"defaultSegmentCode\": \"000\"\n            },\n            \"type\": 2368.5901320868074,\n            \"id\": \"string\"\n          },\n          {\n            \"attributes\": {\n              \"label\": \"Fund\",\n              \"segmentType\": \"urn:opengov:coa/segment/fund\",\n              \"enabled\": true,\n              \"defaultSegmentCode\": \"000\"\n            },\n            \"type\": 8507.915300864022,\n            \"id\": \"string\"\n          }\n        ],\n        \"createdAt\": \"1999-11-12T01:41:05.582Z\",\n        \"updatedAt\": \"2000-11-15T11:58:12.078Z\",\n        \"managed\": {\n          \"type\": \"string\"\n        }\n      },\n      \"type\": \"chart-of-accounts\"\n    },\n    {\n      \"id\": \"18b67cc5-53c0-439c-f745-cec6fe582f56\",\n      \"attributes\": {\n        \"name\": \"City General Fund CoA\",\n        \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n        \"accountNumberSeparators\": [\n          \"-\",\n          \".\"\n        ],\n        \"segments\": [\n          {\n            \"attributes\": {\n              \"label\": \"Fund\",\n              \"segmentType\": \"urn:opengov:coa/segment/fund\",\n              \"enabled\": true,\n              \"defaultSegmentCode\": \"000\"\n            },\n            \"type\": 1788,\n            \"id\": 8084\n          },\n          {\n            \"attributes\": {\n              \"label\": \"Fund\",\n              \"segmentType\": \"urn:opengov:coa/segment/fund\",\n              \"enabled\": true,\n              \"defaultSegmentCode\": \"000\"\n            },\n            \"type\": 6508,\n            \"id\": false\n          }\n        ],\n        \"createdAt\": \"2000-07-11T19:53:14.051Z\",\n        \"updatedAt\": \"1949-12-25T03:31:04.859Z\",\n        \"managed\": {\n          \"type\": \"string\"\n        }\n      },\n      \"type\": \"chart-of-accounts\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://ZIBYns.rzfkBnPtBvO62ojNc29\",\n    \"next\": \"http://qjdOTsr.uejBBxxkM-d3vlEKWxt,U2kP2AhJUIV0HfW,G,ddsfymxZxhSmhtcQ-YQfL-PpZYjxP9kW\",\n    \"prev\": \"https://aoGfFibq.euxrKtfEhwtsGyc-AoNkIQJmIKwRtm2eWLflPjh457Kb3fOC\",\n    \"first\": \"http://CMXtJdIzK.lxTtEorzLGKYIYvC1V28qknpszmA.pFxwrzr\",\n    \"last\": \"http://iFJOLShPaGHjLffDE.pngyXCdJ+6FDeJiS,b2fKiDgc77yXtl3LNMyEecn8ztw9ypoJ\"\n  },\n  \"meta\": {\n    \"totalRecords\": 42\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47ecf5f2-a2ff-47ca-83dd-f233b92e1063",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e51f5ec-1a48-4693-b112-494553179574",
+              "name": "Unauthorized - Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cf68e79-0ba3-4976-bbd1-7c981209a3a8",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae451904-b0d4-4dce-8f6d-3d70dcc348a0",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e931492-c3e3-456f-8b23-c57e847ac2a1",
+              "name": "Internal Server Error - An unexpected condition was encountered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b032e1c3-f961-426f-bbf1-33824e70bd98",
+          "name": "Describe a Chart of Accounts",
+          "request": {
+            "name": "Describe a Chart of Accounts",
+            "description": {
+              "content": "Retrieve a Chart Of Accounts by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "chart-of-accounts",
+                ":chartOfAccountsId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "chartOfAccountsId",
+                  "description": "(Required) The identifier of the chart of accounts."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e37ccb5b-cbaa-4436-b66e-9e0a65cf77dd",
+              "name": "A Chart of Accounts resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"fca803c2-e05d-dc44-aa37-da3614f43414\",\n    \"attributes\": {\n      \"name\": \"City General Fund CoA\",\n      \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n      \"accountNumberSeparators\": [\n        \"-\",\n        \".\"\n      ],\n      \"segments\": [\n        {\n          \"attributes\": {\n            \"label\": \"Fund\",\n            \"segmentType\": \"urn:opengov:coa/segment/fund\",\n            \"enabled\": true,\n            \"defaultSegmentCode\": \"000\"\n          },\n          \"type\": 211.13316926282155,\n          \"id\": 6939\n        },\n        {\n          \"attributes\": {\n            \"label\": \"Fund\",\n            \"segmentType\": \"urn:opengov:coa/segment/fund\",\n            \"enabled\": true,\n            \"defaultSegmentCode\": \"000\"\n          },\n          \"type\": 9999,\n          \"id\": \"string\"\n        }\n      ],\n      \"createdAt\": \"2010-10-07T05:34:46.150Z\",\n      \"updatedAt\": \"1966-04-14T01:25:55.974Z\",\n      \"managed\": {\n        \"type\": \"string\"\n      }\n    },\n    \"type\": \"chart-of-accounts\"\n  },\n  \"links\": {\n    \"self\": \"https://api.bnp.opengov.com/api/v1/budgets/1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2ae015a-fd73-4304-9701-56811075b06e",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "854b5a40-e70e-48d9-b364-e7655c69d006",
+              "name": "Unauthorized - Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca00f045-a295-4465-ba9c-d683694bf50c",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ace3866-cfbd-4f91-87ad-415f0c1c3cd8",
+              "name": "Not found - Chart of Accounts with the given ID not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "732c013e-849f-4176-8bbb-26a41d46458e",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60f6624c-64c3-4726-9017-be05c68c9714",
+              "name": "Internal Server Error - An unexpected condition was encountered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":chartOfAccountsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chartOfAccountsId",
+                      "description": "(Required) The identifier of the chart of accounts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0044a4d6-5292-4a71-b43f-80fef9f62c15",
+          "name": "Get accounts by list of account IDs",
+          "request": {
+            "name": "Get accounts by list of account IDs",
+            "description": {
+              "content": "Returns account details for a given CoA ID and list of account number IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "chart-of-accounts",
+                ":coaId",
+                "accounts-by-ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "coaId",
+                  "description": "(Required) The unique identifier for the Chart of Accounts"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb6c6fe3-d285-4ad9-8c09-1e02932a08ee",
+              "name": "A list of CoA account details for the given account number IDs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"account\",\n      \"id\": \"1b0d9227-6195-2fc8-3b2e-6c18d1add2a3\",\n      \"attributes\": {\n        \"label\": \"Office Supplies\",\n        \"accountType\": \"EXPENSES\",\n        \"status\": \"OPERATIONAL\",\n        \"segments\": [\n          \"101\",\n          \"5100\",\n          \"001\"\n        ],\n        \"description\": \"General office supplies and materials\"\n      }\n    },\n    {\n      \"type\": \"account\",\n      \"id\": \"555f5234-232d-fe50-dd45-4801e46024ce\",\n      \"attributes\": {\n        \"label\": \"Office Supplies\",\n        \"accountType\": \"EXPENSES\",\n        \"status\": \"OPERATIONAL\",\n        \"segments\": [\n          \"101\",\n          \"5100\",\n          \"001\"\n        ],\n        \"description\": \"General office supplies and materials\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://api.bnp.opengov.com/api/v1/budgets/1\"\n  },\n  \"meta\": {\n    \"totalRecords\": 42\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0805f341-f929-4789-8d6a-cd33fd23c4d0",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93e85bd7-b680-4550-bf70-d23c83fb4139",
+              "name": "Unauthorized - Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3fc7742d-ca3f-4272-801b-0668592413f4",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0c63af4-d807-44ea-8b41-55f1ab78e524",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47c2c539-8743-43aa-b6d0-0d37043b7d55",
+              "name": "Unsupported Media Type - The request could not be understood by the server due to an unsupported media type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb34bba6-101f-4074-a983-4bef70cea8d8",
+              "name": "Internal Server Error - An unexpected condition was encountered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chart-of-accounts",
+                    ":coaId",
+                    "accounts-by-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "coaId",
+                      "description": "(Required) The unique identifier for the Chart of Accounts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"ids\": [\n        \"b3ac9705-f64e-4e7b-87ef-9403f648ffaf\",\n        \"12345678-aaaa-bbbb-cccc-0123456789ab\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bnp.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d6ec0b7e-dc9e-4e7b-b2ef-b2de2862fdeb",
+    "name": "Budgeting & Performance Chart Of Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Budgeting & Performance API\n\n\nContact Support:\n Name: B&P Team",
+      "type": "text/plain"
+    }
+  }
+}

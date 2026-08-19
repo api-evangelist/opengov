@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Operation Error API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "operationError",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List unresolved operation errors for a PO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/operation-errors",
+            "params": [
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all unresolved (persistent) operation errors for the given purchase order, such as encumbrance booking failures and budget check issues."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

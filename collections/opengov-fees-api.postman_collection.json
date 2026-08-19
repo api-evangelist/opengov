@@ -1,0 +1,1991 @@
+{
+  "item": [
+    {
+      "id": "89d2f431-6561-4124-84e5-60ea1cc0c31c",
+      "name": "Fees",
+      "description": {
+        "content": "A Payment Step can have one or more Fees.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9675c136-cd94-4969-8046-530921b96132",
+          "name": "List fees",
+          "request": {
+            "name": "List fees",
+            "description": {
+              "content": "List fees on a Payment Step.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "payment-steps",
+                ":paymentStepID",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentStepID",
+                  "description": "(Required) ID of a payment step"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41df9cad-a550-4d42-9bd0-76f8e4448c83",
+              "name": "Fees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"fee-789012\",\n      \"type\": \"fee\",\n      \"attributes\": {\n        \"label\": \"Building Permit Application Fee\",\n        \"accountNumber\": \"ACC-4567890123\",\n        \"flatAmount\": 125.5,\n        \"balanceRemaining\": 75.25,\n        \"isEnabled\": true,\n        \"updatedAt\": \"1946-09-25T21:13:15.635Z\"\n      },\n      \"relationships\": {\n        \"ledgerEntries\": {\n          \"$ref\": {}\n        },\n        \"templateFee\": {\n          \"$ref\": {}\n        }\n      }\n    },\n    {\n      \"id\": \"fee-789012\",\n      \"type\": \"fee\",\n      \"attributes\": {\n        \"label\": \"Building Permit Application Fee\",\n        \"accountNumber\": \"ACC-4567890123\",\n        \"flatAmount\": 125.5,\n        \"balanceRemaining\": 75.25,\n        \"isEnabled\": true,\n        \"updatedAt\": \"1967-05-21T10:12:58.012Z\"\n      },\n      \"relationships\": {\n        \"ledgerEntries\": {\n          \"$ref\": {}\n        },\n        \"templateFee\": {\n          \"$ref\": {}\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43b75ed2-8a90-47da-8464-a5f18a97f7ff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c28d2f26-3bb3-4d1a-a562-486bcb49cb7e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d093676-1698-4c0b-8754-1eb7308a772f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "265aa6d6-42d0-4f86-b43c-5075200573cf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b5e6e42-2115-4b51-88ab-7126b22223ba",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de1b071d-ea26-41b9-804c-201e457625ba",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64786133-97db-4835-8f42-79df3cbe1de8",
+          "name": "Create a fee",
+          "request": {
+            "name": "Create a fee",
+            "description": {
+              "content": "Create a fee.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "payment-steps",
+                ":paymentStepID",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentStepID",
+                  "description": "(Required) ID of a payment step"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"templateFeeID\": \"<string>\",\n      \"recordID\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b05c6a70-9943-430b-bb32-f433b2207bce",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"fee-789012\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Building Permit Application Fee\",\n      \"accountNumber\": \"ACC-4567890123\",\n      \"flatAmount\": 125.5,\n      \"balanceRemaining\": 75.25,\n      \"isEnabled\": true,\n      \"updatedAt\": \"1966-06-19T13:20:11.525Z\"\n    },\n    \"relationships\": {\n      \"ledgerEntries\": {\n        \"$ref\": {}\n      },\n      \"templateFee\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "124f2442-9185-47cf-9a14-e1da9cf71e16",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b233d6d-24c8-4729-b08c-fcf13a5a25c1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4d001b07-69fe-4273-a5fb-48df121e1e53",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03d8db4a-1526-4729-8fb9-f2c57179bf5b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4dc7a08a-8e1a-4ba5-ba9c-d4c106ddd736",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c91e5a1-96c2-40e0-afbd-f793cb0c7c85",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5cd630bd-8ae9-4fe3-bb7d-8c20f41a534c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1af8dbd8-1764-4ccc-bde1-58871ec09779",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"templateFeeID\": \"template-fee-600001\",\n      \"recordID\": \"record-600002\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8a77621-202d-4b1f-b818-ba0a64950c15",
+          "name": "Get a fee",
+          "request": {
+            "name": "Get a fee",
+            "description": {
+              "content": "Retrieve a fee by ID.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "payment-steps",
+                "fees",
+                ":paymentFeeID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentFeeID",
+                  "description": "(Required) ID of the payment fee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3009d15-a626-46aa-907f-408763f941e7",
+              "name": "Fee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"fee-789012\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Building Permit Application Fee\",\n      \"accountNumber\": \"ACC-4567890123\",\n      \"flatAmount\": 125.5,\n      \"balanceRemaining\": 75.25,\n      \"isEnabled\": true,\n      \"updatedAt\": \"1966-06-19T13:20:11.525Z\"\n    },\n    \"relationships\": {\n      \"ledgerEntries\": {\n        \"$ref\": {}\n      },\n      \"templateFee\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd1927bb-0c98-40b8-9857-065ae9135fbc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0ff12e9c-50a7-435b-bc12-0bbde4335220",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b75cdda-23c4-45df-a6a3-fc91d2cb788e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17545844-f940-4198-ac1e-9d922db51d0d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8e3d6a5-e52e-4061-9dda-f6d51026e093",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97805f1f-9033-4eb3-bd18-835c7e12b6d3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9e2e219-f5d5-404b-acda-aea0d720df68",
+          "name": "Update a fee",
+          "request": {
+            "name": "Update a fee",
+            "description": {
+              "content": "Update a fee.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "payment-steps",
+                "fees",
+                ":paymentFeeID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentFeeID",
+                  "description": "(Required) ID of the payment fee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"label\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"flatAmount\": \"<currency>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "620ec1d5-aed6-42e5-9ef0-30f7ab24b51c",
+              "name": "Record updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"fee-789012\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Building Permit Application Fee\",\n      \"accountNumber\": \"ACC-4567890123\",\n      \"flatAmount\": 125.5,\n      \"balanceRemaining\": 75.25,\n      \"isEnabled\": true,\n      \"updatedAt\": \"1966-06-19T13:20:11.525Z\"\n    },\n    \"relationships\": {\n      \"ledgerEntries\": {\n        \"$ref\": {}\n      },\n      \"templateFee\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f0d3564-2eea-447e-a350-2cb463ae5ac5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81da91d1-ad70-4723-b0c2-5099037797b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18e1eb68-c97a-4cdb-a2d6-c7b85c3a9d0b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb6772ba-dda2-4c5a-9b39-11a80b02e874",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36b172fe-5ca8-4edf-a3f3-5832cc372239",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc3e6557-c970-4aa2-a1d2-8f4946585fb3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95593e2b-d365-4ff8-a9f8-53b197c10a52",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    "fees",
+                    ":paymentFeeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentFeeID",
+                      "description": "(Required) ID of the payment fee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"id\": \"fee-600003\",\n    \"type\": \"fee\",\n    \"attributes\": {\n      \"label\": \"Updated Building Permit Fee\",\n      \"accountNumber\": \"ACC-9876543210\",\n      \"flatAmount\": 275.5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10362977-7165-4b8d-9512-8b7d2e5579df",
+    "name": "Permitting & Licensing Fees API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

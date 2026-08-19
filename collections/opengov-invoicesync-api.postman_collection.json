@@ -1,0 +1,622 @@
+{
+  "item": [
+    {
+      "id": "669aeb90-8038-4ed4-be77-abac3a5cdefa",
+      "name": "invoiceSync",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "09487ea5-5a77-46f6-b702-9fdab0a6ef44",
+          "name": "Sync invoice allocations",
+          "request": {
+            "name": "Sync invoice allocations",
+            "description": {
+              "content": "Processes delta-based invoice allocation updates. Accepts invoice header, line items (with quantities), and splits (with amounts). Upserts by invoiceLineId (allocations) and invoiceLineDistributionId (splits). Applies deltas to running totals and triggers financial recompute. Idempotent: replayed requests (same idempotencyKey) return 200; new requests return 202.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "invoice-allocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa3aa48f-16a2-458a-8aba-ea268e617458",
+              "name": "Idempotent replay — a request with this idempotencyKey was already accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"accepted\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3bfe2ec-573f-4f31-a669-3e8049873f87",
+              "name": "New request accepted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"accepted\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f3681f8-319c-4e3e-a510-ea67ec9ccc35",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a703cf82-9434-40b6-89bf-e45df632786d",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f6458dd-e260-4388-969e-64e59cede82a",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93816e46-a6ef-4044-8b5c-c8ae22898734",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fab21a9d-c4a4-4213-8300-55a991823e22",
+              "name": "IdempotencyConflictError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 409,\n  \"code\": \"IDEMPOTENCY_CONFLICT\",\n  \"detail\": \"A request with this idempotency key is currently being processed. Retry after the in-flight request completes.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dece6cb4-eb6f-42a7-859c-dd1010067952",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "invoice-allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyKey\": \"<uuid>\",\n  \"invoices\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"invoiceLineId\": \"<uuid>\",\n          \"poPurchaseOrderId\": \"<number>\",\n          \"poLineItemId\": \"<number>\",\n          \"deltaMatchedQuantity\": \"<string>\",\n          \"deltaInvoicedQuantity\": \"<string>\",\n          \"lineItemSplits\": [\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            },\n            {\n              \"invoiceLineDistributionId\": \"<number>\",\n              \"poLineItemSplitId\": \"<number>\",\n              \"deltaMatchedAmount\": \"<string>\",\n              \"deltaInvoicedAmount\": \"<string>\",\n              \"deltaPaidAmount\": \"<string>\",\n              \"deltaEncLiquidatedAccrualAmount\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"invoiceNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-purchase-order.procurement.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f5aec2e-d186-4585-a18a-3d2a12ac63b4",
+    "name": "OpenGov Purchase Order Invoice Sync API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing purchase orders, line items, splits, and vendors.",
+      "type": "text/plain"
+    }
+  }
+}

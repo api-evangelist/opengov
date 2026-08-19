@@ -1,0 +1,4365 @@
+{
+  "item": [
+    {
+      "id": "0fbaebc3-c01d-4e10-b9c6-a43939e1682c",
+      "name": "Datasets",
+      "description": {
+        "content": "**Datasets** are collections of data that can be retrieved using the API.\n\nDatasets can be retrieved by using `GET` requests. The base url for datasets is `https://api.procurement.opengov.com/gateway/datasets/v1/`\n\nNote: All dates and times returned by this API are in the time zone selected by the agency.\n## Datasets Legacy Authentication Methods\nIn addition to the OpenGov standard Authorization header, for historic purposes we support two additional ways for the Datasets APIs.\n### 1. HTTP Basic Auth\n\nUse your OpenGov account email as the username and your API key as the password.\n\n```bash curl -u \"alice@example.com:YOUR_API_KEY\" \\ https://api.procurement.opengov.com/gateway/datasets/v1/solicitations ```\n### 2. X-api-key header\n\nYou may also authenticate using the `x-api-key` request header:\n```bash curl -H \"x-api-key: YOUR_API_KEY\" \\ https://api.procurement.opengov.com/gateway/datasets/v1/solicitations ```\n> **Security note:** Some third-party systems may log or store custom headers in plaintext.  \n\nTo obtain an API key, please follow the steps outlined in this guide [OpenGov Procurement API Reference](https://opengov.my.site.com/support/s/article/87a452ae-254c-4b62-8336-d475c2e30723) or contact OpenGov support.\n\nThe API will return a 401 error if the key is invalid.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3071cef0-90d2-4034-a5ba-03d32f67e8b2",
+          "name": "Contracts",
+          "request": {
+            "name": "Contracts",
+            "description": {
+              "content": "Generates a csv of contracts data. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| created_at | 2024-01-01 09:00:00 |\n| updated_at | 2023-01-25 09:00:00 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-contracts-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cd1decdd-bd6d-4a97-83dd-55749ef731cd",
+              "name": "Successfully retrieved Contracts dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1b71413-6a82-4ad7-a7fb-628662258365",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f2832d9a-1629-4e7f-853d-78709107a123",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42f20acd-2e7d-4ed7-afaa-458b2127431a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9aca0091-c04b-4a68-bfee-5c25286c8d7d",
+          "name": "Contract Documents",
+          "request": {
+            "name": "Contract Documents",
+            "description": {
+              "content": "Generates a csv of contract document projects. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | Carroll Bog Boardwalk Construction |\n| project_id | P-2024-001 |\n| template | Standard Construction Template |\n| template_abbreviation | SCT |\n| requisition_id | REQ-45678 |\n| department | Facilities Management |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| status | Review |\n| status_sort | 2 |\n| workload_points_remaining | 50.5 |\n| created_by | admin_user |\n| created_at | 2024-03-01 22:20:31 |\n| last_updated_at | 2024-03-03 23:29:00 |\n| procurement_classification | Invitation to Bid |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | 0 |\n| internal_contract_id | 12345 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "contract-documents"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-contract-documents-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86cb50d8-9628-4a7b-85a1-6f77ddfda849",
+              "name": "Successfully retrieved Contract Documents dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbe70b43-19f6-419e-8d5a-dbad55781bd1",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "575f38ef-60fe-4f6a-a9da-f823c1d403f4",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47598434-8483-4038-b080-8b943bca7906",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "249c2f2c-c654-42a5-a458-bfd398afb152",
+          "name": "Contracts with Spend",
+          "request": {
+            "name": "Contracts with Spend",
+            "description": {
+              "content": "Generates a csv of contracts with spend data. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| internal_po_id | 12345 |\n| po_issue_date | 2024-01-15 |\n| po_fiscal_year | FY2024 |\n| po_department | Finance |\n| po_created_by | John Doe |\n| po_order_status | Approved |\n| po_order_amount | 5000.75 |\n| po_amount_paid | 3000.50 |\n| po_number | PO-67890 |\n| po_description | Purchase of office furniture |\n| po_comments | Urgent request due to office expansion. |\n| po_created_at | 2024-01-01 09:00:00 |\n| po_updated_at | 2024-01-02 09:00:00 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "contracts-with-spend"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-contracts-with-spend-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a2afc72-cd42-4530-858d-1b818091a079",
+              "name": "Successfully retrieved Contracts with Spend dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e8e7de3-a7f4-412b-bfa0-70aaa2c7ac12",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f50e5ed2-3f66-48f2-8b6d-1795363a3db8",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9b4dede-c08f-40df-91a8-368dd7e659f4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "319c0337-a871-4da4-be65-6bbd760613ad",
+          "name": "Intakes",
+          "request": {
+            "name": "Intakes",
+            "description": {
+              "content": "Generates a csv of intake projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | FIN-2024-001 |\n| type | Construction |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre_proposal_date | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_start_date | 2024-04-05 14:00:00 |\n| reverse_auction_end_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| status | Draft |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| assigned_to | Bob Approver |\n| assigned_at | 2024-02-21 09:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "intakes"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-intakes-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5efa4df5-2096-41db-a925-1d566fded174",
+              "name": "Successfully retrieved Intakes dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c894e34-c933-43a9-b41e-6f0d1fa1b33e",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba642422-ab95-429c-91ba-00f1a699b25e",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0693e005-1322-43ec-a940-9b0dda632c0f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a08556a2-aea8-4515-8ea2-ca71f7e179d6",
+          "name": "Solicitations",
+          "request": {
+            "name": "Solicitations",
+            "description": {
+              "content": "Generates a csv of solicitation projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | RFP-2024-001 |\n| template | Standard RFP Template |\n| template_abbreviation | RFP-T |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre-proposal_meeting | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_starting_date | 2024-04-05 14:00:00 |\n| reverse_auction_ending_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| contract_end_date | 2025-04-01 00:00:00 |\n| status | Open |\n| status_sort | 1 |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n| notified | 152 |\n| viewed | 0 |\n| followers | 34 |\n| downloaders | 30 |\n| applicants | 10 |\n| no_bids | 2 |\n| submissions | 8 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "solicitations"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-solicitations-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8b65455b-8a05-4b50-971d-3e50831e1334",
+              "name": "Successfully retrieved Solicitations dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9ef8c717-ed8e-4ba3-9202-8219670ed5f6",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cfedd0e2-acff-4866-90e7-7b8328f1cb82",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51df0039-4d45-47f0-b6c7-37a000cb925b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8f33c68-b1c6-4be6-9047-5e493112254c",
+          "name": "Vendor Companies",
+          "request": {
+            "name": "Vendor Companies",
+            "description": {
+              "content": "Generates a csv of vendor companies.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC123 |\n| duns | 123456789 |\n| nigp_categories | 05500, 06006 |\n| naics_categories | 541330 |\n| unspsc_categories | 80141600 |\n| state_of_incorporation | CA |\n| business_type | LLC |\n| languages | English, Spanish |\n| no_dbe | WBE |\n| self_reported_certifications | MBE, WBE |\n| verified_certifications | WBE |\n| primary_address_line_1 | 123 Main St |\n| primary_address_line_2 | Suite 200 |\n| primary_city | San Francisco |\n| primary_state | CA |\n| primary_postal_code | 94105 |\n| primary_country | US |\n| billing_address_line_1 | 456 Market St |\n| billing_address_line_2 | Floor 3 |\n| billing_city | San Francisco |\n| billing_state | CA |\n| billing_postal_code | 94105 |\n| billing_country | US |\n| website | https://acme.nil |\n| phone | +1 (415) 555-9876 |\n| fax_phone | +1 (415) 555-0000 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "vendor-companies"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-vendor-companies-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b00838ad-42db-407a-8c93-5ee9dea9d0db",
+              "name": "Successfully retrieved Vendor Companies dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6bfdb30-44ec-4c9a-945d-fb0437aea67a",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea3f61bd-57c8-43af-9814-e648cddcf651",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "115894f7-c236-4ef1-8b9b-5d6cee118b01",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a028b32e-b72e-40aa-9f35-09d7abe45880",
+          "name": "Vendor Subscribers",
+          "request": {
+            "name": "Vendor Subscribers",
+            "description": {
+              "content": "Generates a csv of vendor subscribers joined with vendor company profile data.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| subscriber_id | u_12345 |\n| subscriber_name | Alice Johnson |\n| subscriber_title | Purchasing Manager |\n| subscriber_email | alice@example.nil |\n| subscriber_phone | +1 (415) 555-1234 x22 |\n| subscriber_status | Active |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC123 |\n| duns | 123456789 |\n| nigp_categories | 05500, 06006 |\n| naics_categories | 541330 |\n| unspsc_categories | 80141600 |\n| state_of_incorporation | CA |\n| business_type | LLC |\n| languages | English, Spanish |\n| no_dbe | WBE |\n| self_reported_certifications | MBE, WBE |\n| verified_certifications | WBE |\n| primary_address_line_1 | 123 Main St |\n| primary_address_line_2 | Suite 200 |\n| primary_city | San Francisco |\n| primary_state | CA |\n| primary_postal_code | 94105 |\n| primary_country | US |\n| billing_address_line_1 | 456 Market St |\n| billing_address_line_2 | Floor 3 |\n| billing_city | San Francisco |\n| billing_state | CA |\n| billing_postal_code | 94105 |\n| billing_country | US |\n| website | https://acme.nil |\n| phone | +1 (415) 555-9876 |\n| fax_phone | +1 (415) 555-0000 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "datasets",
+                "v1",
+                "vendor-subscribers"
+              ],
+              "host": [
+                "{{gateway-datasets-v1-vendor-subscribers-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "63d49d27-a1e2-4ffb-99d1-e00e6c75bf36",
+              "name": "Successfully retrieved Vendor Subscribers dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13be78ec-865d-49ce-b8f9-6873bc594f88",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06d4ed07-2dd6-401d-a92a-1c372ddeda73",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3fc2bc03-d63c-481b-b928-bd325729f051",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "datasets",
+                    "v1",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-datasets-v1-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f26d930c-73b7-4c4d-b632-3c32490da685",
+          "name": "Contracts",
+          "request": {
+            "name": "Contracts",
+            "description": {
+              "content": "Generates a csv of contracts data. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| created_at | 2024-01-01 09:00:00 |\n| updated_at | 2023-01-25 09:00:00 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "contracts"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-contracts-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae77641f-7a1c-4eda-8488-59772c27b9fd",
+              "name": "Successfully retrieved Contracts dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d5c7f54f-edaf-4703-b669-eff84c33c811",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c849c04-11cf-4b97-b433-26b2f13b0b8f",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1f12651-9c35-4f7c-b119-82fd9f00aa39",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1451702-8e7f-4588-a2e7-b1650643a8b3",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c0b0086-a2dd-4fd0-a8da-d854b2e5e44a",
+          "name": "Contract Documents",
+          "request": {
+            "name": "Contract Documents",
+            "description": {
+              "content": "Generates a csv of contract document projects. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | Carroll Bog Boardwalk Construction |\n| project_id | P-2024-001 |\n| template | Standard Construction Template |\n| template_abbreviation | SCT |\n| requisition_id | REQ-45678 |\n| department | Facilities Management |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| status | Review |\n| status_sort | 2 |\n| workload_points_remaining | 50.5 |\n| created_by | admin_user |\n| created_at | 2024-03-01 22:20:31 |\n| last_updated_at | 2024-03-03 23:29:00 |\n| procurement_classification | Invitation to Bid |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | 0 |\n| internal_contract_id | 12345 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "contract-documents"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-contract-documents-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4080716c-5bea-4517-8875-09dda6c06542",
+              "name": "Successfully retrieved Contract Documents dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c775322b-c8b6-4cf7-8cc2-10a7e73e8579",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "746f4e67-985d-4d43-abc1-d097327b51b7",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d01db60-510d-46ac-9d9e-d536095fc1cd",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9df1f390-1299-4861-b9ea-9ca1623bf7e2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contract-documents"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contract-documents-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1a282ba-696c-494b-b270-026b77b5beaa",
+          "name": "Contracts with Spend",
+          "request": {
+            "name": "Contracts with Spend",
+            "description": {
+              "content": "Generates a csv of contracts with spend data. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| internal_po_id | 12345 |\n| po_issue_date | 2024-01-15 |\n| po_fiscal_year | FY2024 |\n| po_department | Finance |\n| po_created_by | John Doe |\n| po_order_status | Approved |\n| po_order_amount | 5000.75 |\n| po_amount_paid | 3000.50 |\n| po_number | PO-67890 |\n| po_description | Purchase of office furniture |\n| po_comments | Urgent request due to office expansion. |\n| po_created_at | 2024-01-01 09:00:00 |\n| po_updated_at | 2024-01-02 09:00:00 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "contracts-with-spend"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "093893b2-9509-438d-9ca8-6acf4cc1eede",
+              "name": "Successfully retrieved Contracts with Spend dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9ce84d3f-ec83-48dc-bae0-7a59d1e9fe91",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6152f027-7502-4ab3-9943-f3932957ad8f",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40f8529f-5566-4594-a5f6-529015f36886",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4146ed1-c8a2-4aee-987f-db81eb74ad20",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "contracts-with-spend"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cceb586-ae37-4cce-98c2-9eec12220b29",
+          "name": "Intakes",
+          "request": {
+            "name": "Intakes",
+            "description": {
+              "content": "Generates a csv of intake projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | FIN-2024-001 |\n| type | Construction |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre_proposal_date | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_start_date | 2024-04-05 14:00:00 |\n| reverse_auction_end_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| status | Draft |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| assigned_to | Bob Approver |\n| assigned_at | 2024-02-21 09:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "intakes"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-intakes-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6ab4bb52-6fb9-4985-b86e-df507a75fc47",
+              "name": "Successfully retrieved Intakes dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fba4a085-421c-4b12-9966-2fbac85e5f75",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4bf025ad-25c7-48a5-8249-ae287cc74554",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09c5a70c-0117-4f93-916a-acd867cc05f6",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ed9bc82-fa02-4c4e-9c13-d8d7bb5345af",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "intakes"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-intakes-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e356f422-bccb-4241-8db5-0ecde0ca7f18",
+          "name": "Solicitations",
+          "request": {
+            "name": "Solicitations",
+            "description": {
+              "content": "Generates a csv of solicitation projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | RFP-2024-001 |\n| template | Standard RFP Template |\n| template_abbreviation | RFP-T |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre-proposal_meeting | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_starting_date | 2024-04-05 14:00:00 |\n| reverse_auction_ending_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| contract_end_date | 2025-04-01 00:00:00 |\n| status | Open |\n| status_sort | 1 |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n| notified | 152 |\n| viewed | 0 |\n| followers | 34 |\n| downloaders | 30 |\n| applicants | 10 |\n| no_bids | 2 |\n| submissions | 8 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "solicitations"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-solicitations-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5183ee2e-aef1-47be-9791-3aee639a7946",
+              "name": "Successfully retrieved Solicitations dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09e0ec64-f293-4f10-8cbc-9b5f8b875b73",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e13fee79-d4b3-4131-bf4e-340a96215d29",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a214c82-3dce-417a-b8ec-af98b9c43399",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0dfc3b71-a52e-4fb1-b39a-f0b912e97316",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "solicitations"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-solicitations-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be93fafd-1618-411d-9f03-76add19d89d0",
+          "name": "Vendor Companies",
+          "request": {
+            "name": "Vendor Companies",
+            "description": {
+              "content": "Generates a csv of vendor companies.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC123 |\n| duns | 123456789 |\n| nigp_categories | 05500, 06006 |\n| naics_categories | 541330 |\n| unspsc_categories | 80141600 |\n| state_of_incorporation | CA |\n| business_type | LLC |\n| languages | English, Spanish |\n| no_dbe | WBE |\n| self_reported_certifications | MBE, WBE |\n| verified_certifications | WBE |\n| primary_address_line_1 | 123 Main St |\n| primary_address_line_2 | Suite 200 |\n| primary_city | San Francisco |\n| primary_state | CA |\n| primary_postal_code | 94105 |\n| primary_country | US |\n| billing_address_line_1 | 456 Market St |\n| billing_address_line_2 | Floor 3 |\n| billing_city | San Francisco |\n| billing_state | CA |\n| billing_postal_code | 94105 |\n| billing_country | US |\n| website | https://acme.nil |\n| phone | +1 (415) 555-9876 |\n| fax_phone | +1 (415) 555-0000 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "vendor-companies"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-vendor-companies-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fc7b584f-4146-4508-adc0-ac0fcb930a24",
+              "name": "Successfully retrieved Vendor Companies dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b55479d-4c0c-4360-b9f8-c7a4856747e0",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f1965e3-5fdb-4434-a769-3b7393e7db6c",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b9ba22c-10b0-400c-8430-481661a7e950",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ebc2b29-3ba4-4a4c-aa71-aef569b29ee2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-companies"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-companies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebbc8bba-588b-444e-a960-6fc7b0185284",
+          "name": "Vendor Subscribers",
+          "request": {
+            "name": "Vendor Subscribers",
+            "description": {
+              "content": "Generates a csv of vendor subscribers joined with vendor company profile data.\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| subscriber_id | u_12345 |\n| subscriber_name | Alice Johnson |\n| subscriber_title | Purchasing Manager |\n| subscriber_email | alice@example.nil |\n| subscriber_phone | +1 (415) 555-1234 x22 |\n| subscriber_status | Active |\n| internal_vendor_id | 9876 |\n| date_added | 2024-03-01 |\n| vendor_name | Acme Supplies, Inc. |\n| doing_business_as | Acme |\n| uei | UEI-ABC123 |\n| duns | 123456789 |\n| nigp_categories | 05500, 06006 |\n| naics_categories | 541330 |\n| unspsc_categories | 80141600 |\n| state_of_incorporation | CA |\n| business_type | LLC |\n| languages | English, Spanish |\n| no_dbe | WBE |\n| self_reported_certifications | MBE, WBE |\n| verified_certifications | WBE |\n| primary_address_line_1 | 123 Main St |\n| primary_address_line_2 | Suite 200 |\n| primary_city | San Francisco |\n| primary_state | CA |\n| primary_postal_code | 94105 |\n| primary_country | US |\n| billing_address_line_1 | 456 Market St |\n| billing_address_line_2 | Floor 3 |\n| billing_city | San Francisco |\n| billing_state | CA |\n| billing_postal_code | 94105 |\n| billing_country | US |\n| website | https://acme.nil |\n| phone | +1 (415) 555-9876 |\n| fax_phone | +1 (415) 555-0000 |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gateway",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "datasets",
+                "vendor-subscribers"
+              ],
+              "host": [
+                "{{gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utcTime",
+                  "value": "<boolean>",
+                  "description": "If true, all dates and times will be returned in UTC.\nIf false or not provided, all dates and times will be returned in the time zone selected by the agency.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "977891bc-4710-4cd2-ab7f-bb39c8316b0c",
+              "name": "Successfully retrieved Vendor Subscribers dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e21f971b-e342-4b60-842e-54694d25b462",
+              "name": "Unauthorized, invalid or missing API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9a7d6eb-9da6-4da6-94bb-ea233a3c5d21",
+              "name": "Your OpenGov account does not have OpenGov Procurement access on the requested entity.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API key does not have PRO access to this entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79cdd775-3dd7-4202-8f14-1050fe5450b8",
+              "name": "Government not found or resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5480919b-ff42-47de-8860-4532bcffda8d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gateway",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "datasets",
+                    "vendor-subscribers"
+                  ],
+                  "host": [
+                    "{{gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utcTime",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-contracts-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-contract-documents-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-contracts-with-spend-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-intakes-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-solicitations-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-vendor-companies-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-datasets-v1-vendor-subscribers-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-contracts-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-contract-documents-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-contracts-with-spend-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-intakes-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-solicitations-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-vendor-companies-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "gateway-v2-entities-entityUuid-datasets-vendor-subscribers-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "f109dc6f-ed03-4de0-bbc4-9634ca3fa746",
+    "name": "Opengov Datasets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Datasets across 2 of this provider's published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

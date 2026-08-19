@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Co Terms Attachment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coTermsAttachment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initialize a Change Order Terms & Conditions file upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-orders/:coId/terms/attachments/upload",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a CO-scoped Terms & Conditions attachment row with upload_status=INITIATED and returns a presigned S3 PUT URL. Requires CO Editor permission and the Change Order must be in Draft."
+        },
+        {
+          "info": {
+            "name": "Complete a Change Order Terms & Conditions file upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-orders/:coId/terms/attachments/:attachmentId/complete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "CO-scoped sibling of POST /purchase-orders/:poId/terms/attachments/:id/complete. Requires CO Editor permission, the CO must remain in Draft, and the attachment must belong to that CO."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

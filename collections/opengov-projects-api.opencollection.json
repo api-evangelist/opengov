@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Projects API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/projects",
+            "params": [
+              {
+                "name": "filter[label]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project label"
+              },
+              {
+                "name": "filter[isEnabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project enabled status"
+              },
+              {
+                "name": "filter[createdAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project creation date"
+              },
+              {
+                "name": "filter[applicantUserID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the user ID of the project applicant"
+              }
+            ]
+          },
+          "docs": "List projects.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Retrieve a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/projects/:projectID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project"
+              }
+            ]
+          },
+          "docs": "Retrieve a project by ID.\n### Permissions Required\n`Record Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,956 @@
+{
+  "item": [
+    {
+      "id": "ba366f30-d0bc-45e5-a676-f6489ef04b42",
+      "name": "Categories",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a757fa02-738b-4bdd-940b-2f2fd7ccec8b",
+          "name": "List Categories",
+          "request": {
+            "name": "List Categories",
+            "description": {
+              "content": "This endpoint fetches a paginated list of categories for a given category set (NIGP, NAICS, or UNSPSC), ordered by ID, with cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "contracts",
+                "categories"
+              ],
+              "host": [
+                "{{public-api-v1-contracts-categories-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "set",
+                  "value": "<string>",
+                  "description": "(Required) The category set to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "10",
+                  "description": "The number of categories to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "A cursor for use in pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a88a99a2-4894-4966-bd0b-f89cbebb4b82",
+              "name": "A paginated list of categories was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v1-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"node\": {\n        \"code\": \"20800\",\n        \"title\": \"Office Supplies\",\n        \"codeType\": \"NIGP\"\n      },\n      \"cursor\": \"Y2F0ZWdvcnkuaWQ9NDI=\"\n    },\n    {\n      \"node\": {\n        \"code\": \"20800\",\n        \"title\": \"Office Supplies\",\n        \"codeType\": \"NIGP\"\n      },\n      \"cursor\": \"Y2F0ZWdvcnkuaWQ9NDI=\"\n    }\n  ],\n  \"pageInfo\": {\n    \"totalResultsCount\": 250,\n    \"endCursor\": {},\n    \"hasMoreResults\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14fba6ab-7092-4db9-a481-1f013052b719",
+              "name": "The request parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v1-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": [\n    \"`set` query parameter must be one of: nigp, naics, unspsc\"\n  ],\n  \"error\": \"Bad Request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99205e9e-f086-4cb1-aad7-2ffeccb36e00",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v1-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Authorization header not found\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37c14c19-47c1-4acd-a799-f4a6e1c91c48",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v1-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"message\": \"Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT\",\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57d99414-82ce-435a-98b3-873bf560bb61",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v1-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Requested entity not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6cf2691-8184-4380-8719-6927122e5b45",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v1-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\",\n  \"error\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b93be510-33ce-4bec-a036-41d21ec34907",
+          "name": "List Categories",
+          "request": {
+            "name": "List Categories",
+            "description": {
+              "content": "This endpoint fetches a paginated list of categories for a given category set (NIGP, NAICS, or UNSPSC), ordered by ID, with cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v2",
+                "entities",
+                ":entityUuid",
+                "contracts",
+                "categories"
+              ],
+              "host": [
+                "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "set",
+                  "value": "<string>",
+                  "description": "(Required) The category set to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "10",
+                  "description": "The number of categories to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "A cursor for use in pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "entityUuid",
+                  "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "693c8a35-c2b1-458e-9120-fafd2b2497fa",
+              "name": "A paginated list of categories was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"node\": {\n        \"code\": \"20800\",\n        \"title\": \"Office Supplies\",\n        \"codeType\": \"NIGP\"\n      },\n      \"cursor\": \"Y2F0ZWdvcnkuaWQ9NDI=\"\n    },\n    {\n      \"node\": {\n        \"code\": \"20800\",\n        \"title\": \"Office Supplies\",\n        \"codeType\": \"NIGP\"\n      },\n      \"cursor\": \"Y2F0ZWdvcnkuaWQ9NDI=\"\n    }\n  ],\n  \"pageInfo\": {\n    \"totalResultsCount\": 250,\n    \"endCursor\": {},\n    \"hasMoreResults\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5b220ac-2639-47ba-bdda-a64dd769e45c",
+              "name": "The request parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": [\n    \"`set` query parameter must be one of: nigp, naics, unspsc\"\n  ],\n  \"error\": \"Bad Request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51a14ae5-702c-49ec-be5e-af5f7e6a2adc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Authorization header not found\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65ed076b-7990-4aca-92d0-692148518f05",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"message\": \"Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT\",\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d7fb0c4-7349-4067-a562-849d93ff9d76",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Requested entity not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "476e3008-4f01-4331-9267-56520bc5237e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v2",
+                    "entities",
+                    ":entityUuid",
+                    "contracts",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{public-api-v2-entities-entityUuid-contracts-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "set",
+                      "value": "nigp"
+                    },
+                    {
+                      "key": "first",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "Y2F0ZWdvcnkuaWQ9MQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "entityUuid",
+                      "description": "(Required) UUID of the OpenGov entity (typically an agency) the request is acting on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\",\n  \"error\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "public-api-v1-contracts-categories-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.procurement.opengov.com",
+      "key": "public-api-v2-entities-entityUuid-contracts-categories-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "95c3e699-c01b-4ea8-ab7b-b47e4e45a375",
+    "name": "Opengov Categories API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Categories across 2 of this provider's published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

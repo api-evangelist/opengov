@@ -1,0 +1,2549 @@
+{
+  "item": [
+    {
+      "id": "e539e4a1-a6b0-49d9-a307-e120bea472ff",
+      "name": "print",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5228956c-ea43-49d8-8b11-a1afcaa95738",
+          "name": "Initiate or retrieve a print job for a Purchase Order",
+          "request": {
+            "name": "Initiate or retrieve a print job for a Purchase Order",
+            "description": {
+              "content": "Validates PO eligibility, computes content hash, checks S3 cache. Cache hit: returns completed with presigned URL (200). Cache miss: creates print job, forks generation, returns generating (202).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "print"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a0152b6-2960-4258-8632-2b2857b1ca3b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"completed\",\n    \"downloadUrl\": \"string\",\n    \"jobId\": 9941.476622382135\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5f0768d-4d0a-4f94-a462-9d8e81c025a6",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76312046-3e4f-4801-ae7b-22420355f0c8",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1a801e1-ea30-41b6-afee-fee31e12d8f8",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a1dc63-2cf8-48c4-b507-f3b6c5e70dc8",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a571479-6b6c-47c7-94c7-66123059d158",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d748c1cf-5fcb-49b0-9660-6e9956034236",
+          "name": "Poll print job status",
+          "request": {
+            "name": "Poll print job status",
+            "description": {
+              "content": "Returns current job status. Completed includes a fresh presigned download URL. Failed includes a human-readable error message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "print",
+                "print-jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "844da7a0-f66e-476e-b634-7de7d932fe83",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"generating\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3189ad60-b1fe-4c67-bedb-8a49e4d121f6",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d0cb1cd-f124-4aa5-ae53-14f5b764bd7e",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "308d1485-32e5-4a24-8776-85b13efe852f",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "341f579b-3b17-499e-958c-c8075ba93214",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ead07e7c-b17d-4919-9afb-7fb96663c2c3",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7b63c82-916d-4797-a673-93e0fa93a0c9",
+          "name": "Record print download and get URL",
+          "request": {
+            "name": "Record print download and get URL",
+            "description": {
+              "content": "Called when the user explicitly downloads. Records an activity log entry (entry type PRINT) and returns a fresh presigned download URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "print",
+                "print-jobs",
+                ":jobId",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2abb5a6-6ed1-40b4-aa8c-3c4bec1c310c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"downloadUrl\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d02aa372-333f-48b0-a35e-ea3673e6efe9",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57961f7e-bd71-4c08-b315-a10ed7a521a3",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aedf3dee-ff9b-425d-b950-bcac10d483c9",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f9c3004-4e70-483b-93ba-3f335db9644a",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b48c8b48-004b-4d3c-b494-aed8d1b1b257",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "print-jobs",
+                    ":jobId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ed338f4-7559-496a-adb4-c6a5b32510c1",
+          "name": "Get available comments and attachments for print settings UI",
+          "request": {
+            "name": "Get available comments and attachments for print settings UI",
+            "description": {
+              "content": "Returns available comments and attachments for the print settings panel. The frontend uses this to populate checkboxes/selectors before requesting a PDF preview.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "print",
+                "preview-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a8b6469-646a-4006-8d7c-b37c65166804",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"availableComments\": [\n      {\n        \"id\": 187.45330451469977,\n        \"author\": \"string\",\n        \"timestamp\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"id\": 5358.620192122223,\n        \"author\": \"string\",\n        \"timestamp\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"availableAttachments\": [\n      {\n        \"id\": 6625.284538836274,\n        \"fileName\": \"string\",\n        \"mimeType\": \"string\",\n        \"sizeBytes\": 1097.3676274602262,\n        \"purpose\": \"GENERAL\",\n        \"poChangeOrderId\": 9423.112146795474\n      },\n      {\n        \"id\": 414.68831303455136,\n        \"fileName\": \"string\",\n        \"mimeType\": \"string\",\n        \"sizeBytes\": 151.76964437469854,\n        \"purpose\": \"TERMS_AND_CONDITIONS\",\n        \"poChangeOrderId\": 8950.16238770612\n      }\n    ],\n    \"availableChangeOrders\": [\n      {\n        \"id\": 1214.1823840988818,\n        \"coNumber\": \"string\",\n        \"status\": \"string\",\n        \"effectiveDate\": \"string\",\n        \"approvedAt\": \"string\",\n        \"createdAt\": \"string\",\n        \"revisedPoTotal\": \"string\",\n        \"changeInTotal\": \"string\",\n        \"isApproved\": false\n      },\n      {\n        \"id\": 8503.341451397699,\n        \"coNumber\": \"string\",\n        \"status\": \"string\",\n        \"effectiveDate\": \"string\",\n        \"approvedAt\": \"string\",\n        \"createdAt\": \"string\",\n        \"revisedPoTotal\": \"string\",\n        \"changeInTotal\": \"string\",\n        \"isApproved\": false\n      }\n    ],\n    \"persistedTerms\": {\n      \"bodyHtml\": \"string\",\n      \"attachmentIds\": [\n        6979.988866597178,\n        468.2682300296515\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f375a77e-7aea-4fdd-aac4-ad83b31971fb",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d805f1fa-f941-495f-9d25-ab5a52fca319",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddc30e3d-b850-4ba6-b3af-25b1fca46d37",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20f06421-5de8-4ab8-8e24-707e4efde39f",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce1d60ce-f5f6-4ea5-b76b-c2becb5a00a6",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9fd2ed3-3b45-4ee9-b7bc-ed5fd94f4d11",
+          "name": "Render a live PDF preview of the purchase order",
+          "request": {
+            "name": "Render a live PDF preview of the purchase order",
+            "description": {
+              "content": "Renders the PO as PDF via Carbone DOCX template with current print options. Returns binary application/pdf response. No S3 caching or job tracking — intended for interactive preview only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "print",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3dfd4a40-b1d3-4d3b-b7ba-ace559b2d6c5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "416a7074-75be-43c4-ba62-a5200f56b32f",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2d2e946-b6d6-460e-a260-174f1268bd3a",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf616434-a941-49fb-9c06-43694f961ab4",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6247a0c-be1f-43c3-929d-e08e7bf51ec4",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a93e43db-f0e1-4584-a4c3-be2135324653",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "print",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeAttachments\": \"<boolean>\",\n  \"attachmentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"attachmentOrder\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeComments\": \"<boolean>\",\n  \"commentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"includeTermsAndConditions\": \"<boolean>\",\n  \"includePo\": \"<boolean>\",\n  \"includeChangeOrders\": \"<boolean>\",\n  \"changeOrderIds\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"termsAndConditions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-purchase-order.procurement.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c123ef4e-bbea-473a-82d9-75a385606fc0",
+    "name": "OpenGov Purchase Order Print API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing purchase orders, line items, splits, and vendors.",
+      "type": "text/plain"
+    }
+  }
+}

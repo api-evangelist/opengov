@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Co Comment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coComment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a CO-scoped comment or attachment-only entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/comments",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a comment scoped to a specific Change Order (and optionally a CO line). Mirrors POST /purchase-orders/:poId/comments but routes through the CO-scoped guards (CO must belong to PO, CO must be in Draft, attachments must already be CO-scoped)."
+        },
+        {
+          "info": {
+            "name": "Edit a CO-scoped comment (body, add/remove attachments)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/comments/:commentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "commentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a CO-scoped comment body and/or attachment links. CO must remain in Draft. Author-only (mirrors PO precedent)."
+        },
+        {
+          "info": {
+            "name": "Delete a CO-scoped comment (soft-delete with cascade)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/comments/:commentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "commentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes a CO-scoped comment, its linked attachments, and its activity log entry. Author-only. CO must remain in Draft."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

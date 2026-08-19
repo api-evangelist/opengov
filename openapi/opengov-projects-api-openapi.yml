@@ -1,0 +1,368 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Projects API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Projects
+  description: Project APIs allow you to work with projects that group related records
+paths:
+  /v2/{community}/projects:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    get:
+      summary: List projects
+      description: 'List projects.
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: listProjects
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Projects
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      - name: filter[label]
+        in: query
+        description: Filter by project label
+        required: false
+        schema:
+          type: string
+      - name: filter[isEnabled]
+        in: query
+        description: Filter by project enabled status
+        required: false
+        schema:
+          type: boolean
+      - name: filter[createdAt]
+        in: query
+        description: Filter by project creation date
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+          - type: object
+            properties:
+              lt:
+                type: string
+                description: Less than the specified date
+              lte:
+                type: string
+                description: Less than or equal to the specified date
+              gt:
+                type: string
+                description: Greater than the specified date
+              gte:
+                type: string
+                description: Greater than or equal to the specified date
+      - name: filter[applicantUserID]
+        in: query
+        description: Filter by the user ID of the project applicant
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Inspection Result
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Projects
+                      title: Project
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          description: Unique internal ID of a project
+                          example: project-707172
+                        type:
+                          type: string
+                          enum:
+                          - project
+                          example: project
+                        attributes:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              description: Project label
+                              example: Downtown Redevelopment Phase 2
+                            applicantUserID:
+                              type: string
+                              description: Applicant user associated with the project
+                              nullable: true
+                              example: user-applicant-737475
+                            isEnabled:
+                              type: boolean
+                              description: Indicates if the project is enabled
+                              example: true
+                            createdAt:
+                              type: string
+                              format: date-time
+                              nullable: true
+                              description: Date and time (UTC) when the project is created
+                              readOnly: true
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/projects/{projectID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: projectID
+      in: path
+      description: ID of the project
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve a project
+      description: 'Retrieve a project by ID.
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: getProject
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: Basic information about a project by ID
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Projects
+                    title: Project
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of a project
+                        example: project-707172
+                      type:
+                        type: string
+                        enum:
+                        - project
+                        example: project
+                      attributes:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            description: Project label
+                            example: Downtown Redevelopment Phase 2
+                          applicantUserID:
+                            type: string
+                            description: Applicant user associated with the project
+                            nullable: true
+                            example: user-applicant-737475
+                          isEnabled:
+                            type: boolean
+                            description: Indicates if the project is enabled
+                            example: true
+                          createdAt:
+                            type: string
+                            format: date-time
+                            nullable: true
+                            description: Date and time (UTC) when the project is created
+                            readOnly: true
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

@@ -1,0 +1,1924 @@
+{
+  "item": [
+    {
+      "id": "92b3f6ed-84e1-4246-86ee-bcdc42e70950",
+      "name": "vendor-search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f71b16b8-362c-485f-be32-bf6ae4facb6d",
+          "name": "vendor-search.get Vendors Stats",
+          "request": {
+            "name": "vendor-search.get Vendors Stats",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "vendors",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d99a333c-6161-4241-85ea-895dd6aa33f7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalVendors\": 994.5419480920525,\n  \"draft\": 2533.7778513331477,\n  \"awaitingReview\": 9876.363066783138,\n  \"inReview\": 5243.688308259177,\n  \"approved\": 8350.660430740061,\n  \"notApproved\": 8048.403859319543,\n  \"deactivated\": 8877.278091879463,\n  \"changeRequested\": 2043.0836351636794\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de963d7a-f318-4538-b420-6e1142099da5",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"issues\": [\n    {\n      \"_tag\": \"Refinement\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    },\n    {\n      \"_tag\": \"Refinement\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\",\n  \"_tag\": \"HttpApiDecodeError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9997e79-6b6a-4486-9064-57638a44fcd6",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_tag\": \"AuthError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d51dc882-97b1-40cd-b3ed-9db7b6f1eafb",
+              "name": "UnauthorizedHttpError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"UnauthorizedHttpError\",\n  \"requiredPermissions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58c676b4-a49e-478b-a96b-19f52cc3c58b",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"string\",\n  \"_tag\": \"EntityNotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "194ec706-62c5-4249-bd5a-8630f9e5be67",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"InfrastructureError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6fef1e0-a14e-4c96-8c01-b7f59656a5f1",
+          "name": "vendor-search.search Vendors",
+          "request": {
+            "name": "vendor-search.search Vendors",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "vendors",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c0e8a45-e595-4d41-a6aa-ba2cf67f6561",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"vendorKey\": 1803.9115744244582,\n      \"entityId\": \"string\",\n      \"vendorId\": \"string\",\n      \"legalCompanyName\": \"string\",\n      \"vendorCreationSource\": \"string\",\n      \"status\": \"Draft\",\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\",\n      \"confidenceScore\": 3749.273128398354,\n      \"doingBusinessAs\": \"string\",\n      \"businessType\": \"string\",\n      \"localProfiles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ethnicity\": \"string\",\n      \"stateOfIncorporation\": \"string\",\n      \"companyWebsite\": \"string\",\n      \"companyDescription\": \"string\",\n      \"externalSystemCode\": \"string\",\n      \"vendorParent\": 4563.2672768324455,\n      \"vendorParentName\": \"string\",\n      \"additionalLanguages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vendorPublicProfileId\": \"string\",\n      \"taxType\": \"string\",\n      \"taxId\": \"string\",\n      \"is1099Applicable\": false,\n      \"uei\": \"string\",\n      \"duns\": \"string\",\n      \"vendorCreationSourceId\": \"string\",\n      \"paymentTermRefId\": \"string\",\n      \"paymentTerm\": \"string\",\n      \"paymentTermDesc\": \"string\",\n      \"phoneCountryCode\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"phoneExt\": \"string\",\n      \"email\": \"string\",\n      \"faxCountryCode\": \"string\",\n      \"faxNumber\": \"string\",\n      \"faxExt\": \"string\",\n      \"customFields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"isDeleted\": false,\n      \"deletedAt\": \"1976-11-11T04:47:27.249Z\",\n      \"createdAt\": \"2000-11-09T10:37:01.946Z\",\n      \"updatedAt\": \"1999-04-14T00:22:34.101Z\",\n      \"addresses\": [\n        {\n          \"addressId\": 3276.3106098622497,\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": \"string\",\n          \"defaultFor\": [\n            \"PRIMARY\",\n            \"PRIMARY\"\n          ],\n          \"isDeleted\": false,\n          \"deletedAt\": \"1956-11-02T15:45:27.903Z\",\n          \"createdAt\": \"1982-05-25T18:13:24.657Z\",\n          \"updatedAt\": \"1977-08-22T19:06:18.835Z\"\n        },\n        {\n          \"addressId\": 7915.22279706166,\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": \"string\",\n          \"defaultFor\": [\n            \"ORDER FROM\",\n            \"REMIT TO\"\n          ],\n          \"isDeleted\": true,\n          \"deletedAt\": \"1954-06-20T08:09:45.961Z\",\n          \"createdAt\": \"2005-08-03T11:32:45.357Z\",\n          \"updatedAt\": \"1946-12-02T05:41:32.864Z\"\n        }\n      ],\n      \"paymentMethods\": [\n        {\n          \"paymentId\": 5963.626921502289,\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": true,\n          \"paymentLabel\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"1983-12-06T12:21:48.624Z\",\n          \"createdAt\": \"2011-09-25T20:36:37.071Z\",\n          \"updatedAt\": \"2016-09-09T01:48:31.936Z\"\n        },\n        {\n          \"paymentId\": 9462.25244424065,\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": true,\n          \"paymentLabel\": \"string\",\n          \"isDeleted\": true,\n          \"deletedAt\": \"1963-09-28T21:15:09.424Z\",\n          \"createdAt\": \"1969-08-03T19:38:40.453Z\",\n          \"updatedAt\": \"1992-04-12T07:01:56.286Z\"\n        }\n      ],\n      \"contacts\": [\n        {\n          \"contactId\": 827.81148743993,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"jobTitle\": \"string\",\n          \"phoneCountryCode\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"phoneExt\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"1957-10-14T11:33:37.685Z\",\n          \"createdAt\": \"2020-02-09T03:27:29.891Z\",\n          \"updatedAt\": \"1947-12-16T05:56:38.168Z\"\n        },\n        {\n          \"contactId\": 2062.627558154402,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"jobTitle\": \"string\",\n          \"phoneCountryCode\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"phoneExt\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"1957-04-10T16:15:13.659Z\",\n          \"createdAt\": \"2018-12-21T04:19:18.056Z\",\n          \"updatedAt\": \"1957-08-08T23:54:03.497Z\"\n        }\n      ],\n      \"certificates\": [\n        {\n          \"certificateId\": 2797.607537533672,\n          \"attachmentId\": 5255.178111959016,\n          \"certificateType\": \"string\",\n          \"certificateCategory\": \"string\",\n          \"certificateDetails\": {},\n          \"isDeleted\": false,\n          \"deletedAt\": \"2004-05-07T15:24:11.954Z\",\n          \"createdAt\": \"2018-09-14T06:12:03.685Z\",\n          \"updatedAt\": \"1951-08-04T12:12:46.400Z\",\n          \"attachment\": {\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bucket\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isDeleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"certificateId\": 4734.706831200455,\n          \"attachmentId\": 4253.288987610975,\n          \"certificateType\": \"string\",\n          \"certificateCategory\": \"string\",\n          \"certificateDetails\": {},\n          \"isDeleted\": true,\n          \"deletedAt\": \"1969-12-01T01:53:10.596Z\",\n          \"createdAt\": \"2001-05-10T03:22:27.230Z\",\n          \"updatedAt\": \"2003-03-05T01:15:19.431Z\",\n          \"attachment\": {\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bucket\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isDeleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"categories\": [\n        {\n          \"categoryId\": 1990.2840942450784,\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": true,\n          \"deletedAt\": \"1954-10-25T17:28:21.615Z\",\n          \"createdAt\": \"1962-11-13T03:35:02.270Z\",\n          \"updatedAt\": \"2021-12-13T20:26:17.463Z\"\n        },\n        {\n          \"categoryId\": 6610.723404212851,\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"2001-09-30T09:46:47.630Z\",\n          \"createdAt\": \"2010-11-15T21:51:04.474Z\",\n          \"updatedAt\": \"1995-11-04T01:54:41.655Z\"\n        }\n      ]\n    },\n    {\n      \"vendorKey\": 1738.296071591724,\n      \"entityId\": \"string\",\n      \"vendorId\": \"string\",\n      \"legalCompanyName\": \"string\",\n      \"vendorCreationSource\": \"string\",\n      \"status\": \"Deactivated\",\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\",\n      \"confidenceScore\": 8637.233734376752,\n      \"doingBusinessAs\": \"string\",\n      \"businessType\": \"string\",\n      \"localProfiles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ethnicity\": \"string\",\n      \"stateOfIncorporation\": \"string\",\n      \"companyWebsite\": \"string\",\n      \"companyDescription\": \"string\",\n      \"externalSystemCode\": \"string\",\n      \"vendorParent\": 7176.4899393952965,\n      \"vendorParentName\": \"string\",\n      \"additionalLanguages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vendorPublicProfileId\": \"string\",\n      \"taxType\": \"string\",\n      \"taxId\": \"string\",\n      \"is1099Applicable\": true,\n      \"uei\": \"string\",\n      \"duns\": \"string\",\n      \"vendorCreationSourceId\": \"string\",\n      \"paymentTermRefId\": \"string\",\n      \"paymentTerm\": \"string\",\n      \"paymentTermDesc\": \"string\",\n      \"phoneCountryCode\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"phoneExt\": \"string\",\n      \"email\": \"string\",\n      \"faxCountryCode\": \"string\",\n      \"faxNumber\": \"string\",\n      \"faxExt\": \"string\",\n      \"customFields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"isDeleted\": true,\n      \"deletedAt\": \"1976-05-16T00:31:42.349Z\",\n      \"createdAt\": \"1995-08-28T04:18:02.994Z\",\n      \"updatedAt\": \"1959-10-07T20:01:33.021Z\",\n      \"addresses\": [\n        {\n          \"addressId\": 3651.2788413363796,\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": \"string\",\n          \"defaultFor\": [\n            \"PRIMARY\",\n            \"ORDER FROM\"\n          ],\n          \"isDeleted\": false,\n          \"deletedAt\": \"1968-05-15T05:46:29.643Z\",\n          \"createdAt\": \"2007-11-14T06:35:25.634Z\",\n          \"updatedAt\": \"1981-07-03T02:46:59.706Z\"\n        },\n        {\n          \"addressId\": 935.3386110323813,\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": \"string\",\n          \"defaultFor\": [\n            \"REMIT TO\",\n            \"ORDER FROM\"\n          ],\n          \"isDeleted\": false,\n          \"deletedAt\": \"2008-06-10T08:23:41.649Z\",\n          \"createdAt\": \"2020-06-30T01:06:55.811Z\",\n          \"updatedAt\": \"2018-04-30T15:23:07.029Z\"\n        }\n      ],\n      \"paymentMethods\": [\n        {\n          \"paymentId\": 5965.154017045908,\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": true,\n          \"paymentLabel\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"1999-03-02T13:23:36.029Z\",\n          \"createdAt\": \"2007-03-27T08:07:04.166Z\",\n          \"updatedAt\": \"1969-12-13T04:44:29.363Z\"\n        },\n        {\n          \"paymentId\": 9571.80464862062,\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": false,\n          \"paymentLabel\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"1983-05-24T17:37:06.230Z\",\n          \"createdAt\": \"1972-12-29T12:23:07.882Z\",\n          \"updatedAt\": \"1954-09-08T19:21:33.302Z\"\n        }\n      ],\n      \"contacts\": [\n        {\n          \"contactId\": 5493.14570597141,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"jobTitle\": \"string\",\n          \"phoneCountryCode\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"phoneExt\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\",\n          \"isDeleted\": true,\n          \"deletedAt\": \"2026-04-02T23:03:51.946Z\",\n          \"createdAt\": \"1968-04-19T10:39:54.547Z\",\n          \"updatedAt\": \"2004-03-25T00:23:11.212Z\"\n        },\n        {\n          \"contactId\": 8491.826369451474,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"jobTitle\": \"string\",\n          \"phoneCountryCode\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"phoneExt\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"2022-02-20T23:15:42.184Z\",\n          \"createdAt\": \"1983-02-26T05:44:21.231Z\",\n          \"updatedAt\": \"1967-06-02T07:06:02.733Z\"\n        }\n      ],\n      \"certificates\": [\n        {\n          \"certificateId\": 9121.654234035255,\n          \"attachmentId\": 5638.590684518686,\n          \"certificateType\": \"string\",\n          \"certificateCategory\": \"string\",\n          \"certificateDetails\": {},\n          \"isDeleted\": false,\n          \"deletedAt\": \"2005-11-14T16:07:12.543Z\",\n          \"createdAt\": \"1990-04-14T20:08:42.759Z\",\n          \"updatedAt\": \"2014-03-30T05:37:58.198Z\",\n          \"attachment\": {\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bucket\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isDeleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"certificateId\": 6868.171318286041,\n          \"attachmentId\": 4863.218948611282,\n          \"certificateType\": \"string\",\n          \"certificateCategory\": \"string\",\n          \"certificateDetails\": {},\n          \"isDeleted\": false,\n          \"deletedAt\": \"2008-10-24T14:27:43.914Z\",\n          \"createdAt\": \"1992-11-11T17:09:01.496Z\",\n          \"updatedAt\": \"1998-02-04T19:51:54.041Z\",\n          \"attachment\": {\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bucket\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isDeleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"categories\": [\n        {\n          \"categoryId\": 4298.61351241634,\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": true,\n          \"deletedAt\": \"1964-11-13T07:52:02.441Z\",\n          \"createdAt\": \"1952-04-01T06:02:42.372Z\",\n          \"updatedAt\": \"2024-02-18T00:47:17.409Z\"\n        },\n        {\n          \"categoryId\": 1212.4463102407212,\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": false,\n          \"deletedAt\": \"1989-12-11T01:30:46.712Z\",\n          \"createdAt\": \"1985-07-21T23:15:25.424Z\",\n          \"updatedAt\": \"2007-05-09T19:54:52.106Z\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"total\": 2864.076290044123\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b3e2b9f-e910-4405-9eb5-1a8a19b1d43a",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"issues\": [\n    {\n      \"_tag\": \"Missing\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    },\n    {\n      \"_tag\": \"Composite\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\",\n  \"_tag\": \"HttpApiDecodeError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8be59ad8-3a11-4bef-af41-17dad5909790",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_tag\": \"AuthError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd408fb0-3a76-433b-9591-be68777aaef7",
+              "name": "UnauthorizedHttpError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"UnauthorizedHttpError\",\n  \"requiredPermissions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20bd45b7-4ee2-4ef5-a489-1a366c98bf2d",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"string\",\n  \"_tag\": \"EntityNotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dd77c01-fb1e-4882-af57-6ffbd347b0ec",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"paging\": {\n    \"offset\": \"<number>\",\n    \"limit\": \"<number>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"InfrastructureError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3df73712-0f89-4e5f-8414-6c8a81c74a59",
+          "name": "vendor-search.search Vendors By Vendor Keys",
+          "request": {
+            "name": "vendor-search.search Vendors By Vendor Keys",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "vendors",
+                "searchByVendorKeys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7a05944-8aef-49ff-a372-ea7328e07694",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "searchByVendorKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vendors\": [\n    {\n      \"vendorKey\": \"<number>\",\n      \"entityId\": \"string\",\n      \"vendorId\": \"string\",\n      \"legalCompanyName\": \"string\",\n      \"vendorCreationSource\": \"string\",\n      \"status\": \"Change_Requested\",\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\",\n      \"doingBusinessAs\": \"string\",\n      \"businessType\": \"string\",\n      \"localProfiles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ethnicity\": \"string\",\n      \"stateOfIncorporation\": \"string\",\n      \"companyWebsite\": \"string\",\n      \"companyDescription\": \"string\",\n      \"externalSystemCode\": \"string\",\n      \"vendorParent\": 1607.3172717593875,\n      \"vendorParentName\": \"string\",\n      \"additionalLanguages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vendorPublicProfileId\": \"string\",\n      \"taxType\": \"string\",\n      \"taxId\": \"string\",\n      \"is1099Applicable\": true,\n      \"uei\": \"string\",\n      \"duns\": \"string\",\n      \"vendorCreationSourceId\": \"string\",\n      \"paymentTermRefId\": \"string\",\n      \"paymentTerm\": \"string\",\n      \"paymentTermDesc\": \"string\",\n      \"phoneCountryCode\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"phoneExt\": \"string\",\n      \"email\": \"string\",\n      \"faxCountryCode\": \"string\",\n      \"faxNumber\": \"string\",\n      \"faxExt\": \"string\",\n      \"customFields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"isDeleted\": true,\n      \"deletedAt\": \"2015-08-29T11:09:43.147Z\",\n      \"createdAt\": \"2012-09-11T01:33:20.544Z\",\n      \"updatedAt\": \"1966-12-29T12:19:25.706Z\",\n      \"addresses\": [\n        {\n          \"addressId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"defaultFor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"addressId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"defaultFor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"paymentMethods\": [\n        {\n          \"paymentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": false,\n          \"paymentLabel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"paymentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": true,\n          \"paymentLabel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"contacts\": [\n        {\n          \"contactId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jobTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneCountryCode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneExt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"contactId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jobTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneCountryCode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneExt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"certificates\": [\n        {\n          \"certificateId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachmentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateDetails\": {},\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"certificateId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachmentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateDetails\": {},\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"categories\": [\n        {\n          \"categoryId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"categoryId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"vendorKey\": \"<number>\",\n      \"entityId\": \"string\",\n      \"vendorId\": \"string\",\n      \"legalCompanyName\": \"string\",\n      \"vendorCreationSource\": \"string\",\n      \"status\": \"Approved\",\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\",\n      \"doingBusinessAs\": \"string\",\n      \"businessType\": \"string\",\n      \"localProfiles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ethnicity\": \"string\",\n      \"stateOfIncorporation\": \"string\",\n      \"companyWebsite\": \"string\",\n      \"companyDescription\": \"string\",\n      \"externalSystemCode\": \"string\",\n      \"vendorParent\": 8652.152633789421,\n      \"vendorParentName\": \"string\",\n      \"additionalLanguages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vendorPublicProfileId\": \"string\",\n      \"taxType\": \"string\",\n      \"taxId\": \"string\",\n      \"is1099Applicable\": true,\n      \"uei\": \"string\",\n      \"duns\": \"string\",\n      \"vendorCreationSourceId\": \"string\",\n      \"paymentTermRefId\": \"string\",\n      \"paymentTerm\": \"string\",\n      \"paymentTermDesc\": \"string\",\n      \"phoneCountryCode\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"phoneExt\": \"string\",\n      \"email\": \"string\",\n      \"faxCountryCode\": \"string\",\n      \"faxNumber\": \"string\",\n      \"faxExt\": \"string\",\n      \"customFields\": {\n        \"key_0\": {}\n      },\n      \"isDeleted\": true,\n      \"deletedAt\": \"1984-10-25T02:31:56.544Z\",\n      \"createdAt\": \"1991-03-24T13:09:57.686Z\",\n      \"updatedAt\": \"1953-07-21T21:41:47.594Z\",\n      \"addresses\": [\n        {\n          \"addressId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"defaultFor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"addressId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addressLine1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zipCode\": \"string\",\n          \"country\": \"string\",\n          \"addressLine2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"defaultFor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"paymentMethods\": [\n        {\n          \"paymentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": false,\n          \"paymentLabel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"paymentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"paymentMethodRefId\": \"string\",\n          \"paymentMethodType\": \"string\",\n          \"paymentMethodDetails\": {},\n          \"isDefault\": true,\n          \"paymentLabel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"contacts\": [\n        {\n          \"contactId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jobTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneCountryCode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneExt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"contactId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"jobTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneCountryCode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phoneExt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"certificates\": [\n        {\n          \"certificateId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachmentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateDetails\": {},\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"certificateId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachmentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"certificateDetails\": {},\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"attachment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"categories\": [\n        {\n          \"categoryId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"categoryId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"setId\": \"string\",\n          \"categoryRefId\": \"string\",\n          \"categoryCode\": \"string\",\n          \"categoryDescription\": \"string\",\n          \"isDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updatedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "339b513d-28d8-421f-bce4-e2ebcf4922e9",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "searchByVendorKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"issues\": [\n    {\n      \"_tag\": \"Missing\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    },\n    {\n      \"_tag\": \"Composite\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\",\n  \"_tag\": \"HttpApiDecodeError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61f62c69-1bae-4725-953a-466857f302d0",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "searchByVendorKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_tag\": \"AuthError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dccc452e-ec53-449b-9723-69cde2f44624",
+              "name": "UnauthorizedHttpError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "searchByVendorKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"UnauthorizedHttpError\",\n  \"requiredPermissions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f61b054-bac8-43c3-98a5-12a929106f26",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "searchByVendorKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"string\",\n  \"_tag\": \"EntityNotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14671875-df39-4646-990b-ff376d56c7c3",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "searchByVendorKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorKeys\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"InfrastructureError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77723706-f9c6-4d02-95ed-0a1bc4ee7224",
+          "name": "vendor-search.export Vendors Csv",
+          "request": {
+            "name": "vendor-search.export Vendors Csv",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "vendors",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "03479a1b-59b6-44b5-8abc-bf2f75d018cc",
+              "name": "a string",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6278869a-eebc-4238-b261-2ff6d1c3c485",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"issues\": [\n    {\n      \"_tag\": \"Missing\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    },\n    {\n      \"_tag\": \"Composite\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\",\n  \"_tag\": \"HttpApiDecodeError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04bac3fe-f65c-4e92-a872-a0972e3616ca",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_tag\": \"AuthError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c15ff75-643c-42da-8efa-b34c6be1bbb8",
+              "name": "UnauthorizedHttpError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"UnauthorizedHttpError\",\n  \"requiredPermissions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "043414a7-a4f1-4e3c-a912-02c092d5ec2e",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"string\",\n  \"_tag\": \"EntityNotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb7ae25b-42fa-42c2-beaf-430ea289ba74",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendors",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"searchString\": \"<string>\",\n    \"columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addressSearchScope\": \"<string>\",\n    \"fuzzyMatch\": \"<boolean>\"\n  },\n  \"sortBy\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"exportColumns\": [\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"colId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"InfrastructureError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vendor.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "44633b62-0c5c-476d-830c-7e3b64c59e96",
+    "name": "Vendor Management Vendor Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A comprehensive API for managing vendors in the OpenGov platform.\n\n## Authentication\nAll endpoints require JWT Bearer token authentication. Include the token in the Authorization header:\n```\nAuthorization: Bearer <your-jwt-token>\n```\n\n## Features\n- **Vendor Management**: Create, read, update, and delete vendors\n- **Health Check**: Monitor service health\n\n## Rate Limiting\nAPI calls are subject to rate limiting based on your subscription tier.\n\nContact Support:\n Name: OpenGov API Support\n Email: api-support@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

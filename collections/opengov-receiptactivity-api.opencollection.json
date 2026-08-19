@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Receipt Receipt Activity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "receiptActivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the activity feed for a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/activity",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "entryTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "visibilityScope",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a paginated, filtered, sortable chronological feed of comments, attachments, and status-transition events from rcp_activity_logs. Supports cursor-based infinite scroll. Comments and attachments are hydrated server-side so the FE renders in one pass."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

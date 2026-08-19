@@ -1,0 +1,1474 @@
+{
+  "item": [
+    {
+      "id": "9bbc7e72-a81f-4496-89cd-03f6b460b300",
+      "name": "Inspection Events",
+      "description": {
+        "content": "An Inspection Event is a single inspection appointment, during which one or more Inspection Results are typically created.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0597dd65-7eae-4d39-9570-fb22f7b9adba",
+          "name": "Get inspection event",
+          "request": {
+            "name": "Get inspection event",
+            "description": {
+              "content": "Retrieve an inspection event by ID.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "inspection-events",
+                ":inspectionEventID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inspectionEventID",
+                  "description": "(Required) ID of the inspection event"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75ad790b-cc8a-4495-8562-bdcd37ab30e0",
+              "name": "Inspection event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"id\": \"inspection-event-345678\",\n    \"attributes\": {\n      \"status\": \"Scheduled\",\n      \"inspectionScheduleType\": \"Date\",\n      \"startAt\": \"1988-03-26T09:29:54.095Z\",\n      \"endAt\": null,\n      \"inspectionStartedAt\": \"2007-08-03T09:49:49.841Z\",\n      \"inspectionCompletedAt\": null,\n      \"requestedTimes\": null,\n      \"isEnabled\": true,\n      \"note\": \"Initial foundation inspection for building permit BP-2024-001\",\n      \"sequenceNo\": 1,\n      \"updatedAt\": null,\n      \"isOffHours\": false,\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    },\n    \"relationships\": {\n      \"inspectionStep\": {\n        \"$ref\": {}\n      },\n      \"inspectionResult\": {\n        \"$ref\": {}\n      },\n      \"inspector\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ac4c5ca-3aa9-4344-9e89-872f32294c37",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b033a1a4-920c-49ad-9737-34c77f7f7268",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13194e66-89be-422e-b362-3b9e0b9c3d20",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15d2462d-cc39-422a-8bc2-d2a7ea154edb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "764e5241-f4aa-4520-95ff-86757a1923bc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7a71acb-2be8-4061-b224-328da947071c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events",
+                    ":inspectionEventID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inspectionEventID",
+                      "description": "(Required) ID of the inspection event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dcb7cc5-c798-4883-b2ab-f19b84509a2b",
+          "name": "List inspection events",
+          "request": {
+            "name": "List inspection events",
+            "description": {
+              "content": "Retrieve inspection events that match the specified filters.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "inspection-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[inspectionStepId]",
+                  "value": "<string>",
+                  "description": "ID of the inspection step"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[inspectorUserIds]",
+                  "value": "<string>",
+                  "description": "IDs of the inspectors"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[inspectorUserIds]",
+                  "value": "<string>",
+                  "description": "IDs of the inspectors"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>",
+                  "description": "Filter by inspection event status, in the event of no filters, will filter by active status"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[scheduledBetween]",
+                  "value": "<string>",
+                  "description": "Inspection date range for scheduled inspections format YYYY-MM-DD, YYYY-MM-DD in the order start, end"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[requestedBetween]",
+                  "value": "<string>",
+                  "description": "Inspection date range for requested inspections format YYYY-MM-DD, YYYY-MM-DD in the order start, end"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31b5a104-5ea7-4d51-bc56-c5b28ca1c2f7",
+              "name": "Inspection events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"inspectionEvent\",\n      \"id\": \"inspection-event-345678\",\n      \"attributes\": {\n        \"status\": \"Scheduled\",\n        \"inspectionScheduleType\": \"Date\",\n        \"startAt\": null,\n        \"endAt\": \"1963-02-21T08:25:31.431Z\",\n        \"inspectionStartedAt\": \"2009-08-06T22:26:49.246Z\",\n        \"inspectionCompletedAt\": null,\n        \"requestedTimes\": null,\n        \"isEnabled\": true,\n        \"note\": \"Initial foundation inspection for building permit BP-2024-001\",\n        \"sequenceNo\": 1,\n        \"updatedAt\": null,\n        \"isOffHours\": false,\n        \"offHoursInfo\": {\n          \"version\": 1,\n          \"desiredTime\": \"3am to 5am\",\n          \"reasonForRequest\": \"Construction crew only available on weekends\"\n        }\n      },\n      \"relationships\": {\n        \"inspectionStep\": {\n          \"$ref\": {}\n        },\n        \"inspectionResult\": {\n          \"$ref\": {}\n        },\n        \"inspector\": {\n          \"$ref\": {}\n        }\n      }\n    },\n    {\n      \"type\": \"inspectionEvent\",\n      \"id\": \"inspection-event-345678\",\n      \"attributes\": {\n        \"status\": \"Scheduled\",\n        \"inspectionScheduleType\": \"Date\",\n        \"startAt\": \"1970-09-06T06:11:47.373Z\",\n        \"endAt\": \"1964-01-21T11:32:44.834Z\",\n        \"inspectionStartedAt\": null,\n        \"inspectionCompletedAt\": null,\n        \"requestedTimes\": null,\n        \"isEnabled\": true,\n        \"note\": \"Initial foundation inspection for building permit BP-2024-001\",\n        \"sequenceNo\": 1,\n        \"updatedAt\": \"1977-06-22T09:54:01.117Z\",\n        \"isOffHours\": false,\n        \"offHoursInfo\": {\n          \"version\": 1,\n          \"desiredTime\": \"3am to 5am\",\n          \"reasonForRequest\": \"Construction crew only available on weekends\"\n        }\n      },\n      \"relationships\": {\n        \"inspectionStep\": {\n          \"$ref\": {}\n        },\n        \"inspectionResult\": {\n          \"$ref\": {}\n        },\n        \"inspector\": {\n          \"$ref\": {}\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links not found in the OpenAPI spec\"\n  },\n  \"meta\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbb36db1-b67b-4c8d-a766-ccc9d59ba8de",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "91918177-0df3-48b9-956d-b63ba4f54a0b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5a67adf-5bdf-46b1-a25a-a40597238163",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9ae89ce4-9777-412a-8f8c-481391a7b810",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2982e37d-eccc-4475-8c63-cb3646da0e41",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b11bcbf-83b6-44e3-914c-8cc946858447",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[inspectionStepId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[inspectorUserIds]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[scheduledBetween]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[requestedBetween]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98972899-9af4-46eb-ad3a-46e664542bdb",
+          "name": "Create an inspection event",
+          "request": {
+            "name": "Create an inspection event",
+            "description": {
+              "content": "Create an inspection event.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "inspection-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"inspectionStepID\": \"<string>\",\n      \"inspectionScheduleType\": \"<string>\",\n      \"status\": \"<string>\",\n      \"startAt\": \"<dateTime>\",\n      \"note\": \"<string>\",\n      \"orderNo\": \"<integer>\",\n      \"inspectorID\": \"<string>\",\n      \"endAt\": \"<dateTime>\",\n      \"inspectionTemplateTypeIDs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": \"<integer>\",\n        \"desiredTime\": \"<string>\",\n        \"reasonForRequest\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b72d7b9-19bb-4048-a702-56870318f116",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "URL of the newly created resource",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"id\": \"inspection-event-345678\",\n    \"attributes\": {\n      \"status\": \"Scheduled\",\n      \"inspectionScheduleType\": \"Date\",\n      \"startAt\": \"1950-08-25T17:55:04.557Z\",\n      \"endAt\": null,\n      \"inspectionStartedAt\": null,\n      \"inspectionCompletedAt\": \"1989-07-31T12:44:46.317Z\",\n      \"requestedTimes\": [\n        {\n          \"scheduledType\": \"DateTime\",\n          \"requestedStart\": null,\n          \"requestedEnd\": null\n        },\n        {\n          \"scheduledType\": \"AMPM_Scheduled\",\n          \"requestedStart\": null,\n          \"requestedEnd\": null\n        }\n      ],\n      \"isEnabled\": true,\n      \"note\": \"Initial foundation inspection for building permit BP-2024-001\",\n      \"sequenceNo\": 1,\n      \"updatedAt\": \"1962-11-18T02:53:21.772Z\",\n      \"isOffHours\": false,\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    },\n    \"relationships\": {\n      \"inspectionStep\": {\n        \"$ref\": {}\n      },\n      \"inspectionResult\": {\n        \"$ref\": {}\n      },\n      \"inspector\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e32bc61-0700-4a09-bb2e-06fbc159fffe",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46258298-3964-497c-85a1-a1546af9cbaa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4421b971-4381-4ce2-96c9-f7d7ccf075dd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca185715-d34e-4f4e-924f-4124140cff44",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8cc48fe9-bf27-496d-af8b-adf9e3232c6a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bee6d06a-f4de-484b-b99d-75b8a2dc1764",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41557088-fe59-43c9-8031-1718bf872ecd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06641e4d-6011-4476-8a74-c42746c4e874",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "inspection-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"inspectionEvent\",\n    \"attributes\": {\n      \"inspectionStepID\": \"inspection-step-700002\",\n      \"inspectionScheduleType\": \"Date\",\n      \"status\": \"Scheduled\",\n      \"startAt\": \"2024-08-25T15:00:00Z\",\n      \"note\": \"Initial foundation inspection scheduled for BP-2024-001234\",\n      \"orderNo\": 1,\n      \"inspectorID\": \"user-inspector-700003\",\n      \"endAt\": \"2024-08-26T15:00:00Z\",\n      \"inspectionTemplateTypeIDs\": [\n        \"template-type-700004\",\n        \"template-type-700005\"\n      ],\n      \"offHoursInfo\": {\n        \"version\": 1,\n        \"desiredTime\": \"3am to 5am\",\n        \"reasonForRequest\": \"Construction crew only available on weekends\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4f4c9565-98b9-4b7e-a8cd-7023bd62226f",
+    "name": "Permitting & Licensing Inspection Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

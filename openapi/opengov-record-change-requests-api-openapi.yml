@@ -1,0 +1,674 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Change Requests API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Change Requests
+  description: A Record Change Request represents a request from an employee to the applicant for changes to the form or attachments.
+paths:
+  /v2/{community}/records/{recordID}/change-requests:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    post:
+      summary: Create change requests
+      description: 'Create a record change request.
+
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: createRecordChangeRequests
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Change Requests
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - changeRequests
+                      example: changeRequests
+                    attributes:
+                      type: object
+                      properties:
+                        overallNote:
+                          type: string
+                          nullable: true
+                          description: Overall notes for the change request
+                          example: Need to modify building height and add additional parking spaces per revised plans
+                        formFieldEntities:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - type
+                            - id
+                            - attributes
+                            properties:
+                              id:
+                                type: string
+                                description: ID of the form field
+                                example: change-request-form-entity-1000011
+                              type:
+                                type: string
+                                enum:
+                                - changeRequestFormFieldEntity
+                                example: changeRequestFormFieldEntity
+                              attributes:
+                                type: object
+                                properties:
+                                  note:
+                                    type: string
+                                    description: Note for record form field
+                                    example: Please update the building height from 3 stories to 4 stories as per revised architectural plans
+                        attachmentEntities:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - type
+                            - id
+                            - attributes
+                            properties:
+                              id:
+                                type: string
+                                description: ID of the attachment
+                                example: change-request-attachment-entity-1000012
+                              type:
+                                type: string
+                                enum:
+                                - changeRequestAttachmentEntity
+                                example: changeRequestAttachmentEntity
+                              attributes:
+                                type: object
+                                properties:
+                                  note:
+                                    type: string
+                                    description: Note for record attachment
+                                    example: Updated structural drawings to reflect the increased building height and additional load requirements
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Change Requests
+                    title: Record Change Request
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordChangeRequest
+                        example: recordChangeRequest
+                      id:
+                        type: string
+                        example: change-request-112233
+                      attributes:
+                        type: object
+                        properties:
+                          overallNote:
+                            type: string
+                            description: Note
+                            example: Need to update building height from 3 stories to 4 stories due to design changes
+                          version:
+                            type: string
+                            nullable: true
+                            description: Version of the record
+                            example: v2.1
+                          requestedBy:
+                            type: string
+                            description: User ID of the requesting user
+                            example: user-applicant-445566
+                          respondedBy:
+                            type: string
+                            nullable: true
+                            description: User ID of the responding user
+                            example: user-reviewer-778899
+                          status:
+                            type: string
+                            enum:
+                            - Open
+                            - Complete
+                            description: Status
+                            example: Open
+                          createdAt:
+                            type: string
+                            format: date-time
+                            description: When the change request was created
+                          completedAt:
+                            type: string
+                            nullable: true
+                            format: date-time
+                            description: When the change request was completed
+                          formFields:
+                            type: array
+                            nullable: true
+                            items:
+                              type: object
+                              required:
+                              - data
+                              properties:
+                                data:
+                                  type: object
+                                  required:
+                                  - id
+                                  - type
+                                  - attributes
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: ID of the record form field
+                                    type:
+                                      type: string
+                                      enum:
+                                      - changeRequestFormFieldEntity
+                                    attributes:
+                                      type: object
+                                      properties:
+                                        note:
+                                          type: string
+                                          description: Note for record form field
+                          attachments:
+                            type: array
+                            nullable: true
+                            items:
+                              type: object
+                              required:
+                              - data
+                              properties:
+                                data:
+                                  type: object
+                                  required:
+                                  - id
+                                  - type
+                                  - attributes
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: ID of the attachment
+                                    type:
+                                      type: string
+                                      enum:
+                                      - changeRequestAttachmentEntity
+                                    attributes:
+                                      type: object
+                                      properties:
+                                        note:
+                                          type: string
+                                          description: Note for record attachment
+                      relationships:
+                        type: object
+                        properties:
+                          record:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                            description: The related record.
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          description: '**Not Implemented**: The server does not support the functionality required to fulfill the request.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+              examples:
+                not_implemented:
+                  summary: Not Implemented
+                  value:
+                    errors:
+                    - id: error-501-001
+                      code: NOT_IMPLEMENTED
+                      detail: The request method is not implemented by the server and cannot be handled.
+                      status: '501'
+                      title: Not Implemented
+    get:
+      summary: Get most recent change request for a record
+      description: 'Retrieve the most recent change request for a record
+
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: getMostRecentRecordChangeRequest
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Change Requests
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Change Requests
+                    title: Record Change Request
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordChangeRequest
+                        example: recordChangeRequest
+                      id:
+                        type: string
+                        example: change-request-112233
+                      attributes:
+                        type: object
+                        properties:
+                          overallNote:
+                            type: string
+                            description: Note
+                            example: Need to update building height from 3 stories to 4 stories due to design changes
+                          version:
+                            type: string
+                            nullable: true
+                            description: Version of the record
+                            example: v2.1
+                          requestedBy:
+                            type: string
+                            description: User ID of the requesting user
+                            example: user-applicant-445566
+                          respondedBy:
+                            type: string
+                            nullable: true
+                            description: User ID of the responding user
+                            example: user-reviewer-778899
+                          status:
+                            type: string
+                            enum:
+                            - Open
+                            - Complete
+                            description: Status
+                            example: Open
+                          createdAt:
+                            type: string
+                            format: date-time
+                            description: When the change request was created
+                          completedAt:
+                            type: string
+                            nullable: true
+                            format: date-time
+                            description: When the change request was completed
+                          formFields:
+                            type: array
+                            nullable: true
+                            items:
+                              type: object
+                              required:
+                              - data
+                              properties:
+                                data:
+                                  type: object
+                                  required:
+                                  - id
+                                  - type
+                                  - attributes
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: ID of the record form field
+                                    type:
+                                      type: string
+                                      enum:
+                                      - changeRequestFormFieldEntity
+                                    attributes:
+                                      type: object
+                                      properties:
+                                        note:
+                                          type: string
+                                          description: Note for record form field
+                          attachments:
+                            type: array
+                            nullable: true
+                            items:
+                              type: object
+                              required:
+                              - data
+                              properties:
+                                data:
+                                  type: object
+                                  required:
+                                  - id
+                                  - type
+                                  - attributes
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: ID of the attachment
+                                    type:
+                                      type: string
+                                      enum:
+                                      - changeRequestAttachmentEntity
+                                    attributes:
+                                      type: object
+                                      properties:
+                                        note:
+                                          type: string
+                                          description: Note for record attachment
+                      relationships:
+                        type: object
+                        properties:
+                          record:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/201/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/record'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+  /v2/{community}/records/{recordID}/change-requests/{changeRequestID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    - name: changeRequestID
+      in: path
+      description: ID of the change request
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get change request
+      description: 'Retrieve a record change request by ID.
+
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: getRecordChangeRequests
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Change Requests
+      responses:
+        '200':
+          description: Record Change Request
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Number of requests allowed
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Number of remaining requests
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/201/content/application~1vnd.api+json/schema/properties/data'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+    delete:
+      summary: Cancel change request
+      description: 'Cancel a record change request
+
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: cancelRecordChangeRequests
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Change Requests
+      responses:
+        '204':
+          description: Change request cancelled
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

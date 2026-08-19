@@ -1,0 +1,399 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "purchaseOrder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find Purchase Order by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a purchase order by ID with vendor, line items, and splits. Pass `?revision=N` to return a historical snapshot rebuilt from po_revision_history. When omitted, the current PO is returned. When `revision` matches the current PO revision, the current PO is returned (no snapshot lookup). When `revision=0` and the PO has no revision history, the current PO is returned. Otherwise a missing snapshot row produces 404 PoRevisionNotFoundError."
+        },
+        {
+          "info": {
+            "name": "Update Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update purchase order header fields. Returns 409 Conflict if PO is not in Draft status."
+        },
+        {
+          "info": {
+            "name": "Delete a Draft Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-delete a Purchase Order in Draft status. Cascade soft-deletes all associated line items and account splits in a single atomic transaction. Only the creator can delete. Vendor records are NOT affected. Returns 204 No Content on success."
+        },
+        {
+          "info": {
+            "name": "Create a Draft Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new purchase order in Draft status (100). poType is required; all other header fields are optional. The system auto-generates a unique PO number. Returns 201 with Location header."
+        },
+        {
+          "info": {
+            "name": "Search Purchase Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/search",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search purchase orders with optional filters: status, eVendorId, searchTerm (poNumber/description). Cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Count Non-Draft Purchase Orders by Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/department-po-count",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the count of non-deleted Purchase Orders in any status other than Draft that are associated with the given departmentId for the entity."
+        },
+        {
+          "info": {
+            "name": "Submit Purchase Order for Approval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/submit",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a Draft Purchase Order. All types (Standard, Blanket, Emergency) transition Draft to PendingApproval and publish a Kafka submitted event for downstream approval workflows. Validates: vendor assigned, at least 1 line item, all line items have splits. Pass dryRun: true to run all checks and persist results as operation errors without transitioning."
+        },
+        {
+          "info": {
+            "name": "Approve Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/approve",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a Purchase Order. Transitions PendingApproval to Approved. When the entity admin setting `autoIssueOnPromotion` is true, the PO is also transitioned to Issued — requires PO_APPROVER and PO_ISSUER claims. If issue fails after approval commits, the PO remains Approved and a non-fatal `AUTO_ISSUE_FAILED` warning is returned (HTTP 200 + warnings array)."
+        },
+        {
+          "info": {
+            "name": "Reject Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/reject",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject a pending Purchase Order back to Draft for revision. Transitions status from PendingApproval to Draft and sets label to 'Rejected'."
+        },
+        {
+          "info": {
+            "name": "Issue Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/issue",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Issue an approved Purchase Order to the vendor. Transitions status from Approved to Issued."
+        },
+        {
+          "info": {
+            "name": "Cancel Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/cancel",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a Purchase Order. Allowed from PendingApproval, Approved, or Issued status. Transitions to Cancelled (terminal state)."
+        },
+        {
+          "info": {
+            "name": "Close Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/close",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Manually close an Issued Purchase Order. Transitions status from Issued to Closed and sets label to 'Manually Closed'."
+        },
+        {
+          "info": {
+            "name": "Bulk Create Approved Purchase Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/bulk",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create N purchase orders from an approved Purchase Request. Validation and budget checks are hard gates: if any fails, zero POs are created. POs are first created in Draft and committed, then encumbrance is booked and they are promoted to Approved. If encumbrance booking fails, the POs are left in Draft (label Errored) and a non-fatal `ENCUMBRANCE_FAILED` entry is returned in the top-level `warnings` array (HTTP 201) rather than failing the request; the caller must cancel/delete those Draft POs "
+        },
+        {
+          "info": {
+            "name": "Clear tolerance fields on a draft purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/clear-tolerances",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes all tolerance and over-invoicing settings from every line item on a draft PO. Used when the entity admin has disabled over-invoicing but the PO still has stale tolerance data."
+        },
+        {
+          "info": {
+            "name": "Copy Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:id/copy",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deep-copy an existing Purchase Order (header, line items, GL splits, selected attachments) into a new Draft PO. Comments are not copied. Supply attachmentIds to select which attachments to copy; an empty array copies none. Attachments are duplicated via S3 server-side copy; if an individual S3 copy fails the attachment row is soft-deleted and the rest of the copy succeeds. The new PO gets a fresh PO number, today's date, the current fiscal year/period, status = Draft, source = Manual. Financial "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

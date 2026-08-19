@@ -1,0 +1,1048 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record
+  description: A Record represents a single permit or license application, code enforcement case, or business process in OpenGov Permitting & Licensing. Records are created in the Employee Portal and/or Citizen Portal and serve as the central container for all related information. This includes form data, workflows, inspections, fees, approvals, public contacts (such as applicants and guests), and associated locations.
+paths:
+  /v2/{community}/records:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    get:
+      summary: List records
+      description: 'Retrieve records in the community that match the specified filters.
+
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: listRecords
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record
+      parameters:
+      - name: filter[number]
+        in: query
+        description: Filter by record number
+        required: false
+        schema:
+          type: string
+      - name: filter[histID]
+        in: query
+        description: Filter by historical ID
+        required: false
+        schema:
+          type: string
+      - name: filter[histNumber]
+        in: query
+        description: Filter by historical permit number
+        required: false
+        schema:
+          type: string
+      - name: filter[typeID]
+        in: query
+        description: Filter by record type ID
+        required: false
+        schema:
+          type: string
+      - name: filter[projectID]
+        in: query
+        description: Filter by project ID
+        required: false
+        schema:
+          type: string
+      - name: filter[applicantUserID]
+        in: query
+        description: Filter records by the user ID of their applicant
+        required: false
+        schema:
+          type: string
+      - name: filter[locationID]
+        in: query
+        description: Filter records by the ID of their associated location
+        required: false
+        schema:
+          type: string
+      - name: filter[status]
+        in: query
+        description: Filter by status
+        required: false
+        schema:
+          type: string
+          description: Status of the record
+          enum:
+          - STOPPED
+          - DRAFT
+          - ACTIVE
+          - COMPLETE
+      - name: filter[createdAt]
+        in: query
+        description: Filter by creation date
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+          - type: object
+            properties:
+              lt:
+                type: string
+                description: Less than the specified date
+              lte:
+                type: string
+                description: Less than or equal to the specified date
+              gt:
+                type: string
+                description: Greater than the specified date
+              gte:
+                type: string
+                description: Greater than or equal to the specified date
+      - name: filter[updatedAt]
+        in: query
+        description: Filter by last updated date
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+          - type: object
+            properties:
+              lt:
+                type: string
+                description: Less than the specified date
+              lte:
+                type: string
+                description: Less than or equal to the specified date
+              gt:
+                type: string
+                description: Greater than the specified date
+              gte:
+                type: string
+                description: Greater than or equal to the specified date
+      - name: filter[submittedAt]
+        in: query
+        description: Filter by submission date
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+          - type: object
+            properties:
+              lt:
+                type: string
+                description: Less than the specified date
+              lte:
+                type: string
+                description: Less than or equal to the specified date
+              gt:
+                type: string
+                description: Greater than the specified date
+              gte:
+                type: string
+                description: Greater than or equal to the specified date
+      - name: filter[expiresAt]
+        in: query
+        description: Filter by expiration date
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+          - type: object
+            properties:
+              lt:
+                type: string
+                description: Less than the specified date
+              lte:
+                type: string
+                description: Less than or equal to the specified date
+              gt:
+                type: string
+                description: Greater than the specified date
+              gte:
+                type: string
+                description: Greater than or equal to the specified date
+      - name: filter[isEnabled]
+        in: query
+        description: Filter by enabled status
+        required: false
+        schema:
+          type: boolean
+      - name: filter[renewalSubmitted]
+        in: query
+        description: Filter by renewal submission status
+        required: false
+        schema:
+          type: boolean
+      - name: filter[submittedOnline]
+        in: query
+        description: Filter by online submission status
+        required: false
+        schema:
+          type: boolean
+      - name: filter[renewalNumber]
+        in: query
+        description: Filter by renewal number
+        required: false
+        schema:
+          type: string
+      - name: filter[renewalOfRecordID]
+        in: query
+        description: Filter by renewal of record ID
+        required: false
+        schema:
+          type: string
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      responses:
+        '200':
+          description: List of Records
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Record
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      - relationships
+                      title: Record
+                      properties:
+                        id:
+                          type: string
+                          description: Unique internal ID of a record
+                          example: record-123456789
+                        type:
+                          type: string
+                          enum:
+                          - record
+                          example: record
+                        attributes:
+                          type: object
+                          required:
+                          - number
+                          - histID
+                          - histNumber
+                          - description
+                          - status
+                          - submittedAt
+                          - expiresAt
+                          - isEnabled
+                          properties:
+                            number:
+                              type: string
+                              nullable: true
+                              description: External ID of a record
+                              example: BP-2024-001234
+                            histID:
+                              type: string
+                              nullable: true
+                              description: Unique internal ID of the corresponding historical record
+                              example: hist-567890123
+                            histNumber:
+                              type: string
+                              nullable: true
+                              description: External ID of the corresponding historical record
+                              example: BP-2023-005678
+                            typeDescription:
+                              type: string
+                              description: Description of the record's type.
+                              example: Building Permit
+                            status:
+                              $ref: '#/paths/~1v2~1{community}~1records/get/parameters/7/schema'
+                            isEnabled:
+                              type: boolean
+                              description: Whether the record is enabled
+                              example: true
+                            submittedAt:
+                              type: string
+                              nullable: true
+                              description: Date and time (UTC) when the record is submitted
+                              format: date-time
+                              readOnly: true
+                            expiresAt:
+                              type: string
+                              nullable: true
+                              format: date-time
+                              description: Date and time (UTC) when the record expires, or null if it does not expire
+                            renewalOfRecordID:
+                              type: string
+                              nullable: true
+                              description: Record ID of the record which this record renews
+                              example: record-prev-456789
+                            renewalNumber:
+                              type: number
+                              nullable: true
+                              description: Order in the renewal series
+                              example: 2
+                            submittedOnline:
+                              type: boolean
+                              description: Submitted online
+                              example: true
+                            renewalSubmitted:
+                              type: boolean
+                              description: A renewal of this record was submitted
+                              example: false
+                            createdAt:
+                              $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdAt'
+                            updatedAt:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                            createdBy:
+                              $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdBy'
+                            updatedBy:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                        relationships:
+                          type: object
+                          required:
+                          - applicant
+                          - guests
+                          - primaryLocation
+                          - formData
+                          - recordType
+                          properties:
+                            applicant:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: The applicant for the record.
+                            guests:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: Guests of the record
+                            primaryLocation:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: The primary location for the record.
+                            additionalLocations:
+                              type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                        description: ID of the related resource
+                                      type:
+                                        type: string
+                                        description: Type of the related resource
+                                    required:
+                                    - id
+                                    - type
+                                  minItems: 0
+                                links:
+                                  $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties/links'
+                              description: Additional locations of the record
+                            formData:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: Form data of the record
+                            workflowSteps:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/additionalLocations/properties'
+                              description: Steps of the record's workflow
+                            recordType:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: Record's type
+                            project:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: Project containing the record
+                  included:
+                    type: array
+                    description: Related resources
+                    items:
+                      type: object
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: string
+                        attributes:
+                          type: object
+                          additionalProperties: true
+                    minItems: 0
+                    maxItems: 5
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    post:
+      summary: Create a record
+      description: 'Create a record. Records are created as drafts, and can be submitted by making a subsequent `PATCH` request. (See `PATCH /records/:id`)
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: createRecord
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  title: The record object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - record
+                      example: record
+                    attributes:
+                      type: object
+                      properties:
+                        histID:
+                          type: string
+                          description: Unique internal ID of the corresponding historical record
+                          example: hist-post-313233
+                        histNumber:
+                          type: string
+                          description: External ID of the corresponding historical record
+                          example: BP-2023-009876
+                        typeID:
+                          type: string
+                          description: Unique ID of the record's type.
+                          example: rt-building-permit
+                        projectID:
+                          type: string
+                          description: Unique internal ID of the project this record belongs to.
+                          example: proj-post-343536
+                        expiresAt:
+                          type: string
+                          description: Date and time (UTC) when the record expires
+                          format: date-time
+                      required:
+                      - typeID
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    - relationships
+                    title: Record
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of a record
+                        example: record-123456789
+                      type:
+                        type: string
+                        enum:
+                        - record
+                        example: record
+                      attributes:
+                        type: object
+                        required:
+                        - number
+                        - histID
+                        - histNumber
+                        - description
+                        - status
+                        - submittedAt
+                        - expiresAt
+                        - isEnabled
+                        properties:
+                          number:
+                            type: string
+                            nullable: true
+                            description: External ID of a record
+                            example: BP-2024-001234
+                          histID:
+                            type: string
+                            nullable: true
+                            description: Unique internal ID of the corresponding historical record
+                            example: hist-567890123
+                          histNumber:
+                            type: string
+                            nullable: true
+                            description: External ID of the corresponding historical record
+                            example: BP-2023-005678
+                          typeDescription:
+                            type: string
+                            description: Description of the record's type.
+                            example: Building Permit
+                          status:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/parameters/7/schema'
+                          isEnabled:
+                            type: boolean
+                            description: Whether the record is enabled
+                            example: true
+                          submittedAt:
+                            type: string
+                            nullable: true
+                            description: Date and time (UTC) when the record is submitted
+                            format: date-time
+                            readOnly: true
+                          expiresAt:
+                            type: string
+                            nullable: true
+                            format: date-time
+                            description: Date and time (UTC) when the record expires, or null if it does not expire
+                          renewalOfRecordID:
+                            type: string
+                            nullable: true
+                            description: Record ID of the record which this record renews
+                            example: record-prev-456789
+                          renewalNumber:
+                            type: number
+                            nullable: true
+                            description: Order in the renewal series
+                            example: 2
+                          submittedOnline:
+                            type: boolean
+                            description: Submitted online
+                            example: true
+                          renewalSubmitted:
+                            type: boolean
+                            description: A renewal of this record was submitted
+                            example: false
+                          createdAt:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdAt'
+                          updatedAt:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                          createdBy:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdBy'
+                          updatedBy:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                      relationships:
+                        type: object
+                        required:
+                        - applicant
+                        - guests
+                        - primaryLocation
+                        - formData
+                        - recordType
+                        properties:
+                          applicant:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/applicant'
+                          guests:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/guests'
+                          primaryLocation:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/primaryLocation'
+                          additionalLocations:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/additionalLocations'
+                          formData:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/formData'
+                          workflowSteps:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/workflowSteps'
+                          recordType:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordType'
+                          project:
+                            $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/project'
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/records/{recordID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve a record
+      description: 'Retrieve a record by ID.
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: getRecord
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record
+      responses:
+        '200':
+          description: Basic information about a record by ID
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    patch:
+      summary: Update a record
+      description: 'Update a record. To submit a draft record, update the status to `ACTIVE`.
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: updateRecord
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  title: The record object
+                  required:
+                  - type
+                  - id
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - record
+                      example: record
+                    id:
+                      type: string
+                      description: Unique internal ID of a record
+                      example: record-patch-373839
+                    attributes:
+                      type: object
+                      properties:
+                        histID:
+                          type: string
+                          description: Unique internal ID of the corresponding historical record
+                          example: hist-patch-404142
+                        histNumber:
+                          type: string
+                          description: External ID of the corresponding historical record
+                          example: BP-2023-543210
+                        projectID:
+                          type: string
+                          description: Unique internal ID of the project this record belongs to.
+                          example: proj-patch-434445
+                        expiresAt:
+                          type: string
+                          description: Date and time (UTC) when the record expires
+                          format: date-time
+                        status:
+                          $ref: '#/paths/~1v2~1{community}~1records/get/parameters/7/schema'
+                        isEnabled:
+                          type: boolean
+                          description: Indicates if the record is archived
+                          example: true
+        required: true
+      responses:
+        '200':
+          description: Record updated
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    delete:
+      summary: Archive a record
+      description: 'Records can only be archvied, not permanently deleted.
+
+        ### Permissions Required
+
+        `Record Archive`'
+      operationId: archiveRecord
+      x-og-claims-required:
+      - PLC_RECORD_ARCHIVE
+      tags:
+      - Record
+      responses:
+        '204':
+          description: Record archived
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/records/{recordID}/renew:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    post:
+      summary: Renew a record
+      description: 'Create a new record as a renewal of an existing record. The record''s type must support renewals, and the record must not already have been renewed.
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: renewRecord
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record
+      responses:
+        '201':
+          description: Record renewed
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          description: '**Conflict**: Returned when the record cannot be renewed, either because
+
+            its record type does not support renewals (`RECORD_RENEWAL_NOT_SUPPORTED`)
+
+            or because the record has already been renewed (`RECORD_ALREADY_RENEWED`).
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    maxItems: 1
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - status
+                      - title
+                      - detail
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier for this particular occurrence of the problem
+                          example: error-767778
+                        status:
+                          type: string
+                          description: The HTTP status code applicable to this problem
+                          example: '400'
+                        title:
+                          type: string
+                          description: A short summary of the problem
+                          example: Validation Error
+                        detail:
+                          type: string
+                          description: Short explanation for the specific occurrence of the problem
+                          example: The provided record type ID is invalid or does not exist
+        '500':
+          description: '**Internal Server Error**: An unexpected error occurred. If the record was
+
+            successfully renewed but its details could not be retrieved, the error code
+
+            will be `RECORD_RENEWED_BUT_NOT_RETRIEVED`, and `detail` will include the
+
+            new record''s ID and URL.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

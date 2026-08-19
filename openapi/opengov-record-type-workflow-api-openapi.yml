@@ -1,0 +1,474 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Type Workflow API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Type Workflow
+  description: The Record Type Workflow is the workflow template for records of that Record Type.
+paths:
+  /v2/{community}/record-types/{recordTypeID}/workflow:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1attachments/parameters/1'
+    get:
+      summary: List workflow step templates for a record type
+      description: 'Retrieve a list of workflow step templates configured for the specified Record Type.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getWorkflowTemplates
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Type Workflow
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      responses:
+        '200':
+          description: Returns workflow template
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Record Type Template Step
+                      x-tags:
+                      - Record Type Workflow
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - recordTypeTemplateStep
+                          example: recordTypeTemplateStep
+                        id:
+                          type: string
+                          example: rt-template-step-101112
+                        attributes:
+                          type: object
+                          description: Step Template
+                          properties:
+                            label:
+                              type: string
+                              maxLength: 255
+                              nullable: true
+                              description: Short descriptive label for the workflow step.
+                              example: Plan Review
+                            stepType:
+                              type: string
+                              enum:
+                              - APPROVAL
+                              - PAYMENT
+                              - INSPECTION
+                              - INSPECTION_V2
+                              - DOCUMENT
+                              - API_INTEGRATION
+                              - ASSET_MANAGEMENT
+                              - RELATED_RECORD
+                              - SHADOW
+                              - REVIEW
+                              description: A value that indicates the kind of process that this step represents
+                              example: APPROVAL
+                            orderNo:
+                              type: integer
+                              nullable: true
+                              description: Ordering number for sorting steps within a workflow.
+                              example: 2
+                            sequence:
+                              type: boolean
+                              description: Indicates whether the step happens in sequence or in parallel.
+                              default: true
+                              example: true
+                            isEnabled:
+                              type: boolean
+                              description: Indicates whether the workflow step is enabled.
+                              default: true
+                              example: true
+                            lastUpdatedByUserID:
+                              type: string
+                              nullable: true
+                              description: Identifier of the user who last updated the workflow step.
+                              example: user-admin-131415
+                            updatedAt:
+                              type: string
+                              format: date-time
+                              nullable: true
+                              description: Timestamp of the last update.
+                            autoAssign:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether the step is automatically assigned to a user or group.
+                              example: false
+                            publicCanRequest:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether the public can request inspections.
+                              example: true
+                            helpText:
+                              type: string
+                              nullable: true
+                              description: Additional help text or instructions related to the workflow step.
+                              example: Please ensure all required documents are submitted before requesting plan review
+                            isRenewal:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether this workflow step is related to a renewal process.
+                              example: false
+                            deadlineDays:
+                              type: integer
+                              nullable: true
+                              description: Number of days until the step deadline.
+                              example: 14
+                            deadlineAutoCompletes:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether the step is automatically completed when the deadline is reached.
+                              example: false
+                            deadlineAlerts:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether alerts are sent for approaching deadlines.
+                              example: true
+                            deadlineType:
+                              type: string
+                              nullable: true
+                              enum:
+                              - Days after step activation
+                              - Days after step assignment
+                              - Days after record submission
+                              description: Identifier for the type of deadline associated with this step.
+                              example: Days after step activation
+                            deadlineEnabled:
+                              type: boolean
+                              description: Indicates whether deadlines are enabled for this step.
+                              default: false
+                              example: true
+                        relationships:
+                          type: object
+                          properties:
+                            recordType:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The related `Record Type`.
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/record-types/{recordTypeID}/workflow/{workflowTemplateID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1attachments/parameters/1'
+    - name: workflowTemplateID
+      in: path
+      description: ID of the workflow template
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get a workflow step template
+      description: 'Retrieve a workflow step template by ID.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getWorkflowTemplate
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Type Workflow
+      responses:
+        '200':
+          description: Returns workflow step template
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Record Type Template Step
+                    x-tags:
+                    - Record Type Workflow
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordTypeTemplateStep
+                        example: recordTypeTemplateStep
+                      id:
+                        type: string
+                        example: rt-template-step-101112
+                      attributes:
+                        type: object
+                        description: Step Template
+                        properties:
+                          label:
+                            type: string
+                            maxLength: 255
+                            nullable: true
+                            description: Short descriptive label for the workflow step.
+                            example: Plan Review
+                          stepType:
+                            $ref: '#/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/stepType'
+                          orderNo:
+                            type: integer
+                            nullable: true
+                            description: Ordering number for sorting steps within a workflow.
+                            example: 2
+                          sequence:
+                            type: boolean
+                            description: Indicates whether the step happens in sequence or in parallel.
+                            default: true
+                            example: true
+                          isEnabled:
+                            type: boolean
+                            description: Indicates whether the workflow step is enabled.
+                            default: true
+                            example: true
+                          lastUpdatedByUserID:
+                            type: string
+                            nullable: true
+                            description: Identifier of the user who last updated the workflow step.
+                            example: user-admin-131415
+                          updatedAt:
+                            type: string
+                            format: date-time
+                            nullable: true
+                            description: Timestamp of the last update.
+                          autoAssign:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether the step is automatically assigned to a user or group.
+                            example: false
+                          publicCanRequest:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether the public can request inspections.
+                            example: true
+                          helpText:
+                            type: string
+                            nullable: true
+                            description: Additional help text or instructions related to the workflow step.
+                            example: Please ensure all required documents are submitted before requesting plan review
+                          isRenewal:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether this workflow step is related to a renewal process.
+                            example: false
+                          deadlineDays:
+                            type: integer
+                            nullable: true
+                            description: Number of days until the step deadline.
+                            example: 14
+                          deadlineAutoCompletes:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether the step is automatically completed when the deadline is reached.
+                            example: false
+                          deadlineAlerts:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether alerts are sent for approaching deadlines.
+                            example: true
+                          deadlineType:
+                            type: string
+                            nullable: true
+                            enum:
+                            - Days after step activation
+                            - Days after step assignment
+                            - Days after record submission
+                            description: Identifier for the type of deadline associated with this step.
+                            example: Days after step activation
+                          deadlineEnabled:
+                            type: boolean
+                            description: Indicates whether deadlines are enabled for this step.
+                            default: false
+                            example: true
+                      relationships:
+                        type: object
+                        properties:
+                          recordType:
+                            $ref: '#/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordType'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

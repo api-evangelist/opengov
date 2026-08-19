@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Location Flags API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Location Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List location flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/locations/:locationID/flags",
+            "params": [
+              {
+                "name": "locationID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location"
+              }
+            ]
+          },
+          "docs": "List location flags on a location.\n### Permissions Required\n`Location Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

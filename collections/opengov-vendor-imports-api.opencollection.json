@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vendor Management Vendor Imports API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vendor-imports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "vendor-imports.requestPresignedUpload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports/presigned-upload",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.listImports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.processImport",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.triggerImport",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports/:importId/import",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "importId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.getImportDetail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports/:importId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "importId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.downloadTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports/template",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.validateJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports/:jobId/validate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-imports.remapColumns",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendor-imports/:jobId/remap",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

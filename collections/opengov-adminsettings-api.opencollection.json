@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Admin Settings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "adminSettings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get admin settings for an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/admin/settings",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ]
+          },
+          "docs": "Returns entity-level admin settings. Creates a row with defaults (allowOverInvoicing=false, autoIssueOnPromotion=false) on first call so the response always includes id/createdAt/updatedAt."
+        },
+        {
+          "info": {
+            "name": "Update admin settings for an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/admin/settings",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or partially updates entity-level admin settings (upsert). Omitted fields retain their existing value or default. Returns the persisted settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting Licensing & Code Enforcement Steps API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Steps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List record steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/workflow-steps",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "List record steps"
+        },
+        {
+          "info": {
+            "name": "Retrieve a record step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/workflow-steps/:stepID",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              },
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of workflow step on a record"
+              }
+            ]
+          },
+          "docs": "Retrieve a record step"
+        },
+        {
+          "info": {
+            "name": "Update a record step",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/workflow-steps/:stepID/state",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              },
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of workflow step on a record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status of a workflow step"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,626 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Attachments API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Attachments
+  description: 'A Record can have attachments which either reference a Record Type Attachment or are ad-hoc. Each attachment can have one or more versions.
+
+
+    '
+paths:
+  /v2/{community}/records/{recordID}/attachments:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    get:
+      summary: List record attachments
+      description: 'List attachments on a record.
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: listRecordAttachments
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Attachments
+      responses:
+        '200':
+          description: Returns record attachments
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Record Attachments
+                      title: Record Attachment
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          example: record-attachment-123456
+                        type:
+                          type: string
+                          enum:
+                          - recordAttachment
+                          example: recordAttachment
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Name of the attachment
+                              example: Floor Plan Drawing
+                            description:
+                              type: string
+                              description: Short description of the attachment.
+                              example: Detailed floor plan showing room layouts and dimensions
+                            required:
+                              type: boolean
+                              description: If the attachment is required at time of record submission.
+                              example: true
+                            orderNumber:
+                              type: number
+                              description: Represents the order that the attachment will appear when viewing the record.
+                              example: 1
+                            url:
+                              type: string
+                              format: uri-reference
+                              description: Signed Url that is acessible for 24 hours.
+                              example: https://storage.example.com/attachments/abc123?expires=1234567890
+                            updatedAt:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                            updatedBy:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                        relationships:
+                          type: object
+                          properties:
+                            record:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The related `Record`.
+                            attachmentTemplate:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The related `Attachment Template`. If not included, the attachment is considered adhoc and not associated with any type of record configuration.
+                            file:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The related `File`, which is the current version of the record attachment.
+                            versions:
+                              description: The versions of the record attachment, including the current version. Ordered from oldest to newest.
+                              type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties/data/properties'
+                                    required:
+                                      $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties/data/required'
+                                  minItems: 0
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    post:
+      summary: Add a record attachment
+      description: "Associates a previously uploaded file with a record as an attachment.\n\n##### Process\n1. First, upload your file using the Files API:\n   - Use [POST /files](operation:external/plce-api/plce-api.oas/files/createFileUpload) to get a pre-signed upload URL\n   - Upload your file using the pre-signed URL\n   - Keep the returned `fileID` for the next step\n2. Then use this endpoint to create the record attachment:\n   - Provide the fileID to associate the file\n   - The file will be cloned, creating an independent copy for this record\n\n##### Attachment Types and Versioning\nAttachments can be either ad-hoc or template-based:\n\nUsing `attachmentTemplateID`:\n- Associates the attachment with a specific template\n- If no attachment exists for this template, creates a new one\n\n### Permissions Required\n`Record Write`"
+      operationId: addRecordAttachment
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Attachments
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - recordAttachment
+                      example: recordAttachment
+                    attributes:
+                      type: object
+                      required:
+                      - fileID
+                      properties:
+                        fileID:
+                          type: string
+                          description: ID of a previously uploaded file
+                          example: file-1000002
+                        name:
+                          type: string
+                          description: Name of the attachment. If not provided, the file name will be used.
+                          example: Structural Engineering Plans
+                        description:
+                          type: string
+                          description: Short description of the attachment
+                          example: Detailed structural engineering drawings for the main building foundation and framework
+                        attachmentTemplateID:
+                          type: string
+                          description: 'Optional. When provided, associates the attachment with a template. If no attachment exists for this template on the record, creates a new one
+
+                            '
+                          example: attachment-template-1000004
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Attachments
+                    title: Record Attachment
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        example: record-attachment-123456
+                      type:
+                        type: string
+                        enum:
+                        - recordAttachment
+                        example: recordAttachment
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: Name of the attachment
+                            example: Floor Plan Drawing
+                          description:
+                            type: string
+                            description: Short description of the attachment.
+                            example: Detailed floor plan showing room layouts and dimensions
+                          required:
+                            type: boolean
+                            description: If the attachment is required at time of record submission.
+                            example: true
+                          orderNumber:
+                            type: number
+                            description: Represents the order that the attachment will appear when viewing the record.
+                            example: 1
+                          url:
+                            type: string
+                            format: uri-reference
+                            description: Signed Url that is acessible for 24 hours.
+                            example: https://storage.example.com/attachments/abc123?expires=1234567890
+                          updatedAt:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                          updatedBy:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                      relationships:
+                        type: object
+                        properties:
+                          record:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/record'
+                          attachmentTemplate:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/attachmentTemplate'
+                          file:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/file'
+                          versions:
+                            description: The versions of the record attachment, including the current version. Ordered from oldest to newest.
+                            type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/versions/properties/data/items'
+                                minItems: 0
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/records/{recordID}/attachments/{attachmentID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    - name: attachmentID
+      in: path
+      description: ID of an attachment on a record
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get record attachment
+      description: 'Retrieve a record attachment by ID.
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: getRecordAttachment
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Attachments
+      responses:
+        '200':
+          description: Returns record attachments
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    delete:
+      summary: Remove a record attachment
+      description: 'Remove a record attachment.
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: removeRecordAttachment
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Attachments
+      responses:
+        '204':
+          description: Record attachment removed
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/records/{recordID}/attachments/{attachmentID}/versions:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    - name: attachmentID
+      in: path
+      description: ID of an attachment on a record
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Create a new version of a record attachment
+      description: "Use this endpoint to create a new version of a record attachment.\n##### Process\n1. On an existing record attachment:\n   - Provide the `fileID` of the new file to associate with the record attachment\n   - The new file will replace the current version of the record attachment\n   - The previous version of the record attachment will be retained in the `versions` relationship\n\n### Permissions Required\n`Record Write`"
+      operationId: addRecordAttachmentVersion
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Attachments
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - file
+                      example: file
+                    attributes:
+                      type: object
+                      required:
+                      - fileID
+                      properties:
+                        fileID:
+                          type: string
+                          description: ID of a previously uploaded file
+                          example: file-1000002
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/records/{recordID}/attachments/{attachmentID}/versions/{fileID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1attachments~1{attachmentID}~1versions/parameters/2'
+    - name: fileID
+      in: path
+      description: ID of a file
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: Remove a record attachment version
+      description: 'Removes the specified file from the version history of a record attachment.
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: removeRecordAttachmentVersion
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Attachments
+      responses:
+        '204':
+          description: Record attachment version removed
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

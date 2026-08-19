@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Payment Steps API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Steps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payment steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/payment-steps",
+            "params": [
+              {
+                "name": "filter[recordID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a recordID"
+              },
+              {
+                "name": "filter[label]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by record step label"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by record step status"
+              },
+              {
+                "name": "filter[completedAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date at which the record step was completed"
+              },
+              {
+                "name": "filter[activatedAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date at which the record step was activated"
+              },
+              {
+                "name": "filter[waived]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by waived"
+              },
+              {
+                "name": "filter[waivedUserID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by waived user ID"
+              }
+            ]
+          },
+          "docs": "Retrieve payment steps that match the specified filters.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Get payment step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/payment-steps/:paymentStepID",
+            "params": [
+              {
+                "name": "paymentStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a payment step"
+              }
+            ]
+          },
+          "docs": "Retrieve a payment step by ID.\n### Permissions Required\n`Workflow Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

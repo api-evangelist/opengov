@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Type Workflow API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Type Workflow",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List workflow step templates for a record type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/:recordTypeID/workflow"
+          },
+          "docs": "Retrieve a list of workflow step templates configured for the specified Record Type.\n### Permissions Required\n`Record Type Read`"
+        },
+        {
+          "info": {
+            "name": "Get a workflow step template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/:recordTypeID/workflow/:workflowTemplateID",
+            "params": [
+              {
+                "name": "workflowTemplateID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the workflow template"
+              }
+            ]
+          },
+          "docs": "Retrieve a workflow step template by ID.\n### Permissions Required\n`Record Type Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

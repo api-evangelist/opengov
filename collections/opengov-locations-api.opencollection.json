@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Locations API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/locations",
+            "params": [
+              {
+                "name": "filter[city]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the city of a location"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of a location."
+              },
+              {
+                "name": "filter[ownerName]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the owner of a location"
+              },
+              {
+                "name": "filter[unit]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the unit of a location."
+              },
+              {
+                "name": "filter[mbl]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the mbl of a location."
+              },
+              {
+                "name": "filter[postalCode]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the postal code of a location."
+              },
+              {
+                "name": "filter[state]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the state of a location"
+              },
+              {
+                "name": "filter[streetNumber]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the street number of a location. Can be combined with filter[streetName] to filter by street address."
+              },
+              {
+                "name": "filter[streetName]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the street name of a location"
+              },
+              {
+                "name": "filter[locationType]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the type of a location"
+              },
+              {
+                "name": "filter[archived]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the archived status of a location."
+              }
+            ]
+          },
+          "docs": "Retrieve locations in the community that match the specified filters.\n### Permissions Required\n`Location Read`"
+        },
+        {
+          "info": {
+            "name": "Create a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/locations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a location.\n### Permissions Required\n`Location Write`"
+        },
+        {
+          "info": {
+            "name": "Retrieve a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/locations/:locationID",
+            "params": [
+              {
+                "name": "locationID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location"
+              }
+            ]
+          },
+          "docs": "Retrieve a location by ID.\n### Permissions Required\n`Location Read`"
+        },
+        {
+          "info": {
+            "name": "Update a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/locations/:locationID",
+            "params": [
+              {
+                "name": "locationID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a location.\n### Permissions Required\n`Location Write`"
+        },
+        {
+          "info": {
+            "name": "Delete a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/locations/:locationID",
+            "params": [
+              {
+                "name": "locationID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location"
+              }
+            ]
+          },
+          "docs": "Delete a location.\n### Permissions Required\n`Location Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

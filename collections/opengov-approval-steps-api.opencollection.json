@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Approval Steps API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Approval Steps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List approval steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/approval-steps",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Subdomain of the community"
+              },
+              {
+                "name": "page[number]",
+                "value": "1",
+                "type": "query",
+                "description": "Which page to return (1-based)"
+              },
+              {
+                "name": "page[size]",
+                "value": "20",
+                "type": "query",
+                "description": "Number of records to return per page"
+              },
+              {
+                "name": "filter[recordID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a recordID"
+              },
+              {
+                "name": "filter[label]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by record step label"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by record step status"
+              },
+              {
+                "name": "filter[completedAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date at which the record step was completed"
+              },
+              {
+                "name": "filter[activatedAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date at which the record step was activated"
+              },
+              {
+                "name": "filter[assigneeID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the user ID of the record step assignee"
+              },
+              {
+                "name": "filter[dueBy]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date at which the record step is due"
+              }
+            ]
+          },
+          "docs": "Retrieve approval steps that match the specified filters.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Get approval step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/approval-steps/:approvalStepID",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Subdomain of the community"
+              },
+              {
+                "name": "approvalStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an approval step"
+              }
+            ]
+          },
+          "docs": "Retrieve an approval step by ID.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Update approval step",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/approval-steps/:approvalStepID",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Subdomain of the community"
+              },
+              {
+                "name": "approvalStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an approval step"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an approval step.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

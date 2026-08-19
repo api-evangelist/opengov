@@ -1,0 +1,901 @@
+{
+  "item": [
+    {
+      "id": "b529336e-f6e7-40cf-a755-bfaf2a0174d7",
+      "name": "Ledger Entries",
+      "description": {
+        "content": "A Leger Entry is created for each Fee paid or refunded in a Transaction.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57f34942-c39b-4c73-a365-7fb04f587a07",
+          "name": "List ledger entries",
+          "request": {
+            "name": "List ledger entries",
+            "description": {
+              "content": "Retrieve ledger entries that match the specified filters.\n### Permissions Required\n`Payment Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "ledger-entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[transactionType]",
+                  "value": "<string>",
+                  "description": "Filter by transaction type"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[accountNumber]",
+                  "value": "<string>",
+                  "description": "Filter by account number"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[feeID]",
+                  "value": "<string>",
+                  "description": "Filter by fee ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[transactionID]",
+                  "value": "<string>",
+                  "description": "Filter by transaction ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "748df1d8-1b99-4f83-9e0b-2d08de95eb33",
+              "name": "Ledger Entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"ledgerEntry\",\n      \"id\": \"ledger-entry-567890\",\n      \"attributes\": {\n        \"amount\": 125.5,\n        \"transactionDate\": \"1993-12-08T14:40:39.830Z\",\n        \"transactionType\": \"Payment\",\n        \"label\": \"Building Permit Application Fee\",\n        \"accountNumber\": \"ACC-4567890123\",\n        \"updatedAt\": \"2012-02-07T21:11:04.077Z\"\n      },\n      \"relationships\": {\n        \"transaction\": {\n          \"$ref\": {}\n        },\n        \"fee\": {\n          \"$ref\": {}\n        }\n      }\n    },\n    {\n      \"type\": \"ledgerEntry\",\n      \"id\": \"ledger-entry-567890\",\n      \"attributes\": {\n        \"amount\": 125.5,\n        \"transactionDate\": \"1976-09-14T12:03:27.351Z\",\n        \"transactionType\": \"Payment\",\n        \"label\": \"Building Permit Application Fee\",\n        \"accountNumber\": \"ACC-4567890123\",\n        \"updatedAt\": \"1950-09-01T19:24:31.925Z\"\n      },\n      \"relationships\": {\n        \"transaction\": {\n          \"$ref\": {}\n        },\n        \"fee\": {\n          \"$ref\": {}\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links not found in the OpenAPI spec\"\n  },\n  \"meta\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0942315-f17e-4dc3-8202-c575ab5822af",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3a784bb-f919-4ff5-91e9-6d80b12f12e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "581a9e11-50e5-4489-b8d5-3dd7f183690d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b3ab9be-6bca-418f-a89f-1d59cfaa6b29",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbade9b0-b3c6-4bb9-acdd-40f1f6f15268",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "025ec823-106c-4f19-b308-0cd032b40831",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[transactionType]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[accountNumber]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[feeID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[transactionID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fb28d10-7abf-4754-bddc-cf6af0c00bb4",
+          "name": "Get ledger entry",
+          "request": {
+            "name": "Get ledger entry",
+            "description": {
+              "content": "Retrieve a ledger entry by ID.\n### Permissions Required\n`Payment Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "ledger-entries",
+                ":ledgerID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ledgerID",
+                  "description": "(Required) ID of a ledger"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9000e28b-3dff-4bd9-a654-a3c617512a26",
+              "name": "Ledger Entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"ledgerEntry\",\n    \"id\": \"ledger-entry-567890\",\n    \"attributes\": {\n      \"amount\": 125.5,\n      \"transactionDate\": \"1949-09-29T02:10:01.884Z\",\n      \"transactionType\": \"Payment\",\n      \"label\": \"Building Permit Application Fee\",\n      \"accountNumber\": \"ACC-4567890123\",\n      \"updatedAt\": \"2010-04-24T09:52:55.527Z\"\n    },\n    \"relationships\": {\n      \"transaction\": {\n        \"$ref\": {}\n      },\n      \"fee\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25ebf473-98da-4bba-bd44-18d59040aa14",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4ad77b2-dcb3-413d-b485-42be30353fb6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f534517c-06d5-4eac-b29b-8459d12f39c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30daefd1-5061-43b7-88aa-7a0802097b52",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98d33af9-7a49-4425-8837-216a0dc3e97b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "37762bbd-94df-4fc2-bf5f-019af5f15835",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "ledger-entries",
+                    ":ledgerID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ledgerID",
+                      "description": "(Required) ID of a ledger"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e06555fa-0556-4c29-9ede-5cb6cf2edc27",
+    "name": "Permitting & Licensing Ledger Entries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

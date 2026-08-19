@@ -1,0 +1,799 @@
+{
+  "item": [
+    {
+      "id": "edfcf0af-0c38-4e1a-9c5e-7f43ec493ae0",
+      "name": "Record Types",
+      "description": {
+        "content": "A Record Type defines the configuration for individual Records of that Record Type.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b1a2d25-45e8-4d9d-8b04-3930190539e5",
+          "name": "List record types",
+          "request": {
+            "name": "List record types",
+            "description": {
+              "content": "List record types.\n### Permissions Required\n`Record Type Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "record-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[departmentID]",
+                  "value": "<string>",
+                  "description": "Filter by the department ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e584b2cf-a6f7-4cc0-94be-3513a341e487",
+              "name": "Returns Record Types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"rt-456789\",\n      \"type\": \"recordType\",\n      \"attributes\": {\n        \"name\": \"Building Permit\",\n        \"applyAccess\": \"Public\",\n        \"isEnabled\": true,\n        \"applicant\": true,\n        \"location\": true,\n        \"offlinePayments\": false,\n        \"viewAccess\": \"Public\",\n        \"allowProjects\": true,\n        \"htmlcontent\": \"<p>Submit your building permit application here. Please ensure all required documents are attached.</p>\",\n        \"status\": \"Published\",\n        \"renews\": false,\n        \"orderNo\": 10,\n        \"adHocAttachmentViewAccess\": \"Internal and Applicant\",\n        \"clonedDate\": \"1995-11-05T13:21:44.988Z\",\n        \"parentRecordTypeID\": \"rt-parent-123\",\n        \"allowPointLocations\": false,\n        \"allowAddressLocations\": true,\n        \"allowSegmentLocations\": false,\n        \"maxLocations\": 1,\n        \"pointLocationsHelpText\": \"Select a specific point on the map for your permit location\",\n        \"addressLocationsHelpText\": \"Enter the full address where the work will be performed\",\n        \"segmentLocationsHelpText\": \"Draw a line segment to indicate the area of work\",\n        \"allowAdditionalLocations\": false,\n        \"automaticExpirationDateExtension\": false,\n        \"automaticProjectRecordsExpirationDateExtension\": false,\n        \"disableRecordAttachments\": false,\n        \"createdAt\": \"1958-12-10T07:36:07.914Z\",\n        \"updatedAt\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt not found in the OpenAPI spec\"\n        },\n        \"createdBy\": \"user-applicant-880002\",\n        \"updatedBy\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy not found in the OpenAPI spec\"\n        }\n      },\n      \"relationships\": {\n        \"department\": {\n          \"$ref\": {}\n        },\n        \"formFields\": {\n          \"$ref\": {}\n        },\n        \"templateSteps\": {\n          \"$ref\": {}\n        },\n        \"attachmentTemplates\": {\n          \"$ref\": {}\n        },\n        \"templateFees\": {\n          \"$ref\": {}\n        },\n        \"documentTemplates\": {\n          \"$ref\": {}\n        }\n      }\n    },\n    {\n      \"id\": \"rt-456789\",\n      \"type\": \"recordType\",\n      \"attributes\": {\n        \"name\": \"Building Permit\",\n        \"applyAccess\": \"Public\",\n        \"isEnabled\": true,\n        \"applicant\": true,\n        \"location\": true,\n        \"offlinePayments\": false,\n        \"viewAccess\": \"Public\",\n        \"allowProjects\": true,\n        \"htmlcontent\": \"<p>Submit your building permit application here. Please ensure all required documents are attached.</p>\",\n        \"status\": \"Published\",\n        \"renews\": false,\n        \"orderNo\": 10,\n        \"adHocAttachmentViewAccess\": \"Internal and Applicant\",\n        \"clonedDate\": \"1950-06-30T20:11:18.028Z\",\n        \"parentRecordTypeID\": \"rt-parent-123\",\n        \"allowPointLocations\": false,\n        \"allowAddressLocations\": true,\n        \"allowSegmentLocations\": false,\n        \"maxLocations\": 1,\n        \"pointLocationsHelpText\": \"Select a specific point on the map for your permit location\",\n        \"addressLocationsHelpText\": \"Enter the full address where the work will be performed\",\n        \"segmentLocationsHelpText\": \"Draw a line segment to indicate the area of work\",\n        \"allowAdditionalLocations\": false,\n        \"automaticExpirationDateExtension\": false,\n        \"automaticProjectRecordsExpirationDateExtension\": false,\n        \"disableRecordAttachments\": false,\n        \"createdAt\": \"1954-05-08T15:54:44.178Z\",\n        \"updatedAt\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt not found in the OpenAPI spec\"\n        },\n        \"createdBy\": \"user-applicant-880002\",\n        \"updatedBy\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy not found in the OpenAPI spec\"\n        }\n      },\n      \"relationships\": {\n        \"department\": {\n          \"$ref\": {}\n        },\n        \"formFields\": {\n          \"$ref\": {}\n        },\n        \"templateSteps\": {\n          \"$ref\": {}\n        },\n        \"attachmentTemplates\": {\n          \"$ref\": {}\n        },\n        \"templateFees\": {\n          \"$ref\": {}\n        },\n        \"documentTemplates\": {\n          \"$ref\": {}\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links not found in the OpenAPI spec\"\n  },\n  \"meta\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74e1d16c-2d92-4fdb-91e5-1dee20c3c831",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3188298f-3601-46e1-a664-89814aaf8ddb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3945772-fd78-45b9-a28c-7bba08406f85",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fffc241e-b7a6-429f-8c05-568d5bbcdee1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c0905bc-f6b0-4614-9dcd-0185a1c11a07",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b234129-0f64-49c5-8c8f-237ff758d34f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[departmentID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "068774fc-660c-40b5-8d4a-3c3ad8a48ccd",
+          "name": "Get a Record type",
+          "request": {
+            "name": "Get a Record type",
+            "description": {
+              "content": "Retrieve a record type by ID.\n### Permissions Required\n`Record Type Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "record-types",
+                ":recordTypeID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "recordTypeID",
+                  "description": "(Required) ID of the record type"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "394e2a77-b0a8-4cd7-80fa-3de0441e95c5",
+              "name": "Returns Record Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"rt-456789\",\n    \"type\": \"recordType\",\n    \"attributes\": {\n      \"name\": \"Building Permit\",\n      \"applyAccess\": \"Public\",\n      \"isEnabled\": true,\n      \"applicant\": true,\n      \"location\": true,\n      \"offlinePayments\": false,\n      \"viewAccess\": \"Public\",\n      \"allowProjects\": true,\n      \"htmlcontent\": \"<p>Submit your building permit application here. Please ensure all required documents are attached.</p>\",\n      \"status\": \"Published\",\n      \"renews\": false,\n      \"orderNo\": 10,\n      \"adHocAttachmentViewAccess\": \"Internal and Applicant\",\n      \"clonedDate\": \"2006-02-25T16:52:24.339Z\",\n      \"parentRecordTypeID\": \"rt-parent-123\",\n      \"allowPointLocations\": false,\n      \"allowAddressLocations\": true,\n      \"allowSegmentLocations\": false,\n      \"maxLocations\": 1,\n      \"pointLocationsHelpText\": \"Select a specific point on the map for your permit location\",\n      \"addressLocationsHelpText\": \"Enter the full address where the work will be performed\",\n      \"segmentLocationsHelpText\": \"Draw a line segment to indicate the area of work\",\n      \"allowAdditionalLocations\": false,\n      \"automaticExpirationDateExtension\": false,\n      \"automaticProjectRecordsExpirationDateExtension\": false,\n      \"disableRecordAttachments\": false,\n      \"createdAt\": \"2006-05-18T17:57:29.026Z\",\n      \"updatedAt\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt not found in the OpenAPI spec\"\n      },\n      \"createdBy\": \"user-applicant-880002\",\n      \"updatedBy\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy not found in the OpenAPI spec\"\n      }\n    },\n    \"relationships\": {\n      \"department\": {\n        \"$ref\": {}\n      },\n      \"formFields\": {\n        \"$ref\": {}\n      },\n      \"templateSteps\": {\n        \"$ref\": {}\n      },\n      \"attachmentTemplates\": {\n        \"$ref\": {}\n      },\n      \"templateFees\": {\n        \"$ref\": {}\n      },\n      \"documentTemplates\": {\n        \"$ref\": {}\n      }\n    }\n  },\n  \"included\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9beb1f65-17eb-4751-abf1-2f972c2658b0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6e08e4a-e3b8-4d37-bacc-d749c75dcaaa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db05af9a-92d5-4d2d-88f2-bd7fd3bcc7e2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25060c19-ea9f-4a6f-9a15-cb04888a3aa7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5f1a059-34f8-423f-8a53-c8ea0489b351",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "14fde271-2c3e-49fb-bdc7-6534f147e054",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "record-types",
+                    ":recordTypeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recordTypeID",
+                      "description": "(Required) ID of the record type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1fc34b78-f5d4-47ba-bd3f-ce2a867f2c0e",
+    "name": "Permitting & Licensing Record Types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

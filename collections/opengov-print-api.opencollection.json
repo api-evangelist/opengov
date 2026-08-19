@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Print API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "print",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate or retrieve a print job for a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/print",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates PO eligibility, computes content hash, checks S3 cache. Cache hit: returns completed with presigned URL (200). Cache miss: creates print job, forks generation, returns generating (202)."
+        },
+        {
+          "info": {
+            "name": "Poll print job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/print/print-jobs/:jobId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns current job status. Completed includes a fresh presigned download URL. Failed includes a human-readable error message."
+        },
+        {
+          "info": {
+            "name": "Record print download and get URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/print/print-jobs/:jobId/download",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Called when the user explicitly downloads. Records an activity log entry (entry type PRINT) and returns a fresh presigned download URL."
+        },
+        {
+          "info": {
+            "name": "Get available comments and attachments for print settings UI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/print/preview-data",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns available comments and attachments for the print settings panel. The frontend uses this to populate checkboxes/selectors before requesting a PDF preview."
+        },
+        {
+          "info": {
+            "name": "Render a live PDF preview of the purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/print/preview",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renders the PO as PDF via Carbone DOCX template with current print options. Returns binary application/pdf response. No S3 caching or job tracking — intended for interactive preview only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

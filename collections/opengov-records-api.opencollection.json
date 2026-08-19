@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting Licensing & Code Enforcement Records API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "Retrieve a record"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

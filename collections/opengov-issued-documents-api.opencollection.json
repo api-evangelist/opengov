@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Issued Documents API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issued Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/document-steps/:documentStepID/documents",
+            "params": [
+              {
+                "name": "documentStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a document step"
+              }
+            ]
+          },
+          "docs": "List documents for a given document step.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Get a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/document-steps/:documentStepID/documents/:documentID",
+            "params": [
+              {
+                "name": "documentStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a document step"
+              },
+              {
+                "name": "documentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a document"
+              }
+            ]
+          },
+          "docs": "Retrieve a document by ID.\n### Permissions Required\n`Workflow Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

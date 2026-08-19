@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Permitting Licensing & Code Enforcement Records API
+  x-logo:
+    url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
+  description: "The OpenGov Permitting & Licensing API is organized around REST. The API is based on the JSON API specification and uses standard HTTP response codes, authentication, and verbs.\n\n## Authentication\nThe OpenGov Permitting & Licensing API is authenticated using the [OAuth2](https://www.rfc-editor.org/rfc/rfc6749) Client Credentials flow. Access tokens are provided as a [bearer token](https://datatracker.ietf.org/doc/html/rfc6750) Authorization header in all API requests.\n\nTo obtain an access token, you must have an OpenGov-provided **Client ID** and **Client Secret** and make a POST request to https://accounts.viewpointcloud.com/oauth/token\n\nExample request:\n\n```bash\ncurl --request POST \\\n  --url https://accounts.viewpointcloud.com/oauth/token \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'grant_type=client_credentials' \\\n  --data 'client_id=YOUR_CLIENT_ID' \\\n  --data 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data 'audience=viewpointcloud.com/api/production'\n```\n\nThe response will include:\n- `access_token`: Access token issued by the authorization server\n- `token_type`: Type of token issued (typically `Bearer`)\n- `expires_in`: The lifetime in seconds of the access token\n<br />\n<br />\nThe API will return a 401 error if a token is invalid.\n<br />\n<br />\n"
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Records
+  description: '**Records** are created in the OpenGov Permitting & Licensing Employee Portal and/or Citizen Portal.
+
+
+    A **Record** can have a **Form**, a **Workflow**, one or more public **Contacts** (the applicant and any guests), and one or more **Locations**.
+
+
+    '
+paths:
+  /v1/{community}/records/{recordID}:
+    get:
+      summary: Retrieve a record
+      operationId: getRecord
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/community'
+      - $ref: '#/components/parameters/recordID'
+      responses:
+        '200':
+          description: Returns the record object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Record'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal Server Error
+components:
+  parameters:
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
+  schemas:
+    relationship:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              description: Link to the related resource
+    Record:
+      x-tags:
+      - Records
+      type: object
+      title: The record object
+      example:
+        type: record
+        id: '31598'
+        attributes:
+          number: B-22-15
+          histID: null
+          histNumber: null
+          description: null
+          typeID: 53
+          typeDescription: Building Permit
+          projectID: null
+          projectDescription: null
+          status: ACTIVE
+          createdAt: 2022-07-08 16:29:54.616000+00:00
+          updatedAt: 2023-11-11 18:29:40+00:00
+          submittedAt: 2022-07-08 16:30:00+00:00
+          expiresAt: 2024-11-12 19:32:35.450000+00:00
+        relationships:
+          recordContacts:
+            links:
+              related: /plce/v1/community/records/31598/contacts
+          recordLocations:
+            links:
+              related: /plce/v1/community/records/31598/locations
+          workflowSteps:
+            links:
+              related: /plce/v1/community/records/31598/workflow-steps
+          recordDetails:
+            links:
+              related: /plce/v1/community/records/31598/details
+      properties:
+        type:
+          type: string
+          enum:
+          - record
+        id:
+          description: Unique internal ID of a record
+        attributes:
+          type: object
+          properties:
+            number:
+              type: string
+              description: External ID of a record
+            histID:
+              type: string
+              description: Unique internal ID of the corresponding historical record
+            histNumber:
+              type: string
+              description: External ID of the corresponding historical record
+            description:
+              type: string
+              description: Description of the record.
+            typeID:
+              type: string
+              description: Unique ID of the record's type.
+            typeDescription:
+              type: string
+              description: Description of the record's type.
+            projectID:
+              type: string
+              description: Unique internal ID of the project this record belongs to.
+            projectDescription:
+              type: string
+              description: Description of the project this record belong to.
+            status:
+              type: string
+              description: Status of the record
+              enum:
+              - STOPPED
+              - DRAFT
+              - ACTIVE
+              - COMPLETE
+            createdAt:
+              type: string
+              description: Date and time (UTC) when the record is created.
+              format: date-time
+            updatedAt:
+              type: string
+              description: Date and time (UTC) when the record is last updated.
+              format: date-time
+            submittedAt:
+              type: string
+              description: Date and time (UTC) when the record is submitted
+              format: date-time
+            expiresAt:
+              type: string
+              description: Date and time (UTC) when the record expires
+              format: date-time
+        relationships:
+          type: object
+          properties:
+            recordDetails:
+              description: Details of the record
+              $ref: '#/components/schemas/relationship'
+            recordContacts:
+              description: Contacts of the record
+              $ref: '#/components/schemas/relationship'
+            recordLocations:
+              description: Locations of the record
+              $ref: '#/components/schemas/relationship'
+            workflowSteps:
+              description: Steps of the record's workflow
+              $ref: '#/components/schemas/relationship'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

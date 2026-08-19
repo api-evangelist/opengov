@@ -1,0 +1,1456 @@
+openapi: 3.2.0
+info:
+  title: Vendor Management Vendor Imports API
+  description: 'A comprehensive API for managing vendors in the OpenGov platform.
+
+
+    ## Authentication
+
+    All endpoints require JWT Bearer token authentication. Include the token in the Authorization header:
+
+    ```
+
+    Authorization: Bearer <your-jwt-token>
+
+    ```
+
+
+    ## Features
+
+    - **Vendor Management**: Create, read, update, and delete vendors
+
+    - **Health Check**: Monitor service health
+
+
+    ## Rate Limiting
+
+    API calls are subject to rate limiting based on your subscription tier.'
+  version: 1.0.0
+  contact:
+    name: OpenGov API Support
+    email: api-support@opengov.com
+  license:
+    name: Proprietary
+    url: https://opengov.com/terms
+servers:
+- url: https://api.vendor.opengov.com
+  description: Production Server
+- url: https://api.vendor.ogstaging.us
+  description: Staging Server
+- url: https://api-vendor.procurement.ogintegration.us
+  description: Integration Server
+security:
+- bearerAuth: []
+tags:
+- name: vendor-imports
+paths:
+  /api/v1/entities/{entityId}/vendor-imports/presigned-upload:
+    post:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.requestPresignedUpload
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: PresignedUploadResponse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresignedUploadResponse'
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+                - $ref: '#/components/schemas/ValidationFailedHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundError'
+        '413':
+          description: PayloadTooLargeHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PresignedUploadRequest'
+        required: true
+  /api/v1/entities/{entityId}/vendor-imports:
+    post:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.processImport
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - jobId
+                - importType
+                - status
+                properties:
+                  jobId:
+                    type: string
+                  importType:
+                    type: string
+                    enum:
+                    - standard
+                    - ai
+                  status:
+                    type: string
+                    enum:
+                    - parsing
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+                - $ref: '#/components/schemas/ValidationFailedHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '413':
+          description: PayloadTooLargeHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessImportRequest'
+        required: true
+    get:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.listImports
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+        required: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - meta
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - importId
+                      - fileName
+                      - fileType
+                      - uploadedBy
+                      - totalRecords
+                      - successCount
+                      - failureCount
+                      - errorCount
+                      - duplicateCount
+                      - status
+                      - createdAt
+                      - completedAt
+                      properties:
+                        importId:
+                          type: string
+                        fileName:
+                          type: string
+                        fileType:
+                          type: string
+                          enum:
+                          - xlsx
+                          - csv
+                          - txt
+                        uploadedBy:
+                          type: string
+                        totalRecords:
+                          type: number
+                        successCount:
+                          type: number
+                        failureCount:
+                          type: number
+                        errorCount:
+                          type: number
+                        duplicateCount:
+                          type: number
+                        status:
+                          type: string
+                          enum:
+                          - parsing
+                          - parsed
+                          - validating
+                          - validated
+                          - importing
+                          - imported
+                          - failed
+                        errorReportDownloadUrl:
+                          type: string
+                        originalFileDownloadUrl:
+                          type: string
+                        createdAt:
+                          type: string
+                        completedAt:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                      additionalProperties: false
+                  meta:
+                    type: object
+                    required:
+                    - total
+                    - limit
+                    - offset
+                    properties:
+                      total:
+                        type: number
+                      limit:
+                        type: number
+                      offset:
+                        type: number
+                    additionalProperties: false
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendor-imports/{importId}/import:
+    post:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.triggerImport
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: importId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - jobId
+                - status
+                - totalRecords
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - importing
+                  totalRecords:
+                    type: number
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+                - $ref: '#/components/schemas/ValidationFailedHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '413':
+          description: PayloadTooLargeHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendor-imports/{importId}:
+    get:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.getImportDetail
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: importId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - importId
+                - fileName
+                - uploadedBy
+                - status
+                - totalVendors
+                - validVendorCount
+                - invalidVendorCount
+                - errorCount
+                - duplicateCount
+                - createdAt
+                - completedAt
+                - processingTimeMs
+                properties:
+                  importId:
+                    type: string
+                  fileName:
+                    type: string
+                  uploadedBy:
+                    type: string
+                  importType:
+                    type: string
+                    enum:
+                    - standard
+                    - ai
+                  status:
+                    type: string
+                    enum:
+                    - parsing
+                    - parsed
+                    - validating
+                    - validated
+                    - importing
+                    - imported
+                    - failed
+                  totalVendors:
+                    type: number
+                  validVendorCount:
+                    type: number
+                  invalidVendorCount:
+                    type: number
+                  errorCount:
+                    type: number
+                  duplicateCount:
+                    type: number
+                  errorReportDownloadUrl:
+                    type: string
+                  originalFileDownloadUrl:
+                    type: string
+                  filledTemplateDownloadUrl:
+                    type: string
+                  successReportDownloadUrl:
+                    type: string
+                  createdAt:
+                    type: string
+                  completedAt:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  processingTimeMs:
+                    anyOf:
+                    - type: number
+                    - type: 'null'
+                  currentStep:
+                    type: string
+                  preview:
+                    type: object
+                    required: []
+                    properties: {}
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: object
+                        required: []
+                        properties: {}
+                        additionalProperties:
+                          title: unknown
+                  unmapped:
+                    type: object
+                    required:
+                    - sourceUnmappedColumns
+                    - targetUnmappedColumns
+                    properties:
+                      sourceUnmappedColumns:
+                        type: array
+                        items:
+                          type: string
+                      targetUnmappedColumns:
+                        type: array
+                        items:
+                          type: string
+                    additionalProperties: false
+                  requiredColumns:
+                    type: object
+                    required: []
+                    properties: {}
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                  validationResult:
+                    type: object
+                    required:
+                    - isValid
+                    - errors
+                    - sheetSummary
+                    properties:
+                      isValid:
+                        type: boolean
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - severity
+                          - code
+                          - message
+                          properties:
+                            severity:
+                              type: string
+                              enum:
+                              - error
+                              - warning
+                            code:
+                              type: string
+                            message:
+                              type: string
+                            sheet:
+                              type: string
+                            row:
+                              type: number
+                            column:
+                              type: string
+                            vendorImportKey:
+                              type: string
+                          additionalProperties: false
+                      sheetSummary:
+                        type: object
+                        required: []
+                        properties: {}
+                        additionalProperties:
+                          type: object
+                          required:
+                          - rowCount
+                          - hasRequiredColumns
+                          properties:
+                            rowCount:
+                              type: number
+                            hasRequiredColumns:
+                              type: boolean
+                            missingColumns:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                    additionalProperties: false
+                  error:
+                    type: string
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendor-imports/template:
+    get:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.downloadTemplate
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Template download response with presigned URL and structured instructions for UI display
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateDownloadResponse'
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendor-imports/{jobId}/validate:
+    post:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.validateJob
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: jobId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - jobId
+                - status
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - validating
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+                - $ref: '#/components/schemas/ValidationFailedHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '413':
+          description: PayloadTooLargeHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendor-imports/{jobId}/remap:
+    post:
+      tags:
+      - vendor-imports
+      operationId: vendor-imports.remapColumns
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: jobId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - filledTemplateDownloadUrl
+                properties:
+                  filledTemplateDownloadUrl:
+                    type: string
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+                - $ref: '#/components/schemas/ValidationFailedHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '413':
+          description: PayloadTooLargeHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - columnMapping
+              properties:
+                columnMapping:
+                  type: object
+                  required: []
+                  properties: {}
+                  additionalProperties:
+                    type: object
+                    required: []
+                    properties: {}
+                    additionalProperties:
+                      type: string
+                unmappedAssignments:
+                  type: object
+                  required: []
+                  properties: {}
+                  additionalProperties:
+                    type: object
+                    required:
+                    - targetSheet
+                    - targetColumn
+                    properties:
+                      targetSheet:
+                        type: string
+                      targetColumn:
+                        type: string
+                    additionalProperties: false
+              additionalProperties: false
+        required: true
+components:
+  schemas:
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    ProcessImportRequest:
+      type: object
+      required:
+      - uploadKey
+      - fileName
+      properties:
+        uploadKey:
+          type: string
+          description: a string at least 1 character(s) long
+          title: minLength(1)
+          minLength: 1
+        fileName:
+          type: string
+          description: a string at most 512 character(s) long
+          title: maxLength(512)
+          minLength: 1
+          maxLength: 512
+      additionalProperties: false
+      description: Start an import job from a previously presigned-uploaded S3 object
+    PayloadTooLargeHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        maxSizeBytes:
+          type: number
+        actualSizeBytes:
+          type: number
+        _tag:
+          type: string
+          enum:
+          - PayloadTooLargeHttpError
+      additionalProperties: false
+    TemplateDownloadResponse:
+      type: object
+      required:
+      - downloadUrl
+      - s3Key
+      - fileName
+      - instructions
+      properties:
+        downloadUrl:
+          type: string
+          description: Presigned S3 URL for template download
+        s3Key:
+          type: string
+          description: S3 object key where the template is stored
+        fileName:
+          type: string
+          description: Suggested filename for the download
+        instructions:
+          $ref: '#/components/schemas/TemplateInstructions'
+      additionalProperties: false
+      description: Template download response with presigned URL and structured instructions for UI display
+      title: Template Download Response
+    TemplateSheetInfo:
+      type: object
+      required:
+      - sheetName
+      - columns
+      properties:
+        sheetName:
+          type: string
+          description: Worksheet tab name
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSheetColumnInfo'
+          description: Columns present on this sheet in template order
+      additionalProperties: false
+      description: One import template tab and its columns
+      title: Template Sheet
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    PresignedUploadResponse:
+      type: object
+      required:
+      - uploadUrl
+      - uploadKey
+      - expiresInSeconds
+      properties:
+        uploadUrl:
+          type: string
+          description: Presigned S3 URL for PUT upload
+        uploadKey:
+          type: string
+          description: Opaque key to pass back to processImport
+        expiresInSeconds:
+          type: number
+      additionalProperties: false
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    TemplateInstructions:
+      type: object
+      required:
+      - generalInstructions
+      - requiredSheets
+      - notes
+      properties:
+        generalInstructions:
+          type: array
+          items:
+            type: string
+          description: General rules for filling the import template (same as Instructions sheet)
+        requiredSheets:
+          type: array
+          items:
+            type: string
+          description: Sheet names that are required and cannot be excluded
+        notes:
+          type: array
+          items:
+            type: string
+          description: Short UI hints; field-level help is in the downloaded template
+        sheets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSheetInfo'
+          description: 'Optional extension: when present, data sheets in the template with ordered column definitions (omitted when no template was generated)'
+      additionalProperties: false
+      description: General instructions, required sheets, and supplementary notes; optional sheet-wise column metadata when available
+      title: Template Instructions
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    TemplateSheetColumnInfo:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Column header as in the template
+      additionalProperties: false
+      title: Template Sheet Column
+    ValidationFailedHttpError:
+      type: object
+      required:
+      - message
+      - errors
+      - _tag
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required:
+            - severity
+            - code
+            - message
+            properties:
+              severity:
+                type: string
+                enum:
+                - error
+                - warning
+              code:
+                type: string
+              message:
+                type: string
+              sheet:
+                type: string
+              row:
+                type: number
+              column:
+                type: string
+              vendorImportKey:
+                type: string
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - ValidationFailedHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    PresignedUploadRequest:
+      type: object
+      required:
+      - fileName
+      properties:
+        fileName:
+          type: string
+          description: a string at most 512 character(s) long
+          title: maxLength(512)
+          minLength: 1
+          maxLength: 512
+        contentType:
+          type: string
+      additionalProperties: false
+      description: Request a presigned S3 PUT URL for direct-from-browser upload
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme

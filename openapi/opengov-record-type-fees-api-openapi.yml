@@ -1,0 +1,337 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Type Fees API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Type Fees
+  description: Record Type Fees define the calculation structure for individual fees charged on Payment Steps.
+paths:
+  /v2/{community}/record-types/{recordTypeID}/fees:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1attachments/parameters/1'
+    get:
+      summary: List fees for a record type
+      description: 'Retrieve a list of fees configured for the specified record type.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getRecordTypeFees
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Type Fees
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      responses:
+        '200':
+          description: Returns fee templates
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Record Type Fee
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      x-tags:
+                      - Record Type Fees
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - recordTypeFee
+                          example: recordTypeFee
+                        id:
+                          type: string
+                          example: record-type-fees-1000013
+                        attributes:
+                          type: object
+                          description: Record type fee
+                          properties:
+                            accountNumber:
+                              type: string
+                              maxLength: 500
+                              nullable: true
+                              description: Account number associated with the fee.
+                              example: ACC-RTF-5432109876
+                            label:
+                              type: string
+                              nullable: true
+                              description: Label or name of the fee.
+                              example: Building Permit Processing Fee
+                            lastUpdatedByUserID:
+                              type: string
+                              nullable: true
+                              description: Identifier of the user who last updated the fee.
+                              example: user-admin-1000014
+                            isEnabled:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether the fee is enabled.
+                              example: true
+                        relationships:
+                          type: object
+                          properties:
+                            recordType:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The related `Record Type`.
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/record-types/fees/{recordTypeFeeID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: recordTypeFeeID
+      in: path
+      description: ID of the record type fee
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Record Type Fee
+      description: 'Retrieve a record type fee by ID.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getRecordTypeFee
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Type Fees
+      responses:
+        '200':
+          description: Returns record type fee
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Record Type Fee
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    x-tags:
+                    - Record Type Fee
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordTypeFee
+                        example: recordTypeFee
+                      id:
+                        type: string
+                        example: record-type-fee-1000009
+                      attributes:
+                        type: object
+                        description: Record type fee
+                        properties:
+                          accountNumber:
+                            type: string
+                            maxLength: 500
+                            nullable: true
+                            description: Account number associated with the fee.
+                            example: ACC-RT-9876543210
+                          label:
+                            type: string
+                            nullable: true
+                            description: Label or name of the fee.
+                            example: Building Permit Application Fee
+                          lastUpdatedByUserID:
+                            type: string
+                            nullable: true
+                            description: Identifier of the user who last updated the fee.
+                            example: user-admin-1000010
+                          isEnabled:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether the fee is enabled.
+                            example: true
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

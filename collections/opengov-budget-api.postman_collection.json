@@ -1,0 +1,2395 @@
+{
+  "item": [
+    {
+      "id": "354169c7-b53f-40a1-9d86-c786dbc07aa8",
+      "name": "Budget",
+      "description": {
+        "content": "Operations for retrieving budget data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20c7cc45-2c76-40f7-a987-215bce2fbd33",
+          "name": "List Budgets by Entity",
+          "request": {
+            "name": "List Budgets by Entity",
+            "description": {
+              "content": "Retrieve a list of Budgets filtered by the associated Entity ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "budgets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[entityId]",
+                  "value": "<uuid>",
+                  "description": "(Required) Filter budgets by entity ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8085e0a3-a929-495b-a4f5-167a3150b839",
+              "name": "A list of Budget resources matching the filter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n        \"coaId\": \"88a72f43-f419-4a23-93ec-8f0f2261ea9a\",\n        \"budgetPeriods\": [\n          {\n            \"id\": \"8dabe1be-e54e-27b5-1f92-893420c5ba1f\",\n            \"name\": \"string\",\n            \"startDate\": \"2017-08-24\",\n            \"endDate\": \"2017-06-10\",\n            \"visible\": true\n          },\n          {\n            \"id\": \"4dc89edf-4191-f1b3-382c-ee3da51eddfb\",\n            \"name\": \"string\",\n            \"startDate\": \"1964-10-25\",\n            \"endDate\": \"1975-01-21\",\n            \"visible\": true\n          }\n        ],\n        \"createdAt\": \"2025-01-01T00:00:00Z\",\n        \"updatedAt\": \"2025-01-01T00:00:00Z\",\n        \"workforceId\": \"91cdba8a-4e75-4083-a5c6-159c8ef7aec0\"\n      },\n      \"type\": \"budget\"\n    },\n    {\n      \"id\": \"string\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n        \"coaId\": \"88a72f43-f419-4a23-93ec-8f0f2261ea9a\",\n        \"budgetPeriods\": [\n          {\n            \"id\": \"a6b030c9-ab67-4c53-78d0-0b41296594b4\",\n            \"name\": \"string\",\n            \"startDate\": \"2025-11-02\",\n            \"endDate\": \"1970-07-31\",\n            \"visible\": false\n          },\n          {\n            \"id\": \"1df27cb8-e9d5-e4df-18e7-faee663341da\",\n            \"name\": \"string\",\n            \"startDate\": \"1987-02-22\",\n            \"endDate\": \"2016-05-31\",\n            \"visible\": true\n          }\n        ],\n        \"createdAt\": \"2025-01-01T00:00:00Z\",\n        \"updatedAt\": \"2025-01-01T00:00:00Z\",\n        \"workforceId\": \"91cdba8a-4e75-4083-a5c6-159c8ef7aec0\"\n      },\n      \"type\": \"budget\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://api.bnp.opengov.com/api/v1/budgets/1\"\n  },\n  \"meta\": {\n    \"totalRecords\": 42\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea5be167-44ec-4bb4-90d5-bc60c3298700",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2668b94e-b08e-4403-96e7-284a7b05cd4e",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4386ebe-c3ba-4ba2-841c-df6810a90afd",
+              "name": "Not Found - The requested entity was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21235a44-077c-4bda-b8f4-bd74c75f82ff",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3104704d-6f09-40d5-8472-f8bd11507e4d",
+          "name": "Get Budget by ID",
+          "request": {
+            "name": "Get Budget by ID",
+            "description": {
+              "content": "Retrieve a Budget by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "budgets",
+                ":budgetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "budgetId",
+                  "description": "(Required) Get a Budget by its ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71e254d7-5418-472d-b0ff-a5f26663e658",
+              "name": "Get a Budget by its ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Get a Budget by its ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"attributes\": {\n      \"name\": \"string\",\n      \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n      \"coaId\": \"88a72f43-f419-4a23-93ec-8f0f2261ea9a\",\n      \"budgetPeriods\": [\n        {\n          \"id\": \"76d55ce9-7b02-81e4-b303-5c2766e3ecff\",\n          \"name\": \"string\",\n          \"startDate\": \"1950-06-12\",\n          \"endDate\": \"1951-04-13\",\n          \"visible\": true,\n          \"workforceId\": \"91cdba8a-4e75-4083-a5c6-159c8ef7aec0\",\n          \"createdAt\": \"2025-01-01T00:00:00Z\",\n          \"updatedAt\": \"2025-01-01T00:00:00Z\"\n        },\n        {\n          \"id\": \"7b300727-c43f-2c75-43e6-01aae4f174f1\",\n          \"name\": \"string\",\n          \"startDate\": \"1955-09-28\",\n          \"endDate\": \"2009-03-25\",\n          \"visible\": true,\n          \"workforceId\": \"91cdba8a-4e75-4083-a5c6-159c8ef7aec0\",\n          \"createdAt\": \"2025-01-01T00:00:00Z\",\n          \"updatedAt\": \"2025-01-01T00:00:00Z\"\n        }\n      ],\n      \"createdAt\": 4713.301479384679,\n      \"updatedAt\": true\n    },\n    \"type\": \"budget\"\n  },\n  \"links\": {\n    \"self\": \"https://bujLmgPaixvQPyKXcmJlCDojXJYQttWDO.akMFL6DTPcn9Jm33Wf,F6ZTjbR00DXnzkvIouvfVUVrGveKBj6U8FDUc+\",\n    \"next\": \"https://rQYaqWmmHnQiY.zbVen4m.hF.6wkH.l8iJ0k38QByBwGnlgOg61ASSQvp1y4yPhKG2hnhBe0KhUfjvZqw+\",\n    \"prev\": \"http://bsbUtbFXDyyVaXmssZzxgBJGxYH.pwjsG6RQN1q0FYITZXJDHiav3t3Eml\"\n  },\n  \"meta\": {\n    \"totalRecords\": 42\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caaac184-f83a-4f28-9a06-23131e3c9444",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Get a Budget by its ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dde89db-d2fe-4ad3-b249-0ac7091ad211",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Get a Budget by its ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1f7119b-9c87-4c60-bd2b-5299fb978bff",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Get a Budget by its ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0916ff05-539b-4305-bb73-e53e48b4f77a",
+          "name": "Get the Amounts Summary for a Budget by ID",
+          "request": {
+            "name": "Get the Amounts Summary for a Budget by ID",
+            "description": {
+              "content": "Retrieve the Amounts Summary for a Budget by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "budgets",
+                ":budgetId",
+                "amounts-summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "budgetId",
+                  "description": "(Required) Budget Identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59d06b75-a2fb-4106-b5c0-292961af8bb3",
+              "name": "Get a Budget by its ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "amounts-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"b10063bc-1ed9-2a4e-259c-491c7cbd8896\",\n    \"attributes\": {\n      \"amountsSummary\": {\n        \"expenses\": {\n          \"baseAmount\": \"string\",\n          \"adjustmentAmount\": \"string\",\n          \"proposedAmount\": \"string\"\n        },\n        \"revenues\": {\n          \"baseAmount\": \"string\",\n          \"adjustmentAmount\": \"string\",\n          \"proposedAmount\": \"string\"\n        }\n      }\n    },\n    \"type\": \"budget-amounts-summary\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fddd7d8-127a-4065-85e9-e59cb9708401",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "amounts-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22892be2-267e-49d1-a4ba-7f2fffd0420a",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "amounts-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e6b8f52-721c-43f3-8933-075b910e5747",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "amounts-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4f53ca1-05cc-4f94-9f8d-044bfc5f3195",
+          "name": "Get Budget Amounts by Budget ID",
+          "request": {
+            "name": "Get Budget Amounts by Budget ID",
+            "description": {
+              "content": "Retrieve budget amounts for a given budget ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "budgets",
+                ":budgetId",
+                "budget-amounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Include the budget metadata"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "budgetId",
+                  "description": "(Required) Budget Identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0a156fa-0227-4112-a531-1a21ce8cd027",
+              "name": "Get Budget Amounts by Budget ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "budget-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"attributes\": {\n        \"fiscalYear\": 2025,\n        \"amount\": \"241000.00\",\n        \"accountNumberId\": \"8e6b0e26-36a7-abc1-8167-e5aecf47bd0d\",\n        \"accountNumber\": \"101-1234-2123-10021\"\n      },\n      \"type\": \"budget-amount\"\n    },\n    {\n      \"id\": \"string\",\n      \"attributes\": {\n        \"fiscalYear\": 2025,\n        \"amount\": \"241000.00\",\n        \"accountNumberId\": \"bdf7aac4-eb8a-cb3f-f715-c17ca7e1f56d\",\n        \"accountNumber\": \"101-1234-2123-10021\"\n      },\n      \"type\": \"budget-amount\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"http://oxZJBXurIcguyuWwtaMRthcgrvGLXBEuh.otdVgvX3GD1wsFuQOtpiTRrR2P2dda3h82,Id7f9a0IhL\",\n    \"next\": \"http://WSLfOH.ntDoSCfN6HFACYTKeh,.O47XgSjVXirXc+nZjIn5ew5+J5jJWV\",\n    \"prev\": \"http://NfZhs.lyuek4finG5TGPh9EY+Yc+dSvY,JswXRI2UQ6t00Va7i09mVnyn0q4sS\",\n    \"first\": \"https://vLuvxNDZYhLXFCWVOjDwNhwcSWKXcGK.opoNClVxt3lNC.Ldngl2PhqyDET\",\n    \"last\": \"https://sSryZIhTXevIXbKcpvLmHhkhXMuvW.pkq-lEeL\"\n  },\n  \"meta\": {\n    \"totalRecords\": 42\n  },\n  \"included\": [\n    {\n      \"id\": \"string\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n        \"coaId\": \"88a72f43-f419-4a23-93ec-8f0f2261ea9a\",\n        \"budgetPeriods\": [\n          {\n            \"id\": \"e53cdf67-aea6-42fa-03b2-05d69c0e1e59\",\n            \"name\": \"string\",\n            \"startDate\": \"2018-05-31\",\n            \"endDate\": \"2012-04-26\",\n            \"visible\": true\n          },\n          {\n            \"id\": \"174ae6e9-b76e-3669-be05-6165c0794f32\",\n            \"name\": \"string\",\n            \"startDate\": \"1991-04-27\",\n            \"endDate\": \"1974-12-29\",\n            \"visible\": true\n          }\n        ],\n        \"createdAt\": \"2025-01-01T00:00:00Z\",\n        \"updatedAt\": \"2025-01-01T00:00:00Z\",\n        \"workforceId\": \"91cdba8a-4e75-4083-a5c6-159c8ef7aec0\"\n      },\n      \"type\": \"budget\"\n    },\n    {\n      \"id\": \"string\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"entityId\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\",\n        \"coaId\": \"88a72f43-f419-4a23-93ec-8f0f2261ea9a\",\n        \"budgetPeriods\": [\n          {\n            \"id\": \"89adcf18-08cc-ac82-8d9e-3c758e6f1f47\",\n            \"name\": \"string\",\n            \"startDate\": \"1975-11-08\",\n            \"endDate\": \"1961-05-17\",\n            \"visible\": true\n          },\n          {\n            \"id\": \"79bcb136-10d9-775e-0f58-0c281fb4c3bd\",\n            \"name\": \"string\",\n            \"startDate\": \"2008-07-31\",\n            \"endDate\": \"1997-04-12\",\n            \"visible\": false\n          }\n        ],\n        \"createdAt\": \"2025-01-01T00:00:00Z\",\n        \"updatedAt\": \"2025-01-01T00:00:00Z\",\n        \"workforceId\": \"91cdba8a-4e75-4083-a5c6-159c8ef7aec0\"\n      },\n      \"type\": \"budget\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a79901d-35ba-456f-bfa0-261ed878ea82",
+              "name": "Bad Request - The request could not be understood by the server due to malformed syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "budget-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88849fb0-8ffa-4cfc-9f0a-fa8784bf0bca",
+              "name": "Unauthorized - Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "budget-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a7f3bc1-4de2-4dc5-9c5a-ae164e3d13f2",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "budget-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58563a6b-6a83-41b6-9a7c-0c34856057e5",
+              "name": "Not found - Budget with the given ID not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "budget-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed3f2050-4c1d-44d7-9e01-bc63b536a927",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "budgets",
+                    ":budgetId",
+                    "budget-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "budgetId",
+                      "description": "(Required) Budget Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd786346-95f0-4ac3-824f-78467362de4c",
+          "name": "Retrieves the exportable data resources for an entity",
+          "request": {
+            "name": "Retrieves the exportable data resources for an entity",
+            "description": {
+              "content": "Returns all standard dataset instances available for export from the Budget and Workforce applications for the specified entity. If includeCustom=true, custom financial datasets are also included. Use the Get Data Export Resource Metadata endpoint to retrieve additional details for a resource, including its column schema, and use the Export Data Resource as CSV endpoint to download the resource as a CSV file.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "data-exports",
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[entityId]",
+                  "value": "<uuid>",
+                  "description": "(Required) Filter resources by entity ID (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includeCustom]",
+                  "value": "<string>",
+                  "description": "Includes custom financial datasets"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e3b1b7c-d3f5-423c-a6ea-6cb8cf6248cc",
+              "name": "Successfully retrieved list of available data export resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "780edc1b-a3f2-40f4-8489-f03a2d3aa9b1"
+                    },
+                    {
+                      "key": "filter[includeCustom]",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1\",\n      \"attributes\": {\n        \"name\": \"Budget Summary Report\",\n        \"description\": \"Comprehensive budget summary including all line items and totals for the fiscal year\",\n        \"standardType\": \"urn:opengov:lenses/standard/budgeting/budget-summary/1\",\n        \"createdAt\": \"2024-01-15T10:30:00Z\",\n        \"updatedAt\": \"2024-03-20T14:45:00Z\",\n        \"dataUpdatedAt\": \"2024-03-22T09:15:00Z\"\n      },\n      \"type\": \"data-export-resource\"\n    },\n    {\n      \"id\": \"lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1\",\n      \"attributes\": {\n        \"name\": \"Budget Summary Report\",\n        \"description\": \"Comprehensive budget summary including all line items and totals for the fiscal year\",\n        \"standardType\": \"urn:opengov:lenses/standard/budgeting/budget-summary/1\",\n        \"createdAt\": \"2024-01-15T10:30:00Z\",\n        \"updatedAt\": \"2024-03-20T14:45:00Z\",\n        \"dataUpdatedAt\": \"2024-03-22T09:15:00Z\"\n      },\n      \"type\": \"data-export-resource\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://api.bnp.opengov.com/api/v1/budgets/1\"\n  },\n  \"meta\": {\n    \"totalRecords\": 42\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "057d0d2a-588b-4f84-9fab-542cdc385574",
+              "name": "Bad Request - Invalid or missing entity ID filter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "780edc1b-a3f2-40f4-8489-f03a2d3aa9b1"
+                    },
+                    {
+                      "key": "filter[includeCustom]",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"title\": \"Invalid filter parameter\",\n      \"detail\": \"The filter[entityId] parameter is required and must be a valid UUID\"\n    },\n    {\n      \"status\": \"400\",\n      \"title\": \"Invalid filter parameter\",\n      \"detail\": \"The filter[entityId] parameter is required and must be a valid UUID\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8dd1a49-bd23-4929-9e77-c20aef9ec9ea",
+              "name": "Unauthorized - Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "780edc1b-a3f2-40f4-8489-f03a2d3aa9b1"
+                    },
+                    {
+                      "key": "filter[includeCustom]",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "693232a6-9979-4a45-8e7f-3de725ccbd08",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "780edc1b-a3f2-40f4-8489-f03a2d3aa9b1"
+                    },
+                    {
+                      "key": "filter[includeCustom]",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39e4c36b-6d6d-487d-90ed-427f17ddffc4",
+              "name": "Not found - Entity with the given ID not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "780edc1b-a3f2-40f4-8489-f03a2d3aa9b1"
+                    },
+                    {
+                      "key": "filter[includeCustom]",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c49ab9b5-7faf-4d7d-8611-aaeb93467881",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[entityId]",
+                      "value": "780edc1b-a3f2-40f4-8489-f03a2d3aa9b1"
+                    },
+                    {
+                      "key": "filter[includeCustom]",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63305179-ac98-4f34-8270-a09002d3b727",
+          "name": "Get Data Export Resource Metadata",
+          "request": {
+            "name": "Get Data Export Resource Metadata",
+            "description": {
+              "content": "Retrieves detailed metadata information for a specific data export resource,\nincluding the name, description, standard type, column schema, and timestamps indicating when the \nresource was created and updated.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "data-exports",
+                "metadata",
+                ":resourceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceId",
+                  "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "591f55e1-c134-47d4-9578-2e6b21225420",
+              "name": "Successfully retrieved metadata for the data export resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "metadata",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"data-export-resource-metadata\",\n    \"id\": \"lens/entity/budget-summary/58f3556f-f638-49e3-8260-2d98bee5ed5b\",\n    \"attributes\": {\n      \"entityId\": \"68c1cc9c-03c1-4786-ba87-300c262b1cc3\",\n      \"name\": \"Budget with Allocations (Test) Budget Summary - 7/9/2025\",\n      \"description\": \"Budget with Allocations (Test) Budget Summary - 7/9/2025\",\n      \"sourceId\": \"dataset/entity/budget-summary/ac339608-86a2-4f47-a125-f2d2d536ed4d\",\n      \"managed\": {\n        \"type\": \"application\",\n        \"application\": \"urn:opengov:application:budget\"\n      },\n      \"standardType\": \"urn:opengov:lenses/standard/budgeting/budget-summary/1\",\n      \"columns\": [\n        {\n          \"name\": \"account_number\",\n          \"label\": \"Account Number\",\n          \"visible\": true,\n          \"semanticTypes\": [\n            \"urn:opengov:types/semantic/accounting/coa/account-number\",\n            \"urn:opengov:types/semantic/dataclass/public\"\n          ],\n          \"type\": \"urn:opengov:types/logical/text\"\n        },\n        {\n          \"name\": \"amount\",\n          \"label\": \"Amount\",\n          \"visible\": true,\n          \"semanticTypes\": [\n            \"urn:opengov:types/semantic/datamanagement/default-metric\",\n            \"urn:opengov:types/semantic/dataclass/public\",\n            \"http://schema.org/MonetaryAmount\"\n          ],\n          \"type\": \"urn:opengov:types/logical/numeric?precision=19&scale=4\",\n          \"family\": \"Amount\"\n        }\n      ],\n      \"createdAt\": \"2025-07-09T20:11:01.720379413Z\",\n      \"updatedAt\": \"2025-07-09T20:11:01.720379413Z\",\n      \"visible\": true,\n      \"dataUpdatedAt\": \"2025-07-09T20:11:06.860339917Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0ecf5ea-a84c-46f3-b5e3-68272f298cbd",
+              "name": "Bad Request - Invalid resource identifier",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "metadata",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"title\": \"Invalid resource identifier\",\n      \"detail\": \"The provided resourceId is not valid\"\n    },\n    {\n      \"status\": \"400\",\n      \"title\": \"Invalid resource identifier\",\n      \"detail\": \"The provided resourceId is not valid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7c97cc1-0c12-40a1-9796-d6bf1407b604",
+              "name": "Unauthorized - Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "metadata",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43813c84-9b7c-46a9-bceb-325201bd4867",
+              "name": "Forbidden - Client does not have permission to access the requested resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "metadata",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0953028b-5ec9-4f4e-9924-48bfe430f748",
+              "name": "Not found - Resource with the given ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "metadata",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7faef1f6-ee6d-4fef-8361-b18e42c4ad2c",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "metadata",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource (may contain forward slashes)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5ba4240-88f8-4809-9402-9d068343dc1b",
+          "name": "Export Data Resource as CSV",
+          "request": {
+            "name": "Export Data Resource as CSV",
+            "description": {
+              "content": "Exports a budget data resource as a CSV file by redirecting to a presigned URL.\nThe response includes a Location header that clients should follow to download the data.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "data-exports",
+                "export",
+                ":resourceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceId",
+                  "description": "(Required) The unique identifier of the data resource to export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "919ed22e-c206-4623-8346-94a464bda9e7",
+              "name": "Found - Redirect to the data export location.\nThe client should follow the Location header to download the data.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "export",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource to export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The URL where the data export can be downloaded",
+                  "key": "Location",
+                  "value": "https://dataexports.opengov.com/exports/lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1/export.csv?Signature=1234567890"
+                },
+                {
+                  "disabled": false,
+                  "description": "Caching directives for the redirect response",
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, must-revalidate"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ac337ad-74e8-478b-bc4a-7f4da30aa10e",
+              "name": "Bad Request - Invalid resource identifier",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "export",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource to export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"title\": \"Invalid resource identifier\",\n      \"detail\": \"The provided resourceId is not valid\"\n    },\n    {\n      \"status\": \"400\",\n      \"title\": \"Invalid resource identifier\",\n      \"detail\": \"The provided resourceId is not valid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d891763-181b-4def-ba07-8238ac644ea1",
+              "name": "Unauthorized - Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "export",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource to export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9e0ab13-63e2-4c4f-b6ac-cdab8bd0d1fb",
+              "name": "Forbidden - Client does not have permission to access the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "export",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource to export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cd6015f-79e5-4b97-b0ee-4a1e88e39865",
+              "name": "Not found - Resource with the given ID not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "export",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource to export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc2f3935-c7a7-437a-b154-c3a4e89ed268",
+              "name": "Not Acceptable - The request could not be understood by the server due to a client error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "data-exports",
+                    "export",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) The unique identifier of the data resource to export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bnp.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "94abf3df-da65-42db-967f-07591997db65",
+    "name": "Budgeting & Performance Budget API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Budgeting & Performance API\n\n\nContact Support:\n Name: B&P Team",
+      "type": "text/plain"
+    }
+  }
+}

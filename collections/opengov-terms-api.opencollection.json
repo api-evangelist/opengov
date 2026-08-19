@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Terms API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "terms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Terms & Conditions for a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/terms",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the persisted Terms & Conditions body and selected attachment IDs. Returns `terms: null` when no T&C row exists yet."
+        },
+        {
+          "info": {
+            "name": "Upsert Terms & Conditions for a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/terms",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the PO's Terms & Conditions row and replaces its attachment selection atomically. Attachment IDs must belong to the same PO and have `purpose = 'TERMS_AND_CONDITIONS'`. Enforces 5-attachment cap, 2MB per-file limit, and the MIME allow-list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,444 @@
+{
+  "item": [
+    {
+      "id": "c6b12118-87c6-4bbb-9404-d3d6f1c0ba92",
+      "name": "Record Form",
+      "description": {
+        "content": "A Record's **Form** is based on its **Record Type**.\n\nA Form is comprised of **Fields** which are contained within **Sections**. Each Field is of a specific data Type, and has a **Label** and a **Value**.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "09ab87b1-3991-4bdb-bed3-621870f1c385",
+          "name": "List record form fields",
+          "request": {
+            "name": "List record form fields",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":community",
+                "records",
+                ":recordID",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "community",
+                  "description": "(Required) Name of the community"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "recordID",
+                  "description": "(Required) ID of the record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3285ea90-53cc-44a5-8471-7cc64a1dcb77",
+              "name": "Returns form fields and sections",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Name of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "recordID",
+                      "description": "(Required) ID of the record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"record_details\",\n    \"id\": 5897,\n    \"attributes\": {\n      \"id\": 509,\n      \"fields\": [\n        {\n          \"id\": 9437,\n          \"label\": \"string\",\n          \"type\": \"FILE_UPLOAD\",\n          \"required\": true,\n          \"internal\": true,\n          \"ordinal\": 9491,\n          \"sectionID\": 4525,\n          \"groupID\": 1339,\n          \"value\": \"string\"\n        },\n        {\n          \"id\": 8972,\n          \"label\": \"string\",\n          \"type\": \"CHECKBOX\",\n          \"required\": false,\n          \"internal\": true,\n          \"ordinal\": 7899,\n          \"sectionID\": 9173,\n          \"groupID\": 9346,\n          \"value\": \"string\"\n        }\n      ],\n      \"sections\": [\n        {\n          \"id\": 9932,\n          \"label\": \"string\",\n          \"internal\": false,\n          \"ordinal\": 1485\n        },\n        {\n          \"id\": 9120,\n          \"label\": \"string\",\n          \"internal\": true,\n          \"ordinal\": 55\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f0fa3ea-c746-4245-b7b6-8bb49ea0b50b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Name of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "recordID",
+                      "description": "(Required) ID of the record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffd7b099-d941-4e88-ab60-b5ccdec86f32",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Name of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "recordID",
+                      "description": "(Required) ID of the record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aed508ee-7743-4284-92db-4e01c375b1b2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Name of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "recordID",
+                      "description": "(Required) ID of the record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71db7810-e566-4857-8db7-81d0db369b62",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Name of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "recordID",
+                      "description": "(Required) ID of the record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f950581-2acc-4d13-ba9c-505b36a22f2e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Name of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "recordID",
+                      "description": "(Required) ID of the record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a261bc7f-d1ff-46c6-80ca-b16d7d0806b6",
+    "name": "Permitting Licensing & Code Enforcement Record Form API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API is organized around REST. The API is based on the JSON API specification and uses standard HTTP response codes, authentication, and verbs.\n\n## Authentication\nThe OpenGov Permitting & Licensing API is authenticated using the [OAuth2](https://www.rfc-editor.org/rfc/rfc6749) Client Credentials flow. Access tokens are provided as a [bearer token](https://datatracker.ietf.org/doc/html/rfc6750) Authorization header in all API requests.\n\nTo obtain an access token, you must have an OpenGov-provided **Client ID** and **Client Secret** and make a POST request to https://accounts.viewpointcloud.com/oauth/token\n\nExample request:\n\n```bash\ncurl --request POST \\\n  --url https://accounts.viewpointcloud.com/oauth/token \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'grant_type=client_credentials' \\\n  --data 'client_id=YOUR_CLIENT_ID' \\\n  --data 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data 'audience=viewpointcloud.com/api/production'\n```\n\nThe response will include:\n- `access_token`: Access token issued by the authorization server\n- `token_type`: Type of token issued (typically `Bearer`)\n- `expires_in`: The lifetime in seconds of the access token\n<br />\n<br />\nThe API will return a 401 error if a token is invalid.\n<br />\n<br />\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,698 @@
+{
+  "item": [
+    {
+      "id": "c5b59512-535d-47fb-8ede-7ae09fb96c5d",
+      "name": "vendorRecommendations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60821af9-6ed7-4c6d-9924-447c375715f7",
+          "name": "vendor Recommendations.get Vendor Recommendations",
+          "request": {
+            "name": "vendor Recommendations.get Vendor Recommendations",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "vendor-recommendations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "issueType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "certCategory",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "certType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "vendorKey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expiringDays",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "42b0110e-ae61-4f41-b7bd-5243a08795d1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendor-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendorKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"totalIssues\": 6631.247159869964,\n    \"totalVendorsAffected\": 1239.849170435291\n  },\n  \"issues\": [\n    {\n      \"issueType\": \"string\",\n      \"severity\": \"critical\",\n      \"category\": \"string\",\n      \"count\": 7006.543948162718,\n      \"vendorKeys\": [\n        8402.103341502629,\n        1233.3894558045245\n      ],\n      \"certCategory\": \"string\",\n      \"certType\": \"string\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"issueType\": \"string\",\n      \"severity\": \"info\",\n      \"category\": \"string\",\n      \"count\": 8717.411009735448,\n      \"vendorKeys\": [\n        2038.5925869029486,\n        2427.127244731556\n      ],\n      \"certCategory\": \"string\",\n      \"certType\": \"string\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    }\n  ],\n  \"vendors\": [\n    {\n      \"vendorKey\": 529.5944119832019,\n      \"legalCompanyName\": \"string\",\n      \"status\": \"string\",\n      \"issueCount\": 9104.706282243478,\n      \"issues\": [\n        {\n          \"issueType\": \"string\",\n          \"severity\": \"info\",\n          \"certCategory\": \"string\",\n          \"certType\": \"string\"\n        },\n        {\n          \"issueType\": \"string\",\n          \"severity\": \"info\",\n          \"certCategory\": \"string\",\n          \"certType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"vendorKey\": 5151.994277696162,\n      \"legalCompanyName\": \"string\",\n      \"status\": \"string\",\n      \"issueCount\": 1271.828733649396,\n      \"issues\": [\n        {\n          \"issueType\": \"string\",\n          \"severity\": \"warning\",\n          \"certCategory\": \"string\",\n          \"certType\": \"string\"\n        },\n        {\n          \"issueType\": \"string\",\n          \"severity\": \"warning\",\n          \"certCategory\": \"string\",\n          \"certType\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbd035fa-1632-4a62-8f45-e422e0b83b85",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendor-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendorKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"issues\": [\n    {\n      \"_tag\": \"Unexpected\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    },\n    {\n      \"_tag\": \"Unexpected\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\",\n  \"_tag\": \"HttpApiDecodeError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e71d55c3-6f53-4039-850e-320e8378b67f",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendor-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendorKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_tag\": \"AuthError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "697c9e0b-2a9b-4ff9-8e56-e28b0d040dc9",
+              "name": "UnauthorizedHttpError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendor-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendorKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"UnauthorizedHttpError\",\n  \"requiredPermissions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e2de8a0-eabe-48c5-b5da-cf7828aa6865",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendor-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendorKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"string\",\n  \"_tag\": \"EntityNotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be7f9dc6-1976-4c58-ba6a-12dc05614560",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "vendor-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendorKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) JWT Bearer token for authentication",
+                    "key": "Authorization",
+                    "value": "Bearer <your-jwt-token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"_tag\": \"InfrastructureError\",\n  \"cause\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vendor.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "03b1ffd6-1f1c-4c1d-929f-bcd00fba2890",
+    "name": "Vendor Management Vendor Recommendations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A comprehensive API for managing vendors in the OpenGov platform.\n\n## Authentication\nAll endpoints require JWT Bearer token authentication. Include the token in the Authorization header:\n```\nAuthorization: Bearer <your-jwt-token>\n```\n\n## Features\n- **Vendor Management**: Create, read, update, and delete vendors\n- **Health Check**: Monitor service health\n\n## Rate Limiting\nAPI calls are subject to rate limiting based on your subscription tier.\n\nContact Support:\n Name: OpenGov API Support\n Email: api-support@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

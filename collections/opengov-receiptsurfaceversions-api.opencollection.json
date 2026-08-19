@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Receipt Receipt Surface Versions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "receiptSurfaceVersions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get surface version status for a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/surface-versions",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "surfaces",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns current max entry IDs for each surface (COMMENTS, ATTACHMENTS, ACTIVITY_LOG) and the user's last-viewed entry ID for each. Frontend uses the `isNewer` flag to render the 'New' badge. Called on side-panel mount."
+        },
+        {
+          "info": {
+            "name": "Record surface views (mark up to entry IDs as seen)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/surface-versions",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Body is an array of `{ surface, lastViewedEntryId }` pairs. Backend upserts rcp_user_surface_views records and bumps `viewed_count`. Returns 204 No Content. Called when the user opens a panel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

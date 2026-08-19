@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Primary Location API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Primary Location",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get primary location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/primary-location"
+          },
+          "docs": "Retrieve the primary location associated with a record.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Update primary location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/primary-location",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the primary location associated with a record.\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Remove primary location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/primary-location"
+          },
+          "docs": "Remove the primary location from a record.\n### Permissions Required\n`Record Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

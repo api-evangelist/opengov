@@ -1,0 +1,1581 @@
+openapi: 3.2.0
+info:
+  title: Vendor Management Saved Views API
+  description: 'A comprehensive API for managing vendors in the OpenGov platform.
+
+
+    ## Authentication
+
+    All endpoints require JWT Bearer token authentication. Include the token in the Authorization header:
+
+    ```
+
+    Authorization: Bearer <your-jwt-token>
+
+    ```
+
+
+    ## Features
+
+    - **Vendor Management**: Create, read, update, and delete vendors
+
+    - **Health Check**: Monitor service health
+
+
+    ## Rate Limiting
+
+    API calls are subject to rate limiting based on your subscription tier.'
+  version: 1.0.0
+  contact:
+    name: OpenGov API Support
+    email: api-support@opengov.com
+  license:
+    name: Proprietary
+    url: https://opengov.com/terms
+servers:
+- url: https://api.vendor.opengov.com
+  description: Production Server
+- url: https://api.vendor.ogstaging.us
+  description: Staging Server
+- url: https://api-vendor.procurement.ogintegration.us
+  description: Integration Server
+security:
+- bearerAuth: []
+tags:
+- name: saved-views
+paths:
+  /api/v1/entities/{entityId}/saved-views:
+    get:
+      tags:
+      - saved-views
+      operationId: saved-views.listSavedViews
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: domain
+        in: query
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - preconfigured
+                - private
+                - shared
+                properties:
+                  preconfigured:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - savedViewId
+                      - domain
+                      - name
+                      - isShared
+                      - viewPayload
+                      - isPreconfigured
+                      - section
+                      properties:
+                        savedViewId:
+                          type: string
+                        domain:
+                          type: string
+                        name:
+                          type: string
+                          description: a string at most 255 character(s) long
+                          title: maxLength(255)
+                          pattern: ^\S[\s\S]*\S$|^\S$|^$
+                          minLength: 1
+                          maxLength: 255
+                        isShared:
+                          type: boolean
+                        viewPayload:
+                          type: object
+                          required:
+                          - columns
+                          - search
+                          properties:
+                            columns:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                - name
+                                properties:
+                                  name:
+                                    type: string
+                                  visibility:
+                                    type: boolean
+                                additionalProperties: false
+                            search:
+                              type: object
+                              required:
+                              - query
+                              - sortBy
+                              properties:
+                                query:
+                                  type: object
+                                  required:
+                                  - searchString
+                                  - columns
+                                  properties:
+                                    searchString:
+                                      type: string
+                                    columns:
+                                      type: array
+                                      items:
+                                        type: string
+                                  additionalProperties: false
+                                conditions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - field
+                                    - operator
+                                    properties:
+                                      field:
+                                        type: string
+                                      operator:
+                                        type: string
+                                        enum:
+                                        - eq
+                                        - neq
+                                        - contains
+                                        - notContains
+                                        - startsWith
+                                        - endsWith
+                                        - gt
+                                        - gte
+                                        - lt
+                                        - lte
+                                        - between
+                                        - in
+                                        - notIn
+                                        - isNull
+                                        - isNotNull
+                                        - isEmpty
+                                        - isNotEmpty
+                                      value:
+                                        anyOf:
+                                        - type: string
+                                        - type: array
+                                          items:
+                                            type: string
+                                    additionalProperties: false
+                                paging:
+                                  type: object
+                                  required:
+                                  - offset
+                                  - limit
+                                  properties:
+                                    offset:
+                                      type: number
+                                    limit:
+                                      type: number
+                                  additionalProperties: false
+                                sortBy:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - field
+                                    - order
+                                    properties:
+                                      field:
+                                        type: string
+                                      order:
+                                        type: string
+                                        enum:
+                                        - asc
+                                        - desc
+                                    additionalProperties: false
+                              additionalProperties: false
+                          additionalProperties: false
+                        isDeleted:
+                          anyOf:
+                          - type: boolean
+                          - type: 'null'
+                        deletedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        createdAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        updatedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        isPreconfigured:
+                          type: boolean
+                        section:
+                          type: string
+                          enum:
+                          - preconfigured
+                          - private
+                          - shared
+                      additionalProperties: false
+                  private:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - savedViewId
+                      - domain
+                      - name
+                      - isShared
+                      - viewPayload
+                      - isPreconfigured
+                      - section
+                      properties:
+                        savedViewId:
+                          type: string
+                        domain:
+                          type: string
+                        name:
+                          type: string
+                          description: a string at most 255 character(s) long
+                          title: maxLength(255)
+                          pattern: ^\S[\s\S]*\S$|^\S$|^$
+                          minLength: 1
+                          maxLength: 255
+                        isShared:
+                          type: boolean
+                        viewPayload:
+                          type: object
+                          required:
+                          - columns
+                          - search
+                          properties:
+                            columns:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                - name
+                                properties:
+                                  name:
+                                    type: string
+                                  visibility:
+                                    type: boolean
+                                additionalProperties: false
+                            search:
+                              type: object
+                              required:
+                              - query
+                              - sortBy
+                              properties:
+                                query:
+                                  type: object
+                                  required:
+                                  - searchString
+                                  - columns
+                                  properties:
+                                    searchString:
+                                      type: string
+                                    columns:
+                                      type: array
+                                      items:
+                                        type: string
+                                  additionalProperties: false
+                                conditions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - field
+                                    - operator
+                                    properties:
+                                      field:
+                                        type: string
+                                      operator:
+                                        type: string
+                                        enum:
+                                        - eq
+                                        - neq
+                                        - contains
+                                        - notContains
+                                        - startsWith
+                                        - endsWith
+                                        - gt
+                                        - gte
+                                        - lt
+                                        - lte
+                                        - between
+                                        - in
+                                        - notIn
+                                        - isNull
+                                        - isNotNull
+                                        - isEmpty
+                                        - isNotEmpty
+                                      value:
+                                        anyOf:
+                                        - type: string
+                                        - type: array
+                                          items:
+                                            type: string
+                                    additionalProperties: false
+                                paging:
+                                  type: object
+                                  required:
+                                  - offset
+                                  - limit
+                                  properties:
+                                    offset:
+                                      type: number
+                                    limit:
+                                      type: number
+                                  additionalProperties: false
+                                sortBy:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - field
+                                    - order
+                                    properties:
+                                      field:
+                                        type: string
+                                      order:
+                                        type: string
+                                        enum:
+                                        - asc
+                                        - desc
+                                    additionalProperties: false
+                              additionalProperties: false
+                          additionalProperties: false
+                        isDeleted:
+                          anyOf:
+                          - type: boolean
+                          - type: 'null'
+                        deletedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        createdAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        updatedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        isPreconfigured:
+                          type: boolean
+                        section:
+                          type: string
+                          enum:
+                          - preconfigured
+                          - private
+                          - shared
+                      additionalProperties: false
+                  shared:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - savedViewId
+                      - domain
+                      - name
+                      - isShared
+                      - viewPayload
+                      - isPreconfigured
+                      - section
+                      properties:
+                        savedViewId:
+                          type: string
+                        domain:
+                          type: string
+                        name:
+                          type: string
+                          description: a string at most 255 character(s) long
+                          title: maxLength(255)
+                          pattern: ^\S[\s\S]*\S$|^\S$|^$
+                          minLength: 1
+                          maxLength: 255
+                        isShared:
+                          type: boolean
+                        viewPayload:
+                          type: object
+                          required:
+                          - columns
+                          - search
+                          properties:
+                            columns:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                - name
+                                properties:
+                                  name:
+                                    type: string
+                                  visibility:
+                                    type: boolean
+                                additionalProperties: false
+                            search:
+                              type: object
+                              required:
+                              - query
+                              - sortBy
+                              properties:
+                                query:
+                                  type: object
+                                  required:
+                                  - searchString
+                                  - columns
+                                  properties:
+                                    searchString:
+                                      type: string
+                                    columns:
+                                      type: array
+                                      items:
+                                        type: string
+                                  additionalProperties: false
+                                conditions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - field
+                                    - operator
+                                    properties:
+                                      field:
+                                        type: string
+                                      operator:
+                                        type: string
+                                        enum:
+                                        - eq
+                                        - neq
+                                        - contains
+                                        - notContains
+                                        - startsWith
+                                        - endsWith
+                                        - gt
+                                        - gte
+                                        - lt
+                                        - lte
+                                        - between
+                                        - in
+                                        - notIn
+                                        - isNull
+                                        - isNotNull
+                                        - isEmpty
+                                        - isNotEmpty
+                                      value:
+                                        anyOf:
+                                        - type: string
+                                        - type: array
+                                          items:
+                                            type: string
+                                    additionalProperties: false
+                                paging:
+                                  type: object
+                                  required:
+                                  - offset
+                                  - limit
+                                  properties:
+                                    offset:
+                                      type: number
+                                    limit:
+                                      type: number
+                                  additionalProperties: false
+                                sortBy:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - field
+                                    - order
+                                    properties:
+                                      field:
+                                        type: string
+                                      order:
+                                        type: string
+                                        enum:
+                                        - asc
+                                        - desc
+                                    additionalProperties: false
+                              additionalProperties: false
+                          additionalProperties: false
+                        isDeleted:
+                          anyOf:
+                          - type: boolean
+                          - type: 'null'
+                        deletedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        createdAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        updatedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        isPreconfigured:
+                          type: boolean
+                        section:
+                          type: string
+                          enum:
+                          - preconfigured
+                          - private
+                          - shared
+                      additionalProperties: false
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+    post:
+      tags:
+      - saved-views
+      operationId: saved-views.createSavedView
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - savedViewId
+                - domain
+                - name
+                - isShared
+                - viewPayload
+                - isPreconfigured
+                properties:
+                  savedViewId:
+                    type: string
+                  domain:
+                    type: string
+                  name:
+                    type: string
+                    description: a string at most 255 character(s) long
+                    title: maxLength(255)
+                    pattern: ^\S[\s\S]*\S$|^\S$|^$
+                    minLength: 1
+                    maxLength: 255
+                  isShared:
+                    type: boolean
+                  viewPayload:
+                    type: object
+                    required:
+                    - columns
+                    - search
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - name
+                          properties:
+                            name:
+                              type: string
+                            visibility:
+                              type: boolean
+                          additionalProperties: false
+                      search:
+                        type: object
+                        required:
+                        - query
+                        - sortBy
+                        properties:
+                          query:
+                            type: object
+                            required:
+                            - searchString
+                            - columns
+                            properties:
+                              searchString:
+                                type: string
+                              columns:
+                                type: array
+                                items:
+                                  type: string
+                            additionalProperties: false
+                          conditions:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - field
+                              - operator
+                              properties:
+                                field:
+                                  type: string
+                                operator:
+                                  type: string
+                                  enum:
+                                  - eq
+                                  - neq
+                                  - contains
+                                  - notContains
+                                  - startsWith
+                                  - endsWith
+                                  - gt
+                                  - gte
+                                  - lt
+                                  - lte
+                                  - between
+                                  - in
+                                  - notIn
+                                  - isNull
+                                  - isNotNull
+                                  - isEmpty
+                                  - isNotEmpty
+                                value:
+                                  anyOf:
+                                  - type: string
+                                  - type: array
+                                    items:
+                                      type: string
+                              additionalProperties: false
+                          paging:
+                            type: object
+                            required:
+                            - offset
+                            - limit
+                            properties:
+                              offset:
+                                type: number
+                              limit:
+                                type: number
+                            additionalProperties: false
+                          sortBy:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - field
+                              - order
+                              properties:
+                                field:
+                                  type: string
+                                order:
+                                  type: string
+                                  enum:
+                                  - asc
+                                  - desc
+                              additionalProperties: false
+                        additionalProperties: false
+                    additionalProperties: false
+                  isDeleted:
+                    anyOf:
+                    - type: boolean
+                    - type: 'null'
+                  deletedAt:
+                    anyOf:
+                    - type: string
+                      format: date-time
+                    - type: 'null'
+                  createdAt:
+                    anyOf:
+                    - type: string
+                      format: date-time
+                    - type: 'null'
+                  updatedAt:
+                    anyOf:
+                    - type: string
+                      format: date-time
+                    - type: 'null'
+                  isPreconfigured:
+                    type: boolean
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedViewModel.jsonCreate'
+        required: true
+  /api/v1/entities/{entityId}/saved-views/{savedViewId}:
+    patch:
+      tags:
+      - saved-views
+      operationId: saved-views.updateSavedView
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: savedViewId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - savedViewId
+                - domain
+                - name
+                - isShared
+                - viewPayload
+                - isPreconfigured
+                properties:
+                  savedViewId:
+                    type: string
+                  domain:
+                    type: string
+                  name:
+                    type: string
+                    description: a string at most 255 character(s) long
+                    title: maxLength(255)
+                    pattern: ^\S[\s\S]*\S$|^\S$|^$
+                    minLength: 1
+                    maxLength: 255
+                  isShared:
+                    type: boolean
+                  viewPayload:
+                    type: object
+                    required:
+                    - columns
+                    - search
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - name
+                          properties:
+                            name:
+                              type: string
+                            visibility:
+                              type: boolean
+                          additionalProperties: false
+                      search:
+                        type: object
+                        required:
+                        - query
+                        - sortBy
+                        properties:
+                          query:
+                            type: object
+                            required:
+                            - searchString
+                            - columns
+                            properties:
+                              searchString:
+                                type: string
+                              columns:
+                                type: array
+                                items:
+                                  type: string
+                            additionalProperties: false
+                          conditions:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - field
+                              - operator
+                              properties:
+                                field:
+                                  type: string
+                                operator:
+                                  type: string
+                                  enum:
+                                  - eq
+                                  - neq
+                                  - contains
+                                  - notContains
+                                  - startsWith
+                                  - endsWith
+                                  - gt
+                                  - gte
+                                  - lt
+                                  - lte
+                                  - between
+                                  - in
+                                  - notIn
+                                  - isNull
+                                  - isNotNull
+                                  - isEmpty
+                                  - isNotEmpty
+                                value:
+                                  anyOf:
+                                  - type: string
+                                  - type: array
+                                    items:
+                                      type: string
+                              additionalProperties: false
+                          paging:
+                            type: object
+                            required:
+                            - offset
+                            - limit
+                            properties:
+                              offset:
+                                type: number
+                              limit:
+                                type: number
+                            additionalProperties: false
+                          sortBy:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - field
+                              - order
+                              properties:
+                                field:
+                                  type: string
+                                order:
+                                  type: string
+                                  enum:
+                                  - asc
+                                  - desc
+                              additionalProperties: false
+                        additionalProperties: false
+                    additionalProperties: false
+                  isDeleted:
+                    anyOf:
+                    - type: boolean
+                    - type: 'null'
+                  deletedAt:
+                    anyOf:
+                    - type: string
+                      format: date-time
+                    - type: 'null'
+                  createdAt:
+                    anyOf:
+                    - type: string
+                      format: date-time
+                    - type: 'null'
+                  updatedAt:
+                    anyOf:
+                    - type: string
+                      format: date-time
+                    - type: 'null'
+                  isPreconfigured:
+                    type: boolean
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: []
+              properties:
+                name:
+                  type: string
+                  description: a string at most 255 character(s) long
+                  title: maxLength(255)
+                  pattern: ^\S[\s\S]*\S$|^\S$|^$
+                  minLength: 1
+                  maxLength: 255
+                isShared:
+                  type: boolean
+                viewPayload:
+                  type: object
+                  required:
+                  - columns
+                  - search
+                  properties:
+                    columns:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                        - name
+                        properties:
+                          name:
+                            type: string
+                          visibility:
+                            type: boolean
+                        additionalProperties: false
+                    search:
+                      type: object
+                      required:
+                      - query
+                      - sortBy
+                      properties:
+                        query:
+                          type: object
+                          required:
+                          - searchString
+                          - columns
+                          properties:
+                            searchString:
+                              type: string
+                            columns:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                        conditions:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - field
+                            - operator
+                            properties:
+                              field:
+                                type: string
+                              operator:
+                                type: string
+                                enum:
+                                - eq
+                                - neq
+                                - contains
+                                - notContains
+                                - startsWith
+                                - endsWith
+                                - gt
+                                - gte
+                                - lt
+                                - lte
+                                - between
+                                - in
+                                - notIn
+                                - isNull
+                                - isNotNull
+                                - isEmpty
+                                - isNotEmpty
+                              value:
+                                anyOf:
+                                - type: string
+                                - type: array
+                                  items:
+                                    type: string
+                            additionalProperties: false
+                        paging:
+                          type: object
+                          required:
+                          - offset
+                          - limit
+                          properties:
+                            offset:
+                              type: number
+                            limit:
+                              type: number
+                          additionalProperties: false
+                        sortBy:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - field
+                            - order
+                            properties:
+                              field:
+                                type: string
+                              order:
+                                type: string
+                                enum:
+                                - asc
+                                - desc
+                            additionalProperties: false
+                      additionalProperties: false
+                  additionalProperties: false
+              additionalProperties: false
+        required: true
+    delete:
+      tags:
+      - saved-views
+      operationId: saved-views.deleteSavedView
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: savedViewId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+components:
+  schemas:
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    SavedViewModel.jsonCreate:
+      type: object
+      required:
+      - domain
+      - name
+      - isShared
+      - viewPayload
+      properties:
+        domain:
+          type: string
+        name:
+          type: string
+          description: a string at most 255 character(s) long
+          title: maxLength(255)
+          pattern: ^\S[\s\S]*\S$|^\S$|^$
+          minLength: 1
+          maxLength: 255
+        isShared:
+          type: boolean
+        viewPayload:
+          type: object
+          required:
+          - columns
+          - search
+          properties:
+            columns:
+              type: array
+              items:
+                type: object
+                required:
+                - name
+                properties:
+                  name:
+                    type: string
+                  visibility:
+                    type: boolean
+                additionalProperties: false
+            search:
+              type: object
+              required:
+              - query
+              - sortBy
+              properties:
+                query:
+                  type: object
+                  required:
+                  - searchString
+                  - columns
+                  properties:
+                    searchString:
+                      type: string
+                    columns:
+                      type: array
+                      items:
+                        type: string
+                  additionalProperties: false
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - field
+                    - operator
+                    properties:
+                      field:
+                        type: string
+                      operator:
+                        type: string
+                        enum:
+                        - eq
+                        - neq
+                        - contains
+                        - notContains
+                        - startsWith
+                        - endsWith
+                        - gt
+                        - gte
+                        - lt
+                        - lte
+                        - between
+                        - in
+                        - notIn
+                        - isNull
+                        - isNotNull
+                        - isEmpty
+                        - isNotEmpty
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: array
+                          items:
+                            type: string
+                    additionalProperties: false
+                paging:
+                  type: object
+                  required:
+                  - offset
+                  - limit
+                  properties:
+                    offset:
+                      type: number
+                    limit:
+                      type: number
+                  additionalProperties: false
+                sortBy:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - field
+                    - order
+                    properties:
+                      field:
+                        type: string
+                      order:
+                        type: string
+                        enum:
+                        - asc
+                        - desc
+                    additionalProperties: false
+              additionalProperties: false
+          additionalProperties: false
+      additionalProperties: false
+      title: SavedViewModel.jsonCreate
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme

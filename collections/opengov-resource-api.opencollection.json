@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Data CKAN Action Resource API",
+    "version": "2.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "resource",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the metadata of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/resource_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_tracking",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return the metadata of a resource."
+        },
+        {
+          "info": {
+            "name": "Add a new resource to a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/resource_create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a resource to a dataset (package). POST using multipart/form-data to upload a file."
+        },
+        {
+          "info": {
+            "name": "Update only specific fields of an existing resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/resource_patch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Use multipart/form-data when uploading a file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,132 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Permitting Licensing & Code Enforcement Record Contacts API
+  x-logo:
+    url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
+  description: "The OpenGov Permitting & Licensing API is organized around REST. The API is based on the JSON API specification and uses standard HTTP response codes, authentication, and verbs.\n\n## Authentication\nThe OpenGov Permitting & Licensing API is authenticated using the [OAuth2](https://www.rfc-editor.org/rfc/rfc6749) Client Credentials flow. Access tokens are provided as a [bearer token](https://datatracker.ietf.org/doc/html/rfc6750) Authorization header in all API requests.\n\nTo obtain an access token, you must have an OpenGov-provided **Client ID** and **Client Secret** and make a POST request to https://accounts.viewpointcloud.com/oauth/token\n\nExample request:\n\n```bash\ncurl --request POST \\\n  --url https://accounts.viewpointcloud.com/oauth/token \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'grant_type=client_credentials' \\\n  --data 'client_id=YOUR_CLIENT_ID' \\\n  --data 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data 'audience=viewpointcloud.com/api/production'\n```\n\nThe response will include:\n- `access_token`: Access token issued by the authorization server\n- `token_type`: Type of token issued (typically `Bearer`)\n- `expires_in`: The lifetime in seconds of the access token\n<br />\n<br />\nThe API will return a 401 error if a token is invalid.\n<br />\n<br />\n"
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Record Contacts
+  description: 'A Record can have one **Applicant** and up to 99 **Guests**.
+
+
+    The Applicant is the public user who submitted a Record. The Applicant or any employee user can add Guests to a Record.
+
+
+    '
+paths:
+  /v1/{community}/records/{recordID}/contacts:
+    get:
+      summary: List record contacts
+      operationId: listRecordContacts
+      tags:
+      - Record Contacts
+      parameters:
+      - $ref: '#/components/parameters/community'
+      - $ref: '#/components/parameters/recordID'
+      responses:
+        '200':
+          description: Returns record contacts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordContact'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal Server Error
+components:
+  parameters:
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
+  schemas:
+    RecordContact:
+      x-tags:
+      - Record Contacts
+      type: object
+      title: The record contact object
+      example:
+        type: record_contact
+        id: '31598'
+        attributes:
+          function: APPLICANT
+          userID: auth0|56x7x955xxx3x5454x1xxx65
+          firstName: Jane
+          lastName: Smith
+          email: jsmith@gmail.com
+      properties:
+        type:
+          type: string
+          enum:
+          - record_contact
+        id:
+          type: string
+          description: The Record ID
+        attributes:
+          type: object
+          properties:
+            function:
+              type: string
+              description: Describes the function of a contact in a record
+              enum:
+              - APPLICANT
+              - GUEST
+            userID:
+              type: string
+              description: User ID of the contact
+            firstName:
+              type: string
+              description: First name of the contact
+            lastName:
+              type: string
+              description: Last name of the contact
+            email:
+              type: string
+              description: Email of the contact
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

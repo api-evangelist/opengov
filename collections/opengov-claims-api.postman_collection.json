@@ -1,0 +1,731 @@
+{
+  "item": [
+    {
+      "id": "7c2bc4dd-1045-402b-9c2a-5bea943a065d",
+      "name": "claims",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4666d42-5e06-4983-a65c-1202269c1fa5",
+          "name": "Get current user's PO and CO claims",
+          "request": {
+            "name": "Get current user's PO and CO claims",
+            "description": {
+              "content": "Returns the current user's raw PRO-domain claims (PO and CO), expanded effective claims after hierarchy resolution. Any authenticated user can call this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "claims"
+              ],
+              "host": [
+                "{{api-v1-po-entities-entityId-claims-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e60b39ec-99ad-4d12-bea5-828e8066d524",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-po-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"claims\": [\n      {\n        \"key\": \"string\",\n        \"domain\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"domain\": \"string\",\n        \"description\": \"string\"\n      }\n    ],\n    \"effectiveClaims\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a601450-116d-4fe6-b87d-a0ec54732080",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-po-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51da5ede-43c9-4bf7-9de9-32f921c75f26",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-po-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "330f471a-97d1-4821-9f0d-7e8c2e3a2f5f",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-po-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16b648d2-67bc-4613-b238-4162321d1e2c",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-po-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1d882f7-d4df-4f68-a2aa-de3acfbded83",
+          "name": "Get User Claims",
+          "request": {
+            "name": "Get User Claims",
+            "description": {
+              "content": "Retrieve all claims and effective claims for the authenticated user within the current entity context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "entities",
+                ":entityId",
+                "claims"
+              ],
+              "host": [
+                "{{api-v1-entities-entityId-claims-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4c1f1aea-92c6-46fe-ac75-6b9dbbb8e238",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"claims\": [\n      {\n        \"key\": \"string\",\n        \"domain\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"domain\": \"string\",\n        \"description\": \"string\"\n      }\n    ],\n    \"effectiveClaims\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f25d2591-174d-4402-ac24-11127b50ce98",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 8045,\n        \"key_1\": 5517,\n        \"key_2\": 99\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24870b40-1e6c-4a94-85ec-89960224b005",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 8045,\n        \"key_1\": 5517,\n        \"key_2\": 99\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8da257f4-0743-4b43-b280-9fa9b8fa8abd",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 8045,\n        \"key_1\": 5517,\n        \"key_2\": 99\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1323b2d5-b1d7-430e-b635-d1d5a4bd5377",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 8045,\n        \"key_1\": 5517,\n        \"key_2\": 99\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d8a0013-f2ed-4a57-bac4-208fd9deb8b5",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "entities",
+                    ":entityId",
+                    "claims"
+                  ],
+                  "host": [
+                    "{{api-v1-entities-entityId-claims-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"parameter\": \"status\",\n      \"detail\": \"Expected one of [\\\"Draft\\\", \\\"Submitted\\\", \\\"Cancelled\\\"], received \\\"Draft112\\\"\",\n      \"code\": \"INVALID_ENUM_VALUE\",\n      \"data\": {\n        \"key_0\": 8045,\n        \"key_1\": 5517,\n        \"key_2\": 99\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-purchase-order.procurement.opengov.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api-purchase-order.procurement.opengov.com",
+      "key": "api-v1-po-entities-entityId-claims-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api-receipts.procurement.opengov.com",
+      "key": "api-v1-entities-entityId-claims-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "ba3bbeea-8d42-4cd2-9542-54058e056175",
+    "name": "Opengov Claims API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged claims across 3 of this provider's published API definitions: opengov-purchase-order-openapi.yml, opengov-receipt-openapi.yml, opengov-vendor-management-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

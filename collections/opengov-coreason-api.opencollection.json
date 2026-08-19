@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Co Reason API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coReason",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List CO reasons for an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-order-reasons",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "isActive",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns non-deleted Change Order reasons for the entity. Use ?isActive=true or ?isActive=false to filter by status. Omit the parameter to return all reasons."
+        },
+        {
+          "info": {
+            "name": "Create a new CO reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-order-reasons",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Change Order reason for the entity. Code must be unique per entity. Returns 201 on success."
+        },
+        {
+          "info": {
+            "name": "Update a CO reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-order-reasons/:reasonId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "reasonId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Change Order reason. All fields are optional. Returns 200 with updated reason."
+        },
+        {
+          "info": {
+            "name": "Delete a CO reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-order-reasons/:reasonId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "reasonId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes a Change Order reason. Active COs referencing this reason are handled by BR-CR05 nullification. Returns 204 No Content on success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

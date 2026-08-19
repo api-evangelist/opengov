@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Fees API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/payment-steps/:paymentStepID/fees",
+            "params": [
+              {
+                "name": "paymentStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a payment step"
+              }
+            ]
+          },
+          "docs": "List fees on a Payment Step.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Create a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/payment-steps/:paymentStepID/fees",
+            "params": [
+              {
+                "name": "paymentStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a payment step"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a fee.\n### Permissions Required\n`Workflow Write`"
+        },
+        {
+          "info": {
+            "name": "Get a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/payment-steps/fees/:paymentFeeID",
+            "params": [
+              {
+                "name": "paymentFeeID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the payment fee"
+              }
+            ]
+          },
+          "docs": "Retrieve a fee by ID.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Update a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/payment-steps/fees/:paymentFeeID",
+            "params": [
+              {
+                "name": "paymentFeeID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the payment fee"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a fee.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

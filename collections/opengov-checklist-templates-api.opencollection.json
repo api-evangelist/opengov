@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Checklist Templates API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checklist Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List checklist templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-type-templates/:inspectionTypeTemplateID/checklist-templates",
+            "params": [
+              {
+                "name": "inspectionTypeTemplateID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an inspection type template"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of checklist templates for an Inspection Type Template.\n### Permissions Required\n`System Config Read`"
+        },
+        {
+          "info": {
+            "name": "Get checklist template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-type-templates/:inspectionTypeTemplateID/checklist-templates/:checklistTemplateID",
+            "params": [
+              {
+                "name": "inspectionTypeTemplateID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an inspection type template"
+              },
+              {
+                "name": "checklistTemplateID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a checklist template"
+              }
+            ]
+          },
+          "docs": "Retrieve a checklist template by ID.\n### Permissions Required\n`System Config Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

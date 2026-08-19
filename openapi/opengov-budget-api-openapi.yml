@@ -1,0 +1,1025 @@
+openapi: 3.2.0
+info:
+  title: Budgeting & Performance Budget API
+  version: 1.0.0
+  description: 'The OpenGov Budgeting & Performance API
+
+    '
+  contact:
+    name: B&P Team
+    url: https://api.bnp.opengov.com
+  license:
+    name: Proprietary
+    url: https://api.bnp.opengov.com/terms
+servers:
+- url: https://api.bnp.opengov.com
+  description: Production server
+- url: https://api.bnp.ogintegration.us
+  description: Development server
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Budget
+  description: Operations for retrieving budget data.
+  x-displayName: Budget
+paths:
+  /api/v1/budgets:
+    get:
+      summary: List Budgets by Entity
+      description: Retrieve a list of Budgets filtered by the associated Entity ID.
+      operationId: listBudgetsByEntity
+      tags:
+      - Budget
+      parameters:
+      - name: filter[entityId]
+        in: query
+        required: true
+        description: Filter budgets by entity ID.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: A list of Budget resources matching the filter.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BudgetsListResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '404':
+          description: Not Found - The requested entity was not found.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+  /api/v1/budgets/{budgetId}:
+    get:
+      summary: Get Budget by ID
+      description: Retrieve a Budget by its ID.
+      operationId: getBudgetById
+      tags:
+      - Budget
+      parameters:
+      - name: budgetId
+        in: path
+        required: true
+        description: Get a Budget by its ID.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Get a Budget by its ID.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BudgetResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+  /api/v1/budgets/{budgetId}/amounts-summary:
+    get:
+      summary: Get the Amounts Summary for a Budget by ID
+      description: Retrieve the Amounts Summary for a Budget by its ID.
+      operationId: getBudgetAmountsSummary
+      tags:
+      - Budget
+      parameters:
+      - name: budgetId
+        in: path
+        required: true
+        description: Budget Identifier
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Get a Budget by its ID.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BudgetAmountsSummaryResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+  /api/v1/budgets/{budgetId}/budget-amounts:
+    get:
+      summary: Get Budget Amounts by Budget ID
+      description: Retrieve budget amounts for a given budget ID
+      operationId: getBudgetAmountsByBudget
+      tags:
+      - Budget
+      parameters:
+      - name: budgetId
+        in: path
+        required: true
+        description: Budget Identifier
+        schema:
+          type: integer
+      - in: query
+        name: page[number]
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - in: query
+        name: page[size]
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      - in: query
+        name: include
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - budget
+        style: form
+        explode: false
+        description: Include the budget metadata
+      responses:
+        '200':
+          description: Get Budget Amounts by Budget ID
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/BudgetAmountsResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+                        detail:
+                          type: string
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid.
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '404':
+          description: Not found - Budget with the given ID not found.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+  /api/v1/data-exports/resources:
+    get:
+      tags:
+      - Budget
+      summary: Retrieves the exportable data resources for an entity
+      description: 'Returns all standard dataset instances available for export from the Budget and Workforce applications for the specified entity. If includeCustom=true, custom financial datasets are also included. Use the Get Data Export Resource Metadata endpoint to retrieve additional details for a resource, including its column schema, and use the Export Data Resource as CSV endpoint to download the resource as a CSV file.
+
+        '
+      operationId: listDataExportResources
+      parameters:
+      - name: filter[entityId]
+        in: query
+        required: true
+        description: Filter resources by entity ID (UUID)
+        schema:
+          type: string
+          format: uuid
+          example: 780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
+      - name: filter[includeCustom]
+        in: query
+        required: false
+        description: Includes custom financial datasets
+        schema:
+          type: string
+          example: 'true'
+      responses:
+        '200':
+          description: Successfully retrieved list of available data export resources
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataExportResourcesResponse'
+        '400':
+          description: Bad Request - Invalid or missing entity ID filter
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          example: '400'
+                        title:
+                          type: string
+                          example: Invalid filter parameter
+                        detail:
+                          type: string
+                          example: The filter[entityId] parameter is required and must be a valid UUID
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid.
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '404':
+          description: Not found - Entity with the given ID not found.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+  /api/v1/data-exports/metadata/{resourceId}:
+    get:
+      tags:
+      - Budget
+      summary: Get Data Export Resource Metadata
+      description: "Retrieves detailed metadata information for a specific data export resource,\nincluding the name, description, standard type, column schema, and timestamps indicating when the \nresource was created and updated.\n"
+      operationId: getDataExportResourceMetadata
+      parameters:
+      - name: resourceId
+        in: path
+        required: true
+        description: The unique identifier of the data resource (may contain forward slashes)
+        schema:
+          type: string
+          example: lens/entity/budget-summary/58f3556f-f638-49e3-8260-2d98bee5ed5b
+        style: simple
+        explode: false
+      responses:
+        '200':
+          description: Successfully retrieved metadata for the data export resource
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DataExportResourceMetadataResponse'
+              example:
+                data:
+                  type: data-export-resource-metadata
+                  id: lens/entity/budget-summary/58f3556f-f638-49e3-8260-2d98bee5ed5b
+                  attributes:
+                    entityId: 68c1cc9c-03c1-4786-ba87-300c262b1cc3
+                    name: Budget with Allocations (Test) Budget Summary - 7/9/2025
+                    description: Budget with Allocations (Test) Budget Summary - 7/9/2025
+                    sourceId: dataset/entity/budget-summary/ac339608-86a2-4f47-a125-f2d2d536ed4d
+                    managed:
+                      type: application
+                      application: urn:opengov:application:budget
+                    standardType: urn:opengov:lenses/standard/budgeting/budget-summary/1
+                    columns:
+                    - name: account_number
+                      label: Account Number
+                      visible: true
+                      semanticTypes:
+                      - urn:opengov:types/semantic/accounting/coa/account-number
+                      - urn:opengov:types/semantic/dataclass/public
+                      type: urn:opengov:types/logical/text
+                    - name: amount
+                      label: Amount
+                      visible: true
+                      semanticTypes:
+                      - urn:opengov:types/semantic/datamanagement/default-metric
+                      - urn:opengov:types/semantic/dataclass/public
+                      - http://schema.org/MonetaryAmount
+                      type: urn:opengov:types/logical/numeric?precision=19&scale=4
+                      family: Amount
+                    createdAt: '2025-07-09T20:11:01.720379413Z'
+                    updatedAt: '2025-07-09T20:11:01.720379413Z'
+                    visible: true
+                    dataUpdatedAt: '2025-07-09T20:11:06.860339917Z'
+        '400':
+          description: Bad Request - Invalid resource identifier
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          example: '400'
+                        title:
+                          type: string
+                          example: Invalid resource identifier
+                        detail:
+                          type: string
+                          example: The provided resourceId is not valid
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource
+        '404':
+          description: Not found - Resource with the given ID not found
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error
+  /api/v1/data-exports/export/{resourceId}:
+    get:
+      tags:
+      - Budget
+      summary: Export Data Resource as CSV
+      description: 'Exports a budget data resource as a CSV file by redirecting to a presigned URL.
+
+        The response includes a Location header that clients should follow to download the data.
+
+        '
+      operationId: exportBudgetDataResource
+      parameters:
+      - name: resourceId
+        in: path
+        required: true
+        description: The unique identifier of the data resource to export
+        schema:
+          type: string
+          example: lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
+      responses:
+        '302':
+          description: 'Found - Redirect to the data export location.
+
+            The client should follow the Location header to download the data.
+
+            '
+          headers:
+            Location:
+              description: The URL where the data export can be downloaded
+              required: true
+              schema:
+                type: string
+                format: uri
+                example: https://dataexports.opengov.com/exports/lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1/export.csv?Signature=1234567890
+            Cache-Control:
+              description: Caching directives for the redirect response
+              schema:
+                type: string
+                example: no-cache, no-store, must-revalidate
+        '400':
+          description: Bad Request - Invalid resource identifier
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          example: '400'
+                        title:
+                          type: string
+                          example: Invalid resource identifier
+                        detail:
+                          type: string
+                          example: The provided resourceId is not valid
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid.
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '404':
+          description: Not found - Resource with the given ID not found.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+components:
+  schemas:
+    PaginatedResponseLinks:
+      type: object
+      description: Standard pagination links for collection responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link to the current page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
+        next:
+          type: string
+          format: uri
+          description: Link to the next page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
+        prev:
+          type: string
+          format: uri
+          description: Link to the previous page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        first:
+          type: string
+          format: uri
+          description: Link to the first page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        last:
+          type: string
+          format: uri
+          description: Link to the last page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
+    BudgetAmountsResponse:
+      type: object
+      description: A JSON:API document containing a list of Budget Amount resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - budget-amount
+                description: The type of the resource.
+              id:
+                type: string
+                description: The unique identifier for the  budget amount. This is the account ID and fiscal year concatenated.
+              attributes:
+                type: object
+                required:
+                - fiscalYear
+                - amount
+                - accountNumberId
+                properties:
+                  fiscalYear:
+                    type: integer
+                    description: The fiscal year of the budget amount.
+                    example: 2025
+                  amount:
+                    type: string
+                    format: decimal
+                    description: The budgeted amount for the given account number and fiscal year.
+                    example: '241000.00'
+                  accountNumberId:
+                    type: string
+                    format: uuid
+                    description: The account number id of the budget amount.
+                  accountNumber:
+                    type: string
+                    description: The account number is generated by combining all segment codes.
+                    example: 101-1234-2123-10021
+        links:
+          $ref: '#/components/schemas/PaginatedResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        included:
+          type: array
+          description: Optional included budget resource when requested via include parameter
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
+    BudgetAmountsSummaryResponse:
+      type: object
+      description: A summary of the amounts for a Budget.
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - budget-amounts-summary
+              description: The type of the resource.
+            id:
+              type: string
+              format: uuid
+              description: The unique identifier for the budget.
+            attributes:
+              type: object
+              required:
+              - amountsSummary
+              properties:
+                amountsSummary:
+                  type: object
+                  required:
+                  - expenses
+                  - revenues
+                  properties:
+                    expenses:
+                      type: object
+                      required:
+                      - baseAmount
+                      - adjustmentAmount
+                      - proposedAmount
+                      properties:
+                        baseAmount:
+                          type: string
+                          format: decimal
+                          description: The base amount for the expenses.
+                        adjustmentAmount:
+                          type: string
+                          format: decimal
+                          description: The adjustment amount for the expenses.
+                        proposedAmount:
+                          type: string
+                          format: decimal
+                          description: The proposed amount for the expenses.
+                    revenues:
+                      type: object
+                      required:
+                      - baseAmount
+                      - adjustmentAmount
+                      - proposedAmount
+                      properties:
+                        baseAmount:
+                          type: string
+                          format: decimal
+                          description: The base amount for the revenues.
+                        adjustmentAmount:
+                          type: string
+                          format: decimal
+                          description: The adjustment amount for the revenues.
+                        proposedAmount:
+                          type: string
+                          format: decimal
+                          description: The proposed amount for the revenues.
+    BudgetListResource:
+      type: object
+      required:
+      - id
+      - attributes
+      properties:
+        type:
+          type: string
+          enum:
+          - budget
+          description: The type of the resource.
+        id:
+          type: string
+          description: The unique identifier for the budget.
+        attributes:
+          type: object
+          required:
+          - name
+          - entityId
+          - coaId
+          - budgetPeriods
+          - createdAt
+          - updatedAt
+          properties:
+            name:
+              type: string
+              description: The name of the budget.
+            entityId:
+              type: string
+              format: uuid
+              description: The ID of the entity this budget belongs to.
+              example: a1b2c3d4-e5f6-7890-1234-567890abcdef
+            coaId:
+              type: string
+              format: uuid
+              description: The ID of the chart of accounts this budget belongs to.
+              example: 88a72f43-f419-4a23-93ec-8f0f2261ea9a
+            budgetPeriods:
+              type: array
+              items:
+                type: object
+                required:
+                - id
+                - name
+                - startDate
+                - endDate
+                - visible
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The unique identifier for the budget period.
+                  name:
+                    type: string
+                    description: The name of the budget period.
+                  startDate:
+                    type: string
+                    format: date
+                    description: The start date of the budget period.
+                  endDate:
+                    type: string
+                    format: date
+                    description: The end date of the budget period.
+                  visible:
+                    type: boolean
+                    description: Whether the budget period is visible to the user.
+            workforceId:
+              type: string
+              format: uuid
+              description: The ID of the workforce this budget belongs to.
+              example: 91cdba8a-4e75-4083-a5c6-159c8ef7aec0
+            createdAt:
+              type: string
+              format: date-time
+              readOnly: true
+              description: The date and time the resource was created.
+              example: '2025-01-01T00:00:00Z'
+            updatedAt:
+              type: string
+              format: date-time
+              readOnly: true
+              description: The date and time the resource was last updated.
+              example: '2025-01-01T00:00:00Z'
+    BudgetResponse:
+      type: object
+      description: A JSON:API document containing a list of Budget resources.
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - budget
+              description: The type of the resource.
+            id:
+              type: string
+              description: The unique identifier for the budget.
+            attributes:
+              type: object
+              required:
+              - name
+              - entityId
+              - coaId
+              - budgetPeriods
+              - createdAt
+              - updatedAt
+              properties:
+                name:
+                  type: string
+                  description: The name of the budget.
+                entityId:
+                  type: string
+                  format: uuid
+                  description: The ID of the entity this budget belongs to.
+                  example: a1b2c3d4-e5f6-7890-1234-567890abcdef
+                coaId:
+                  type: string
+                  format: uuid
+                  description: The ID of the chart of accounts this budget belongs to.
+                  example: 88a72f43-f419-4a23-93ec-8f0f2261ea9a
+                budgetPeriods:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - id
+                    - name
+                    - startDate
+                    - endDate
+                    - visible
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The unique identifier for the budget period.
+                      name:
+                        type: string
+                        description: The name of the budget period.
+                      startDate:
+                        type: string
+                        format: date
+                        description: The start date of the budget period.
+                      endDate:
+                        type: string
+                        format: date
+                        description: The end date of the budget period.
+                      visible:
+                        type: boolean
+                        description: Whether the budget period is visible to the user.
+                      workforceId:
+                        type: string
+                        format: uuid
+                        description: The ID of the workforce this budget belongs to.
+                        example: 91cdba8a-4e75-4083-a5c6-159c8ef7aec0
+                      createdAt:
+                        type: string
+                        format: date-time
+                        readOnly: true
+                        description: The date and time the resource was created.
+                        example: '2025-01-01T00:00:00Z'
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        readOnly: true
+                        description: The date and time the resource was last updated.
+                        example: '2025-01-01T00:00:00Z'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              description: Link to the current page of results.
+            next:
+              type: string
+              format: uri
+              description: Link to the next page of results.
+            prev:
+              type: string
+              format: uri
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    BudgetsListResponse:
+      type: object
+      description: A JSON:API document containing a list of Budget resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    ResponseLinks:
+      type: object
+      description: Standard links object for non-paginated responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link of the current request.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1
+    ResponseMeta:
+      type: object
+      description: Standard metadata for collection responses
+      properties:
+        totalRecords:
+          type: integer
+          description: The total number of records matching the query.
+          example: 42
+    DataExportResourceMetadataResponse:
+      type: object
+      description: A JSON:API document containing data export resource metadata
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          description: The primary data for the resource metadata
+          required:
+          - type
+          - id
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - data-export-resource-metadata
+              description: The type of the resource
+            id:
+              type: string
+              description: The unique identifier for the resource
+              example: lens/entity/budget-summary/58f3556f-f638-49e3-8260-2d98bee5ed5b
+            attributes:
+              type: object
+              description: The resource attributes
+              required:
+              - entityId
+              - name
+              - description
+              - sourceId
+              - managed
+              - standardType
+              - columns
+              - createdAt
+              - updatedAt
+              - visible
+              - dataUpdatedAt
+              properties:
+                entityId:
+                  type: string
+                  format: uuid
+                  description: The entity ID that owns this resource
+                  example: 68c1cc9c-03c1-4786-ba87-300c262b1cc3
+                name:
+                  type: string
+                  description: Human-readable name of the resource
+                  example: Budget with Allocations (Test) Budget Summary - 7/9/2025
+                description:
+                  type: string
+                  description: Detailed description of the resource
+                  example: Budget with Allocations (Test) Budget Summary - 7/9/2025
+                sourceId:
+                  type: string
+                  description: The source dataset identifier
+                  example: dataset/entity/budget-summary/ac339608-86a2-4f47-a125-f2d2d536ed4d
+                managed:
+                  type: object
+                  description: Management information for the resource
+                  required:
+                  - type
+                  - application
+                  properties:
+                    type:
+                      type: string
+                      description: The type of management
+                      example: application
+                    application:
+                      type: string
+                      description: URN of the managing application
+                      example: urn:opengov:application:budget
+                standardType:
+                  type: string
+                  description: URN representing the standard type of this resource
+                  example: urn:opengov:lenses/standard/budgeting/budget-summary/1
+                columns:
+                  type: array
+                  description: Schema definition of the columns in the dataset
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - label
+                    - visible
+                    - semanticTypes
+                    - type
+                    properties:
+                      name:
+                        type: string
+                        description: Internal column name
+                        example: account_number
+                      label:
+                        type: string
+                        description: Human-readable column label
+                        example: Account Number
+                      visible:
+                        type: boolean
+                        description: Whether the column is visible by default
+                        example: true
+                      semanticTypes:
+                        type: array
+                        description: Array of semantic type URNs describing the column meaning
+                        items:
+                          type: string
+                        example:
+                        - urn:opengov:types/semantic/accounting/coa/account-number
+                        - urn:opengov:types/semantic/dataclass/public
+                      type:
+                        type: string
+                        description: URN describing the logical data type
+                        example: urn:opengov:types/logical/text
+                      family:
+                        type: string
+                        description: Optional grouping family for related columns
+                        example: Period
+                createdAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the resource was created
+                  example: '2025-07-09T20:11:01.720379413Z'
+                updatedAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the resource metadata was last updated
+                  example: '2025-07-09T20:11:01.720379413Z'
+                visible:
+                  type: boolean
+                  description: Whether the resource is visible to users
+                  example: true
+                dataUpdatedAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the underlying data was last updated
+                  example: '2025-07-09T20:11:06.860339917Z'
+    DataExportResourcesResponse:
+      type: object
+      description: A JSON:API document containing a list of Data Export Resource resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - data-export-resource
+                description: The type of the resource.
+              id:
+                type: string
+                description: Identifier for the resource
+                example: lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
+              attributes:
+                type: object
+                required:
+                - name
+                - description
+                - standardType
+                - createdAt
+                - updatedAt
+                - dataUpdatedAt
+                properties:
+                  name:
+                    type: string
+                    description: Name of the resource
+                    example: Budget Summary Report
+                  description:
+                    type: string
+                    description: Detailed description of what the resource contains
+                    example: Comprehensive budget summary including all line items and totals for the fiscal year
+                  standardType:
+                    type: string
+                    description: URN representing the standard type of this resource
+                    example: urn:opengov:lenses/standard/budgeting/budget-summary/1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the resource was first created
+                    example: '2024-01-15T10:30:00Z'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the resource metadata was last updated
+                    example: '2024-03-20T14:45:00Z'
+                  dataUpdatedAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the underlying data was last updated
+                    example: '2024-03-22T09:15:00Z'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

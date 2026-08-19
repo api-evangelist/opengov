@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Inspection Events API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inspection Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get inspection event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-events/:inspectionEventID",
+            "params": [
+              {
+                "name": "inspectionEventID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inspection event"
+              }
+            ]
+          },
+          "docs": "Retrieve an inspection event by ID.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "List inspection events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-events",
+            "params": [
+              {
+                "name": "filter[inspectionStepId]",
+                "value": "",
+                "type": "query",
+                "description": "ID of the inspection step"
+              },
+              {
+                "name": "filter[inspectorUserIds]",
+                "value": "",
+                "type": "query",
+                "description": "IDs of the inspectors"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inspection event status, in the event of no filters, will filter by active status"
+              },
+              {
+                "name": "filter[scheduledBetween]",
+                "value": "",
+                "type": "query",
+                "description": "Inspection date range for scheduled inspections format YYYY-MM-DD, YYYY-MM-DD in the order start, end"
+              },
+              {
+                "name": "filter[requestedBetween]",
+                "value": "",
+                "type": "query",
+                "description": "Inspection date range for requested inspections format YYYY-MM-DD, YYYY-MM-DD in the order start, end"
+              }
+            ]
+          },
+          "docs": "Retrieve inspection events that match the specified filters.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Create an inspection event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an inspection event.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

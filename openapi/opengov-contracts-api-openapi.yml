@@ -1,0 +1,2009 @@
+openapi: 3.2.0
+info:
+  title: Opengov Contracts API
+  version: '1.0'
+  description: 'Operations tagged Contracts across 2 of this provider''s published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.procurement.opengov.com
+  description: Production
+tags:
+- name: Contracts
+  x-displayName: Contracts
+paths:
+  /gateway/contract-orders/v1:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    post:
+      tags:
+      - Contracts
+      summary: Import Contract Orders
+      operationId: importContractOrders
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      requestBody:
+        description: A JSON array of Contract Orders to be imported.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContractOrder'
+      responses:
+        '200':
+          description: Successfully updated one or more Contract Orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdCount:
+                    type: integer
+                    example: 2
+                    description: Number of Contract Orders created.
+                  updatedCount:
+                    type: integer
+                    example: 1
+                    description: Number of Contract Orders updated.
+                  erroredContractOrders:
+                    type: array
+                    description: List of Contract Orders that encountered errors.
+                    items:
+                      $ref: '#/components/schemas/ErroredContractOrder'
+        '201':
+          description: Successfully created one or more Contract Orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdCount:
+                    type: integer
+                    example: 2
+                    description: Number of Contract Orders created.
+                  updatedCount:
+                    type: integer
+                    example: 1
+                    description: Number of Contract Orders updated.
+                  erroredContractOrders:
+                    type: array
+                    description: List of Contract Orders that encountered errors.
+                    items:
+                      $ref: '#/components/schemas/ErroredContractOrder'
+        '400':
+          description: Bad request, invalid or empty body.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No valid contract orders to import
+                  erroredContractOrders:
+                    type: array
+                    description: List of Contract Orders that encountered errors.
+                    items:
+                      $ref: '#/components/schemas/ErroredContractOrder'
+        '401':
+          description: Unauthorized, invalid or missing token.
+        '403':
+          description: Forbidden, user does not have permission to import contract orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Only contract admins can import contract orders
+        '404':
+          description: Not Found, feature is not available in this environment.
+        '500':
+          description: Internal server error.
+  /public/api/v1/contracts:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint fetches a list of contracts, ordered by their ID, and supports cursor-based pagination.
+      operationId: ListContractsV1Controller_listContracts
+      parameters:
+      - name: first
+        required: false
+        in: query
+        description: The number of contracts to return.
+        schema:
+          default: 5
+          example: 10
+          type: number
+      - name: after
+        required: false
+        in: query
+        description: A cursor for use in pagination.
+        schema:
+          example: Y29udHJhY3QuaWQ9MQ==
+          type: string
+      - name: startDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts with startDate after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: startDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts with startDate before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: createdDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts with created_at after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: createdDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts with created_at before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: endDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts with endDate after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: endDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts with endDate before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: updatedDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts updated after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: updatedDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts updated before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: sortByAsc
+        required: false
+        in: query
+        description: Sorts, in ascending order, the final list by the valid contract field
+        schema:
+          example: title
+          type: string
+      - name: sortByDesc
+        required: false
+        in: query
+        description: Sorts, in descending order, the final list by the valid contract field
+        schema:
+          example: title
+          type: string
+      - name: externalVendorId
+        required: false
+        in: query
+        description: Filters contracts by External Vendor ID (case-insensitive substring match).
+        schema:
+          example: vendor-123
+          type: string
+      responses:
+        '200':
+          description: A paginated list of contracts was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractsResponseDto'
+        '400':
+          description: The request parameters are invalid.
+          content:
+            application/json:
+              examples:
+                Invalid `first` parameter (not an integer):
+                  value:
+                    statusCode: 400
+                    message:
+                    - '`first` query parameter must be an integer'
+                    error: Bad Request
+                Invalid `first` parameter (negative value):
+                  value:
+                    statusCode: 400
+                    message:
+                    - '`first` query parameter must be a non-negative number'
+                    error: Bad Request
+                Malformed `after` cursor:
+                  value:
+                    statusCode: 400
+                    message: Invalid `after` cursor, please only use cursors generated by this API
+                    error: Bad Request
+                Filtering startDate misordered:
+                  value:
+                    statusCode: 400
+                    message: startDateBefore is earlier than startDateAfter
+                    error: Bad Request
+                Attempting to sort by invalid field:
+                  value:
+                    statusCode: 400
+                    message: Attempting to sort by invalid field id
+                    error: Bad Request
+                Attempting to sort both ascending and descending:
+                  value:
+                    statusCode: 400
+                    message: Provide only one of sortByAsc or sortByDesc
+                    error: Bad Request
+                General request validation errors:
+                  value:
+                    statusCode: 400
+                    message: Validation error on query parameter property
+                    error: Bad Request
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          content:
+            application/json:
+              examples:
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+          description: ''
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: List of Contracts
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /public/api/v1/contracts/{id}:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint fetches a contract based on its unique ID.
+      operationId: ListContractsV1Controller_getContractById
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: number
+      responses:
+        '200':
+          description: The contract was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractByIdResponseDetails'
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          description: The contract with the specified ID was not found.
+          content:
+            application/json:
+              examples:
+                Contract Not Found:
+                  value:
+                    statusCode: 404
+                    message: Contract not found
+                    error: Not Found
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: Contract by ID
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /public/api/v1/contracts/{id}/attachments:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint fetches all attachments associated with a contract by contract ID.
+      operationId: ListContractsV1Controller_getContractAttachments
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: number
+      responses:
+        '200':
+          description: The attachment metadata were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttachmentResponseDto'
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          description: No Contract found matching Contract ID
+          content:
+            application/json:
+              examples:
+                Contract Not Found:
+                  value:
+                    statusCode: 404
+                    message: Contract not found
+                    error: Not Found
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: Attachments
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /public/api/v1/contracts/{id}/contacts:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint returns the customizable contacts associated with a contract (Contacts subtab).
+      operationId: ListContractsV1Controller_getContractContacts
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: number
+      responses:
+        '200':
+          description: The contacts were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactsResponseDto'
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          description: Contract not found
+          content:
+            application/json:
+              examples:
+                Contract Not Found:
+                  value:
+                    statusCode: 404
+                    message: Contract not found
+                    error: Not Found
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: Contacts
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /gateway/v2/entities/{entityUuid}/contract-orders:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    post:
+      tags:
+      - Contracts
+      summary: Import Contract Orders
+      operationId: importContractOrdersV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      requestBody:
+        description: A JSON array of Contract Orders to be imported.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContractOrder'
+      responses:
+        '200':
+          description: Successfully updated one or more Contract Orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdCount:
+                    type: integer
+                    example: 2
+                    description: Number of Contract Orders created.
+                  updatedCount:
+                    type: integer
+                    example: 1
+                    description: Number of Contract Orders updated.
+                  erroredContractOrders:
+                    type: array
+                    description: List of Contract Orders that encountered errors.
+                    items:
+                      $ref: '#/components/schemas/ErroredContractOrder'
+        '201':
+          description: Successfully created one or more Contract Orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdCount:
+                    type: integer
+                    example: 2
+                    description: Number of Contract Orders created.
+                  updatedCount:
+                    type: integer
+                    example: 1
+                    description: Number of Contract Orders updated.
+                  erroredContractOrders:
+                    type: array
+                    description: List of Contract Orders that encountered errors.
+                    items:
+                      $ref: '#/components/schemas/ErroredContractOrder'
+        '400':
+          description: Bad request, invalid or empty body.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No valid contract orders to import
+                  erroredContractOrders:
+                    type: array
+                    description: List of Contract Orders that encountered errors.
+                    items:
+                      $ref: '#/components/schemas/ErroredContractOrder'
+        '401':
+          description: Unauthorized, invalid or missing token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Not Found, feature is not available in this environment.
+        '500':
+          description: Internal server error.
+  /public/api/v2/entities/{entityUuid}/contracts:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint fetches a list of contracts, ordered by their ID, and supports cursor-based pagination.
+      operationId: ListContractsV2Controller_listContracts
+      parameters:
+      - name: first
+        required: false
+        in: query
+        description: The number of contracts to return.
+        schema:
+          default: 5
+          example: 10
+          type: number
+      - name: after
+        required: false
+        in: query
+        description: A cursor for use in pagination.
+        schema:
+          example: Y29udHJhY3QuaWQ9MQ==
+          type: string
+      - name: startDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts with startDate after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: startDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts with startDate before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: createdDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts with created_at after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: createdDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts with created_at before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: endDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts with endDate after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: endDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts with endDate before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: updatedDateAfter
+        required: false
+        in: query
+        description: Filters out all contracts updated after this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: updatedDateBefore
+        required: false
+        in: query
+        description: Filters out all contracts updated before this date (ISO8601).
+        schema:
+          example: '2025-01-01'
+          type: string
+      - name: sortByAsc
+        required: false
+        in: query
+        description: Sorts, in ascending order, the final list by the valid contract field
+        schema:
+          example: title
+          type: string
+      - name: sortByDesc
+        required: false
+        in: query
+        description: Sorts, in descending order, the final list by the valid contract field
+        schema:
+          example: title
+          type: string
+      - name: externalVendorId
+        required: false
+        in: query
+        description: Filters contracts by External Vendor ID (case-insensitive substring match).
+        schema:
+          example: vendor-123
+          type: string
+      - required: true
+        name: entityUuid
+        description: UUID of the OpenGov entity (typically an agency) the request is acting on
+        schema:
+          type: string
+          format: uuid
+        in: path
+      responses:
+        '200':
+          description: A paginated list of contracts was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractsResponseDto'
+        '400':
+          description: The request parameters are invalid.
+          content:
+            application/json:
+              examples:
+                Invalid `first` parameter (not an integer):
+                  value:
+                    statusCode: 400
+                    message:
+                    - '`first` query parameter must be an integer'
+                    error: Bad Request
+                Invalid `first` parameter (negative value):
+                  value:
+                    statusCode: 400
+                    message:
+                    - '`first` query parameter must be a non-negative number'
+                    error: Bad Request
+                Malformed `after` cursor:
+                  value:
+                    statusCode: 400
+                    message: Invalid `after` cursor, please only use cursors generated by this API
+                    error: Bad Request
+                Filtering startDate misordered:
+                  value:
+                    statusCode: 400
+                    message: startDateBefore is earlier than startDateAfter
+                    error: Bad Request
+                Attempting to sort by invalid field:
+                  value:
+                    statusCode: 400
+                    message: Attempting to sort by invalid field id
+                    error: Bad Request
+                Attempting to sort both ascending and descending:
+                  value:
+                    statusCode: 400
+                    message: Provide only one of sortByAsc or sortByDesc
+                    error: Bad Request
+                General request validation errors:
+                  value:
+                    statusCode: 400
+                    message: Validation error on query parameter property
+                    error: Bad Request
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          content:
+            application/json:
+              examples:
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+          description: ''
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: List of Contracts
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /public/api/v2/entities/{entityUuid}/contracts/{id}:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint fetches a contract based on its unique ID.
+      operationId: ListContractsV2Controller_getContractById
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: number
+      - required: true
+        name: entityUuid
+        description: UUID of the OpenGov entity (typically an agency) the request is acting on
+        schema:
+          type: string
+          format: uuid
+        in: path
+      responses:
+        '200':
+          description: The contract was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractByIdResponseDetails'
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          description: The contract with the specified ID was not found.
+          content:
+            application/json:
+              examples:
+                Contract Not Found:
+                  value:
+                    statusCode: 404
+                    message: Contract not found
+                    error: Not Found
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: Contract by ID
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /public/api/v2/entities/{entityUuid}/contracts/{id}/attachments:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint fetches all attachments associated with a contract by contract ID.
+      operationId: ListContractsV2Controller_getContractAttachments
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: number
+      - required: true
+        name: entityUuid
+        description: UUID of the OpenGov entity (typically an agency) the request is acting on
+        schema:
+          type: string
+          format: uuid
+        in: path
+      responses:
+        '200':
+          description: The attachment metadata were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttachmentResponseDto'
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          description: No Contract found matching Contract ID
+          content:
+            application/json:
+              examples:
+                Contract Not Found:
+                  value:
+                    statusCode: 404
+                    message: Contract not found
+                    error: Not Found
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: Attachments
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+  /public/api/v2/entities/{entityUuid}/contracts/{id}/contacts:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      description: This endpoint returns the customizable contacts associated with a contract (Contacts subtab).
+      operationId: ListContractsV2Controller_getContractContacts
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: number
+      - required: true
+        name: entityUuid
+        description: UUID of the OpenGov entity (typically an agency) the request is acting on
+        schema:
+          type: string
+          format: uuid
+        in: path
+      responses:
+        '200':
+          description: The contacts were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactsResponseDto'
+        '401':
+          content:
+            application/json:
+              examples:
+                Missing Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Authorization header not found
+                    error: Unauthorized
+                Missing Authorization Value:
+                  value:
+                    statusCode: 401
+                    message: Authorization header value not found
+                    error: Unauthorized
+                Invalid Authorization Header:
+                  value:
+                    statusCode: 401
+                    message: Invalid authorization header
+                    error: Unauthorized
+                Token Verification Failed:
+                  value:
+                    statusCode: 401
+                    message: Token verification failed
+                    error: Unauthorized
+                API Key Authentication Failed:
+                  value:
+                    statusCode: 401
+                    message: API key authentication failed
+                    error: Unauthorized
+                Incomplete User Information:
+                  value:
+                    statusCode: 401
+                    message: 'User or entity information incomplete: userUUID=undefined, entityUUID=undefined'
+                    error: Unauthorized
+                Failed to Get Entitlements:
+                  value:
+                    statusCode: 401
+                    message: Failed to get entitlements
+                    error: Unauthorized
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                Missing Required Entitlements:
+                  value:
+                    statusCode: 403
+                    message: 'Required entitlements not found: PLATFORM_ADMIN_SETTINGS_ENTITLEMENT, PRO_ENTITLEMENT'
+                    error: Forbidden
+                Not a Member of Requested Entity:
+                  value:
+                    statusCode: 403
+                    message: User is not a member of the requested entity
+                    error: Forbidden
+                No Associated Government Organization:
+                  value:
+                    statusCode: 403
+                    message: No associated government organization found for user
+                    error: Forbidden
+          description: ''
+        '404':
+          description: Contract not found
+          content:
+            application/json:
+              examples:
+                Contract Not Found:
+                  value:
+                    statusCode: 404
+                    message: Contract not found
+                    error: Not Found
+                Requested Entity Not Found:
+                  value:
+                    statusCode: 404
+                    message: Requested entity not found
+                    error: Not Found
+        '500':
+          content:
+            application/json:
+              examples:
+                Server Error:
+                  value:
+                    statusCode: 500
+                    message: Internal server error
+                    error: Internal Server Error
+          description: ''
+      summary: Contacts
+      tags:
+      - Contracts
+      security:
+      - BearerToken: []
+      - APIKey: []
+components:
+  schemas:
+    ContactResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the contact (contact.id, not contract_id).
+          example: 123
+        firstName:
+          type: string
+          description: Contact first name
+          example: John
+        lastName:
+          type: string
+          description: Contact last name
+          example: Doe
+        email:
+          type: string
+          description: Contact email address
+          example: john.doe@example.com
+        phone:
+          type: string
+          description: Contact phone number
+          example: +1 (555) 123-4567
+          nullable: true
+        title:
+          type: string
+          description: Contact title/role
+          example: Procurement Manager
+          nullable: true
+      required:
+      - id
+      - firstName
+      - lastName
+      - email
+    ContractCategoriesResponseDetails:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code representing the category.
+          example: '20800'
+        title:
+          type: string
+          description: The category code title.
+          example: Office Supplies
+        codeType:
+          type: string
+          description: The ID of the category set this category belongs to.
+          example: NIGP
+      required:
+      - code
+      - title
+      - codeType
+    ContractRenewalResponseDetails:
+      type: object
+      properties:
+        length:
+          type: number
+          description: The length of the renewal period.
+          example: 12
+        lengthUnit:
+          type: string
+          description: The unit for the renewal period length.
+          example: months
+        selected:
+          type: boolean
+          description: Whether this renewal is selected.
+          example: true
+      required:
+      - length
+      - lengthUnit
+      - selected
+    ErroredContractOrder:
+      allOf:
+      - $ref: '#/components/schemas/ContractOrder'
+      - type: object
+        properties:
+          errors:
+            type: array
+            description: List of validation or processing errors for this Contract Order.
+            items:
+              type: string
+              example: 'contractId not found: CONTRACT-12345'
+    ContractBudgetResponseDetails:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: The total budget amount.
+          example: 100000
+        issued:
+          type: number
+          description: The amount that has been issued.
+          example: 50000
+        paid:
+          type: number
+          description: The amount that has been paid.
+          example: 25000
+      required:
+      - amount
+      - issued
+      - paid
+    ContactsResponseDto:
+      type: object
+      properties:
+        results:
+          description: List of contacts associated with the contract
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactResponseDetails'
+      required:
+      - results
+    AttachmentResponseDto:
+      type: object
+      properties:
+        results:
+          description: The list of attachments for the contract.
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResponseDetails'
+      required:
+      - results
+    BasicContractDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the contract.
+          example: 123
+        title:
+          type: string
+          description: The title of the contract.
+          example: Annual Office Supply Contract
+        startDate:
+          type: string
+          description: The start date of the contract in ISO 8601.
+          example: '2023-07-05T15:25:45.511Z'
+        endDate:
+          type: string
+          description: The end date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        status:
+          type: string
+          description: The current status of the contract.
+          example: ended
+        isPublic:
+          type: boolean
+          description: Indicates if the contract is public.
+          example: true
+        isCooperative:
+          type: boolean
+          description: Indicates if the contract is a cooperative contract.
+          example: false
+        contractId:
+          type: string
+          description: The contract identifier string.
+          example: CNTR-2023-001
+        internalReferenceId:
+          type: string
+          description: The unique contract identifier per government
+          example: '000000001'
+        updated_at:
+          type: string
+          description: The last updated date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        created_at:
+          type: string
+          description: The created date of the contract in ISO 8601.
+          example: '2025-07-04T15:25:45.511Z'
+        departmentName:
+          type: string
+          description: The name of the department associated with the contract.
+          example: Public Works
+        durationType:
+          type: string
+          description: The type of duration for the contract.
+          example: fixed
+      required:
+      - id
+      - title
+      - startDate
+      - endDate
+      - status
+      - isPublic
+      - isCooperative
+      - contractId
+      - internalReferenceId
+      - updated_at
+      - created_at
+      - departmentName
+      - durationType
+    ContractByIdResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the contract.
+          example: 123
+        title:
+          type: string
+          description: The title of the contract.
+          example: Annual Office Supply Contract
+        startDate:
+          type: string
+          description: The start date of the contract in ISO 8601.
+          example: '2023-07-05T15:25:45.511Z'
+        endDate:
+          type: string
+          description: The end date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        status:
+          type: string
+          description: The current status of the contract.
+          example: ended
+        isPublic:
+          type: boolean
+          description: Indicates if the contract is public.
+          example: true
+        isCooperative:
+          type: boolean
+          description: Indicates if the contract is a cooperative contract.
+          example: false
+        contractId:
+          type: string
+          description: The contract identifier string.
+          example: CNTR-2023-001
+        internalReferenceId:
+          type: string
+          description: The unique contract identifier per government
+          example: '000000001'
+        updated_at:
+          type: string
+          description: The last updated date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        created_at:
+          type: string
+          description: The created date of the contract in ISO 8601.
+          example: '2025-07-04T15:25:45.511Z'
+        departmentName:
+          type: string
+          description: The name of the department associated with the contract.
+          example: Public Works
+        durationType:
+          type: string
+          description: The type of duration for the contract.
+          example: fixed
+        project_id:
+          type: number
+          description: The project ID associated with the contract.
+          example: 789
+        summary:
+          type: string
+          description: A summary of the contract details.
+          example: Supply of office materials for the year.
+        state:
+          type: string
+          description: The current state of the contract.
+          example: published
+        government_id:
+          type: number
+          description: The ID of the government entity associated with the contract.
+          example: 456
+        expirationDate:
+          type: string
+          description: The expiration date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        hasProtest:
+          type: boolean
+          description: Indicates if the contract has a protest on it.
+          example: false
+        hasClaim:
+          type: boolean
+          description: Indicates if the contract has a claim on it.
+          example: false
+        initialTermLength:
+          type: number
+          description: The initial term length of the contract.
+          example: 12
+        initialTermLengthUnit:
+          type: string
+          description: The unit for the initial term length.
+          example: months
+        procurementClassification:
+          type: string
+          description: The procurement classification for the contract.
+          example: Goods
+        note:
+          type: string
+          description: Additional notes about the contract.
+          example: This contract is subject to annual review.
+        rebid:
+          type: boolean
+          description: Indicates if the contract is a rebid.
+          example: false
+        milestones:
+          description: The contract milestones.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractMilestoneResponseDetails'
+        attachments:
+          description: The contract attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResponseDetails'
+        vendor:
+          description: The vendor (contract party) details.
+          allOf:
+          - $ref: '#/components/schemas/ContractPartyResponseDetails'
+        procurementContact:
+          description: The procurement contact details.
+          oneOf:
+          - $ref: '#/components/schemas/ContractContactResponseDetails'
+          - type: 'null'
+        projectContact:
+          description: The project contact details.
+          oneOf:
+          - $ref: '#/components/schemas/ContractContactResponseDetails'
+          - type: 'null'
+        renewals:
+          description: The contract renewals.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractRenewalResponseDetails'
+        budget:
+          description: The budget details.
+          allOf:
+          - $ref: '#/components/schemas/ContractBudgetResponseDetails'
+        categories:
+          description: The category codes associated with the contract.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractCategoriesResponseDetails'
+      required:
+      - id
+      - title
+      - startDate
+      - endDate
+      - status
+      - isPublic
+      - isCooperative
+      - contractId
+      - internalReferenceId
+      - updated_at
+      - created_at
+      - departmentName
+      - durationType
+      - project_id
+      - summary
+      - state
+      - government_id
+      - expirationDate
+      - hasProtest
+      - hasClaim
+      - initialTermLength
+      - initialTermLengthUnit
+      - procurementClassification
+      - note
+      - rebid
+      - milestones
+      - attachments
+      - vendor
+      - procurementContact
+      - projectContact
+      - renewals
+      - budget
+      - categories
+    ContractPartyResponseDetails:
+      type: object
+      properties:
+        companyName:
+          type: string
+          description: The name of the company.
+          example: Acme Corp
+        companyEmail:
+          type: string
+          description: The email address of the company.
+          example: contact@acmecorp.com
+      required:
+      - companyName
+      - companyEmail
+    ContractContactResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the contact.
+          example: 1
+        firstName:
+          type: string
+          description: The first name of the contact.
+          example: John
+        lastName:
+          type: string
+          description: The last name of the contact.
+          example: Doe
+        title:
+          type: string
+          description: The title of the contact.
+          example: Contract Manager
+        phoneCountry:
+          type: string
+          description: The country code for the contact phone number.
+          example: '+1'
+        phone:
+          type: string
+          description: The phone number of the contact.
+          example: '1234567890'
+        email:
+          type: string
+          description: The email address of the contact.
+          example: john.doe@acme.com
+      required:
+      - id
+      - firstName
+      - lastName
+      - title
+      - phoneCountry
+      - phone
+      - email
+    ContractOrder:
+      x-tags:
+      - Contracts
+      type: object
+      required:
+      - amount
+      - department
+      - fiscalYear
+      - issueDate
+      - number
+      - paidAmount
+      anyOf:
+      - required:
+        - contractId
+      - required:
+        - vendorAssignedNo
+      properties:
+        amount:
+          type: number
+          description: The contract order amount.
+          example: 1000.5
+        contractId:
+          type: string
+          description: Case sensitive. The ID of the associated contract. Required if `vendorAssignedNo` is not provided. If there are no contract matches or greater than 1 match, the `vendorAssignedNo` will be required.
+          maxLength: 255
+          example: CONTRACT-12345
+        department:
+          type: string
+          description: Case insensitive. The name of the department making the purchase.
+          maxLength: 128
+          example: finance
+        description:
+          type: string
+          description: An optional description of the contract order.
+          maxLength: 500
+          example: Purchase of office supplies.
+        fiscalYear:
+          type: string
+          description: Case insensitive. The fiscal year associated with the contract order.
+          maxLength: 256
+          example: fy2024-2025
+        issueDate:
+          type: string
+          format: date
+          description: The date the contract order was approved and issued. Most common date formats are accepted. Ex. `YYYY-MM-DD` or `MM/DD/YYYY`.
+          example: '2023-10-01'
+        notes:
+          type: string
+          description: Optional notes for the contract order.
+          maxLength: 500
+          example: Urgent request.
+        number:
+          type: string
+          description: Case sensitive. The contract order number.
+          maxLength: 64
+          example: PO-987654
+        paidAmount:
+          type: number
+          description: The amount that has been paid so far.
+          example: 500
+        vendorAssignedNo:
+          type: string
+          description: Case sensitive. The vendor assigned number for this contract order. Required if `contractId` is not provided. If there are no contract matches or greater than 1 match, the `contractId` will be required.
+          maxLength: 128
+          example: VENDOR-98765
+    AttachmentResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the attachment.
+          example: 1
+        filename:
+          type: string
+          description: The filename of the attachment.
+          example: contract.pdf
+        fileExtension:
+          type: string
+          description: The file extension of the attachment.
+          example: pdf
+        url:
+          type: string
+          description: The URL where the attachment can be accessed.
+          example: https://example.com/contract.pdf
+          nullable: true
+      required:
+      - id
+      - filename
+      - fileExtension
+      - url
+    ContractMilestoneResponseDetails:
+      type: object
+      properties:
+        isEndDate:
+          type: boolean
+          description: Whether this milestone is the end date.
+          example: false
+        isStartDate:
+          type: boolean
+          description: Whether this milestone is the start date.
+          example: true
+        isInsuranceExpiration:
+          type: boolean
+          description: Whether this milestone is an insurance expiration.
+          example: false
+        isAnnualEvaluation:
+          type: boolean
+          description: Whether this milestone is an annual evaluation.
+          example: false
+        date:
+          type: string
+          description: The date of the milestone in ISO 8601 format.
+          example: '2025-07-05T15:25:45.511Z'
+        name:
+          type: string
+          description: The name of the milestone.
+          example: Contract Signed
+      required:
+      - isEndDate
+      - isStartDate
+      - isInsuranceExpiration
+      - isAnnualEvaluation
+      - date
+      - name
+    ListContractsResponseDto:
+      type: object
+      properties:
+        results:
+          description: A list of contracts, each with a cursor for pagination.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractEdge'
+        pageInfo:
+          description: Information to assist with pagination.
+          allOf:
+          - $ref: '#/components/schemas/PageInfo'
+      required:
+      - results
+      - pageInfo
+    PageInfo:
+      type: object
+      properties:
+        totalResultsCount:
+          type: number
+          description: The total number of categories matching the query.
+          example: 250
+        endCursor:
+          type: object
+          description: The cursor that points to the last category on the current page.
+          example: Y2F0ZWdvcnkuaWQ9MTMz
+          nullable: true
+        hasMoreResults:
+          type: boolean
+          description: Indicates whether there are more categories available to fetch.
+          example: true
+      required:
+      - totalResultsCount
+      - endCursor
+      - hasMoreResults
+    ContractEdge:
+      type: object
+      properties:
+        node:
+          description: The contract data.
+          allOf:
+          - $ref: '#/components/schemas/BasicContractDetails'
+        cursor:
+          type: string
+          description: A cursor for use in pagination.
+          example: Y29udHJhY3QuaWQ9MTIz
+      required:
+      - node
+      - cursor
+  responses:
+    MissingProEntitlement:
+      description: 'Your OpenGov account does not have OpenGov Procurement access on the requested entity.
+
+        '
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: API key does not have PRO access to this entity
+  parameters:
+    EntityUuidPathParam:
+      name: entityUuid
+      in: path
+      required: true
+      description: 'UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.
+
+        '
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+    xApiKeyHeaderAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    APIKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Format: `Token your-api-key-here`'
+    BearerToken:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      description: Enter Bearer Token without Bearer prefix
+x-refined-from:
+- opengov-procurement-v1-openapi.yml
+- opengov-procurement-v2-openapi.yml
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

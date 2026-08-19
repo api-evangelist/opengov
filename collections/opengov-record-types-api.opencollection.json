@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Types API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List record types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types",
+            "params": [
+              {
+                "name": "filter[departmentID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the department ID"
+              }
+            ]
+          },
+          "docs": "List record types.\n### Permissions Required\n`Record Type Read`"
+        },
+        {
+          "info": {
+            "name": "Get a Record type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/:recordTypeID",
+            "params": [
+              {
+                "name": "recordTypeID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record type"
+              }
+            ]
+          },
+          "docs": "Retrieve a record type by ID.\n### Permissions Required\n`Record Type Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

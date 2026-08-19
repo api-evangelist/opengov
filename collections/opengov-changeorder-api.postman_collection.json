@@ -1,0 +1,501 @@
+{
+  "item": [
+    {
+      "id": "61eecdb6-96a3-48f0-96e1-859c6f3e949e",
+      "name": "changeOrder",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20156ae8-a796-4240-94f6-654f35bc34dd",
+          "name": "Search Change Orders",
+          "request": {
+            "name": "Search Change Orders",
+            "description": {
+              "content": "Search change orders with optional filters: status, poNumber, searchTerm (coNumber/poNumber/vendorName). Cursor-based pagination. Applies reason nullification (BR-CR05) for Draft COs with deleted reasons.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "change-orders",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b4b1e35-6e01-44d1-a33a-aee07a7a83d0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "change-orders",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"changeOrders\": [\n      {\n        \"id\": 6936.57449329394,\n        \"entityId\": \"string\",\n        \"poPurchaseOrderId\": 9895.90443458545,\n        \"coNumber\": \"string\",\n        \"coSequence\": 5475.119995415324,\n        \"coDate\": \"string\",\n        \"status\": \"string\",\n        \"label\": \"string\",\n        \"coReasonId\": 8906.383221812384,\n        \"coReasonLabel\": \"string\",\n        \"changeDescription\": \"string\",\n        \"originalPoTotal\": \"string\",\n        \"changeInTotal\": \"string\",\n        \"revisedPoTotal\": \"string\",\n        \"currency\": \"string\",\n        \"poNumber\": \"string\",\n        \"vendorName\": \"string\",\n        \"fiscalYear\": 9964.517159520403,\n        \"nonFinancialChanges\": {},\n        \"effectiveDate\": \"string\",\n        \"revisedEndDate\": \"string\",\n        \"createdBy\": \"string\",\n        \"createdAt\": \"string\",\n        \"updatedBy\": \"string\",\n        \"updatedAt\": \"string\"\n      },\n      {\n        \"id\": 5272.282345027081,\n        \"entityId\": \"string\",\n        \"poPurchaseOrderId\": 3756.7787297818377,\n        \"coNumber\": \"string\",\n        \"coSequence\": 4598.381209691352,\n        \"coDate\": \"string\",\n        \"status\": \"string\",\n        \"label\": \"string\",\n        \"coReasonId\": 5673.104719982955,\n        \"coReasonLabel\": \"string\",\n        \"changeDescription\": \"string\",\n        \"originalPoTotal\": \"string\",\n        \"changeInTotal\": \"string\",\n        \"revisedPoTotal\": \"string\",\n        \"currency\": \"string\",\n        \"poNumber\": \"string\",\n        \"vendorName\": \"string\",\n        \"fiscalYear\": 3904.307028377505,\n        \"nonFinancialChanges\": {},\n        \"effectiveDate\": \"string\",\n        \"revisedEndDate\": \"string\",\n        \"createdBy\": \"string\",\n        \"createdAt\": \"string\",\n        \"updatedBy\": \"string\",\n        \"updatedAt\": \"string\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"nextCursor\": \"string\",\n    \"prevCursor\": \"string\",\n    \"count\": 9160.37468211374\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bdbcb80-83c7-46f2-b8f7-41a5c50f913c",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "change-orders",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a230f2e5-54f2-445b-b4b4-a2c76e7d2969",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "change-orders",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2cf4ebd-cc52-4d0c-b1b9-af3b59be5d61",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "change-orders",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24a72ab9-deb2-4144-94b1-1def4854f659",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "change-orders",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "581f1e4c-d24d-4083-bfa0-46966643503f",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "change-orders",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"poNumber\": \"<string>\",\n  \"searchTerm\": \"<string>\",\n  \"pagination\": {\n    \"cursor\": \"<string>\",\n    \"pageSize\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-purchase-order.procurement.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4ea40a74-041a-4755-8a9e-aab29201bd3b",
+    "name": "OpenGov Purchase Order Change Order API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing purchase orders, line items, splits, and vendors.",
+      "type": "text/plain"
+    }
+  }
+}

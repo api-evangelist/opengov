@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Revisions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "revisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List revision history for a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/revisions",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all revision history entries for the given PO, ordered by revision number ascending. Each entry includes the CO number, total amount at that revision, and a human-readable change summary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Receipt Receipt Attachments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "receiptAttachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initialize a file upload (get presigned PUT URL)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/attachments/upload",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates an rcp_attachments row with upload_status=INITIATED and returns a presigned S3 PUT URL. Client uploads the file directly to S3. Allowed only while the receipt is in Draft or Submitted status."
+        },
+        {
+          "info": {
+            "name": "Complete a file upload (confirm S3 object)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/attachments/:attachmentId/complete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Client calls this after uploading to S3. If success=true (default), server verifies the S3 object exists via HeadObject and transitions INITIATED → UPLOADED. If success=false, server transitions INITIATED → FAILED (client-signaled failure)."
+        },
+        {
+          "info": {
+            "name": "Get a presigned download URL for an attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/attachments/:attachmentId/download",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a short-lived presigned S3 GET URL with Content-Disposition. The client fetches the URL directly from S3. Soft-deleted attachments and non-UPLOADED rows return 404."
+        },
+        {
+          "info": {
+            "name": "Delete an attachment (soft-delete)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/attachments/:attachmentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Soft-deletes the attachment. If standalone (not linked to a comment), the associated activity log entry is hidden. If linked to a comment, the comment remains visible. Uploader-only. Allowed only while the receipt is in Draft or Submitted status."
+        },
+        {
+          "info": {
+            "name": "Bulk-delete orphaned (unlinked) attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/attachments/bulk-delete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Soft-deletes and removes S3 objects for multiple unlinked attachments in a single request. Only attachments owned by the caller that are not yet linked to a comment or group are eligible. Silently skips ineligible IDs. Used by the frontend to clean up abandoned uploads on dialog cancel."
+        },
+        {
+          "info": {
+            "name": "List active attachments for a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/attachments",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns all attachments in uploadStatus IN (ATTACHED, UPLOADED) for the receipt, newest first. `storageKey` is omitted (internal). Used by the frontend Copy flow and attachment tiles to avoid walking the activity feed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

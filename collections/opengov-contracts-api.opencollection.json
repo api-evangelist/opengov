@@ -1,0 +1,412 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Contracts API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import Contract Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.procurement.opengov.com/gateway/contract-orders/v1",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Import Contract Orders"
+        },
+        {
+          "info": {
+            "name": "List of Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v1/contracts",
+            "params": [
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "The number of contracts to return."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for use in pagination."
+              },
+              {
+                "name": "startDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with startDate after this date (ISO8601)."
+              },
+              {
+                "name": "startDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with startDate before this date (ISO8601)."
+              },
+              {
+                "name": "createdDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with created_at after this date (ISO8601)."
+              },
+              {
+                "name": "createdDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with created_at before this date (ISO8601)."
+              },
+              {
+                "name": "endDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with endDate after this date (ISO8601)."
+              },
+              {
+                "name": "endDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with endDate before this date (ISO8601)."
+              },
+              {
+                "name": "updatedDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts updated after this date (ISO8601)."
+              },
+              {
+                "name": "updatedDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts updated before this date (ISO8601)."
+              },
+              {
+                "name": "sortByAsc",
+                "value": "",
+                "type": "query",
+                "description": "Sorts, in ascending order, the final list by the valid contract field"
+              },
+              {
+                "name": "sortByDesc",
+                "value": "",
+                "type": "query",
+                "description": "Sorts, in descending order, the final list by the valid contract field"
+              },
+              {
+                "name": "externalVendorId",
+                "value": "",
+                "type": "query",
+                "description": "Filters contracts by External Vendor ID (case-insensitive substring match)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches a list of contracts, ordered by their ID, and supports cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Contract by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v1/contracts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches a contract based on its unique ID."
+        },
+        {
+          "info": {
+            "name": "Attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v1/contracts/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches all attachments associated with a contract by contract ID."
+        },
+        {
+          "info": {
+            "name": "Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v1/contracts/:id/contacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint returns the customizable contacts associated with a contract (Contacts subtab)."
+        },
+        {
+          "info": {
+            "name": "Import Contract Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.procurement.opengov.com/gateway/v2/entities/:entityUuid/contract-orders",
+            "params": [
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Import Contract Orders"
+        },
+        {
+          "info": {
+            "name": "List of Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v2/entities/:entityUuid/contracts",
+            "params": [
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "The number of contracts to return."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for use in pagination."
+              },
+              {
+                "name": "startDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with startDate after this date (ISO8601)."
+              },
+              {
+                "name": "startDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with startDate before this date (ISO8601)."
+              },
+              {
+                "name": "createdDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with created_at after this date (ISO8601)."
+              },
+              {
+                "name": "createdDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with created_at before this date (ISO8601)."
+              },
+              {
+                "name": "endDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with endDate after this date (ISO8601)."
+              },
+              {
+                "name": "endDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts with endDate before this date (ISO8601)."
+              },
+              {
+                "name": "updatedDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts updated after this date (ISO8601)."
+              },
+              {
+                "name": "updatedDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filters out all contracts updated before this date (ISO8601)."
+              },
+              {
+                "name": "sortByAsc",
+                "value": "",
+                "type": "query",
+                "description": "Sorts, in ascending order, the final list by the valid contract field"
+              },
+              {
+                "name": "sortByDesc",
+                "value": "",
+                "type": "query",
+                "description": "Sorts, in descending order, the final list by the valid contract field"
+              },
+              {
+                "name": "externalVendorId",
+                "value": "",
+                "type": "query",
+                "description": "Filters contracts by External Vendor ID (case-insensitive substring match)."
+              },
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches a list of contracts, ordered by their ID, and supports cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Contract by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v2/entities/:entityUuid/contracts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches a contract based on its unique ID."
+        },
+        {
+          "info": {
+            "name": "Attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v2/entities/:entityUuid/contracts/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint fetches all attachments associated with a contract by contract ID."
+        },
+        {
+          "info": {
+            "name": "Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.procurement.opengov.com/public/api/v2/entities/:entityUuid/contracts/:id/contacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entityUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the OpenGov entity (typically an agency) the request is acting on"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint returns the customizable contacts associated with a contract (Contacts subtab)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

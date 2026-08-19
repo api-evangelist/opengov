@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: OpenGov Purchase Order Purchase Order Type API
+  version: 1.0.0
+  description: API for managing purchase orders, line items, splits, and vendors.
+servers:
+- url: https://api-purchase-order.procurement.opengov.com
+  description: Production
+- url: https://api-purchase-order.procurement.ogstaging.us
+  description: Staging
+- url: https://api-purchase-order.procurement.ogintegration.us
+  description: Integration
+security:
+- platformApiKey: []
+- platformBearerToken: []
+tags:
+- name: purchaseOrderType
+paths:
+  /api/v1/po/entities/{entityId}/purchase-order-types:
+    get:
+      tags:
+      - purchaseOrderType
+      operationId: purchaseOrderType.list
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseOrderTypeModel.json'
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code
+                    example: 400
+                  code:
+                    type: string
+                    description: Machine-readable error code
+                    example: ValidationError
+                  detail:
+                    type: string
+                    description: Human-readable error description. For 400 ValidationError with exactly one field issue, matches that field's `detail`; otherwise a summary (e.g. multiple validation issues).
+                    example: The request body failed validation.
+                  fieldErrors:
+                    type: array
+                    description: Per-field validation errors (present for 400 validation errors)
+                    items:
+                      type: object
+                      properties:
+                        parameter:
+                          type: string
+                          description: Dot-path to the field
+                          example: lineItems.0.lineItemSplits.1
+                        detail:
+                          type: string
+                          description: Human-readable validation message
+                          example: 'Account 101-5100 has insufficient budget: requested 500.00, available 200.00'
+                        code:
+                          type: string
+                          description: Machine-readable rule identifier
+                          example: BUDGET_INSUFFICIENT
+                        data:
+                          type: object
+                          description: Structured context for the error (account codes, amounts, IDs, etc.)
+                          additionalProperties: true
+                          example:
+                            accountNumber: 101-5100
+                            accountPseudoKey: GF-101-5100
+                            requestedAmount: 500
+                            availableAmount: 200
+                      required:
+                      - parameter
+                      - detail
+                required:
+                - status
+                - code
+                - detail
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code
+                    example: 401
+                  code:
+                    type: string
+                    description: Machine-readable error code
+                    example: AuthenticationError
+                  detail:
+                    type: string
+                    description: Human-readable error description. For 400 ValidationError with exactly one field issue, matches that field's `detail`; otherwise a summary (e.g. multiple validation issues).
+                    example: Authentication is required to access this resource.
+                required:
+                - status
+                - code
+                - detail
+        '403':
+          description: UnauthorizedError
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code
+                    example: 403
+                  code:
+                    type: string
+                    description: Machine-readable error code
+                    example: AuthorizationError
+                  detail:
+                    type: string
+                    description: Human-readable error description. For 400 ValidationError with exactly one field issue, matches that field's `detail`; otherwise a summary (e.g. multiple validation issues).
+                    example: You do not have permission to perform this action.
+                required:
+                - status
+                - code
+                - detail
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code
+                    example: 404
+                  code:
+                    type: string
+                    description: Machine-readable error code
+                    example: PurchaseOrderNotFound
+                  detail:
+                    type: string
+                    description: Human-readable error description. For 400 ValidationError with exactly one field issue, matches that field's `detail`; otherwise a summary (e.g. multiple validation issues).
+                    example: Purchase order with id 123 was not found.
+                required:
+                - status
+                - code
+                - detail
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code
+                    example: 500
+                  code:
+                    type: string
+                    description: Machine-readable error code
+                    example: InternalServerError
+                  detail:
+                    type: string
+                    description: Human-readable error description. For 400 ValidationError with exactly one field issue, matches that field's `detail`; otherwise a summary (e.g. multiple validation issues).
+                    example: An unexpected error occurred while processing your request. Please try again later.
+                required:
+                - status
+                - code
+                - detail
+      description: Returns the standard PO types (Standard, Blanket, Emergency). Per-entity overrides will be added in a later phase.
+      summary: List PO types
+components:
+  schemas:
+    PurchaseOrderTypeModel.json:
+      type: object
+      required:
+      - id
+      - code
+      - isActive
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: number
+        code:
+          $ref: '#/components/schemas/PoType'
+        description:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        isActive:
+          type: boolean
+        createdAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+        updatedAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+      additionalProperties: false
+      title: PurchaseOrderTypeModel.json
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
+    PoType:
+      type: string
+      enum:
+      - Standard
+      - Blanket
+      - Emergency
+      description: 'Purchase order type: Standard, Blanket, Emergency'
+      title: PO Type
+  securitySchemes:
+    platformApiKey:
+      description: OpenGov Platform API Key
+      type: apiKey
+      name: Authorization
+      in: header
+    platformBearerToken:
+      type: http
+      scheme: bearer

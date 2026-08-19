@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Attachment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "attachment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initialize a general file upload (get presigned PUT URL)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/attachments/upload",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a po_attachments row with purpose=GENERAL, upload_status=INITIATED and returns a presigned S3 PUT URL. Client uploads the file directly to S3 via the presigned URL. For Terms & Conditions uploads use POST /terms/attachments/upload instead."
+        },
+        {
+          "info": {
+            "name": "Complete a file upload (confirm S3 object)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/attachments/:attachmentId/complete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Client calls this after uploading to S3. If success=true (default), server verifies the S3 object exists via HeadObject and transitions INITIATED → UPLOADED. If success=false, server transitions INITIATED → FAILED (client-signaled failure). For T&C uploads use POST /terms/attachments/:attachmentId/complete (stricter auth)."
+        },
+        {
+          "info": {
+            "name": "Get a presigned download URL for an attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/attachments/:attachmentId/download",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a short-lived presigned S3 GET URL with Content-Disposition. The client fetches the URL directly from S3. Soft-deleted attachments and non-UPLOADED rows return 404."
+        },
+        {
+          "info": {
+            "name": "Delete an attachment (soft-delete)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/attachments/:attachmentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes the attachment. If standalone (not linked to a comment), the associated activity log entry is hidden. If linked to a comment, the comment remains visible. General attachments: uploader-only. T&C attachments: PO Editor. PO must not be in a terminal status."
+        },
+        {
+          "info": {
+            "name": "Bulk-delete orphaned (unlinked) attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/attachments/bulk-delete",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Soft-deletes and removes S3 objects for multiple unlinked attachments in a single request. Only attachments owned by the caller that are not yet linked to a comment or group are eligible. Silently skips ineligible IDs. Used by the frontend to clean up abandoned uploads."
+        },
+        {
+          "info": {
+            "name": "List attachments for a PO, grouped by purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/attachments",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all attachments in uploadStatus IN ('ATTACHED', 'UPLOADED') for the PO, grouped into `general` and `termsAndConditions` arrays (newest first within each). `storageKey` is omitted from each item (internal). Used by the frontend Copy-PO flow and attachment tiles to avoid walking the activity feed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,363 @@
+openapi: 3.2.0
+info:
+  title: Opengov Organization API
+  version: '1.0'
+  description: 'Operations tagged organization across 2 of this provider''s published API definitions: opengov-open-data-ckan-openapi.yml, opengov-permitting-licensing-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cloudcity.ogopendata.com/api/3/action
+  description: Cloud City Open Data
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+tags:
+- name: organization
+  description: Organizations are used to create, manage and publish datasets.
+paths:
+  /organization_list:
+    servers:
+    - url: https://cloudcity.ogopendata.com/api/3/action
+      description: Cloud City Open Data
+    get:
+      operationId: organizationList
+      summary: Return a list of the names of the site's organizations.
+      tags:
+      - organization
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 1000
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Organization list envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Organization'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /organization_show:
+    servers:
+    - url: https://cloudcity.ogopendata.com/api/3/action
+      description: Cloud City Open Data
+    get:
+      operationId: organizationShow
+      summary: Return the details of a organization.
+      tags:
+      - organization
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: include_datasets
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: include_dataset_count
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Organization envelope
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Organization'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      security:
+      - ApiTokenAuth: []
+  /v2/{community}/organization:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    servers:
+    - url: https://api.plce.opengov.com/plce
+      description: Production
+      x-og-envs:
+      - production
+      - staging
+      - development
+      - local
+    get:
+      summary: Retrieve an organization
+      description: 'Retrieve details about the organization.
+
+        ### Permissions Required
+
+        `System Config Read`'
+      operationId: getOrganization
+      x-og-claims-required:
+      - PLC_SYSTEM_CONFIG_READ
+      tags:
+      - organization
+      responses:
+        '200':
+          description: Organization
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Organization
+                    title: Organization
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of an organization
+                        example: org-123456
+                      type:
+                        type: string
+                        enum:
+                        - organization
+                        example: organization
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: Organization name
+                            example: City of Springfield
+                          logoURL:
+                            type: string
+                            format: url
+                            description: Logo URL
+                            example: https://example.com/logos/springfield-logo.png
+                          live:
+                            type: boolean
+                            description: Organization is live
+                            example: true
+                          publicPortalEnabled:
+                            type: boolean
+                            description: Public portal enabled
+                            example: true
+                          timezone:
+                            type: string
+                            description: Timezone
+                            example: America/New_York
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+      security:
+      - bearerAuth: []
+      - basicHttpAuthentication: []
+      - auth0Prod: []
+      - auth0Dev: []
+components:
+  schemas:
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
+    Organization:
+      type: object
+      description: CKAN Organization
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        state:
+          type: string
+        approval_status:
+          type: string
+        package_count:
+          type: integer
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Authorization Error
+                  message: 'Access denied: User not authorized to perform this action'
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-refined-from:
+- opengov-open-data-ckan-openapi.yml
+- opengov-permitting-licensing-v2-openapi.yml
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

@@ -1,0 +1,537 @@
+openapi: 3.2.0
+info:
+  title: Vendor Management Vendor Taskmaster API
+  description: 'A comprehensive API for managing vendors in the OpenGov platform.
+
+
+    ## Authentication
+
+    All endpoints require JWT Bearer token authentication. Include the token in the Authorization header:
+
+    ```
+
+    Authorization: Bearer <your-jwt-token>
+
+    ```
+
+
+    ## Features
+
+    - **Vendor Management**: Create, read, update, and delete vendors
+
+    - **Health Check**: Monitor service health
+
+
+    ## Rate Limiting
+
+    API calls are subject to rate limiting based on your subscription tier.'
+  version: 1.0.0
+  contact:
+    name: OpenGov API Support
+    email: api-support@opengov.com
+  license:
+    name: Proprietary
+    url: https://opengov.com/terms
+servers:
+- url: https://api.vendor.opengov.com
+  description: Production Server
+- url: https://api.vendor.ogstaging.us
+  description: Staging Server
+- url: https://api-vendor.procurement.ogintegration.us
+  description: Integration Server
+security:
+- bearerAuth: []
+tags:
+- name: vendor-taskmaster
+paths:
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/taskmaster/actions:
+    get:
+      tags:
+      - vendor-taskmaster
+      operationId: vendor-taskmaster.getVendorTaskMasterActions
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: vendorKey
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - taskId
+                  - label
+                  - link
+                  properties:
+                    taskId:
+                      type: number
+                    label:
+                      type: string
+                    link:
+                      type: string
+                    outcome:
+                      anyOf:
+                      - type: string
+                      - type: 'null'
+                  additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/approval-pending:
+    get:
+      tags:
+      - vendor-taskmaster
+      operationId: vendor-taskmaster.getVendorApprovalPending
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: vendorKey
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - pending
+                properties:
+                  pending:
+                    type: boolean
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/taskmaster/outcome:
+    post:
+      tags:
+      - vendor-taskmaster
+      operationId: vendor-taskmaster.submitVendorTaskMasterOutcome
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: vendorKey
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - link
+                - responseCode
+                properties:
+                  link:
+                    type: string
+                  responseCode:
+                    type: number
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - taskId
+              - action
+              properties:
+                taskId:
+                  type: number
+                action:
+                  type: string
+                comment:
+                  type: string
+              additionalProperties: false
+        required: true
+components:
+  schemas:
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme

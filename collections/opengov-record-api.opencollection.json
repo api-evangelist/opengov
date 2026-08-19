@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records",
+            "params": [
+              {
+                "name": "filter[number]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by record number"
+              },
+              {
+                "name": "filter[histID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by historical ID"
+              },
+              {
+                "name": "filter[histNumber]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by historical permit number"
+              },
+              {
+                "name": "filter[typeID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by record type ID"
+              },
+              {
+                "name": "filter[projectID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project ID"
+              },
+              {
+                "name": "filter[applicantUserID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter records by the user ID of their applicant"
+              },
+              {
+                "name": "filter[locationID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter records by the ID of their associated location"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status"
+              },
+              {
+                "name": "filter[createdAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation date"
+              },
+              {
+                "name": "filter[updatedAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date"
+              },
+              {
+                "name": "filter[submittedAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by submission date"
+              },
+              {
+                "name": "filter[expiresAt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by expiration date"
+              },
+              {
+                "name": "filter[isEnabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status"
+              },
+              {
+                "name": "filter[renewalSubmitted]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by renewal submission status"
+              },
+              {
+                "name": "filter[submittedOnline]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by online submission status"
+              },
+              {
+                "name": "filter[renewalNumber]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by renewal number"
+              },
+              {
+                "name": "filter[renewalOfRecordID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by renewal of record ID"
+              }
+            ]
+          },
+          "docs": "Retrieve records in the community that match the specified filters.\n\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Create a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a record. Records are created as drafts, and can be submitted by making a subsequent `PATCH` request. (See `PATCH /records/:id`)\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Retrieve a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "Retrieve a record by ID.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Update a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a record. To submit a draft record, update the status to `ACTIVE`.\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Archive a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "Records can only be archvied, not permanently deleted.\n### Permissions Required\n`Record Archive`"
+        },
+        {
+          "info": {
+            "name": "Renew a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/renew"
+          },
+          "docs": "Create a new record as a renewal of an existing record. The record's type must support renewals, and the record must not already have been renewed.\n### Permissions Required\n`Record Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

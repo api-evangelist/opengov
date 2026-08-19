@@ -1,0 +1,1885 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Forms API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Forms
+  description: 'A Record''s Form is based on its Record Type.
+
+
+    A Form is comprised of Fields which are contained within Sections. Each Field is of a specific data Type, and has a Label and a Value.
+
+
+    '
+paths:
+  /v2/{community}/records/{recordID}/form:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    get:
+      summary: Get record form data
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve the form data for a specific record. This returns single-entry form data only. For multi-entry form data, use Form Collection endpoints.\n### Permissions Required\n`Record Read`"
+      operationId: getRecordFormData
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Forms
+      parameters:
+      - name: include
+        in: query
+        description: Include related resources
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - sections
+        style: form
+        explode: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Record Form Data
+                    x-tags:
+                    - Record Forms
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - formData
+                        example: formData
+                      id:
+                        type: string
+                        example: form-data-525354
+                      attributes:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            items:
+                              type: object
+                              description: Form field definition and value.
+                              properties:
+                                id:
+                                  type: string
+                                  description: An ID that uniquely identifies a form field
+                                  example: form-field-123456789
+                                label:
+                                  type: string
+                                  description: Short description of the form field
+                                  example: I agree to the terms and conditions
+                                formFieldType:
+                                  type: string
+                                  enum:
+                                  - CHECKBOX
+                                  - DATE
+                                  - DROP_DOWN
+                                  - E_SIGNATURE
+                                  - EIN
+                                  - FILE_UPLOAD
+                                  - NUMBER
+                                  - SHORT_TEXT
+                                  - LONG_TEXT
+                                  - HELP_TEXT
+                                  - SSN
+                                  description: Indicates the type of field
+                                required:
+                                  type: boolean
+                                  description: Indicates if a field is a required field
+                                internal:
+                                  type: boolean
+                                  description: When true, indicates that the field is visible only to employees otherwise visible to all
+                                ordinal:
+                                  type: integer
+                                  description: Position of the field within a section or field group
+                                  example: 1
+                                sectionID:
+                                  type: integer
+                                  description: Indentifier for the section of the form that this field is part of
+                                  example: 1
+                                date:
+                                  type: string
+                                  description: Value of the DATE field
+                                  format: date
+                                dateTime:
+                                  type: string
+                                  description: Value of the DATE_TIME field
+                                  format: date-time
+                                checkbox:
+                                  type: boolean
+                                  description: Value of the CHECKBOX field
+                                signature:
+                                  type: string
+                                  description: Value of the E_SIGNATURE field
+                                  example: John Doe
+                                ssn:
+                                  type: string
+                                  description: Value of the SSN field
+                                  example: 123-45-6789
+                                number:
+                                  type: number
+                                  description: Value of the NUMBER field
+                                  example: 123456789
+                                shortText:
+                                  type: string
+                                  description: Value of the SHORT_TEXT field
+                                  example: Short Text
+                                longText:
+                                  type: string
+                                  description: Value of the LONG_TEXT field
+                                  example: Long Text
+                                dropDown:
+                                  type: string
+                                  description: Value of the DROP_DOWN field
+                                  example: Option 1
+                              required:
+                              - label
+                              - formFieldType
+                              - required
+                              - internal
+                              - ordinal
+                              - sectionID
+                              if:
+                                properties:
+                                  formFieldType:
+                                    const: DATE
+                              then:
+                                properties:
+                                  date:
+                                    type: string
+                                    description: Value of the DATE field
+                                    format: date
+                                required:
+                                - date
+                              allOf:
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: DATE_TIME
+                                then:
+                                  properties:
+                                    dateTime:
+                                      type: string
+                                      description: Value of the DATE_TIME field
+                                      format: date-time
+                                  required:
+                                  - dateTime
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: CHECKBOX
+                                then:
+                                  properties:
+                                    checkbox:
+                                      type: boolean
+                                      description: Value of the CHECKBOX field
+                                  required:
+                                  - checkbox
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: E_SIGNATURE
+                                then:
+                                  properties:
+                                    signature:
+                                      type: string
+                                      description: Value of the E_SIGNATURE field
+                                  required:
+                                  - signature
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: E_SIGNATURE
+                                then:
+                                  properties:
+                                    signature:
+                                      type: string
+                                      description: Value of the E_SIGNATURE field
+                                  required:
+                                  - signature
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: SSN
+                                then:
+                                  properties:
+                                    ssn:
+                                      type: string
+                                      description: Value of the SSN field
+                                  required:
+                                  - ssn
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: NUMBER
+                                then:
+                                  properties:
+                                    number:
+                                      type: number
+                                      description: Value of the NUMBER field
+                                  required:
+                                  - number
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: SHORT_TEXT
+                                then:
+                                  properties:
+                                    shortText:
+                                      type: string
+                                      description: Value of the SHORT_TEXT field
+                                  required:
+                                  - shortText
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: LONG_TEXT
+                                then:
+                                  properties:
+                                    longText:
+                                      type: string
+                                      description: Value of the LONG_TEXT field
+                                  required:
+                                  - longText
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: DROP_DOWN
+                                then:
+                                  properties:
+                                    dropDown:
+                                      type: string
+                                      description: Value of the DROP_DOWN field
+                                  required:
+                                  - dropDown
+                        required:
+                        - fields
+                      relationships:
+                        type: object
+                        properties:
+                          collections:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                            description: The related *collections*.
+                  included:
+                    type: array
+                    description: The related *collections* if requested.
+                    items:
+                      type: object
+                      title: Form Collection
+                      description: 'Form data collection for a record.
+
+                        This is referred to as a multi-entry section in the UI.
+
+                        It is used to collect repeatable data from multiple entries.
+
+
+                        The related *entries* are referred to as *items* in the UI.
+
+                        Each entry is a collection of form fields.
+
+                        Each entry must be retrieved or updated individually.
+
+                        '
+                      x-tags:
+                      - Record Forms
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          example: form-collection-555657
+                        type:
+                          type: string
+                          enum:
+                          - formCollection
+                          example: formCollection
+                        attributes:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              example: Property Details
+                            ordinal:
+                              type: integer
+                              example: 2
+                            fields:
+                              type: array
+                              description: 'Definitions of the fields that make up each entry in this collection.
+
+                                Use each field''s `id` as the field identifier when creating or updating
+
+                                collection entries.
+
+                                '
+                              items:
+                                type: object
+                                description: Form field template definition and value
+                                properties:
+                                  id:
+                                    type: string
+                                    description: An ID that uniquely identifies a form field
+                                    example: form-field-123456789
+                                  label:
+                                    type: string
+                                    description: Label of the form field
+                                    example: I agree to the terms and conditions
+                                  description:
+                                    type: string
+                                    nullable: true
+                                    description: Description of the form field
+                                    example: Please agree to the terms and conditions
+                                  formFieldType:
+                                    type: string
+                                    enum:
+                                    - CHECKBOX
+                                    - DATE
+                                    - DROP_DOWN
+                                    - E_SIGNATURE
+                                    - EIN
+                                    - FILE_UPLOAD
+                                    - NUMBER
+                                    - SHORT_TEXT
+                                    - LONG_TEXT
+                                    - HELP_TEXT
+                                    - SSN
+                                    description: Indicates the type of field
+                                  dataType:
+                                    type: string
+                                    enum:
+                                    - NUMBER
+                                    - STRING
+                                    - BOOLEAN
+                                    - DATETIME
+                                    description: Indicates the type of form field's data
+                                  helpText:
+                                    type: string
+                                    nullable: true
+                                    description: Help text of the form field
+                                    example: By checking this box, you acknowledge.
+                                  required:
+                                    type: boolean
+                                    description: Whether the form field is required
+                                  internal:
+                                    type: boolean
+                                    description: When true, indicates that the field is visible only to employees otherwise visible to all
+                        relationships:
+                          type: object
+                          properties:
+                            entries:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          description: '**Not Implemented**: The server does not support the functionality required to fulfill the request.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+              examples:
+                not_implemented:
+                  summary: Not Implemented
+                  value:
+                    errors:
+                    - id: error-501-001
+                      code: NOT_IMPLEMENTED
+                      detail: The request method is not implemented by the server and cannot be handled.
+                      status: '501'
+                      title: Not Implemented
+    patch:
+      summary: Update record form data
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nUpdate the form data for a specific record. This updates single-entry form data only. For multi-entry form data, use Form Collection endpoints.\n### Permissions Required\n`Record Write`"
+      operationId: updateRecordFormData
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Forms
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  title: Record Form Data
+                  x-tags:
+                  - Record Forms
+                  required:
+                  - id
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - formData
+                      example: formData
+                    id:
+                      type: string
+                      example: form-data-1000005
+                    attributes:
+                      type: object
+                      properties:
+                        fields:
+                          type: array
+                          items:
+                            type: object
+                            description: Form field create / update payload.
+                            properties:
+                              id:
+                                type: string
+                                description: An ID that uniquely identifies a form field
+                                example: form-field-123456789
+                              date:
+                                type: string
+                                description: Value of the DATE field
+                                format: date
+                              dateTime:
+                                type: string
+                                description: Value of the DATE_TIME field
+                                format: date-time
+                              checkbox:
+                                type: boolean
+                                description: Value of the CHECKBOX field
+                              signature:
+                                type: string
+                                description: Value of the E_SIGNATURE field
+                                example: John Doe
+                              ssn:
+                                type: string
+                                description: Value of the SSN field
+                                example: 123-45-6789
+                              number:
+                                type: number
+                                description: Value of the NUMBER field
+                                example: 123456789
+                              shortText:
+                                type: string
+                                description: Value of the SHORT_TEXT field
+                                example: Short Text
+                              longText:
+                                type: string
+                                description: Value of the LONG_TEXT field
+                                example: Long Text
+                              dropDown:
+                                type: string
+                                description: Value of the DROP_DOWN field
+                                example: Option 1
+                            required:
+                            - id
+                            if:
+                              properties:
+                                formFieldType:
+                                  const: DATE
+                            then:
+                              properties:
+                                date:
+                                  type: string
+                                  description: Value of the DATE field
+                                  format: date
+                              required:
+                              - date
+                            allOf:
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: DATE_TIME
+                              then:
+                                properties:
+                                  dateTime:
+                                    type: string
+                                    description: Value of the DATE_TIME field
+                                    format: date-time
+                                required:
+                                - dateTime
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: CHECKBOX
+                              then:
+                                properties:
+                                  checkbox:
+                                    type: boolean
+                                    description: Value of the CHECKBOX field
+                                required:
+                                - checkbox
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: E_SIGNATURE
+                              then:
+                                properties:
+                                  signature:
+                                    type: string
+                                    description: Value of the E_SIGNATURE field
+                                required:
+                                - signature
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: E_SIGNATURE
+                              then:
+                                properties:
+                                  signature:
+                                    type: string
+                                    description: Value of the E_SIGNATURE field
+                                required:
+                                - signature
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: SSN
+                              then:
+                                properties:
+                                  ssn:
+                                    type: string
+                                    description: Value of the SSN field
+                                required:
+                                - ssn
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: NUMBER
+                              then:
+                                properties:
+                                  number:
+                                    type: number
+                                    description: Value of the NUMBER field
+                                required:
+                                - number
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: SHORT_TEXT
+                              then:
+                                properties:
+                                  shortText:
+                                    type: string
+                                    description: Value of the SHORT_TEXT field
+                                required:
+                                - shortText
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: LONG_TEXT
+                              then:
+                                properties:
+                                  longText:
+                                    type: string
+                                    description: Value of the LONG_TEXT field
+                                required:
+                                - longText
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: DROP_DOWN
+                              then:
+                                properties:
+                                  dropDown:
+                                    type: string
+                                    description: Value of the DROP_DOWN field
+                                required:
+                                - dropDown
+                      required:
+                      - fields
+              required:
+              - data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Record Form Data
+                    x-tags:
+                    - Record Forms
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - formData
+                        example: formData
+                      id:
+                        type: string
+                        example: form-data-525354
+                      attributes:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            items:
+                              type: object
+                              description: Form field definition and value.
+                              properties:
+                                id:
+                                  type: string
+                                  description: An ID that uniquely identifies a form field
+                                  example: form-field-123456789
+                                label:
+                                  type: string
+                                  description: Short description of the form field
+                                  example: I agree to the terms and conditions
+                                formFieldType:
+                                  $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/attributes/properties/fields/items/properties/formFieldType'
+                                required:
+                                  type: boolean
+                                  description: Indicates if a field is a required field
+                                internal:
+                                  type: boolean
+                                  description: When true, indicates that the field is visible only to employees otherwise visible to all
+                                ordinal:
+                                  type: integer
+                                  description: Position of the field within a section or field group
+                                  example: 1
+                                sectionID:
+                                  type: integer
+                                  description: Indentifier for the section of the form that this field is part of
+                                  example: 1
+                                date:
+                                  type: string
+                                  description: Value of the DATE field
+                                  format: date
+                                dateTime:
+                                  type: string
+                                  description: Value of the DATE_TIME field
+                                  format: date-time
+                                checkbox:
+                                  type: boolean
+                                  description: Value of the CHECKBOX field
+                                signature:
+                                  type: string
+                                  description: Value of the E_SIGNATURE field
+                                  example: John Doe
+                                ssn:
+                                  type: string
+                                  description: Value of the SSN field
+                                  example: 123-45-6789
+                                number:
+                                  type: number
+                                  description: Value of the NUMBER field
+                                  example: 123456789
+                                shortText:
+                                  type: string
+                                  description: Value of the SHORT_TEXT field
+                                  example: Short Text
+                                longText:
+                                  type: string
+                                  description: Value of the LONG_TEXT field
+                                  example: Long Text
+                                dropDown:
+                                  type: string
+                                  description: Value of the DROP_DOWN field
+                                  example: Option 1
+                              required:
+                              - label
+                              - formFieldType
+                              - required
+                              - internal
+                              - ordinal
+                              - sectionID
+                              if:
+                                properties:
+                                  formFieldType:
+                                    const: DATE
+                              then:
+                                properties:
+                                  date:
+                                    type: string
+                                    description: Value of the DATE field
+                                    format: date
+                                required:
+                                - date
+                              allOf:
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: DATE_TIME
+                                then:
+                                  properties:
+                                    dateTime:
+                                      type: string
+                                      description: Value of the DATE_TIME field
+                                      format: date-time
+                                  required:
+                                  - dateTime
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: CHECKBOX
+                                then:
+                                  properties:
+                                    checkbox:
+                                      type: boolean
+                                      description: Value of the CHECKBOX field
+                                  required:
+                                  - checkbox
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: E_SIGNATURE
+                                then:
+                                  properties:
+                                    signature:
+                                      type: string
+                                      description: Value of the E_SIGNATURE field
+                                  required:
+                                  - signature
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: E_SIGNATURE
+                                then:
+                                  properties:
+                                    signature:
+                                      type: string
+                                      description: Value of the E_SIGNATURE field
+                                  required:
+                                  - signature
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: SSN
+                                then:
+                                  properties:
+                                    ssn:
+                                      type: string
+                                      description: Value of the SSN field
+                                  required:
+                                  - ssn
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: NUMBER
+                                then:
+                                  properties:
+                                    number:
+                                      type: number
+                                      description: Value of the NUMBER field
+                                  required:
+                                  - number
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: SHORT_TEXT
+                                then:
+                                  properties:
+                                    shortText:
+                                      type: string
+                                      description: Value of the SHORT_TEXT field
+                                  required:
+                                  - shortText
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: LONG_TEXT
+                                then:
+                                  properties:
+                                    longText:
+                                      type: string
+                                      description: Value of the LONG_TEXT field
+                                  required:
+                                  - longText
+                              - if:
+                                  properties:
+                                    formFieldType:
+                                      const: DROP_DOWN
+                                then:
+                                  properties:
+                                    dropDown:
+                                      type: string
+                                      description: Value of the DROP_DOWN field
+                                  required:
+                                  - dropDown
+                        required:
+                        - fields
+                      relationships:
+                        type: object
+                        properties:
+                          collections:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/collections'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '422':
+          description: Validation error
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                required:
+                - errors
+                properties:
+                  errors:
+                    type: array
+                    maxItems: 1
+                    items:
+                      type: object
+                      required:
+                      - status
+                      - code
+                      - title
+                      - detail
+                      - source
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                          - '422'
+                        code:
+                          type: string
+                          enum:
+                          - INVALID_ATTRIBUTE_VALUE
+                        title:
+                          type: string
+                          example: Invalid Attribute Value
+                        detail:
+                          type: string
+                          example: The value 'ASDASFASDA' is not valid for boolean field 'is_complete'
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                              example: /data/0/attributes/value
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+  /v2/{community}/records/{recordID}/collections:
+    get:
+      summary: Get all form collections for a record
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve all form collections (multi-entry form sections) for a specific record.\n### Permissions Required\n`Record Read`"
+      operationId: getRecordFormCollections
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Forms
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+  /v2/{community}/records/{recordID}/collections/{collectionID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    - name: collectionID
+      in: path
+      description: ID of the collection
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get a form collection for a record
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve a form collection (multi-entry form section) by ID.\n### Permissions Required\n`Record Read`"
+      operationId: getRecordFormCollection
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Forms
+      parameters:
+      - name: include
+        in: query
+        description: Include related resources
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - fields
+        style: form
+        explode: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Form Collection
+                    description: 'Form data collection for a record.
+
+                      This is referred to as a multi-entry section in the UI.
+
+                      It is used to collect repeatable data from multiple entries.
+
+
+                      The related *entries* are referred to as *items* in the UI.
+
+                      Each entry is a collection of form fields.
+
+                      Each entry must be retrieved or updated individually.
+
+                      '
+                    x-tags:
+                    - Record Forms
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        example: form-collection-555657
+                      type:
+                        type: string
+                        enum:
+                        - formCollection
+                        example: formCollection
+                      attributes:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            example: Property Details
+                          ordinal:
+                            type: integer
+                            example: 2
+                          fields:
+                            type: array
+                            description: 'Definitions of the fields that make up each entry in this collection.
+
+                              Use each field''s `id` as the field identifier when creating or updating
+
+                              collection entries.
+
+                              '
+                            items:
+                              $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/attributes/properties/fields/items'
+                      relationships:
+                        type: object
+                        properties:
+                          entries:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries'
+                  included:
+                    type: array
+                    description: The related *fields* if requested.
+                    items:
+                      type: object
+                      title: Form Collection Fields
+                      x-tags:
+                      - Record Forms
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          example: form-collection-fields-1000006
+                        type:
+                          type: string
+                          enum:
+                          - formCollectionEntry
+                          example: formCollectionEntry
+                        attributes:
+                          type: object
+                          properties:
+                            fields:
+                              type: array
+                              items:
+                                type: object
+                                description: Form field definition and value.
+                                properties:
+                                  id:
+                                    type: string
+                                    description: An ID that uniquely identifies a form field
+                                    example: form-field-123456789
+                                  label:
+                                    type: string
+                                    description: Short description of the form field
+                                    example: I agree to the terms and conditions
+                                  formFieldType:
+                                    $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/attributes/properties/fields/items/properties/formFieldType'
+                                  required:
+                                    type: boolean
+                                    description: Indicates if a field is a required field
+                                  internal:
+                                    type: boolean
+                                    description: When true, indicates that the field is visible only to employees otherwise visible to all
+                                  ordinal:
+                                    type: integer
+                                    description: Position of the field within a section or field group
+                                    example: 1
+                                  sectionID:
+                                    type: integer
+                                    description: Indentifier for the section of the form that this field is part of
+                                    example: 1
+                                  date:
+                                    type: string
+                                    description: Value of the DATE field
+                                    format: date
+                                  dateTime:
+                                    type: string
+                                    description: Value of the DATE_TIME field
+                                    format: date-time
+                                  checkbox:
+                                    type: boolean
+                                    description: Value of the CHECKBOX field
+                                  signature:
+                                    type: string
+                                    description: Value of the E_SIGNATURE field
+                                    example: John Doe
+                                  ssn:
+                                    type: string
+                                    description: Value of the SSN field
+                                    example: 123-45-6789
+                                  number:
+                                    type: number
+                                    description: Value of the NUMBER field
+                                    example: 123456789
+                                  shortText:
+                                    type: string
+                                    description: Value of the SHORT_TEXT field
+                                    example: Short Text
+                                  longText:
+                                    type: string
+                                    description: Value of the LONG_TEXT field
+                                    example: Long Text
+                                  dropDown:
+                                    type: string
+                                    description: Value of the DROP_DOWN field
+                                    example: Option 1
+                                required:
+                                - label
+                                - formFieldType
+                                - required
+                                - internal
+                                - ordinal
+                                - sectionID
+                                if:
+                                  properties:
+                                    formFieldType:
+                                      const: DATE
+                                then:
+                                  properties:
+                                    date:
+                                      type: string
+                                      description: Value of the DATE field
+                                      format: date
+                                  required:
+                                  - date
+                                allOf:
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: DATE_TIME
+                                  then:
+                                    properties:
+                                      dateTime:
+                                        type: string
+                                        description: Value of the DATE_TIME field
+                                        format: date-time
+                                    required:
+                                    - dateTime
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: CHECKBOX
+                                  then:
+                                    properties:
+                                      checkbox:
+                                        type: boolean
+                                        description: Value of the CHECKBOX field
+                                    required:
+                                    - checkbox
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: E_SIGNATURE
+                                  then:
+                                    properties:
+                                      signature:
+                                        type: string
+                                        description: Value of the E_SIGNATURE field
+                                    required:
+                                    - signature
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: E_SIGNATURE
+                                  then:
+                                    properties:
+                                      signature:
+                                        type: string
+                                        description: Value of the E_SIGNATURE field
+                                    required:
+                                    - signature
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: SSN
+                                  then:
+                                    properties:
+                                      ssn:
+                                        type: string
+                                        description: Value of the SSN field
+                                    required:
+                                    - ssn
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: NUMBER
+                                  then:
+                                    properties:
+                                      number:
+                                        type: number
+                                        description: Value of the NUMBER field
+                                    required:
+                                    - number
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: SHORT_TEXT
+                                  then:
+                                    properties:
+                                      shortText:
+                                        type: string
+                                        description: Value of the SHORT_TEXT field
+                                    required:
+                                    - shortText
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: LONG_TEXT
+                                  then:
+                                    properties:
+                                      longText:
+                                        type: string
+                                        description: Value of the LONG_TEXT field
+                                    required:
+                                    - longText
+                                - if:
+                                    properties:
+                                      formFieldType:
+                                        const: DROP_DOWN
+                                  then:
+                                    properties:
+                                      dropDown:
+                                        type: string
+                                        description: Value of the DROP_DOWN field
+                                    required:
+                                    - dropDown
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+    post:
+      summary: Create a new entry in a record form collection
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nThis can be used only to append a new entry to the end of the collection.\nTo insert an entry at a specific position, use the `PATCH` method.\n\n### Permissions Required\n`Record Write`"
+      operationId: createRecordFormCollectionEntry
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Forms
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        description: The record form collection entry to create
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - formCollection
+                    attributes:
+                      type: object
+                      properties:
+                        fields:
+                          type: array
+                          items:
+                            type: object
+                            description: Form field create / update payload.
+                            properties:
+                              id:
+                                type: string
+                                description: An ID that uniquely identifies a form field
+                                example: form-field-123456789
+                              date:
+                                type: string
+                                description: Value of the DATE field
+                                format: date
+                              dateTime:
+                                type: string
+                                description: Value of the DATE_TIME field
+                                format: date-time
+                              checkbox:
+                                type: boolean
+                                description: Value of the CHECKBOX field
+                              signature:
+                                type: string
+                                description: Value of the E_SIGNATURE field
+                                example: John Doe
+                              ssn:
+                                type: string
+                                description: Value of the SSN field
+                                example: 123-45-6789
+                              number:
+                                type: number
+                                description: Value of the NUMBER field
+                                example: 123456789
+                              shortText:
+                                type: string
+                                description: Value of the SHORT_TEXT field
+                                example: Short Text
+                              longText:
+                                type: string
+                                description: Value of the LONG_TEXT field
+                                example: Long Text
+                              dropDown:
+                                type: string
+                                description: Value of the DROP_DOWN field
+                                example: Option 1
+                            required:
+                            - id
+                            if:
+                              properties:
+                                formFieldType:
+                                  const: DATE
+                            then:
+                              properties:
+                                date:
+                                  type: string
+                                  description: Value of the DATE field
+                                  format: date
+                              required:
+                              - date
+                            allOf:
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: DATE_TIME
+                              then:
+                                properties:
+                                  dateTime:
+                                    type: string
+                                    description: Value of the DATE_TIME field
+                                    format: date-time
+                                required:
+                                - dateTime
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: CHECKBOX
+                              then:
+                                properties:
+                                  checkbox:
+                                    type: boolean
+                                    description: Value of the CHECKBOX field
+                                required:
+                                - checkbox
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: E_SIGNATURE
+                              then:
+                                properties:
+                                  signature:
+                                    type: string
+                                    description: Value of the E_SIGNATURE field
+                                required:
+                                - signature
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: E_SIGNATURE
+                              then:
+                                properties:
+                                  signature:
+                                    type: string
+                                    description: Value of the E_SIGNATURE field
+                                required:
+                                - signature
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: SSN
+                              then:
+                                properties:
+                                  ssn:
+                                    type: string
+                                    description: Value of the SSN field
+                                required:
+                                - ssn
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: NUMBER
+                              then:
+                                properties:
+                                  number:
+                                    type: number
+                                    description: Value of the NUMBER field
+                                required:
+                                - number
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: SHORT_TEXT
+                              then:
+                                properties:
+                                  shortText:
+                                    type: string
+                                    description: Value of the SHORT_TEXT field
+                                required:
+                                - shortText
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: LONG_TEXT
+                              then:
+                                properties:
+                                  longText:
+                                    type: string
+                                    description: Value of the LONG_TEXT field
+                                required:
+                                - longText
+                            - if:
+                                properties:
+                                  formFieldType:
+                                    const: DROP_DOWN
+                              then:
+                                properties:
+                                  dropDown:
+                                    type: string
+                                    description: Value of the DROP_DOWN field
+                                required:
+                                - dropDown
+              required:
+              - data
+      responses:
+        '201':
+          description: Successful response
+          headers:
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+  /v2/{community}/records/{recordID}/collections/{collectionID}/entries:
+    get:
+      summary: Get all form entries for a collection
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve all form entries for a specific collection.\n### Permissions Required\n`Record Read`"
+      operationId: getRecordFormCollectionEntries
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Forms
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      - name: collectionID
+        in: path
+        description: ID of the collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Form Collection Fields
+                      description: 'Form data collection entry for a record.
+
+                        This is referred to as an item in the UI.
+
+                        It is used to collect data for a single entry within a form data collection.
+
+                        '
+                      x-tags:
+                      - Record Forms
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          example: form-collection-fields-1000006
+                        type:
+                          type: string
+                          enum:
+                          - formCollectionEntry
+                        attributes:
+                          type: object
+                          properties:
+                            fields:
+                              type: array
+                              items:
+                                $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1collections~1{collectionID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/attributes/properties/fields/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+  /v2/{community}/records/{recordID}/collections/{collectionID}/entries/{collectionEntryID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+    - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1collections~1{collectionID}~1entries/get/parameters/2'
+    - name: collectionEntryID
+      in: path
+      description: ID of an entry within a form data collection
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get fields for a specific form data collection entry
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve the fields for a specific form data collection entry.\n### Permissions Required\n`Record Read`"
+      operationId: getRecordFormCollectionEntry
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Forms
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Form Collection Fields
+                    description: 'Form data collection entry for a record.
+
+                      This is referred to as an item in the UI.
+
+                      It is used to collect data for a single entry within a form data collection.
+
+                      '
+                    x-tags:
+                    - Record Forms
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        example: form-collection-fields-1000006
+                      type:
+                        type: string
+                        enum:
+                        - formCollectionEntry
+                      attributes:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            items:
+                              $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1collections~1{collectionID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/attributes/properties/fields/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+    patch:
+      summary: Update fields for a specific form data collection entry for a record
+      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nUpdate fields for a specific form data collection entry for a record.\n### Permissions Required\n`Record Write`"
+      operationId: updateRecordFormCollectionEntry
+      x-forms-api-warning: true
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Forms
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  title: Form Collection Fields
+                  description: 'Form data collection entry for a record.
+
+                    This is referred to as an item in the UI.
+
+                    It is used to collect data for a single entry within a form data collection.
+
+                    '
+                  x-tags:
+                  - Record Forms
+                  required:
+                  - id
+                  - type
+                  - attributes
+                  properties:
+                    id:
+                      type: string
+                      example: form-collection-fields-update-1000007
+                    type:
+                      type: string
+                      enum:
+                      - formCollectionEntry
+                    attributes:
+                      type: object
+                      properties:
+                        fields:
+                          type: array
+                          items:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/patch/requestBody/content/application~1vnd.api+json/schema/properties/data/properties/attributes/properties/fields/items'
+              required:
+              - data
+      responses:
+        '200':
+          description: Form fields successfully updated
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Form Collection Fields
+                    x-tags:
+                    - Record Forms
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        example: form-collection-fields-update-1000007
+                      type:
+                        type: string
+                        enum:
+                        - formCollectionEntry
+                        example: formCollectionEntry
+                      attributes:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            items:
+                              $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1form/patch/requestBody/content/application~1vnd.api+json/schema/properties/data/properties/attributes/properties/fields/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+        '501':
+          $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

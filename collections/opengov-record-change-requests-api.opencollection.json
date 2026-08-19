@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Change Requests API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Change Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get most recent change request for a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/change-requests"
+          },
+          "docs": "Retrieve the most recent change request for a record\n\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Create change requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/change-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a record change request.\n\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Get change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/change-requests/:changeRequestID",
+            "params": [
+              {
+                "name": "changeRequestID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the change request"
+              }
+            ]
+          },
+          "docs": "Retrieve a record change request by ID.\n\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Cancel change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/change-requests/:changeRequestID",
+            "params": [
+              {
+                "name": "changeRequestID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the change request"
+              }
+            ]
+          },
+          "docs": "Cancel a record change request\n\n### Permissions Required\n`Record Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

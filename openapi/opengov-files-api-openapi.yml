@@ -1,0 +1,919 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Files API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Files
+  description: "Files in OpenGov Permitting & Licensing are managed in a two-step process:\n\n1. **File Upload**\n   - First, create a file entry to receive a pre-signed Azure Blob Storage URL\n   - Use this URL to upload your file directly to Azure Blob Storage\n   - The file is now stored but not yet associated with any entity\n\n2. **File Association**\n   - Associate the uploaded file with an entity (currently only Record Attachments)\n   - The file is cloned when associated, allowing the same file to be reused across different entities\n   - Each association creates a new file object with its own lifecycle\n\nThis design allows for efficient file reuse while maintaining independent file management for each entity.\n"
+paths:
+  /v2/{community}/files:
+    parameters:
+    - name: community
+      in: path
+      description: Subdomain of the community
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Upload a file
+      description: "Creates a new file entry and returns a pre-signed URL for uploading.\n\n##### Upload Process\n1. Call this endpoint with the file metadata to receive:\n   - A `fileID` for referencing the file\n   - A pre-signed URL for uploading\n2. Use the pre-signed URL to upload your file:\n   - Send a `PUT` request to the URL\n   - Include the file content in the request body\n   - Set the `Content-Type` header to match the file type\n   - Include the header `x-ms-blob-type` with the value `BlockBlob`\n3. Once uploaded, the file can be associated with entities:\n   - Currently supports association with [Record Attachments](operation:external/plce-api/plce-api.oas/record-attachments/addRecordAttachment)\n   - Each association creates a clone of the original file\n   - The same file can be reused across multiple entities\n\nThe pre-signed URL expires after 1 hour.\n\nFor more information on uploading files, see the [Azure Blob Service REST API documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/put-blob)\n\n### Permissions Required\n`File Write`"
+      operationId: createFileUpload
+      x-og-claims-required:
+      - PLC_FILE_WRITE
+      tags:
+      - Files
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.api+json
+          enum:
+          - application/vnd.api+json
+          - application/json
+        description: 'The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.
+
+          '
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - file
+                      example: file
+                    attributes:
+                      type: object
+                      required:
+                      - fileName
+                      - contentType
+                      properties:
+                        fileName:
+                          type: string
+                          description: Name of the file
+                          example: construction_plans.pdf
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Number of requests allowed
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Number of remaining requests
+            Location:
+              description: URL of the newly created resource
+              schema:
+                type: string
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: File
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of the file
+                        example: file-post-response-585960
+                      type:
+                        type: string
+                        enum:
+                        - file
+                        example: file
+                      attributes:
+                        type: object
+                        required:
+                        - fileName
+                        - fileDate
+                        - uploadedByUserID
+                        - isEnabled
+                        - containerName
+                        - lastUpdatedByUserID
+                        - lastUpdatedDate
+                        - blobName
+                        - sharedUrl
+                        - thumbnailUrl
+                        - uploadUrl
+                        - urlExpiresAt
+                        - entityType
+                        - entityPrimaryKey
+                        properties:
+                          fileName:
+                            type: string
+                            description: Name of the file
+                            example: structural_drawings.pdf
+                          fileDate:
+                            type: string
+                            format: date-time
+                            description: Date when the file was created/uploaded
+                          uploadedByUserID:
+                            type: string
+                            maxLength: 100
+                            description: ID of the user who uploaded the file
+                            example: user-uploader-616263
+                          isEnabled:
+                            type: boolean
+                            description: Whether the file is enabled or not
+                            example: true
+                          containerName:
+                            type: string
+                            description: Name of the container where the file is stored
+                            example: permit-documents
+                          lastUpdatedByUserID:
+                            type: string
+                            description: ID of the user who last updated the file
+                            example: user-updater-646566
+                          lastUpdatedDate:
+                            type: string
+                            format: date-time
+                            description: Date when the file was last updated
+                          blobName:
+                            type: string
+                            description: Name of the blob in storage
+                            example: 20241201_structural_drawings_616263.pdf
+                          sharedUrl:
+                            type: string
+                            description: URL for sharing the file
+                            nullable: true
+                            example: https://storage.example.com/shared/structural_drawings_xyz789
+                          thumbnailUrl:
+                            type: string
+                            description: URL for the file's thumbnail
+                            nullable: true
+                            example: https://storage.example.com/thumbnails/structural_drawings_thumb.jpg
+                          uploadUrl:
+                            type: string
+                            description: Pre-signed URL for uploading the file (valid for 1 hour). Will be null when retrieving files in a list.
+                            nullable: true
+                            example: https://storage.example.com/upload/structural_drawings?token=abc123xyz
+                          urlExpiresAt:
+                            type: string
+                            format: date-time
+                            description: Expiration timestamp for the pre-signed URL. Will be null when retrieving files in a list.
+                            nullable: true
+                          entityType:
+                            type: string
+                            enum:
+                            - resource
+                            description: Type identifier for the associated entity
+                            example: resource
+                          entityPrimaryKey:
+                            type: string
+                            description: Primary key of the associated entity
+                            nullable: true
+                            example: resource-key-676869
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          description: '**Conflict**: The request could not be completed due to a conflict with the current state of the resource.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+        '415':
+          description: '**Unsupported Media Type**
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+              examples:
+                unsupported_media_type:
+                  summary: Unsupported Content-Type header
+                  value:
+                    errors:
+                    - id: error-415-001
+                      code: UNSUPPORTED_MEDIA_TYPE
+                      detail: The request Content-Type is not supported. Expected application/vnd.api+json
+                      source:
+                        header: Content-Type
+                      status: '415'
+                      title: Unsupported Media Type
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    get:
+      summary: List files
+      description: 'Returns a paginated list of files. Note that download URLs are not included in list responses.
+
+        To get a download URL for a specific file, use the single file endpoint.
+
+
+        ### Permissions Required
+
+        `File Read`'
+      operationId: listFiles
+      x-og-claims-required:
+      - PLC_FILE_READ
+      tags:
+      - Files
+      parameters:
+      - name: page[number]
+        in: query
+        description: Which page to return (1-based)
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        example: 1
+      - name: page[size]
+        in: query
+        description: Number of records to return per page
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 20
+      - name: filter[fileName]
+        in: query
+        description: Filter by the name of a file
+        required: false
+        schema:
+          type: string
+      - name: filter[fileDate]
+        in: query
+        description: Filter by file creation/upload date
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          oneOf:
+          - type: string
+          - type: object
+            properties:
+              lt:
+                type: string
+                description: Less than the specified date
+              lte:
+                type: string
+                description: Less than or equal to the specified date
+              gt:
+                type: string
+                description: Greater than the specified date
+              gte:
+                type: string
+                description: Greater than or equal to the specified date
+      - name: filter[isEnabled]
+        in: query
+        description: Filter by file enabled status
+        required: false
+        schema:
+          type: boolean
+      - name: filter[uploadedByUserID]
+        in: query
+        description: Filter by the ID of the user who uploaded the file
+        required: false
+        schema:
+          type: string
+      - name: filter[entityType]
+        in: query
+        description: Filter by the type of the entity the file is associated with
+        required: false
+        schema:
+          type: string
+          enum:
+          - user
+          - location
+          - form_field
+          - form_section
+          - attachment
+          - record_step
+          - fee_item
+          - step_assignment
+          - record
+          - multi_entry_item
+          - flag
+          - template_step
+          - step_fee_item
+          - record_attachment
+          - checklist_item_result
+          - inspection_event
+          - doc
+          - record_snapshot
+          - multi_entry_item_entry
+          - form_field_entry
+          - record_type
+          - step_inspection_type_result
+          - segment
+          - resource
+          description: Type identifier for the associated entity
+      responses:
+        '200':
+          description: Returns list of files
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Number of requests allowed
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Number of remaining requests
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Files
+                      title: File
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          description: Unique internal ID of the file
+                          example: file-123456789
+                        type:
+                          type: string
+                          enum:
+                          - file
+                          example: file
+                        attributes:
+                          type: object
+                          required:
+                          - fileName
+                          - fileDate
+                          - uploadedByUserID
+                          - isEnabled
+                          - containerName
+                          - lastUpdatedByUserID
+                          - lastUpdatedDate
+                          - blobName
+                          - sharedUrl
+                          - thumbnailUrl
+                          - downloadUrl
+                          - urlExpiresAt
+                          - entityType
+                          - entityPrimaryKey
+                          properties:
+                            fileName:
+                              type: string
+                              description: Name of the file
+                              example: permit_application.pdf
+                            fileDate:
+                              type: string
+                              format: date-time
+                              description: Date when the file was created/uploaded
+                            uploadedByUserID:
+                              type: string
+                              maxLength: 100
+                              description: ID of the user who uploaded the file
+                              example: user-789012
+                            isEnabled:
+                              type: boolean
+                              description: Whether the file is enabled or not
+                              example: true
+                            containerName:
+                              type: string
+                              description: Name of the container where the file is stored
+                              example: documents-container
+                            lastUpdatedByUserID:
+                              type: string
+                              description: ID of the user who last updated the file
+                              example: user-345678
+                            lastUpdatedDate:
+                              type: string
+                              format: date-time
+                              description: Date when the file was last updated
+                            blobName:
+                              type: string
+                              description: Name of the blob in storage
+                              example: 20241201_permit_application_123456.pdf
+                            sharedUrl:
+                              type: string
+                              description: URL for sharing the file
+                              nullable: true
+                              example: https://storage.example.com/files/shared/abc123
+                            thumbnailUrl:
+                              type: string
+                              description: URL for the file's thumbnail
+                              nullable: true
+                              example: https://storage.example.com/thumbnails/abc123_thumb.jpg
+                            downloadUrl:
+                              type: string
+                              description: Pre-signed URL for downloading the file (valid for 1 hour). Will be null when retrieving files in a list.
+                              nullable: true
+                              example: https://storage.example.com/download/abc123?token=xyz789
+                            urlExpiresAt:
+                              type: string
+                              format: date-time
+                              description: Expiration timestamp for the pre-signed URL. Will be null when retrieving files in a list.
+                              nullable: true
+                            entityType:
+                              type: string
+                              enum:
+                              - user
+                              - location
+                              - form_field
+                              - form_section
+                              - attachment
+                              - record_step
+                              - fee_item
+                              - step_assignment
+                              - record
+                              - multi_entry_item
+                              - flag
+                              - template_step
+                              - step_fee_item
+                              - record_attachment
+                              - checklist_item_result
+                              - inspection_event
+                              - doc
+                              - record_snapshot
+                              - multi_entry_item_entry
+                              - form_field_entry
+                              - record_type
+                              - step_inspection_type_result
+                              - segment
+                              - resource
+                              description: Type identifier for the associated entity
+                              example: record_attachment
+                            entityPrimaryKey:
+                              type: string
+                              description: Primary key of the associated entity
+                              nullable: true
+                              example: rec-456789
+                  links:
+                    type: object
+                    description: Links to related resources in a collection
+                    properties:
+                      self:
+                        $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links/properties/self'
+                      first:
+                        $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links/properties/first'
+                      prev:
+                        $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links/properties/prev'
+                      next:
+                        $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links/properties/next'
+                      last:
+                        $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links/properties/last'
+                    additionalProperties:
+                      type: string
+                      format: uri-reference
+                      description: URL of the related resource
+                  meta:
+                    type: object
+                    required:
+                    - page
+                    - size
+                    - totalPages
+                    - totalRecords
+                    properties:
+                      page:
+                        type: integer
+                        description: The current page number
+                        example: 2
+                      size:
+                        type: integer
+                        description: Number of records per page
+                        example: 20
+                      totalPages:
+                        type: integer
+                        description: Total number of pages available
+                        example: 10
+                      totalRecords:
+                        type: integer
+                        description: Total count of records across all pages
+                        example: 200
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          description: '**Bad Request**: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+        '401':
+          description: '**Unauthorized**: The request has not been applied because it lacks valid authentication credentials for the target resource.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+              examples:
+                unauthorized:
+                  summary: Missing or invalid authentication
+                  value:
+                    errors:
+                    - id: error-401-001
+                      code: UNAUTHORIZED
+                      detail: Authentication credentials are missing or invalid
+                      status: '401'
+                      title: Unauthorized
+        '403':
+          description: '**Forbidden**: The server understood the request, but is refusing to fulfill it. Authorization will not help and the request SHOULD NOT be repeated.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+              examples:
+                forbidden:
+                  summary: Insufficient permissions
+                  value:
+                    errors:
+                    - id: error-403-001
+                      code: FORBIDDEN
+                      detail: You do not have sufficient permissions to access this resource
+                      status: '403'
+                      title: Forbidden
+        '406':
+          description: '**Not Acceptable**: The server cannot produce a response matching the list of acceptable values defined in the request''s proactive content negotiation headers.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+              examples:
+                not_acceptable:
+                  summary: Content type not acceptable
+                  value:
+                    errors:
+                    - id: error-406-001
+                      code: NOT_ACCEPTABLE
+                      detail: The requested content type is not supported. Please use application/vnd.api+json
+                      source:
+                        header: Accept
+                      status: '406'
+                      title: Not Acceptable
+        '500':
+          description: '**Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.
+
+            '
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400/content/application~1vnd.api+json/schema'
+  /v2/{community}/files/{fileID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: fileID
+      in: path
+      description: ID of a file
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get file
+      description: 'Returns file information including a pre-signed Azure Blob Storage URL for downloading.
+
+
+        The pre-signed URL:
+
+        - Is valid for 1 hour
+
+        - Can be shared with multiple clients
+
+        - Should be used with a GET request to download the file
+
+        - Will include the original Content-Type of the file
+
+
+        ### Permissions Required
+
+        `File Read`'
+      operationId: getFile
+      x-og-claims-required:
+      - PLC_FILE_READ
+      tags:
+      - Files
+      responses:
+        '200':
+          description: Returns file information and a pre-signed URL
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Files
+                    title: File
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of the file
+                        example: file-123456789
+                      type:
+                        type: string
+                        enum:
+                        - file
+                        example: file
+                      attributes:
+                        type: object
+                        required:
+                        - fileName
+                        - fileDate
+                        - uploadedByUserID
+                        - isEnabled
+                        - containerName
+                        - lastUpdatedByUserID
+                        - lastUpdatedDate
+                        - blobName
+                        - sharedUrl
+                        - thumbnailUrl
+                        - downloadUrl
+                        - urlExpiresAt
+                        - entityType
+                        - entityPrimaryKey
+                        properties:
+                          fileName:
+                            type: string
+                            description: Name of the file
+                            example: permit_application.pdf
+                          fileDate:
+                            type: string
+                            format: date-time
+                            description: Date when the file was created/uploaded
+                          uploadedByUserID:
+                            type: string
+                            maxLength: 100
+                            description: ID of the user who uploaded the file
+                            example: user-789012
+                          isEnabled:
+                            type: boolean
+                            description: Whether the file is enabled or not
+                            example: true
+                          containerName:
+                            type: string
+                            description: Name of the container where the file is stored
+                            example: documents-container
+                          lastUpdatedByUserID:
+                            type: string
+                            description: ID of the user who last updated the file
+                            example: user-345678
+                          lastUpdatedDate:
+                            type: string
+                            format: date-time
+                            description: Date when the file was last updated
+                          blobName:
+                            type: string
+                            description: Name of the blob in storage
+                            example: 20241201_permit_application_123456.pdf
+                          sharedUrl:
+                            type: string
+                            description: URL for sharing the file
+                            nullable: true
+                            example: https://storage.example.com/files/shared/abc123
+                          thumbnailUrl:
+                            type: string
+                            description: URL for the file's thumbnail
+                            nullable: true
+                            example: https://storage.example.com/thumbnails/abc123_thumb.jpg
+                          downloadUrl:
+                            type: string
+                            description: Pre-signed URL for downloading the file (valid for 1 hour). Will be null when retrieving files in a list.
+                            nullable: true
+                            example: https://storage.example.com/download/abc123?token=xyz789
+                          urlExpiresAt:
+                            type: string
+                            format: date-time
+                            description: Expiration timestamp for the pre-signed URL. Will be null when retrieving files in a list.
+                            nullable: true
+                          entityType:
+                            type: string
+                            enum:
+                            - user
+                            - location
+                            - form_field
+                            - form_section
+                            - attachment
+                            - record_step
+                            - fee_item
+                            - step_assignment
+                            - record
+                            - multi_entry_item
+                            - flag
+                            - template_step
+                            - step_fee_item
+                            - record_attachment
+                            - checklist_item_result
+                            - inspection_event
+                            - doc
+                            - record_snapshot
+                            - multi_entry_item_entry
+                            - form_field_entry
+                            - record_type
+                            - step_inspection_type_result
+                            - segment
+                            - resource
+                            description: Type identifier for the associated entity
+                            example: record_attachment
+                          entityPrimaryKey:
+                            type: string
+                            description: Primary key of the associated entity
+                            nullable: true
+                            example: rec-456789
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

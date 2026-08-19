@@ -1,0 +1,1447 @@
+{
+  "item": [
+    {
+      "id": "c4737edb-e668-4859-84f7-4cc16126c409",
+      "name": "resource",
+      "description": {
+        "content": "A resource holds the data itself. A resource can be a CSV or Excel spreadsheet, XML file, PDF document, image file, linked data, etc. A dataset can contain any number of resources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35fa78aa-2a2b-4821-afe5-5d3798f78f02",
+          "name": "Return the metadata of a resource.",
+          "request": {
+            "name": "Return the metadata of a resource.",
+            "description": {},
+            "url": {
+              "path": [
+                "resource_show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "include_tracking",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23f2f37a-db2b-45c2-95ad-3c17a9f622f8",
+              "name": "Resource envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": {\n    \"id\": \"string\",\n    \"package_id\": \"string\",\n    \"url\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"format\": \"string\",\n    \"size\": 7078,\n    \"mimetype\": \"string\",\n    \"hash\": \"string\",\n    \"created\": \"1960-02-13T11:07:14.046Z\",\n    \"last_modified\": \"2002-06-01T12:31:08.380Z\",\n    \"key_0\": 8602.956452177248\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67ebbbb8-e5a5-4f56-b01a-d69909b42ee9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\",\n    \"key_0\": 8549,\n    \"key_1\": \"string\",\n    \"key_2\": 1866,\n    \"key_3\": 8551,\n    \"key_4\": 6000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15a07f29-6e26-492a-90d8-f61b2f2eeda7",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efdb1d8b-ac3c-4074-835a-c9494b411593",
+              "name": "Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Not Found Error\",\n    \"message\": \"Not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a46b77d-b800-4b8b-aaa1-991860d40c60",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Validation Error\",\n    \"name_or_id\": [\n      \"Missing value\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb3fb28b-b9db-41ad-8516-6edba7fdf9c4",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\",\n    \"key_0\": 8549,\n    \"key_1\": \"string\",\n    \"key_2\": 1866,\n    \"key_3\": 8551,\n    \"key_4\": 6000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "860ece28-1b69-41a7-ab68-ae7a59687ef1",
+          "name": "Add a new resource to a dataset",
+          "request": {
+            "name": "Add a new resource to a dataset",
+            "description": {
+              "content": "Add a resource to a dataset (package). POST using multipart/form-data to upload a file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "package_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The package ID to add a new resource to"
+                },
+                {
+                  "key": "upload",
+                  "type": "file",
+                  "description": "(Required) The file to upload"
+                },
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The name of the resource"
+                },
+                {
+                  "key": "description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The description of the resource"
+                },
+                {
+                  "key": "format",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The format of the resource"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "353f16de-5fa3-47c1-aa95-a6182b05c346",
+              "name": "Resource create result envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The package ID to add a new resource to",
+                        "type": "text/plain"
+                      },
+                      "key": "package_id",
+                      "value": "<package_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Main data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The format of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "format",
+                      "value": "CSV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": {\n    \"id\": \"string\",\n    \"package_id\": \"string\",\n    \"url\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"format\": \"string\",\n    \"size\": 7078,\n    \"mimetype\": \"string\",\n    \"hash\": \"string\",\n    \"created\": \"1960-02-13T11:07:14.046Z\",\n    \"last_modified\": \"2002-06-01T12:31:08.380Z\",\n    \"key_0\": 8602.956452177248\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e06b1e83-a3a3-459f-a422-2c4fa4acf081",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The package ID to add a new resource to",
+                        "type": "text/plain"
+                      },
+                      "key": "package_id",
+                      "value": "<package_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Main data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The format of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "format",
+                      "value": "CSV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\",\n    \"key_0\": 8549,\n    \"key_1\": \"string\",\n    \"key_2\": 1866,\n    \"key_3\": 8551,\n    \"key_4\": 6000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5a7038c-ec00-4747-a16c-26b686e0ff47",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The package ID to add a new resource to",
+                        "type": "text/plain"
+                      },
+                      "key": "package_id",
+                      "value": "<package_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Main data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The format of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "format",
+                      "value": "CSV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0f40a8b-6ced-44f8-93fb-d8c21bedfc67",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The package ID to add a new resource to",
+                        "type": "text/plain"
+                      },
+                      "key": "package_id",
+                      "value": "<package_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Main data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The format of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "format",
+                      "value": "CSV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Validation Error\",\n    \"name_or_id\": [\n      \"Missing value\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67c4a34c-9b07-4c1c-a211-1a9944ff3adb",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The package ID to add a new resource to",
+                        "type": "text/plain"
+                      },
+                      "key": "package_id",
+                      "value": "<package_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Main data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The format of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "format",
+                      "value": "CSV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\",\n    \"key_0\": 8549,\n    \"key_1\": \"string\",\n    \"key_2\": 1866,\n    \"key_3\": 8551,\n    \"key_4\": 6000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6da54a5e-6be1-4b58-b77f-4e95c3fc2261",
+          "name": "Update only specific fields of an existing resource.",
+          "request": {
+            "name": "Update only specific fields of an existing resource.",
+            "description": {
+              "content": "Use multipart/form-data when uploading a file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resource_patch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The ID of an existing resource to update"
+                },
+                {
+                  "key": "upload",
+                  "type": "file",
+                  "description": "(Required) The file to upload"
+                },
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The name of the resource"
+                },
+                {
+                  "key": "description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The description of the resource"
+                },
+                {
+                  "key": "format",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The format of the resource"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b1d4e4ff-6a18-46b8-8baf-7102d54f2b71",
+              "name": "Resource patch result envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The ID of an existing resource to update",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<resource_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Updated data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": {\n    \"id\": \"string\",\n    \"package_id\": \"string\",\n    \"url\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"format\": \"string\",\n    \"size\": 7078,\n    \"mimetype\": \"string\",\n    \"hash\": \"string\",\n    \"created\": \"1960-02-13T11:07:14.046Z\",\n    \"last_modified\": \"2002-06-01T12:31:08.380Z\",\n    \"key_0\": 8602.956452177248\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "645987a9-0df2-4d41-add4-c7dfee2c825b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The ID of an existing resource to update",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<resource_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Updated data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\",\n    \"key_0\": 8549,\n    \"key_1\": \"string\",\n    \"key_2\": 1866,\n    \"key_3\": 8551,\n    \"key_4\": 6000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "637fc568-8073-402f-8ad8-f1eb01060d25",
+              "name": "Authorization error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The ID of an existing resource to update",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<resource_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Updated data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Authorization Error\",\n    \"message\": \"Access denied: User not authorized to perform this action\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8975d66-e148-48ca-911f-46e83d5d08ab",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The ID of an existing resource to update",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<resource_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Updated data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"https://demo.ckan.org/api/3/action/help_show?name={action_name}\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"Validation Error\",\n    \"name_or_id\": [\n      \"Missing value\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45d9a80c-8043-49f5-83b7-d73c90aa7155",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resource_patch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The ID of an existing resource to update",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<resource_id>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Data File",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The description of the resource",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "Updated data file",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "upload",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"string\",\n    \"message\": \"string\",\n    \"key_0\": 8549,\n    \"key_1\": \"string\",\n    \"key_2\": 1866,\n    \"key_3\": 8551,\n    \"key_4\": 6000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloudcity.ogopendata.com/api/3/action",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e56c6a05-c01d-4b0b-b866-4c62590ec8e6",
+    "name": "Open Data CKAN Action Resource API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n\n\nContact Support:\n Name: CKAN Community",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,661 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Primary Location API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Primary Location
+  description: 'A Record can be associated with one Primary Location.
+
+
+    Record Locations reference Locations.
+
+    '
+paths:
+  /v2/{community}/records/{recordID}/primary-location:
+    get:
+      summary: Get primary location
+      description: 'Retrieve the primary location associated with a record.
+
+        ### Permissions Required
+
+        `Record Read`'
+      operationId: getRecordPrimaryLocation
+      x-og-claims-required:
+      - PLC_RECORD_READ
+      tags:
+      - Record Primary Location
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      responses:
+        '200':
+          description: Returns record primary locations
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Primary Location
+                    title: Record Location
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    - relationships
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordLocation
+                        example: recordLocation
+                      id:
+                        type: string
+                        example: record-location-456789
+                      attributes:
+                        type: object
+                        properties:
+                          latitude:
+                            type: number
+                            nullable: true
+                            format: double
+                            description: Latitude of the location
+                            example: 37.7749
+                          longitude:
+                            type: number
+                            nullable: true
+                            format: double
+                            description: Longitude of the location
+                            example: -122.4194
+                          locationType:
+                            type: string
+                            enum:
+                            - PARCEL
+                            - POINT
+                            - SEGMENT
+                            description: Type of location Parcel, Point, segment etc.
+                            example: PARCEL
+                          ownerName:
+                            type: string
+                            nullable: true
+                            description: Name of the otnwer
+                            example: Jane Doe
+                          ownerStreetNumber:
+                            type: string
+                            nullable: true
+                            description: owner's street Number
+                            example: '789'
+                          ownerStreetName:
+                            type: string
+                            nullable: true
+                            description: owner's street name
+                            example: Pine Street
+                          ownerUnit:
+                            type: string
+                            nullable: true
+                            description: owner's unit number
+                            example: Unit 5A
+                          ownerCity:
+                            type: string
+                            nullable: true
+                            description: owner's city
+                            example: San Francisco
+                          ownerState:
+                            type: string
+                            nullable: true
+                            description: owner's state
+                            example: CA
+                          ownerPostalCode:
+                            type: string
+                            nullable: true
+                            description: owner's postal code
+                            example: '94108'
+                          ownerCountry:
+                            type: string
+                            nullable: true
+                            description: owner's country
+                            example: USA
+                          ownerPhoneNo:
+                            type: string
+                            nullable: true
+                            description: owner's phone number
+                            example: 415-555-0199
+                          ownerEmail:
+                            type: string
+                            nullable: true
+                            description: owner's email
+                            example: jane.doe@email.com
+                          streetNo:
+                            type: string
+                            nullable: true
+                            description: Street number of a parcel location
+                            example: '1234'
+                          streetName:
+                            type: string
+                            nullable: true
+                            description: Street name of a parcel location
+                            example: Market Street
+                          unit:
+                            type: string
+                            nullable: true
+                            description: Unit identifier of a parcel location
+                            example: Suite 300
+                          city:
+                            type: string
+                            description: City of a parcel location
+                            example: San Francisco
+                          state:
+                            type: string
+                            description: State of a parcel location
+                            example: CA
+                          postalCode:
+                            type: string
+                            description: Postal code of a parcel location
+                            example: '94103'
+                          country:
+                            type: string
+                            description: Country of a parcel location
+                            example: USA
+                          lotArea:
+                            type: number
+                            nullable: true
+                            description: Area of the lot
+                            example: 2500.75
+                          mbl:
+                            type: string
+                            nullable: true
+                            description: The parcel identifier
+                            example: 456-789-012
+                          occupancyType:
+                            type: string
+                            nullable: true
+                            description: Occupancy Type
+                            example: Mixed Use
+                          propertyUse:
+                            type: string
+                            nullable: true
+                            description: Property Use
+                            example: Commercial/Residential
+                          sewage:
+                            type: string
+                            nullable: true
+                            description: Sewage
+                            example: Municipal Sewer
+                          water:
+                            type: string
+                            nullable: true
+                            description: Water
+                            example: City Water Supply
+                          yearBuilt:
+                            type: number
+                            nullable: true
+                            description: Year Built
+                            example: 2018
+                          zoning:
+                            type: string
+                            nullable: true
+                            description: Zoning
+                            example: C-3 Commercial District
+                          buildingType:
+                            type: string
+                            nullable: true
+                            description: Building Type
+                            example: High-rise Mixed Use
+                      relationships:
+                        type: object
+                        required:
+                        - record
+                        - location
+                        properties:
+                          record:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                            description: The related `Record`.
+                          location:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                            description: The related `Location`.
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    patch:
+      summary: Update primary location
+      description: 'Update the primary location associated with a record.
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: updateRecordPrimaryLocation
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Primary Location
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - id
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - location
+                      example: location
+                    id:
+                      type: string
+                      description: The locationID of the location to set as primary
+                      example: location-1000008
+      responses:
+        '200':
+          description: Record primary location updated successfully
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Primary Location
+                    title: Record Location
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    - relationships
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordLocation
+                        example: recordLocation
+                      id:
+                        type: string
+                        example: record-location-456789
+                      attributes:
+                        type: object
+                        properties:
+                          latitude:
+                            type: number
+                            nullable: true
+                            format: double
+                            description: Latitude of the location
+                            example: 37.7749
+                          longitude:
+                            type: number
+                            nullable: true
+                            format: double
+                            description: Longitude of the location
+                            example: -122.4194
+                          locationType:
+                            type: string
+                            enum:
+                            - PARCEL
+                            - POINT
+                            - SEGMENT
+                            description: Type of location Parcel, Point, segment etc.
+                            example: PARCEL
+                          ownerName:
+                            type: string
+                            nullable: true
+                            description: Name of the otnwer
+                            example: Jane Doe
+                          ownerStreetNumber:
+                            type: string
+                            nullable: true
+                            description: owner's street Number
+                            example: '789'
+                          ownerStreetName:
+                            type: string
+                            nullable: true
+                            description: owner's street name
+                            example: Pine Street
+                          ownerUnit:
+                            type: string
+                            nullable: true
+                            description: owner's unit number
+                            example: Unit 5A
+                          ownerCity:
+                            type: string
+                            nullable: true
+                            description: owner's city
+                            example: San Francisco
+                          ownerState:
+                            type: string
+                            nullable: true
+                            description: owner's state
+                            example: CA
+                          ownerPostalCode:
+                            type: string
+                            nullable: true
+                            description: owner's postal code
+                            example: '94108'
+                          ownerCountry:
+                            type: string
+                            nullable: true
+                            description: owner's country
+                            example: USA
+                          ownerPhoneNo:
+                            type: string
+                            nullable: true
+                            description: owner's phone number
+                            example: 415-555-0199
+                          ownerEmail:
+                            type: string
+                            nullable: true
+                            description: owner's email
+                            example: jane.doe@email.com
+                          streetNo:
+                            type: string
+                            nullable: true
+                            description: Street number of a parcel location
+                            example: '1234'
+                          streetName:
+                            type: string
+                            nullable: true
+                            description: Street name of a parcel location
+                            example: Market Street
+                          unit:
+                            type: string
+                            nullable: true
+                            description: Unit identifier of a parcel location
+                            example: Suite 300
+                          city:
+                            type: string
+                            description: City of a parcel location
+                            example: San Francisco
+                          state:
+                            type: string
+                            description: State of a parcel location
+                            example: CA
+                          postalCode:
+                            type: string
+                            description: Postal code of a parcel location
+                            example: '94103'
+                          country:
+                            type: string
+                            description: Country of a parcel location
+                            example: USA
+                          lotArea:
+                            type: number
+                            nullable: true
+                            description: Area of the lot
+                            example: 2500.75
+                          mbl:
+                            type: string
+                            nullable: true
+                            description: The parcel identifier
+                            example: 456-789-012
+                          occupancyType:
+                            type: string
+                            nullable: true
+                            description: Occupancy Type
+                            example: Mixed Use
+                          propertyUse:
+                            type: string
+                            nullable: true
+                            description: Property Use
+                            example: Commercial/Residential
+                          sewage:
+                            type: string
+                            nullable: true
+                            description: Sewage
+                            example: Municipal Sewer
+                          water:
+                            type: string
+                            nullable: true
+                            description: Water
+                            example: City Water Supply
+                          yearBuilt:
+                            type: number
+                            nullable: true
+                            description: Year Built
+                            example: 2018
+                          zoning:
+                            type: string
+                            nullable: true
+                            description: Zoning
+                            example: C-3 Commercial District
+                          buildingType:
+                            type: string
+                            nullable: true
+                            description: Building Type
+                            example: High-rise Mixed Use
+                      relationships:
+                        type: object
+                        required:
+                        - record
+                        - location
+                        properties:
+                          record:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1primary-location/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/record'
+                          location:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1primary-location/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/location'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    delete:
+      summary: Remove primary location
+      description: 'Remove the primary location from a record.
+
+        ### Permissions Required
+
+        `Record Write`'
+      operationId: removePrimaryLocation
+      x-og-claims-required:
+      - PLC_RECORD_WRITE
+      tags:
+      - Record Primary Location
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      responses:
+        '204':
+          description: Record primary location removed
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

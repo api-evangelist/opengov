@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Checklist Results API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checklist Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List checklist results for an inspection result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-results/:inspectionResultID/checklist-results",
+            "params": [
+              {
+                "name": "inspectionResultID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inspection result"
+              }
+            ]
+          },
+          "docs": "Retrieve checklist results for an inspection result.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Create a checklist result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-results/:inspectionResultID/checklist-results",
+            "params": [
+              {
+                "name": "inspectionResultID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inspection result"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a checklist result.\n### Permissions Required\n`Workflow Write`"
+        },
+        {
+          "info": {
+            "name": "Update a checklist result",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-results/:inspectionResultID/checklist-results/:checklistResultID",
+            "params": [
+              {
+                "name": "inspectionResultID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inspection result"
+              },
+              {
+                "name": "checklistResultID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a checklist result"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a checklist result.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

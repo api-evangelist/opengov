@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Additional Locations API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Additional Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List additional locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/additional-locations",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of additional locations associated with a record.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Add a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/additional-locations",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new Additional Location to the record. Records can have only 99 additional locations.\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Retrieve a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/additional-locations/:locationID",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "Retrieve an additional location on a record.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Remove a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/additional-locations/:locationID",
+            "params": [
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              }
+            ]
+          },
+          "docs": "Remove an additional location from a record.\n### Permissions Required\n`Record Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

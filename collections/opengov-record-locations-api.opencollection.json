@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting Licensing & Code Enforcement Record Locations API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List record locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v1/:community/records/:recordID/locations",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Name of the community"
+              },
+              {
+                "name": "recordID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record"
+              },
+              {
+                "name": "primary",
+                "value": "",
+                "type": "query",
+                "description": "Primary location"
+              }
+            ]
+          },
+          "docs": "List record locations"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

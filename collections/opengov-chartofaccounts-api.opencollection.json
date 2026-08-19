@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Budgeting & Performance Chart Of Accounts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ChartOfAccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Chart Of Accounts by Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/chart-of-accounts",
+            "params": [
+              {
+                "name": "filter[entityId]",
+                "value": "",
+                "type": "query",
+                "description": "Filter chart of accounts by entity ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of Chart Of Accounts filtered by the associated Entity ID."
+        },
+        {
+          "info": {
+            "name": "Describe a Chart of Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/chart-of-accounts/:chartOfAccountsId",
+            "params": [
+              {
+                "name": "chartOfAccountsId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the chart of accounts."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a Chart Of Accounts by its ID."
+        },
+        {
+          "info": {
+            "name": "Get accounts by list of account IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bnp.opengov.com/api/v1/chart-of-accounts/:coaId/accounts-by-ids",
+            "params": [
+              {
+                "name": "coaId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Chart of Accounts"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-KEY",
+              "value": "{{X-API-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns account details for a given CoA ID and list of account number IDs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

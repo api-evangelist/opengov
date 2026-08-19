@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Data CKAN Action Package API",
+    "version": "2.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "package",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a list of the names of the site's datasets (packages).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/package_list",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return a list of the names of the site's datasets (packages)."
+        },
+        {
+          "info": {
+            "name": "Searches for datasets (packages) satisfying a given search criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/package_search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A solr query string that will be used to filter and score results"
+              },
+              {
+                "name": "fq",
+                "value": "",
+                "type": "query",
+                "description": "A solr filter query that will facet results by removing non-matching items."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the search results, defaults to `score desc, metadata_modified desc`."
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The offset from the beginning of results for pagination"
+              },
+              {
+                "name": "include_private",
+                "value": "",
+                "type": "query",
+                "description": "Include private datasets in the search results. Only private datasets from the user's organizations will be returned. Sysadmins will be returned all private datasets."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This action accepts solr search query parameters (details below), and returns a dictionary of results, including dictized datasets that match the search criteria, a search count and also facet information."
+        },
+        {
+          "info": {
+            "name": "Return the metadata of a dataset (package) and its resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/package_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Dataset id or name"
+              },
+              {
+                "name": "use_default_schema",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_tracking",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return the metadata of a dataset (package) and its resources."
+        },
+        {
+          "info": {
+            "name": "Create a new dataset (package).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/package_create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "You must be authorized to create new datasets."
+        },
+        {
+          "info": {
+            "name": "Update only specific fields of an existing dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/package_patch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Any fields not passed will retain their original values."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

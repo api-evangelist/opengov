@@ -1,0 +1,486 @@
+openapi: 3.2.0
+info:
+  title: Budgeting & Performance Chart Of Accounts API
+  version: 1.0.0
+  description: 'The OpenGov Budgeting & Performance API
+
+    '
+  contact:
+    name: B&P Team
+    url: https://api.bnp.opengov.com
+  license:
+    name: Proprietary
+    url: https://api.bnp.opengov.com/terms
+servers:
+- url: https://api.bnp.opengov.com
+  description: Production server
+- url: https://api.bnp.ogintegration.us
+  description: Development server
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: ChartOfAccounts
+  description: Operations for retrieving Chart of Accounts data.
+  x-displayName: Chart Of Accounts
+paths:
+  /api/v1/chart-of-accounts:
+    get:
+      summary: List Chart Of Accounts by Entity
+      description: Retrieve a list of Chart Of Accounts filtered by the associated Entity ID.
+      operationId: listChartOfAccountsByEntity
+      tags:
+      - ChartOfAccounts
+      parameters:
+      - name: filter[entityId]
+        in: query
+        required: true
+        description: Filter chart of accounts by entity ID.
+        schema:
+          type: string
+          format: uuid
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      responses:
+        '200':
+          description: A list of Chart Of Accounts resources matching the filter.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ChartOfAccountsListResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid.
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+  /api/v1/chart-of-accounts/{chartOfAccountsId}:
+    get:
+      summary: Describe a Chart of Accounts
+      description: Retrieve a Chart Of Accounts by its ID.
+      operationId: getChartOfAccountsById
+      tags:
+      - ChartOfAccounts
+      parameters:
+      - name: chartOfAccountsId
+        in: path
+        required: true
+        description: The identifier of the chart of accounts.
+        schema:
+          type: string
+          format: uuid
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      responses:
+        '200':
+          description: A Chart of Accounts resource.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ChartOfAccountsResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid.
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '404':
+          description: Not found - Chart of Accounts with the given ID not found.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+  /api/v1/chart-of-accounts/{coaId}/accounts-by-ids:
+    post:
+      summary: Get accounts by list of account IDs
+      description: Returns account details for a given CoA ID and list of account number IDs.
+      operationId: accountsByIds
+      tags:
+      - ChartOfAccounts
+      parameters:
+      - name: coaId
+        in: path
+        required: true
+        description: The unique identifier for the Chart of Accounts
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        description: Request body containing list of account number IDs to retrieve
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - accounts-by-ids-query
+                      description: The type of the query resource.
+                    attributes:
+                      type: object
+                      required:
+                      - ids
+                      properties:
+                        ids:
+                          type: array
+                          items:
+                            type: string
+                            format: uuid
+                          description: List of account number IDs to retrieve
+                          example:
+                          - b3ac9705-f64e-4e7b-87ef-9403f648ffaf
+                          - 12345678-aaaa-bbbb-cccc-0123456789ab
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      responses:
+        '200':
+          description: A list of CoA account details for the given account number IDs.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/AccountsByIdsResponse'
+        '400':
+          description: Bad Request - The request could not be understood by the server due to malformed syntax.
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+        '401':
+          description: Unauthorized - Authentication credentials missing or invalid.
+        '403':
+          description: Forbidden - Client does not have permission to access the requested resource.
+        '406':
+          description: Not Acceptable - The request could not be understood by the server due to a client error.
+        '415':
+          description: Unsupported Media Type - The request could not be understood by the server due to an unsupported media type.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+components:
+  schemas:
+    ChartOfAccountsResource:
+      type: object
+      required:
+      - id
+      - attributes
+      properties:
+        type:
+          type: string
+          enum:
+          - chart-of-accounts
+          description: The type of the resource.
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the chart of accounts.
+        attributes:
+          type: object
+          required:
+          - name
+          - entityId
+          - accountNumberSeparators
+          - segments
+          properties:
+            name:
+              type: string
+              description: The name of the chart of accounts.
+              example: City General Fund CoA
+            entityId:
+              type: string
+              format: uuid
+              description: The ID of the entity this chart of accounts belongs to.
+              example: a1b2c3d4-e5f6-7890-1234-567890abcdef
+            accountNumberSeparators:
+              type: array
+              items:
+                type: string
+              description: Separators used in account numbers.
+              example:
+              - '-'
+              - .
+            createdAt:
+              type: string
+              format: date-time
+              readOnly: true
+              description: The date and time the resource was created.
+            updatedAt:
+              type: string
+              format: date-time
+              readOnly: true
+              description: The date and time the resource was last updated.
+            segments:
+              type: array
+              description: List of segments associated with this CoA.
+              items:
+                type: object
+                description: Represents a segment within a Chart of Accounts structure.
+                required:
+                - type
+                - id
+                - attributes
+                properties:
+                  attributes:
+                    type: object
+                    required:
+                    - label
+                    - segmentType
+                    - enabled
+                    properties:
+                      label:
+                        type: string
+                        description: The user-defined label for the segment.
+                        example: Fund
+                      segmentType:
+                        type: string
+                        description: The type or category of the segment.
+                        example: urn:opengov:coa/segment/fund
+                      enabled:
+                        type: boolean
+                        description: Indicates whether the segment is currently active.
+                        example: true
+                      defaultSegmentCode:
+                        type: string
+                        description: An optional default code for this segment.
+                        example: '000'
+            managed:
+              type: object
+              description: Indicates how the chart of accounts is managed.
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - user
+                  - application
+                  description: Specifies if the management is done by a user or an application.
+                application:
+                  type:
+                  - string
+                  - 'null'
+                  description: The application managing the chart of accounts, null if managed by a user.
+              required:
+              - type
+              anyOf:
+              - properties:
+                  type:
+                    enum:
+                    - user
+                required:
+                - type
+              - properties:
+                  type:
+                    enum:
+                    - application
+                  application:
+                    type: string
+                required:
+                - type
+                - application
+    PaginatedResponseLinks:
+      type: object
+      description: Standard pagination links for collection responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link to the current page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
+        next:
+          type: string
+          format: uri
+          description: Link to the next page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
+        prev:
+          type: string
+          format: uri
+          description: Link to the previous page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        first:
+          type: string
+          format: uri
+          description: Link to the first page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        last:
+          type: string
+          format: uri
+          description: Link to the last page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
+    AccountsByIdsResponse:
+      type: object
+      description: A JSON:API document containing a list of Account resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - type
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - account
+                description: The type of the resource.
+              id:
+                type: string
+                format: uuid
+                description: The unique identifier for the account.
+              attributes:
+                type: object
+                required:
+                - label
+                - accountType
+                - status
+                - segments
+                properties:
+                  label:
+                    type: string
+                    description: The label of the account.
+                    example: Office Supplies
+                  description:
+                    type: string
+                    description: Optional description of the account.
+                    example: General office supplies and materials
+                  accountType:
+                    type: string
+                    enum:
+                    - EXPENSES
+                    - REVENUES
+                    - ASSETS
+                    - LIABILITIES
+                    - EQUITIES
+                    - FTES
+                    - UNCATEGORIZED
+                    description: The ledger type of the account.
+                    example: EXPENSES
+                  status:
+                    type: string
+                    enum:
+                    - OPERATIONAL
+                    - PROPOSED
+                    description: The status of the account.
+                    example: OPERATIONAL
+                  segments:
+                    type: array
+                    items:
+                      type: string
+                    description: List of segments associated with this account.
+                    example:
+                    - '101'
+                    - '5100'
+                    - '001'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    ResponseLinks:
+      type: object
+      description: Standard links object for non-paginated responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link of the current request.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1
+    ResponseMeta:
+      type: object
+      description: Standard metadata for collection responses
+      properties:
+        totalRecords:
+          type: integer
+          description: The total number of records matching the query.
+          example: 42
+    ChartOfAccountsListResponse:
+      type: object
+      description: A JSON:API document containing a list of Chart Of Accounts resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartOfAccountsResource'
+        links:
+          $ref: '#/components/schemas/PaginatedResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    ChartOfAccountsResponse:
+      type: object
+      description: A JSON:API document containing a single Chart of Accounts resource.
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ChartOfAccountsResource'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Transactions API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/transactions",
+            "params": [
+              {
+                "name": "filter[transactionType]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction type"
+              },
+              {
+                "name": "filter[originalPaymentID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by original payment ID"
+              },
+              {
+                "name": "filter[processedByUserID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by processed by user ID"
+              },
+              {
+                "name": "filter[payerName]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payer name"
+              },
+              {
+                "name": "filter[transactionDate]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction date, either an exact date/date-time or a range.\n\nA bare value (e.g. filter[transactionDate]=2026-06-19) matches that whole day when a date-only\nvalue is given, or that exact instant when a full ISO-8601 date-time is given.\n\nSupports filter[transactionDate][gte] and/or filter[transactionDate][lte] (ISO-8601 dates or date-times)\nfor a range. Range is inclusive of both bounds. If only one bound is provided, filter on that bound only.\n\nIf gte > lte, return 400 invalid_parameter.\n"
+              },
+              {
+                "name": "filter[paymentMethod]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payment method"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of payment transactions that match the specified filters.\n### Permissions Required\n`Payment Read`"
+        },
+        {
+          "info": {
+            "name": "Get transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/transactions/:transactionID",
+            "params": [
+              {
+                "name": "transactionID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a transaction"
+              }
+            ]
+          },
+          "docs": "Retrieve a payment transaction by ID.\n### Permissions Required\n`Payment Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

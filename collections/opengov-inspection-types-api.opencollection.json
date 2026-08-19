@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Inspection Types API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inspection Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inspection types on a step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-steps/:inspectionStepID/inspection-types",
+            "params": [
+              {
+                "name": "inspectionStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an inspection step"
+              }
+            ]
+          },
+          "docs": "Retrieve inspection types on a step.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Create an inspection type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-steps/:inspectionStepID/inspection-types",
+            "params": [
+              {
+                "name": "inspectionStepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an inspection step"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an inspection type on an Inspection Step.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

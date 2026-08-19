@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vendor Management Vendor Search API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vendor-search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "vendor-search.getVendorsStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendors/stats",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-search.searchVendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendors/search",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-search.searchVendorsByVendorKeys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendors/searchByVendorKeys",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "vendor-search.exportVendorsCsv",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vendor.opengov.com/api/v1/entities/:entityId/vendors/export",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

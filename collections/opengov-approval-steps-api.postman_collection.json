@@ -1,0 +1,1890 @@
+{
+  "item": [
+    {
+      "id": "dc6cf917-998d-41d7-b4be-29733b615979",
+      "name": "Approval Steps",
+      "description": {
+        "content": "Approval Steps are one step type that can be found in a record's workflow.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f084123-8830-4093-92f2-c6b339bc76c0",
+          "name": "List approval steps",
+          "request": {
+            "name": "List approval steps",
+            "description": {
+              "content": "Retrieve approval steps that match the specified filters.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "approval-steps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "1",
+                  "description": "Which page to return (1-based)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "20",
+                  "description": "Number of records to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[recordID]",
+                  "value": "<string>",
+                  "description": "Filter by a recordID"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[label]",
+                  "value": "<string>",
+                  "description": "Filter by record step label"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>",
+                  "description": "Filter by record step status"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[assigneeID]",
+                  "value": "<string>",
+                  "description": "Filter by the user ID of the record step assignee"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "community",
+                  "description": "(Required) Subdomain of the community"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1180b105-71d5-442f-ad71-ba0065ff9dc6",
+              "name": "Approval step",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"approvalStep\",\n      \"id\": \"approval-step-100001\",\n      \"attributes\": {\n        \"label\": \"Plan Review and Approval\",\n        \"stepType\": \"APPROVAL\",\n        \"ordinal\": 1,\n        \"sequence\": true,\n        \"status\": \"<string>\",\n        \"activatedAt\": \"2004-02-25T17:45:39.699Z\",\n        \"completedAt\": \"1963-11-10T10:09:08.156Z\",\n        \"dueBy\": \"1964-12-02T01:59:41.124Z\"\n      },\n      \"relationships\": {\n        \"step\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          },\n          \"links\": {\n            \"self\": \"http://oFHpPERJPjhVZk.inYCUZEvPnm6pxpXzsrY\",\n            \"related\": \"https://CiNByGCjxXc.dfurExzGHIeUJraaEA7R4Gupi\"\n          }\n        },\n        \"assignee\": {\n          \"$ref\": {}\n        }\n      }\n    },\n    {\n      \"type\": \"approvalStep\",\n      \"id\": \"approval-step-100001\",\n      \"attributes\": {\n        \"label\": \"Plan Review and Approval\",\n        \"stepType\": \"APPROVAL\",\n        \"ordinal\": 1,\n        \"sequence\": true,\n        \"status\": \"<string>\",\n        \"activatedAt\": \"1965-07-25T23:41:39.450Z\",\n        \"completedAt\": \"1947-09-17T14:58:51.137Z\",\n        \"dueBy\": \"1965-03-24T08:15:42.305Z\"\n      },\n      \"relationships\": {\n        \"step\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          },\n          \"links\": {\n            \"self\": \"https://BLOpN.nejaRgaQxGwZ4cvn.7tlkVoHESx?ev=Q8HDX&\",\n            \"related\": \"https://pD.yykiryzmWuJMR7d.T,J42K16xejNXJGB71Yn4I7JW0fPZmykUO9RubUzARb?gnh&dkeyd=mSh&er=ZJn&\"\n          }\n        },\n        \"assignee\": {\n          \"$ref\": {}\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"http://DkewCiecehCc.deggCttOYPAs0LDy.20pkP?om=Vg_xg&vtzqzr&\",\n    \"first\": \"http://KHpHzuixVvVAOpZUvOBP.fsmol2+7C9oNKwZac-IBMyc-roI4WNYvxVQG4KsmTAg1yUdEwSKywt35X46-DtS\",\n    \"prev\": \"http://GCfFH.qxvoN1VpKYjVtwbAiXUx3p8W+rXfz12j3,4aDU4cCqG?\",\n    \"next\": \"http://unUeAnllJPOjd.mzaoL7lqURur?wt=fQ7&\",\n    \"last\": \"https://hquVfBjKCPFOXthUAHNH.kceq3VzvgHeEtolVe2mdJbuKGO6LN3K+l1ASWsmvIXgRFTcS\"\n  },\n  \"meta\": {\n    \"page\": 2,\n    \"size\": 20,\n    \"totalPages\": 10,\n    \"totalRecords\": 200\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f411b5c-327e-4077-9287-6433e91a14ea",
+              "name": "**Bad Request**: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a383f16-4c59-4f9e-a156-5d4ba21fea5f",
+              "name": "**Unauthorized**: The request has not been applied because it lacks valid authentication credentials for the target resource.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-401-001\",\n      \"code\": \"UNAUTHORIZED\",\n      \"detail\": \"Authentication credentials are missing or invalid\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e42dfea-6c63-4964-aef0-2e79d3f9de45",
+              "name": "**Forbidden**: The server understood the request, but is refusing to fulfill it. Authorization will not help and the request SHOULD NOT be repeated.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-403-001\",\n      \"code\": \"FORBIDDEN\",\n      \"detail\": \"You do not have sufficient permissions to access this resource\",\n      \"status\": \"403\",\n      \"title\": \"Forbidden\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5dbf279-961a-4de8-9cb4-ba39adbdb12c",
+              "name": "**Resource not found**: The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-404-001\",\n      \"code\": \"NOT_FOUND\",\n      \"detail\": \"The requested resource could not be found\",\n      \"status\": \"404\",\n      \"title\": \"Not Found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f89b1e0-513c-44e4-915b-f44f58dd5e31",
+              "name": "**Not Acceptable**: The server cannot produce a response matching the list of acceptable values defined in the request's proactive content negotiation headers.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-406-001\",\n      \"code\": \"NOT_ACCEPTABLE\",\n      \"detail\": \"The requested content type is not supported. Please use application/vnd.api+json\",\n      \"source\": {\n        \"header\": \"Accept\"\n      },\n      \"status\": \"406\",\n      \"title\": \"Not Acceptable\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f032d07f-17a1-494b-9df4-9a4ea7da9f66",
+              "name": "**Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[assigneeID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b34d304-cdfd-495a-8425-50c29de8a115",
+          "name": "Get approval step",
+          "request": {
+            "name": "Get approval step",
+            "description": {
+              "content": "Retrieve an approval step by ID.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "approval-steps",
+                ":approvalStepID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "community",
+                  "description": "(Required) Subdomain of the community"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "approvalStepID",
+                  "description": "(Required) ID of an approval step"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05c608f8-e5a6-4c9b-af96-cb631659c555",
+              "name": "Approval step",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100001\",\n    \"attributes\": {\n      \"label\": \"Plan Review and Approval\",\n      \"stepType\": \"APPROVAL\",\n      \"ordinal\": 1,\n      \"sequence\": true,\n      \"status\": \"<string>\",\n      \"activatedAt\": \"1984-08-24T17:01:26.631Z\",\n      \"completedAt\": \"1947-09-05T22:41:16.254Z\",\n      \"dueBy\": \"1969-11-26T10:10:19.392Z\"\n    },\n    \"relationships\": {\n      \"step\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        },\n        \"links\": {\n          \"self\": \"http://rgfrDBNxoIsYcAFbdVaipwKu.ojbgWUvuRKGERXsjJjzx1,RyKixYl1f6-ar-tz1Tqwq06?v&fczrv&y=Zp&\",\n          \"related\": \"http://CLVoCMwlnTcEa.csnmWSZVZMwn6GvwJS6LXCQqIg4,cIane5xRblqGQq76b,Mvzia18E2gUo2gkLG8HcTn2?p=Ek0d&\",\n          \"key_0\": \"https://tLPayvCOXkKbgiFqUoOuaAlU.oopYaouvcN5rG4x01Uf8STKMVT+w?f&\",\n          \"key_1\": \"http://G.cezDsI1A-h?\"\n        }\n      },\n      \"assignee\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3167bcb3-888e-4bf5-91cc-c9f452eab0d1",
+              "name": "**Bad Request**: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb052373-e1a0-43e2-b5dc-5645f1abb366",
+              "name": "**Unauthorized**: The request has not been applied because it lacks valid authentication credentials for the target resource.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-401-001\",\n      \"code\": \"UNAUTHORIZED\",\n      \"detail\": \"Authentication credentials are missing or invalid\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc89baaf-53e4-42fc-938e-3c6d2933af6d",
+              "name": "**Forbidden**: The server understood the request, but is refusing to fulfill it. Authorization will not help and the request SHOULD NOT be repeated.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-403-001\",\n      \"code\": \"FORBIDDEN\",\n      \"detail\": \"You do not have sufficient permissions to access this resource\",\n      \"status\": \"403\",\n      \"title\": \"Forbidden\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "190d2cf6-4378-476a-a5b6-e0bb93560089",
+              "name": "**Resource not found**: The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-404-001\",\n      \"code\": \"NOT_FOUND\",\n      \"detail\": \"The requested resource could not be found\",\n      \"status\": \"404\",\n      \"title\": \"Not Found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09ff246b-139e-4fee-ba41-b4af55ceae0d",
+              "name": "**Not Acceptable**: The server cannot produce a response matching the list of acceptable values defined in the request's proactive content negotiation headers.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-406-001\",\n      \"code\": \"NOT_ACCEPTABLE\",\n      \"detail\": \"The requested content type is not supported. Please use application/vnd.api+json\",\n      \"source\": {\n        \"header\": \"Accept\"\n      },\n      \"status\": \"406\",\n      \"title\": \"Not Acceptable\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80fb4113-1876-4b56-acdb-f093c52e6a7d",
+              "name": "**Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81c03f00-6a1e-4956-9efe-6a49951ea2fe",
+          "name": "Update approval step",
+          "request": {
+            "name": "Update approval step",
+            "description": {
+              "content": "Update an approval step.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "approval-steps",
+                ":approvalStepID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "community",
+                  "description": "(Required) Subdomain of the community"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "approvalStepID",
+                  "description": "(Required) ID of an approval step"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"assigneeID\": \"<string>\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a58c93c-dbb8-4a1f-9862-a0460a48d2e5",
+              "name": "Approval updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100001\",\n    \"attributes\": {\n      \"label\": \"Plan Review and Approval\",\n      \"stepType\": \"APPROVAL\",\n      \"ordinal\": 1,\n      \"sequence\": true,\n      \"status\": \"<string>\",\n      \"activatedAt\": \"1984-08-24T17:01:26.631Z\",\n      \"completedAt\": \"1947-09-05T22:41:16.254Z\",\n      \"dueBy\": \"1969-11-26T10:10:19.392Z\"\n    },\n    \"relationships\": {\n      \"step\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        },\n        \"links\": {\n          \"self\": \"http://rgfrDBNxoIsYcAFbdVaipwKu.ojbgWUvuRKGERXsjJjzx1,RyKixYl1f6-ar-tz1Tqwq06?v&fczrv&y=Zp&\",\n          \"related\": \"http://CLVoCMwlnTcEa.csnmWSZVZMwn6GvwJS6LXCQqIg4,cIane5xRblqGQq76b,Mvzia18E2gUo2gkLG8HcTn2?p=Ek0d&\",\n          \"key_0\": \"https://tLPayvCOXkKbgiFqUoOuaAlU.oopYaouvcN5rG4x01Uf8STKMVT+w?f&\",\n          \"key_1\": \"http://G.cezDsI1A-h?\"\n        }\n      },\n      \"assignee\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc725257-babb-4c3e-9353-96ef851d22d5",
+              "name": "**Bad Request**: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cff1857c-81aa-4854-b822-5ace5c8b8fed",
+              "name": "**Unauthorized**: The request has not been applied because it lacks valid authentication credentials for the target resource.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-401-001\",\n      \"code\": \"UNAUTHORIZED\",\n      \"detail\": \"Authentication credentials are missing or invalid\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c6ef6cd-05cc-47bd-959b-627bace90057",
+              "name": "**Forbidden**: The server understood the request, but is refusing to fulfill it. Authorization will not help and the request SHOULD NOT be repeated.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-403-001\",\n      \"code\": \"FORBIDDEN\",\n      \"detail\": \"You do not have sufficient permissions to access this resource\",\n      \"status\": \"403\",\n      \"title\": \"Forbidden\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "158992da-ce51-4796-956c-4fbaac2c6d42",
+              "name": "**Resource not found**: The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-404-001\",\n      \"code\": \"NOT_FOUND\",\n      \"detail\": \"The requested resource could not be found\",\n      \"status\": \"404\",\n      \"title\": \"Not Found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "869619a5-1280-4d2a-84a8-4bfd9cf3dc75",
+              "name": "**Not Acceptable**: The server cannot produce a response matching the list of acceptable values defined in the request's proactive content negotiation headers.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-406-001\",\n      \"code\": \"NOT_ACCEPTABLE\",\n      \"detail\": \"The requested content type is not supported. Please use application/vnd.api+json\",\n      \"source\": {\n        \"header\": \"Accept\"\n      },\n      \"status\": \"406\",\n      \"title\": \"Not Acceptable\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb6436c3-76d9-40f8-b52e-4052abc69c45",
+              "name": "**Conflict**: The request could not be completed due to a conflict with the current state of the resource.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d3a25d0-f4a3-480d-ad6d-2b25137d4e70",
+              "name": "**Unsupported Media Type**\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-415-001\",\n      \"code\": \"UNSUPPORTED_MEDIA_TYPE\",\n      \"detail\": \"The request Content-Type is not supported. Expected application/vnd.api+json\",\n      \"source\": {\n        \"header\": \"Content-Type\"\n      },\n      \"status\": \"415\",\n      \"title\": \"Unsupported Media Type\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f00f0a9b-6111-4fa8-8244-7f7adf71b072",
+              "name": "**Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "approval-steps",
+                    ":approvalStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "community",
+                      "description": "(Required) Subdomain of the community"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalStepID",
+                      "description": "(Required) ID of an approval step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Content-Type header must be set to `application/vnd.api+json` for all PUT, PATCH, and POST requests.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.api+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"approvalStep\",\n    \"id\": \"approval-step-100003\",\n    \"attributes\": {\n      \"assigneeID\": \"user-reviewer-100004\",\n      \"dueBy\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-767778\",\n      \"status\": \"400\",\n      \"title\": \"Validation Error\",\n      \"detail\": \"The provided record type ID is invalid or does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3bf14899-2f82-4ecf-85db-43cfee71970f",
+    "name": "Permitting & Licensing Approval Steps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

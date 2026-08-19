@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Spend Summary API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "spendSummary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get PO spend summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/spend-summary",
+            "params": [
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns distinct invoices and receipts linked to this PO with aggregate allocation amounts, plus a PO amount breakdown (subtotal, tax, freight, discount, miscCharges, totalTolerance)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

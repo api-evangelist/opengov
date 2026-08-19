@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Files API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/files",
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Subdomain of the community"
+              },
+              {
+                "name": "page[number]",
+                "value": "1",
+                "type": "query",
+                "description": "Which page to return (1-based)"
+              },
+              {
+                "name": "page[size]",
+                "value": "20",
+                "type": "query",
+                "description": "Number of records to return per page"
+              },
+              {
+                "name": "filter[fileName]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of a file"
+              },
+              {
+                "name": "filter[fileDate]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by file creation/upload date"
+              },
+              {
+                "name": "filter[isEnabled]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by file enabled status"
+              },
+              {
+                "name": "filter[uploadedByUserID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the user who uploaded the file"
+              },
+              {
+                "name": "filter[entityType]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the type of the entity the file is associated with"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of files. Note that download URLs are not included in list responses.\nTo get a download URL for a specific file, use the single file endpoint.\n\n### Permissions Required\n`File Read`"
+        },
+        {
+          "info": {
+            "name": "Upload a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/files",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "community",
+                "value": "",
+                "type": "path",
+                "description": "Subdomain of the community"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new file entry and returns a pre-signed URL for uploading.\n\n##### Upload Process\n1. Call this endpoint with the file metadata to receive:\n   - A `fileID` for referencing the file\n   - A pre-signed URL for uploading\n2. Use the pre-signed URL to upload your file:\n   - Send a `PUT` request to the URL\n   - Include the file content in the request body\n   - Set the `Content-Type` header to match the file type\n   - Include the header `x-ms-blob-type` with the value `BlockBlob`\n3. Once uploade"
+        },
+        {
+          "info": {
+            "name": "Get file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/files/:fileID",
+            "params": [
+              {
+                "name": "fileID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a file"
+              }
+            ]
+          },
+          "docs": "Returns file information including a pre-signed Azure Blob Storage URL for downloading.\n\nThe pre-signed URL:\n- Is valid for 1 hour\n- Can be shared with multiple clients\n- Should be used with a GET request to download the file\n- Will include the original Content-Type of the file\n\n### Permissions Required\n`File Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

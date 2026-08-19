@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Gl Suggestions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "glSuggestions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search historical line items for GL suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/gl-suggestions/search",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns up to `limit` (default 15, max 50) historical PO line items whose descriptions contain any of the input `descriptions` keywords (case-insensitive substring match), along with their splits and PO context. Filters: status != Cancelled, line item has at least one non-deleted split. Designed for an AI-agent consumer to rerank.\n\nPass 1..10 semantically-related keywords for the same logical line item (e.g. `[\"laptop\", \"macbook\"]`). Each candidate is matched against any input term; candidates a"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,702 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Inspection Events API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Inspection Events
+  description: An Inspection Event is a single inspection appointment, during which one or more Inspection Results are typically created.
+paths:
+  /v2/{community}/inspection-events/{inspectionEventID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    get:
+      summary: Get inspection event
+      description: 'Retrieve an inspection event by ID.
+
+        ### Permissions Required
+
+        `Workflow Read`'
+      operationId: getInspectionEvent
+      x-og-claims-required:
+      - PLC_RECORD_STEP_READ
+      tags:
+      - Inspection Events
+      parameters:
+      - name: inspectionEventID
+        in: path
+        description: ID of the inspection event
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Inspection event
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Inspection Events
+                    title: Inspection Event
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - inspectionEvent
+                        example: inspectionEvent
+                      id:
+                        type: string
+                        example: inspection-event-345678
+                      attributes:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                            enum:
+                            - Requested
+                            - Scheduled
+                            - Active
+                            - Complete
+                            description: The status of the inspection event
+                            example: Scheduled
+                          inspectionScheduleType:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - Date
+                            - DateTime
+                            - Range
+                            - AMPM
+                            - AMPM_Scheduled
+                            description: Specifies how the inspection time is scheduled. `Date` indicates any time on the given startAt date. `DateTime` indicates a specific time on the given startAt date. `Range` indicates within a defined time window. May be null if the schedule service was used, or it was inspected without being scheduled. `AMPM` is a legacy scheduling type that indicates a specific time window within a day. `AMPM_Scheduled` indicates a scheduled AM/PM time window.
+                            example: Date
+                          startAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the inspection should start. If inspection schedule type is `Date`, this is a speciifc day. If inspection schedule type is `DateTime`, this is a specific time on that day. If inspection schedule type is `Range`, this is the start of the range.
+                          endAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the inspection should end. If inspection schedule type is `Date` or `DateTime`, this field may be null. If inspection schedule type is `Range`, this is the end of the range.
+                          inspectionStartedAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: Timestamp of when the inspection was started. Not to be confused with the `startAt` attribute.
+                          inspectionCompletedAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: Timestamp of when the inspection was completed, if status is `Complete`. Not to be confused with the `endAt` attribute.
+                          requestedTimes:
+                            type:
+                            - array
+                            - 'null'
+                            items:
+                              type: object
+                              description: List of time slots requested by the applicant for the inspection. Each entry represents a preferred time window with its scheduling type.
+                              properties:
+                                scheduledType:
+                                  type: string
+                                  enum:
+                                  - Date
+                                  - DateTime
+                                  - Range
+                                  - AMPM
+                                  - AMPM_Scheduled
+                                  description: Specifies how the inspection time is scheduled
+                                requestedStart:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  format: date-time
+                                  description: The requested start time for the inspection
+                                requestedEnd:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  format: date-time
+                                  description: The requested end time for the inspection
+                          isEnabled:
+                            type: boolean
+                            description: Whether the inspection event is enabled
+                            example: true
+                          note:
+                            type:
+                            - string
+                            - 'null'
+                            description: Notes and comments about the inspection
+                            example: Initial foundation inspection for building permit BP-2024-001
+                          sequenceNo:
+                            type: integer
+                            description: The order of the event in the series
+                            example: 1
+                          updatedAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: Last updated date
+                          isOffHours:
+                            type: boolean
+                            description: Whether this is an off-hours inspection. Derived from the presence of offHoursInfo.
+                            example: false
+                          offHoursInfo:
+                            type: object
+                            description: Off-hours inspection request information. When provided, all fields are required.
+                            nullable: true
+                            required:
+                            - version
+                            - desiredTime
+                            - reasonForRequest
+                            properties:
+                              version:
+                                type: integer
+                                description: Version of the off-hours info schema
+                                example: 1
+                              desiredTime:
+                                type: string
+                                description: The desired time for the off-hours inspection
+                                example: 3am to 5am
+                              reasonForRequest:
+                                type: string
+                                description: The reason for requesting an off-hours inspection
+                                example: Construction crew only available on weekends
+                      relationships:
+                        type: object
+                        required:
+                        - inspectionStep
+                        properties:
+                          inspectionStep:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                            description: The related `Inspection Step`.
+                          inspectionResult:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                            description: Any related `Inspection Result`.
+                          inspector:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                            description: The user assigned as the inspector.
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/inspection-events:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    get:
+      summary: List inspection events
+      description: 'Retrieve inspection events that match the specified filters.
+
+        ### Permissions Required
+
+        `Workflow Read`'
+      operationId: getInspectionEvents
+      x-og-claims-required:
+      - PLC_RECORD_STEP_READ
+      tags:
+      - Inspection Events
+      parameters:
+      - name: filter[inspectionStepId]
+        in: query
+        description: ID of the inspection step
+        required: false
+        schema:
+          type: string
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      - name: filter[inspectorUserIds]
+        in: query
+        description: IDs of the inspectors
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: filter[status]
+        in: query
+        description: Filter by inspection event status, in the event of no filters, will filter by active status
+        required: false
+        schema:
+          type: string
+          description: Status of the inspection event
+          enum:
+          - Scheduled
+          - Requested
+          - Active
+          - Complete
+          nullable: true
+      - name: filter[scheduledBetween]
+        in: query
+        description: Inspection date range for scheduled inspections format YYYY-MM-DD, YYYY-MM-DD in the order start, end
+        required: false
+        schema:
+          type: string
+      - name: filter[requestedBetween]
+        in: query
+        description: Inspection date range for requested inspections format YYYY-MM-DD, YYYY-MM-DD in the order start, end
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Inspection events
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1{community}~1inspection-events~1{inspectionEventID}/get/responses/200/content/application~1vnd.api+json/schema/properties/data'
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    post:
+      summary: Create an inspection event
+      description: 'Create an inspection event.
+
+        ### Permissions Required
+
+        `Workflow Write`'
+      operationId: postInspectionEvent
+      x-og-claims-required:
+      - PLC_RECORD_STEP_UPDATE
+      tags:
+      - Inspection Events
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  x-tags:
+                  - Inspection Events
+                  title: Inspection Event
+                  required:
+                  - type
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - inspectionEvent
+                      example: inspectionEvent
+                    attributes:
+                      type: object
+                      properties:
+                        inspectionStepID:
+                          type: string
+                          description: The ID of the inspection step
+                          example: inspection-step-700002
+                        status:
+                          type: string
+                          enum:
+                          - Scheduled
+                          - Active
+                          description: The status of the inspection
+                          example: Scheduled
+                        note:
+                          type: string
+                          description: Note
+                          example: Initial foundation inspection scheduled for BP-2024-001234
+                        orderNo:
+                          type: integer
+                          description: The order of the event in the series
+                          example: 1
+                        inspectorID:
+                          type: string
+                          description: The user ID of the assigned inspector
+                          example: user-inspector-700003
+                        inspectionScheduleType:
+                          type: string
+                          enum:
+                          - Date
+                          - DateTime
+                          - Range
+                          - AMPM_Scheduled
+                          description: Specifies how the inspection time is scheduled. `Date` indicates any time on the given startAt date. `DateTime` indicates a specific time on the given startAt date. `Range` indicates within a defined time window. `AMPM_Scheduled` indicates a scheduled AM/PM time window.
+                          example: Date
+                        startAt:
+                          type: string
+                          format: date-time
+                          description: When the inspection should start. If inspection schedule type is `Date`, this should be the start of the day. If inspection schedule type is `DateTime`, this should be a specific time. If inspection schedule type is `Range`, this should be the start of the range.
+                          example: '2024-08-25T15:00:00Z'
+                        endAt:
+                          type: string
+                          format: date-time
+                          description: When the inspection should end. If inspection schedule type is `Date` or `DateTime`, this field is ignored. If inspection schedule type is `Range`, this should be the end of the range.
+                          example: '2024-08-26T15:00:00Z'
+                        inspectionTemplateTypeIDs:
+                          type: array
+                          items:
+                            type: string
+                          description: The IDs of the inspection template types
+                          example:
+                          - template-type-700004
+                          - template-type-700005
+                        offHoursInfo:
+                          $ref: '#/paths/~1v2~1{community}~1inspection-events~1{inspectionEventID}/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/attributes/properties/offHoursInfo'
+                      required:
+                      - inspectionStepID
+                      - inspectionScheduleType
+                      - status
+                      - startAt
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              description: URL of the newly created resource
+              schema:
+                type: string
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Inspection Events
+                    title: Inspection Event
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - inspectionEvent
+                        example: inspectionEvent
+                      id:
+                        type: string
+                        example: inspection-event-345678
+                      attributes:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                            enum:
+                            - Requested
+                            - Scheduled
+                            - Active
+                            - Complete
+                            description: The status of the inspection event
+                            example: Scheduled
+                          inspectionScheduleType:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - Date
+                            - DateTime
+                            - Range
+                            - AMPM
+                            - AMPM_Scheduled
+                            description: Specifies how the inspection time is scheduled. `Date` indicates any time on the given startAt date. `DateTime` indicates a specific time on the given startAt date. `Range` indicates within a defined time window. May be null if the schedule service was used, or it was inspected without being scheduled. `AMPM` is a legacy scheduling type that indicates a specific time window within a day. `AMPM_Scheduled` indicates a scheduled AM/PM time window.
+                            example: Date
+                          startAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the inspection should start. If inspection schedule type is `Date`, this is a speciifc day. If inspection schedule type is `DateTime`, this is a specific time on that day. If inspection schedule type is `Range`, this is the start of the range.
+                          endAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the inspection should end. If inspection schedule type is `Date` or `DateTime`, this field may be null. If inspection schedule type is `Range`, this is the end of the range.
+                          inspectionStartedAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: Timestamp of when the inspection was started. Not to be confused with the `startAt` attribute.
+                          inspectionCompletedAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: Timestamp of when the inspection was completed, if status is `Complete`. Not to be confused with the `endAt` attribute.
+                          requestedTimes:
+                            type:
+                            - array
+                            - 'null'
+                            items:
+                              type: object
+                              description: List of time slots requested by the applicant for the inspection. Each entry represents a preferred time window with its scheduling type.
+                              properties:
+                                scheduledType:
+                                  type: string
+                                  enum:
+                                  - Date
+                                  - DateTime
+                                  - Range
+                                  - AMPM
+                                  - AMPM_Scheduled
+                                  description: Specifies how the inspection time is scheduled
+                                requestedStart:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  format: date-time
+                                  description: The requested start time for the inspection
+                                requestedEnd:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  format: date-time
+                                  description: The requested end time for the inspection
+                          isEnabled:
+                            type: boolean
+                            description: Whether the inspection event is enabled
+                            example: true
+                          note:
+                            type:
+                            - string
+                            - 'null'
+                            description: Notes and comments about the inspection
+                            example: Initial foundation inspection for building permit BP-2024-001
+                          sequenceNo:
+                            type: integer
+                            description: The order of the event in the series
+                            example: 1
+                          updatedAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: Last updated date
+                          isOffHours:
+                            type: boolean
+                            description: Whether this is an off-hours inspection. Derived from the presence of offHoursInfo.
+                            example: false
+                          offHoursInfo:
+                            $ref: '#/paths/~1v2~1{community}~1inspection-events~1{inspectionEventID}/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/attributes/properties/offHoursInfo'
+                      relationships:
+                        type: object
+                        required:
+                        - inspectionStep
+                        properties:
+                          inspectionStep:
+                            $ref: '#/paths/~1v2~1{community}~1inspection-events~1{inspectionEventID}/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/inspectionStep'
+                          inspectionResult:
+                            $ref: '#/paths/~1v2~1{community}~1inspection-events~1{inspectionEventID}/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/inspectionResult'
+                          inspector:
+                            $ref: '#/paths/~1v2~1{community}~1inspection-events~1{inspectionEventID}/get/responses/200/content/application~1vnd.api+json/schema/properties/data/properties/relationships/properties/inspector'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

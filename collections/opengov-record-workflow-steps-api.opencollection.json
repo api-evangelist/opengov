@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Workflow Steps API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Workflow Steps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List record workflow steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/workflow-steps"
+          },
+          "docs": "List workflow steps on a record.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Add a record workflow step",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/workflow-steps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a workflow step to a record.\n### Permissions Required\n`Workflow Write`"
+        },
+        {
+          "info": {
+            "name": "Retrieve a step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/workflow-steps/:stepID",
+            "params": [
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a workflow step on a record"
+              }
+            ]
+          },
+          "docs": "Retrieve a step on a record.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Update a step",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/workflow-steps/:stepID",
+            "params": [
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a workflow step on a record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a record workflow step's properties.\n### Permissions Required\n`Workflow Write`"
+        },
+        {
+          "info": {
+            "name": "Delete step",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/workflow-steps/:stepID",
+            "params": [
+              {
+                "name": "stepID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a workflow step on a record"
+              }
+            ]
+          },
+          "docs": "Remove a step from a record.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

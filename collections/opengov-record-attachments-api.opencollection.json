@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Attachments API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List record attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/attachments"
+          },
+          "docs": "List attachments on a record.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Add a record attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/attachments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associates a previously uploaded file with a record as an attachment.\n\n##### Process\n1. First, upload your file using the Files API:\n   - Use [POST /files](operation:external/plce-api/plce-api.oas/files/createFileUpload) to get a pre-signed upload URL\n   - Upload your file using the pre-signed URL\n   - Keep the returned `fileID` for the next step\n2. Then use this endpoint to create the record attachment:\n   - Provide the fileID to associate the file\n   - The file will be cloned, creating an inde"
+        },
+        {
+          "info": {
+            "name": "Get record attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/attachments/:attachmentID",
+            "params": [
+              {
+                "name": "attachmentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an attachment on a record"
+              }
+            ]
+          },
+          "docs": "Retrieve a record attachment by ID.\n### Permissions Required\n`Record Read`"
+        },
+        {
+          "info": {
+            "name": "Remove a record attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/attachments/:attachmentID",
+            "params": [
+              {
+                "name": "attachmentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an attachment on a record"
+              }
+            ]
+          },
+          "docs": "Remove a record attachment.\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Create a new version of a record attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/attachments/:attachmentID/versions",
+            "params": [
+              {
+                "name": "attachmentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an attachment on a record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to create a new version of a record attachment.\n##### Process\n1. On an existing record attachment:\n   - Provide the `fileID` of the new file to associate with the record attachment\n   - The new file will replace the current version of the record attachment\n   - The previous version of the record attachment will be retained in the `versions` relationship\n\n### Permissions Required\n`Record Write`"
+        },
+        {
+          "info": {
+            "name": "Remove a record attachment version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/attachments/:attachmentID/versions/:fileID",
+            "params": [
+              {
+                "name": "attachmentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an attachment on a record"
+              },
+              {
+                "name": "fileID",
+                "value": "",
+                "type": "path",
+                "description": "ID of a file"
+              }
+            ]
+          },
+          "docs": "Removes the specified file from the version history of a record attachment.\n### Permissions Required\n`Record Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

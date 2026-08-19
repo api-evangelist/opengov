@@ -1,0 +1,269 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Type Form API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Type Form
+  description: The Record Type Form is the form template for records of that Record Type.
+paths:
+  /v2/{community}/record-types/{recordTypeID}/form:
+    get:
+      summary: Get form fields
+      description: 'Retrieve the form fields for the specified record type.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getRecordTypeForm
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Type Form
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1attachments/parameters/1'
+      responses:
+        '200':
+          description: Form fields of a record type
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    title: Record Type Form
+                    x-tags:
+                    - Record Type Form
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - recordTypeForm
+                        example: recordTypeForm
+                      id:
+                        type: string
+                        example: record-type-form-1000015
+                      attributes:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            items:
+                              type: object
+                              description: Form field template definition and value
+                              properties:
+                                id:
+                                  type: string
+                                  description: An ID that uniquely identifies a form field
+                                  example: form-field-123456789
+                                label:
+                                  type: string
+                                  description: Label of the form field
+                                  example: I agree to the terms and conditions
+                                description:
+                                  type: string
+                                  nullable: true
+                                  description: Description of the form field
+                                  example: Please agree to the terms and conditions
+                                formFieldType:
+                                  type: string
+                                  enum:
+                                  - CHECKBOX
+                                  - DATE
+                                  - DROP_DOWN
+                                  - E_SIGNATURE
+                                  - EIN
+                                  - FILE_UPLOAD
+                                  - NUMBER
+                                  - SHORT_TEXT
+                                  - LONG_TEXT
+                                  - HELP_TEXT
+                                  - SSN
+                                  description: Indicates the type of field
+                                dataType:
+                                  type: string
+                                  enum:
+                                  - NUMBER
+                                  - STRING
+                                  - BOOLEAN
+                                  - DATETIME
+                                  description: Indicates the type of form field's data
+                                helpText:
+                                  type: string
+                                  nullable: true
+                                  description: Help text of the form field
+                                  example: By checking this box, you acknowledge.
+                                required:
+                                  type: boolean
+                                  description: Whether the form field is required
+                                internal:
+                                  type: boolean
+                                  description: When true, indicates that the field is visible only to employees otherwise visible to all
+                        required:
+                        - fields
+                      relationships:
+                        type: object
+                        properties:
+                          recordType:
+                            type: object
+                            properties:
+                              $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                            description: The related `Record Type`.
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

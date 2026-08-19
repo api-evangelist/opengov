@@ -1,0 +1,935 @@
+{
+  "item": [
+    {
+      "id": "b03ace82-af18-4cba-8b75-2d669aec35f2",
+      "name": "Payment Steps",
+      "description": {
+        "content": "Payment Steps are one step type that can be found in a record's workflow.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00e1b790-568a-4255-9d29-49c73dbf5ce8",
+          "name": "List payment steps",
+          "request": {
+            "name": "List payment steps",
+            "description": {
+              "content": "Retrieve payment steps that match the specified filters.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "payment-steps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[recordID]",
+                  "value": "<string>",
+                  "description": "Filter by a recordID"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[label]",
+                  "value": "<string>",
+                  "description": "Filter by record step label"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec",
+                  "description": "Filter by record step status"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[waived]",
+                  "value": "<boolean>",
+                  "description": "Filter by waived"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[waivedUserID]",
+                  "value": "<string>",
+                  "description": "Filter by waived user ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40ec2406-2c41-4e78-a0c9-657b88a6091e",
+              "name": "Payment task",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"paymentStep\",\n      \"id\": \"payment-step-400001\",\n      \"attributes\": {\n        \"label\": \"Permit Fee Payment\",\n        \"stepType\": \"PAYMENT\",\n        \"ordinal\": 3,\n        \"sequence\": true,\n        \"status\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n        },\n        \"activatedAt\": \"2013-03-16T06:20:20.262Z\",\n        \"completedAt\": \"1983-07-09T16:22:09.626Z\",\n        \"waived\": false,\n        \"dueBy\": \"1954-04-06T12:00:45.934Z\"\n      },\n      \"relationships\": {\n        \"step\": {\n          \"$ref\": {}\n        },\n        \"fees\": {\n          \"links\": {\n            \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties/links not found in the OpenAPI spec\"\n          }\n        },\n        \"waivedUser\": {\n          \"$ref\": {}\n        }\n      }\n    },\n    {\n      \"type\": \"paymentStep\",\n      \"id\": \"payment-step-400001\",\n      \"attributes\": {\n        \"label\": \"Permit Fee Payment\",\n        \"stepType\": \"PAYMENT\",\n        \"ordinal\": 3,\n        \"sequence\": true,\n        \"status\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n        },\n        \"activatedAt\": \"1991-05-28T22:29:17.134Z\",\n        \"completedAt\": \"2020-11-16T19:48:04.837Z\",\n        \"waived\": false,\n        \"dueBy\": \"1973-09-25T12:07:14.629Z\"\n      },\n      \"relationships\": {\n        \"step\": {\n          \"$ref\": {}\n        },\n        \"fees\": {\n          \"links\": {\n            \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties/links not found in the OpenAPI spec\"\n          }\n        },\n        \"waivedUser\": {\n          \"$ref\": {}\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links not found in the OpenAPI spec\"\n  },\n  \"meta\": {\n    \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc6a5bba-5cda-4ee9-96ae-f8b490fbbbad",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c57fb737-7bc3-47a3-bdaf-7196ba615934",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f245b8e6-b7e2-4d14-901e-b5fc5664e7f8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2eb5591-99e1-48bd-8fc1-2fe4c4d2eaa3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e628879-bb55-4267-92a9-e994e732f503",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d3fcd3a-0c0e-42fe-adc8-b30a311d9b5f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[recordID]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[label]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[waived]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[waivedUserID]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebb94edf-505e-485c-8510-110379c9ef63",
+          "name": "Get payment step",
+          "request": {
+            "name": "Get payment step",
+            "description": {
+              "content": "Retrieve a payment step by ID.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "payment-steps",
+                ":paymentStepID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentStepID",
+                  "description": "(Required) ID of a payment step"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6ec5659-25c3-4d55-a44a-3e338fd2f63a",
+              "name": "Payment task",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"paymentStep\",\n    \"id\": \"payment-step-400001\",\n    \"attributes\": {\n      \"label\": \"Permit Fee Payment\",\n      \"stepType\": \"PAYMENT\",\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"activatedAt\": \"2014-04-30T18:08:33.311Z\",\n      \"completedAt\": \"2025-09-05T07:00:26.375Z\",\n      \"waived\": false,\n      \"dueBy\": \"1957-09-09T03:27:53.182Z\"\n    },\n    \"relationships\": {\n      \"step\": {\n        \"$ref\": {}\n      },\n      \"fees\": {\n        \"links\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties/links not found in the OpenAPI spec\"\n        }\n      },\n      \"waivedUser\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cee4755a-f760-4853-ac69-1313ed022f96",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7ec5ecd-9e30-4fcc-9c81-1f9c278523e1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee5453dd-f968-4fe3-928b-f5285740b94e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ba635b8-89cc-4b1c-92b4-4bfda925ff0f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eec9853d-5ee3-4fa2-b86a-5150fae19a56",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d33e9495-01e2-4b9d-b383-6149c4ba89f6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "payment-steps",
+                    ":paymentStepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentStepID",
+                      "description": "(Required) ID of a payment step"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a00a8789-3fa6-4b1a-95f7-291b526e3512",
+    "name": "Permitting & Licensing Payment Steps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

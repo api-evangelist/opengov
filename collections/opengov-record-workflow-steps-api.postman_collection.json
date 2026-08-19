@@ -1,0 +1,2377 @@
+{
+  "item": [
+    {
+      "id": "251bd3a0-48c2-4dd7-98d9-975fa7aebe3d",
+      "name": "Record Workflow Steps",
+      "description": {
+        "content": "A Record's Workflow is represented as a collection of **Steps**. Steps are automatically created on a Record at the time it is submitted, based on the Record Type Workflow defined for that Record's Type.\n\nSteps are instantiated on Records and can be added or deleted on individual Records, so a given Record's Steps may not always match its Workflow Template.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f818173-202c-4ae1-9875-e2919316dac5",
+          "name": "List record workflow steps",
+          "request": {
+            "name": "List record workflow steps",
+            "description": {
+              "content": "List workflow steps on a record.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "workflow-steps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd5ad7a9-1b85-4409-89f5-8e7d36104282",
+              "name": "Workflow steps of a record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"workflowStep\",\n      \"id\": \"step-789012\",\n      \"attributes\": {\n        \"label\": \"Review Application\",\n        \"stepType\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/stepType not found in the OpenAPI spec\"\n        },\n        \"ordinal\": 1,\n        \"sequence\": true,\n        \"status\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n        },\n        \"activatedAt\": \"1947-06-02T16:08:46.951Z\",\n        \"completedAt\": \"2004-08-03T10:19:38.432Z\",\n        \"visible\": true\n      },\n      \"relationships\": {\n        \"record\": {\n          \"$ref\": {}\n        },\n        \"comments\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"templateStep\": {\n          \"$ref\": {}\n        },\n        \"approvalTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"documentTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"inspectionTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"paymentTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        }\n      }\n    },\n    {\n      \"type\": \"workflowStep\",\n      \"id\": \"step-789012\",\n      \"attributes\": {\n        \"label\": \"Review Application\",\n        \"stepType\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/stepType not found in the OpenAPI spec\"\n        },\n        \"ordinal\": 1,\n        \"sequence\": true,\n        \"status\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n        },\n        \"activatedAt\": \"1985-05-03T20:18:38.128Z\",\n        \"completedAt\": \"2009-09-29T23:21:15.320Z\",\n        \"visible\": true\n      },\n      \"relationships\": {\n        \"record\": {\n          \"$ref\": {}\n        },\n        \"comments\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"templateStep\": {\n          \"$ref\": {}\n        },\n        \"approvalTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"documentTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"inspectionTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        },\n        \"paymentTask\": {\n          \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41552b73-bc03-4096-9486-ec148d0e7cf0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b08f7bb7-0530-40a1-8c9c-b982a33476b6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f38e3d46-d8d7-4ade-80af-38683bc65145",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c845932-7a1f-48e3-b2d3-c17a5ceef4b5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a664a46-17da-4c14-bdf2-11d134e3e161",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29cf15e3-3553-4a83-9b4e-151699a665b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75e18a54-16f4-4933-a394-89387abf389b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c5f73e8-f7f0-4691-9c51-55b563ae46ef",
+          "name": "Add a record workflow step",
+          "request": {
+            "name": "Add a record workflow step",
+            "description": {
+              "content": "Add a workflow step to a record.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "workflow-steps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"label\": \"<string>\",\n      \"stepType\": \"<string>\",\n      \"templateID\": \"<integer>\",\n      \"ordinal\": \"<integer>\",\n      \"sequence\": \"<boolean>\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff9c3906-fc0b-4911-bc9a-8ac04241475f",
+              "name": "Returns the record workflow step",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-789012\",\n    \"attributes\": {\n      \"label\": \"Review Application\",\n      \"stepType\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/stepType not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 1,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"activatedAt\": \"1978-09-29T14:14:25.985Z\",\n      \"completedAt\": \"2010-01-05T12:46:17.584Z\",\n      \"visible\": true\n    },\n    \"relationships\": {\n      \"record\": {\n        \"$ref\": {}\n      },\n      \"comments\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"templateStep\": {\n        \"$ref\": {}\n      },\n      \"approvalTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"documentTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"inspectionTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"paymentTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b95a6c29-88e1-4687-84c0-96478cf5d7e0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7114e711-a61f-4c67-bb61-ad2debd38b37",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b26a8eb8-17fe-4936-8207-6dbb15e98059",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9639a1a7-ba3b-45f0-8b26-9d5746198ced",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7528925c-8b9a-40c2-96a2-c8516f35d451",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0dfce65-f70b-45c0-9299-2a5b26b1fe00",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "976178bb-34dd-4aa4-9a9b-1dcce3930cea",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86758541-7c3d-44b7-8f56-5d5900c4d42f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"attributes\": {\n      \"label\": \"Technical Review\",\n      \"stepType\": \"APPROVAL\",\n      \"templateID\": 798081,\n      \"ordinal\": 3,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e97f90d7-0d31-42b6-b66a-076b6a5ff5b7",
+          "name": "Retrieve a step",
+          "request": {
+            "name": "Retrieve a step",
+            "description": {
+              "content": "Retrieve a step on a record.\n### Permissions Required\n`Workflow Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "workflow-steps",
+                ":stepID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stepID",
+                  "description": "(Required) ID of a workflow step on a record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ea240c1-d673-46c3-94c1-c18b8508146f",
+              "name": "Workflow step on a record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-789012\",\n    \"attributes\": {\n      \"label\": \"Review Application\",\n      \"stepType\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/stepType not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 1,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"activatedAt\": \"1978-09-29T14:14:25.985Z\",\n      \"completedAt\": \"2010-01-05T12:46:17.584Z\",\n      \"visible\": true\n    },\n    \"relationships\": {\n      \"record\": {\n        \"$ref\": {}\n      },\n      \"comments\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"templateStep\": {\n        \"$ref\": {}\n      },\n      \"approvalTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"documentTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"inspectionTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"paymentTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de9e995b-7490-477c-a25f-826a5ae47ba0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ec1c925-1dc5-4c94-883a-4bd0ea09378b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b1fa4d3-8b89-49c0-8dd8-e03f754bd103",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98d9cebf-70b2-41c7-bfff-04ae83ab6aeb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d49f618a-396f-49d7-b36a-b2b1cbec98bd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82695074-7da2-4849-bdf9-9a3847048fb1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1fc1433-1cac-4e78-bbfc-01cd6bbbcf36",
+          "name": "Delete step",
+          "request": {
+            "name": "Delete step",
+            "description": {
+              "content": "Remove a step from a record.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "workflow-steps",
+                ":stepID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stepID",
+                  "description": "(Required) ID of a workflow step on a record"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2284da68-84f4-45a0-96a7-681fc0bd95c9",
+              "name": "Workflow step deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60ec7de3-c63b-412c-adb2-ebf1e1542aff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "494a8022-0228-4543-9532-19c63a2f6a50",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3293a02-67c8-41ef-bb94-9f84022af2d2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6240f4f4-ca6d-4892-ac8c-de3b1c3a037c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea53a3dc-dfd2-4b24-be31-aaf49c663616",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f515ed7-0080-4ba5-9fad-dcc693d204dd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ee5d526-0601-45a7-a223-676d310ed2a6",
+          "name": "Update a step",
+          "request": {
+            "name": "Update a step",
+            "description": {
+              "content": "Update a record workflow step's properties.\n### Permissions Required\n`Workflow Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "workflow-steps",
+                ":stepID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stepID",
+                  "description": "(Required) ID of a workflow step on a record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"label\": \"<string>\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": \"<integer>\",\n      \"sequence\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a68f0318-bc65-4127-8dc1-65ea848581eb",
+              "name": "Workflow step updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-789012\",\n    \"attributes\": {\n      \"label\": \"Review Application\",\n      \"stepType\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1record-types~1{recordTypeID}~1workflow/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/stepType not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 1,\n      \"sequence\": true,\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"activatedAt\": \"1978-09-29T14:14:25.985Z\",\n      \"completedAt\": \"2010-01-05T12:46:17.584Z\",\n      \"visible\": true\n    },\n    \"relationships\": {\n      \"record\": {\n        \"$ref\": {}\n      },\n      \"comments\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"templateStep\": {\n        \"$ref\": {}\n      },\n      \"approvalTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"documentTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"inspectionTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      },\n      \"paymentTask\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1records~1{recordID}~1form/get/responses/200/content/application~1vnd.api+json/schema/properties/included/items/properties/relationships/properties/entries not found in the OpenAPI spec\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "814a9224-0551-4a6d-b7aa-e5a228d1463c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5522d4be-6aed-4d40-a902-894c028819e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a509453-c376-4470-972e-5bf85142c908",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2510105d-2c19-4bf7-a04f-67404e054664",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "802c935d-f243-4382-bd46-53b73c6f682f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70486185-9dd2-4c27-be2c-47d4d860379d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9069b54d-75b9-429d-94cb-b71d6b1ef6da",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1329b6b-4850-4bfe-9cc5-333542018803",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "workflow-steps",
+                    ":stepID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stepID",
+                      "description": "(Required) ID of a workflow step on a record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"workflowStep\",\n    \"id\": \"step-patch-828384\",\n    \"attributes\": {\n      \"label\": \"Updated Technical Review\",\n      \"status\": {\n        \"value\": \"reference #/paths/~1v2~1{community}~1approval-steps/get/parameters/4/schema not found in the OpenAPI spec\"\n      },\n      \"ordinal\": 4,\n      \"sequence\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b695caee-ae5a-4192-b5b1-47b71f82b73e",
+    "name": "Permitting & Licensing Record Workflow Steps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

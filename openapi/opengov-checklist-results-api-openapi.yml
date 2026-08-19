@@ -1,0 +1,485 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Checklist Results API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Checklist Results
+  description: Inspection Results include Checklist Results for any checklist item that was inspected.
+paths:
+  /v2/{community}/inspection-results/{inspectionResultID}/checklist-results:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: inspectionResultID
+      in: path
+      description: ID of the inspection result
+      required: true
+      schema:
+        type: string
+    get:
+      summary: List checklist results for an inspection result
+      description: 'Retrieve checklist results for an inspection result.
+
+        ### Permissions Required
+
+        `Workflow Read`'
+      operationId: getChecklistResults
+      x-og-claims-required:
+      - PLC_RECORD_STEP_READ
+      tags:
+      - Checklist Results
+      responses:
+        '200':
+          description: Checklist result
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Checklist Results
+                      title: Checklist Result
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - checkListResult
+                          example: checkListResult
+                        id:
+                          type: string
+                          description: The ID of the checklist result
+                          example: checklist-result-282930
+                        attributes:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              description: The code referenceof the checklist result
+                              example: NEC-210.12A
+                            label:
+                              type: string
+                              description: The label of the checklist result
+                              example: Arc-Fault Circuit Interrupter Protection
+                            notes:
+                              type: string
+                              description: The notes of the checklist result
+                              example: AFCI protection verified in bedrooms and living areas
+                            result:
+                              type: string
+                              description: Result of the checklist result item
+                              enum:
+                              - Pass
+                              - Fail
+                              - Skip
+                              example: Pass
+                        relationships:
+                          type: object
+                          required:
+                          - inspectionResult
+                          - type
+                          properties:
+                            inspectionResult:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The related `Inspection Result`.
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    post:
+      summary: Create a checklist result
+      description: 'Create a checklist result.
+
+        ### Permissions Required
+
+        `Workflow Write`'
+      operationId: postChecklistResults
+      x-og-claims-required:
+      - PLC_RECORD_STEP_UPDATE
+      tags:
+      - Checklist Results
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  title: Checklist Result
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - checkListResult
+                      example: checkListResult
+                    attributes:
+                      type: object
+                      properties:
+                        checklistTemplateID:
+                          type: string
+                          description: Unique internal ID of the corresponding checklist template
+                          example: checklist-template-500001
+                        codeReference:
+                          type: string
+                          description: Reference to the code that was checked
+                          example: NEC-210.12A
+                        comment:
+                          type: string
+                          description: Comment of the checklist result item
+                          example: AFCI protection verified in all required locations
+                        itemText:
+                          type: string
+                          description: Text of the checklist result item
+                          example: Arc-Fault Circuit Interrupter Protection
+                        result:
+                          type: string
+                          description: Result of the checklist result item
+                          enum:
+                          - Pass
+                          - Fail
+                          - Skip
+                          example: Pass
+                      required:
+                      - type
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Checklist Results
+                    title: Checklist Result
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - checkListResult
+                        example: checkListResult
+                      id:
+                        type: string
+                        description: The ID of the checklist result
+                        example: checklist-result-282930
+                      attributes:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            description: The code referenceof the checklist result
+                            example: NEC-210.12A
+                          label:
+                            type: string
+                            description: The label of the checklist result
+                            example: Arc-Fault Circuit Interrupter Protection
+                          notes:
+                            type: string
+                            description: The notes of the checklist result
+                            example: AFCI protection verified in bedrooms and living areas
+                          result:
+                            type: string
+                            description: Result of the checklist result item
+                            enum:
+                            - Pass
+                            - Fail
+                            - Skip
+                            example: Pass
+                      relationships:
+                        type: object
+                        required:
+                        - inspectionResult
+                        - type
+                        properties:
+                          inspectionResult:
+                            $ref: '#/paths/~1v2~1{community}~1inspection-results~1{inspectionResultID}~1checklist-results/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/inspectionResult'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/inspection-results/{inspectionResultID}/checklist-results/{checklistResultID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1inspection-results~1{inspectionResultID}~1checklist-results/parameters/1'
+    - name: checklistResultID
+      in: path
+      description: ID of a checklist result
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: Update a checklist result
+      description: 'Update a checklist result.
+
+        ### Permissions Required
+
+        `Workflow Write`'
+      operationId: patchChecklistResults
+      x-og-claims-required:
+      - PLC_RECORD_STEP_UPDATE
+      tags:
+      - Checklist Results
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1inspection-results~1{inspectionResultID}~1checklist-results/parameters/1'
+      - name: checklistResultID
+        in: path
+        description: ID of a checklist result
+        required: true
+        schema:
+          type: string
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  title: Checklist Result
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - checkListResult
+                      example: checkListResult
+                    id:
+                      type: string
+                      example: checklist-result-500002
+                    attributes:
+                      type: object
+                      properties:
+                        comment:
+                          type: string
+                          description: Comment of the checklist result item
+                          example: Updated after re-inspection - all requirements met
+                        result:
+                          type: string
+                          description: Result of the checklist result item
+                          enum:
+                          - Pass
+                          - Fail
+                          - Skip
+                          example: Pass
+                  required:
+                  - type
+                  - id
+                  - attributes
+      responses:
+        '200':
+          description: Checklist result updated successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1inspection-results~1{inspectionResultID}~1checklist-results/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

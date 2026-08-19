@@ -1,0 +1,188 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Activity Logs API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List activity logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/activity-logs",
+            "params": [
+              {
+                "name": "filter[timestamp]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by activity timestamp"
+              },
+              {
+                "name": "filter[userId]",
+                "value": "12345",
+                "type": "query",
+                "description": "Filter by user ID who performed the activity"
+              },
+              {
+                "name": "filter[entityTypeId]",
+                "value": "Records",
+                "type": "query",
+                "description": "Filter by entity type ID (e.g., Records, Attachments, Record_Steps)"
+              },
+              {
+                "name": "filter[entityName]",
+                "value": "Building Permit Application",
+                "type": "query",
+                "description": "Filter by entity name"
+              },
+              {
+                "name": "filter[operationName]",
+                "value": "Status Changed",
+                "type": "query",
+                "description": "Filter by operation name/description"
+              },
+              {
+                "name": "filter[recordTypeName]",
+                "value": "Building Permit",
+                "type": "query",
+                "description": "Filter by record type name (for record-related activities)"
+              },
+              {
+                "name": "filter[recordNumber]",
+                "value": "BP-2024-001",
+                "type": "query",
+                "description": "Filter by record number (for record-related activities)"
+              },
+              {
+                "name": "filter[entityId]",
+                "value": "Records|12345",
+                "type": "query",
+                "description": "Filter by specific entity ID"
+              },
+              {
+                "name": "sort[field]",
+                "value": "TIMESTAMP",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "sort[direction]",
+                "value": "DESC",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "page[current]",
+                "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0=",
+                "type": "query",
+                "description": "Cursor for the current page (opaque string returned from previous response)"
+              },
+              {
+                "name": "page[size]",
+                "value": "20",
+                "type": "query",
+                "description": "Number of records to return per page. (Default: 20)"
+              }
+            ]
+          },
+          "docs": "List all activity logs in the community with optional filtering, sorting, and pagination.\nThis endpoint requires employee access.\n\n### Permissions Required\n`Activity Log Read`"
+        },
+        {
+          "info": {
+            "name": "List activity logs for an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/activity-logs/entities/:entityTypeId/:entityId",
+            "params": [
+              {
+                "name": "entityTypeId",
+                "value": "",
+                "type": "path",
+                "description": "Entity type ID of activity"
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the entity for the activity log"
+              },
+              {
+                "name": "filter[timestamp]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by activity timestamp"
+              },
+              {
+                "name": "filter[userId]",
+                "value": "12345",
+                "type": "query",
+                "description": "Filter by user ID who performed the activity"
+              },
+              {
+                "name": "filter[entityTypeId]",
+                "value": "Records",
+                "type": "query",
+                "description": "Filter by entity type ID (e.g., Records, Attachments, Record_Steps)"
+              },
+              {
+                "name": "filter[entityName]",
+                "value": "Building Permit Application",
+                "type": "query",
+                "description": "Filter by entity name"
+              },
+              {
+                "name": "filter[operationName]",
+                "value": "Status Changed",
+                "type": "query",
+                "description": "Filter by operation name/description"
+              },
+              {
+                "name": "sort[field]",
+                "value": "TIMESTAMP",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "sort[direction]",
+                "value": "DESC",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "page[current]",
+                "value": "eyJsYXN0SWQiOiIxMjM0NSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMDNUMTA6MzA6MDBaIn0=",
+                "type": "query",
+                "description": "Cursor for the current page (opaque string returned from previous response)"
+              },
+              {
+                "name": "page[size]",
+                "value": "20",
+                "type": "query",
+                "description": "Number of records to return per page. (Default: 20)"
+              }
+            ]
+          },
+          "docs": "List all activity logs for a specific entity (of any type) with optional filtering, sorting, and pagination.\nThis endpoint requires employee access and returns activities related to the entity and its child entities.\nWorks for any entity type (Records, Attachments, Record_Steps, etc.).\n\n### Permissions Required\n`Activity Log Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

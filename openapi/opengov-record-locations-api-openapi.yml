@@ -1,0 +1,259 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Permitting Licensing & Code Enforcement Record Locations API
+  x-logo:
+    url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
+  description: "The OpenGov Permitting & Licensing API is organized around REST. The API is based on the JSON API specification and uses standard HTTP response codes, authentication, and verbs.\n\n## Authentication\nThe OpenGov Permitting & Licensing API is authenticated using the [OAuth2](https://www.rfc-editor.org/rfc/rfc6749) Client Credentials flow. Access tokens are provided as a [bearer token](https://datatracker.ietf.org/doc/html/rfc6750) Authorization header in all API requests.\n\nTo obtain an access token, you must have an OpenGov-provided **Client ID** and **Client Secret** and make a POST request to https://accounts.viewpointcloud.com/oauth/token\n\nExample request:\n\n```bash\ncurl --request POST \\\n  --url https://accounts.viewpointcloud.com/oauth/token \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'grant_type=client_credentials' \\\n  --data 'client_id=YOUR_CLIENT_ID' \\\n  --data 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data 'audience=viewpointcloud.com/api/production'\n```\n\nThe response will include:\n- `access_token`: Access token issued by the authorization server\n- `token_type`: Type of token issued (typically `Bearer`)\n- `expires_in`: The lifetime in seconds of the access token\n<br />\n<br />\nThe API will return a 401 error if a token is invalid.\n<br />\n<br />\n"
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Record Locations
+  description: 'A Record can be associated with one **Primary Location** and up to 99 **Additional Locations**.
+
+
+    Record Locations reference **Locations**.
+
+    '
+paths:
+  /v1/{community}/records/{recordID}/locations:
+    get:
+      summary: List record locations
+      operationId: listRecordLocations
+      tags:
+      - Record Locations
+      parameters:
+      - $ref: '#/components/parameters/community'
+      - $ref: '#/components/parameters/recordID'
+      - name: primary
+        in: query
+        description: Primary location
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Returns record locations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecordLocation'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal Server Error
+components:
+  parameters:
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
+  schemas:
+    PropertyOwner:
+      type: object
+      description: 'Detailed information about the property owner for locations of type `PARCEL`
+
+        '
+      example:
+        name: Proper Properties LLC
+        streetNumber: 1200
+        streetName: N Main St.
+        unit: null
+        city: Front Market
+        state: VA
+        postalCode: 22035
+        country: USA
+        phoneNo: 635-509-1357
+        email: properties@properllc.com
+      properties:
+        name:
+          type: string
+          description: Name of the location
+        streetNumber:
+          type: string
+          description: Street Number
+        streetName:
+          type: string
+          description: Street name
+        unit:
+          type: string
+          description: Unit number
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State
+        postalCode:
+          type: string
+          description: Postal Code
+        country:
+          type: string
+          description: Country
+        phoneNo:
+          type: string
+          description: Phone Number
+        email:
+          type: string
+          description: Email
+    RecordLocation:
+      x-tags:
+      - Record Locations
+      type: object
+      title: The record location object
+      example:
+        type: record_location
+        id: '61191'
+        attributes:
+          locationID: '61191'
+          name: null
+          locationType: PARCEL
+          primary: true
+          latitude: 79.231204
+          longitude: -120.523523
+          streetNo: 701
+          streetName: Pleasant Ave.
+          unit: null
+          city: Front Market
+          state: VA
+          postalCode: 22035
+          country: USA
+          owner:
+            name: Proper Properties LLC
+            streetNumber: 1200
+            streetName: N Main St.
+            unit: null
+            city: Front Market
+            state: VA
+            postalCode: 22035
+            country: USA
+            phoneNo: 635-509-1357
+            email: properties@properllc.com
+          secondaryLatitude: null
+          secondaryLongitude: null
+          segmentPrimaryLabel: null
+          segmentSecondaryLabel: null
+          segmentLabel: null
+          segmentLength: null
+      properties:
+        type:
+          type: string
+          enum:
+          - record_location
+        id:
+          type: integer
+          description: The Location ID
+        attributes:
+          type: object
+          properties:
+            locationID:
+              type: integer
+              description: The Location ID
+            name:
+              type: string
+              description: User defined name of the location
+            latitude:
+              type: number
+              format: double
+              description: Latitude of the location
+            longitude:
+              type: number
+              format: double
+              description: Longitude of the location
+            locationType:
+              type: string
+              enum:
+              - PARCEL
+              - POINT
+              - SEGMENT
+              description: Type of location Parcel, Point, segment etc.
+            primary:
+              type: boolean
+              description: true for a location that is designated as primary
+            owner:
+              $ref: '#/components/schemas/PropertyOwner'
+            streetNo:
+              type: string
+              description: Street number of a parcel location
+            streetName:
+              type: string
+              description: Street name of a parcel location
+            unit:
+              type: string
+              description: Unit identifier of a parcel location
+            city:
+              type: string
+              description: City of a parcel location
+            state:
+              type: string
+              description: State of a parcel location
+            postalCode:
+              type: string
+              description: Postal code of a parcel location
+            country:
+              type: string
+              description: Country of a parcel location
+            secondaryLatitude:
+              type: number
+              format: double
+              description: Secondary latitude of a segment location
+            secondaryLongitude:
+              type: number
+              format: double
+              description: Secondary longitude of a segment location
+            segmentPrimaryLabel:
+              type: string
+              description: Primary label of a segment location
+            segmentSecondaryLabel:
+              type: string
+              description: Secondary label of a segment location
+            segmentLabel:
+              type: string
+              description: Label of a segment location
+            segmentLength:
+              type: number
+              format: double
+              description: Length of a segment location
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

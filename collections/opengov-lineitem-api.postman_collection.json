@@ -1,0 +1,2131 @@
+{
+  "item": [
+    {
+      "id": "e1d82d4a-688f-4c50-9ea8-014852d0349c",
+      "name": "lineItem",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c495b73d-8170-49d2-b0b0-52430009aa6d",
+          "name": "Create a new line item on a purchase order",
+          "request": {
+            "name": "Create a new line item on a purchase order",
+            "description": {
+              "content": "Creates a new line item with optional nested splits. Line items can only be added to Purchase Orders in DRAFT status. Maximum 5 splits per line item. Returns 201 with Location header on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "line-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a96a70b-ea84-491f-b44d-1708ce202c59",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"lineItem\": {\n      \"id\": 2653.075604130156,\n      \"poPurchaseOrderId\": 4069.255353518507,\n      \"lineItemType\": \"<string>\",\n      \"lineItemSplits\": [\n        {\n          \"id\": 9213.290889385524,\n          \"poLineItemId\": 958.1845401451639,\n          \"createdAt\": \"string\",\n          \"updatedAt\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountPseudoKey\": \"string\",\n          \"amount\": \"<string>\",\n          \"eProjectAccountId\": \"string\",\n          \"projectAccountNumber\": \"string\",\n          \"projectAccountDescription\": \"string\",\n          \"reimbursable\": true,\n          \"encumberedAmount\": \"<string>\",\n          \"encLiquidatedAccrualAmount\": \"<string>\",\n          \"openEncumbranceAmount\": \"<string>\",\n          \"percentAmount\": \"<string>\",\n          \"displayId\": 2652.5852675572382\n        },\n        {\n          \"id\": 9677.829323170045,\n          \"poLineItemId\": 7539.569631381167,\n          \"createdAt\": \"string\",\n          \"updatedAt\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountPseudoKey\": \"string\",\n          \"amount\": \"<string>\",\n          \"eProjectAccountId\": \"string\",\n          \"projectAccountNumber\": \"string\",\n          \"projectAccountDescription\": \"string\",\n          \"reimbursable\": false,\n          \"encumberedAmount\": \"<string>\",\n          \"encLiquidatedAccrualAmount\": \"<string>\",\n          \"openEncumbranceAmount\": \"<string>\",\n          \"percentAmount\": \"<string>\",\n          \"displayId\": 8057.779188240659\n        }\n      ],\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string\",\n      \"description\": \"string\",\n      \"quantity\": \"<string>\",\n      \"unitOfMeasure\": \"string\",\n      \"unitRate\": \"<string>\",\n      \"referenceNumber\": \"string\",\n      \"acceptedQuantity\": \"<string>\",\n      \"availableAcceptedQuantity\": \"string\",\n      \"toleranceAmountValue\": \"<string>\",\n      \"toleranceAmountType\": \"<string>\",\n      \"toleranceAmount\": \"<string>\",\n      \"toleranceQuantityValue\": \"<string>\",\n      \"toleranceQuantityType\": \"<string>\",\n      \"toleranceQuantity\": \"<string>\",\n      \"toleranceUnitRateValue\": \"<string>\",\n      \"toleranceUnitRateType\": \"<string>\",\n      \"toleranceUnitRate\": \"<string>\",\n      \"taxValue\": \"<string>\",\n      \"taxType\": \"<string>\",\n      \"taxAmount\": \"<string>\",\n      \"discountValue\": \"<string>\",\n      \"discountType\": \"<string>\",\n      \"discountAmount\": \"<string>\",\n      \"freightValue\": \"<string>\",\n      \"freightType\": \"<string>\",\n      \"freightAmount\": \"<string>\",\n      \"miscellaneousValue\": \"<string>\",\n      \"miscellaneousType\": \"<string>\",\n      \"miscellaneousAmount\": \"<string>\",\n      \"includeInThreeWayMatch\": true,\n      \"includeAmountInMatch\": false,\n      \"extendedAmount\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"encumberedAmount\": \"<string>\",\n      \"matchedQuantity\": \"string\",\n      \"matchedAmount\": \"<string>\",\n      \"invoicedQuantity\": \"string\",\n      \"invoicedAmount\": \"<string>\",\n      \"paidAmount\": \"<string>\",\n      \"encLiquidatedAccrualAmount\": \"<string>\",\n      \"availableQuantity\": \"string\",\n      \"availableAmount\": \"<string>\",\n      \"openEncumbranceAmount\": \"<string>\",\n      \"isClosed\": true,\n      \"closedAt\": \"string\",\n      \"closedBy\": \"CDD5feAD-b1F9-cD70-2c00-44F01E9254e3\",\n      \"displayId\": 7647.9923258229965\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fd4a644-82b4-4216-8746-b9b60ac96704",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bfcb1ef-225d-42d8-a714-b75ee1c907df",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07c61aa3-d84e-4955-ab8b-3fd3c5b429fe",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b847c3d1-24b3-483b-9fcb-fc27ed1e0c2c",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bc3aff6-3600-4efa-a780-02f91cdb3833",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c21fd23a-0cd4-4459-91f2-19273162442f",
+          "name": "Update a line item on a purchase order",
+          "request": {
+            "name": "Update a line item on a purchase order",
+            "description": {
+              "content": "Updates a line item and its splits. Line items can only be updated on Purchase Orders in DRAFT status. Splits with id are updated, splits without id are inserted, existing splits omitted are soft-deleted. Maximum 5 splits per line item. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "line-items",
+                ":lineItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lineItemId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d5c35da-b7cb-413e-b6ab-2ade8cb0c5ff",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"lineItem\": {\n      \"id\": 5454.862156254916,\n      \"poPurchaseOrderId\": 9690.40490814747,\n      \"lineItemType\": \"<string>\",\n      \"lineItemSplits\": [\n        {\n          \"id\": 2891.023393723003,\n          \"poLineItemId\": 9841.755494825997,\n          \"createdAt\": \"string\",\n          \"updatedAt\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountPseudoKey\": \"string\",\n          \"amount\": \"<string>\",\n          \"eProjectAccountId\": \"string\",\n          \"projectAccountNumber\": \"string\",\n          \"projectAccountDescription\": \"string\",\n          \"reimbursable\": false,\n          \"encumberedAmount\": \"<string>\",\n          \"encLiquidatedAccrualAmount\": \"<string>\",\n          \"openEncumbranceAmount\": \"<string>\",\n          \"percentAmount\": \"<string>\",\n          \"displayId\": 5449.884312062871\n        },\n        {\n          \"id\": 1993.8584992695219,\n          \"poLineItemId\": 7236.455282630573,\n          \"createdAt\": \"string\",\n          \"updatedAt\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountPseudoKey\": \"string\",\n          \"amount\": \"<string>\",\n          \"eProjectAccountId\": \"string\",\n          \"projectAccountNumber\": \"string\",\n          \"projectAccountDescription\": \"string\",\n          \"reimbursable\": true,\n          \"encumberedAmount\": \"<string>\",\n          \"encLiquidatedAccrualAmount\": \"<string>\",\n          \"openEncumbranceAmount\": \"<string>\",\n          \"percentAmount\": \"<string>\",\n          \"displayId\": 8208.301714436304\n        }\n      ],\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string\",\n      \"description\": \"string\",\n      \"quantity\": \"<string>\",\n      \"unitOfMeasure\": \"string\",\n      \"unitRate\": \"<string>\",\n      \"referenceNumber\": \"string\",\n      \"acceptedQuantity\": \"<string>\",\n      \"availableAcceptedQuantity\": \"string\",\n      \"toleranceAmountValue\": \"<string>\",\n      \"toleranceAmountType\": \"<string>\",\n      \"toleranceAmount\": \"<string>\",\n      \"toleranceQuantityValue\": \"<string>\",\n      \"toleranceQuantityType\": \"<string>\",\n      \"toleranceQuantity\": \"<string>\",\n      \"toleranceUnitRateValue\": \"<string>\",\n      \"toleranceUnitRateType\": \"<string>\",\n      \"toleranceUnitRate\": \"<string>\",\n      \"taxValue\": \"<string>\",\n      \"taxType\": \"<string>\",\n      \"taxAmount\": \"<string>\",\n      \"discountValue\": \"<string>\",\n      \"discountType\": \"<string>\",\n      \"discountAmount\": \"<string>\",\n      \"freightValue\": \"<string>\",\n      \"freightType\": \"<string>\",\n      \"freightAmount\": \"<string>\",\n      \"miscellaneousValue\": \"<string>\",\n      \"miscellaneousType\": \"<string>\",\n      \"miscellaneousAmount\": \"<string>\",\n      \"includeInThreeWayMatch\": true,\n      \"includeAmountInMatch\": false,\n      \"extendedAmount\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"encumberedAmount\": \"<string>\",\n      \"matchedQuantity\": \"string\",\n      \"matchedAmount\": \"<string>\",\n      \"invoicedQuantity\": \"string\",\n      \"invoicedAmount\": \"<string>\",\n      \"paidAmount\": \"<string>\",\n      \"encLiquidatedAccrualAmount\": \"<string>\",\n      \"availableQuantity\": \"string\",\n      \"availableAmount\": \"<string>\",\n      \"openEncumbranceAmount\": \"<string>\",\n      \"isClosed\": false,\n      \"closedAt\": \"string\",\n      \"closedBy\": \"5AbEFc33-bbCe-19a7-dBfd-AB7FDDDF8572\",\n      \"displayId\": 5530.5146420969095\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c837835e-1914-4da7-85b7-2212b7311692",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07256ecc-308a-4176-ac36-c95d5e9eb6ce",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c137f7e-3ded-463c-9865-2ef0ed0eb220",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9ff61de-495b-4d42-8acb-16b5fbdf0ea1",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49b81c2c-4f89-4a09-8198-4b92bfb4338d",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"unitOfMeasure\": \"<string>\",\n  \"unitRate\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"toleranceAmountValue\": \"<string>\",\n  \"toleranceAmountType\": \"<string>\",\n  \"toleranceQuantityValue\": \"<string>\",\n  \"toleranceQuantityType\": \"<string>\",\n  \"toleranceUnitRateValue\": \"<string>\",\n  \"toleranceUnitRateType\": \"<string>\",\n  \"taxValue\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"discountValue\": \"<string>\",\n  \"discountType\": \"<string>\",\n  \"freightValue\": \"<string>\",\n  \"freightType\": \"<string>\",\n  \"miscellaneousValue\": \"<string>\",\n  \"miscellaneousType\": \"<string>\",\n  \"includeInThreeWayMatch\": \"<boolean>\",\n  \"includeAmountInMatch\": \"<boolean>\",\n  \"lineItemSplits\": [\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"accountNumber\": \"<string>\",\n      \"accountPseudoKey\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"eProjectAccountId\": \"<string>\",\n      \"projectAccountNumber\": \"<string>\",\n      \"projectAccountDescription\": \"<string>\",\n      \"reimbursable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1127a11b-f190-4367-84e1-841f9bdf3b83",
+          "name": "Delete a line item on a purchase order",
+          "request": {
+            "name": "Delete a line item on a purchase order",
+            "description": {
+              "content": "Soft-deletes a line item and its splits. Only allowed on Draft POs by the PO creator. Subtracts line item amount from PO total. Returns 204 No Content on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "line-items",
+                ":lineItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lineItemId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4df471f-0ec5-4354-be81-11cd0ffa4826",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01aafdf4-adda-4015-b935-fd8f6f333076",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "193ceb9b-4580-488e-9629-bb10cad22837",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a43250b-4c6a-4344-9473-584b6173e44a",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0ec09de-651f-4ef2-8319-920d82b6d00f",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc4d341a-4f0a-4fa7-ab40-fbef8bf198be",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4d24544-0c45-4b31-a8a2-6a5b4fb65056",
+          "name": "Close line items in bulk",
+          "request": {
+            "name": "Close line items in bulk",
+            "description": {
+              "content": "Closes one or more line items on an Issued PO. Liquidates remaining encumbrance on closed lines (split → line item → PO rollup). Auto-closes the PO with 'Auto-Closed' label when all non-deleted lines are closed. Already-closed lines are silently skipped. Returns 204 No Content on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "po",
+                "entities",
+                ":entityId",
+                "purchase-orders",
+                ":poId",
+                "line-items",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                  "key": "entityId",
+                  "description": "(Required) The UUID of the Platform entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14efc70b-9bfb-4062-9dc4-1dd1b6a2bb74",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b09b2a2f-a974-495b-b370-8220639ddbe7",
+              "name": "The request did not match the expected schema",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"ValidationError\",\n  \"detail\": \"The request body failed validation.\",\n  \"fieldErrors\": [\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    },\n    {\n      \"parameter\": \"lineItems.0.lineItemSplits.1\",\n      \"detail\": \"Account 101-5100 has insufficient budget: requested 500.00, available 200.00\",\n      \"code\": \"BUDGET_INSUFFICIENT\",\n      \"data\": {\n        \"accountNumber\": \"101-5100\",\n        \"accountPseudoKey\": \"GF-101-5100\",\n        \"requestedAmount\": 500,\n        \"availableAmount\": 200\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f08dbf6d-04ea-463b-9c55-f22164fc0e7d",
+              "name": "AuthError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"AuthenticationError\",\n  \"detail\": \"Authentication is required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56769c7c-9ad0-423f-85c2-ef6dd437a04a",
+              "name": "UnauthorizedError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"code\": \"AuthorizationError\",\n  \"detail\": \"You do not have permission to perform this action.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3697a397-17e2-4e9b-a81b-7987e4ec3544",
+              "name": "EntityNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"code\": \"PurchaseOrderNotFound\",\n  \"detail\": \"Purchase order with id 123 was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39e15ce-7bd0-498e-bd03-649c66f16404",
+              "name": "InfrastructureError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "po",
+                    "entities",
+                    ":entityId",
+                    "purchase-orders",
+                    ":poId",
+                    "line-items",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "04eb277c-f9cd-42b0-9610-0f068f6aaea1",
+                      "key": "entityId",
+                      "description": "(Required) The UUID of the Platform entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"InternalServerError\",\n  \"detail\": \"An unexpected error occurred while processing your request. Please try again later.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-purchase-order.procurement.opengov.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ed12666f-3ec7-4efa-b4f3-d36a7e2ebc38",
+    "name": "OpenGov Purchase Order Line Item API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing purchase orders, line items, splits, and vendors.",
+      "type": "text/plain"
+    }
+  }
+}

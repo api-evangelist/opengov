@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Receipt Receipt Comments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "receiptComments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a comment or attachment-only entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/comments",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a text-only comment, attachment-only entry, or mixed comment+attachments on a receipt. Allowed only while the receipt is in Draft or Submitted status. All writes are transactional. Mentions are extracted from body_html."
+        },
+        {
+          "info": {
+            "name": "Edit a comment (body, add/remove attachments)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/comments/:commentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "commentId",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates a comment body (re-sanitized), adds new attachments, or removes existing ones. Mention diff is computed within the same transaction. Author-only — only the original comment author may edit. Allowed only while the receipt is in Draft or Submitted status."
+        },
+        {
+          "info": {
+            "name": "Delete a comment (soft-delete with cascade)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/comments/:commentId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              },
+              {
+                "name": "commentId",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Soft-deletes the comment, cascades to its linked attachments, and hides the associated activity log entry. Author-only. Allowed only while the receipt is in Draft or Submitted status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

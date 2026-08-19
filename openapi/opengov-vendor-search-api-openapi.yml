@@ -1,0 +1,1546 @@
+openapi: 3.2.0
+info:
+  title: Vendor Management Vendor Search API
+  description: 'A comprehensive API for managing vendors in the OpenGov platform.
+
+
+    ## Authentication
+
+    All endpoints require JWT Bearer token authentication. Include the token in the Authorization header:
+
+    ```
+
+    Authorization: Bearer <your-jwt-token>
+
+    ```
+
+
+    ## Features
+
+    - **Vendor Management**: Create, read, update, and delete vendors
+
+    - **Health Check**: Monitor service health
+
+
+    ## Rate Limiting
+
+    API calls are subject to rate limiting based on your subscription tier.'
+  version: 1.0.0
+  contact:
+    name: OpenGov API Support
+    email: api-support@opengov.com
+  license:
+    name: Proprietary
+    url: https://opengov.com/terms
+servers:
+- url: https://api.vendor.opengov.com
+  description: Production Server
+- url: https://api.vendor.ogstaging.us
+  description: Staging Server
+- url: https://api-vendor.procurement.ogintegration.us
+  description: Integration Server
+security:
+- bearerAuth: []
+tags:
+- name: vendor-search
+paths:
+  /api/v1/entities/{entityId}/vendors/stats:
+    get:
+      tags:
+      - vendor-search
+      operationId: vendor-search.getVendorsStats
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - totalVendors
+                - draft
+                - awaitingReview
+                - inReview
+                - approved
+                - notApproved
+                - deactivated
+                - changeRequested
+                properties:
+                  totalVendors:
+                    type: number
+                  draft:
+                    type: number
+                  awaitingReview:
+                    type: number
+                  inReview:
+                    type: number
+                  approved:
+                    type: number
+                  notApproved:
+                    type: number
+                  deactivated:
+                    type: number
+                  changeRequested:
+                    type: number
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+  /api/v1/entities/{entityId}/vendors/search:
+    post:
+      tags:
+      - vendor-search
+      operationId: vendor-search.searchVendors
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - meta
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - vendorKey
+                      - entityId
+                      - vendorId
+                      - legalCompanyName
+                      - vendorCreationSource
+                      - status
+                      - createdBy
+                      - updatedBy
+                      - confidenceScore
+                      properties:
+                        vendorKey:
+                          $ref: '#/components/schemas/VendorKey'
+                        entityId:
+                          type: string
+                        vendorId:
+                          type: string
+                        legalCompanyName:
+                          $ref: '#/components/schemas/NonEmptyString'
+                        doingBusinessAs:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        businessType:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        localProfiles:
+                          anyOf:
+                          - type: array
+                            items:
+                              type: string
+                          - type: 'null'
+                        ethnicity:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        stateOfIncorporation:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        companyWebsite:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        companyDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        externalSystemCode:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        vendorParent:
+                          anyOf:
+                          - type: number
+                          - type: 'null'
+                        vendorParentName:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        additionalLanguages:
+                          anyOf:
+                          - type: array
+                            items:
+                              type: string
+                          - type: 'null'
+                        vendorPublicProfileId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        taxType:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        taxId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        is1099Applicable:
+                          type: boolean
+                        uei:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        duns:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        vendorCreationSource:
+                          type: string
+                        vendorCreationSourceId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        status:
+                          type: string
+                          enum:
+                          - Draft
+                          - Awaiting_Review
+                          - In_Review
+                          - Approved
+                          - Not_Approved
+                          - Deactivated
+                          - Change_Requested
+                        paymentTermRefId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        paymentTerm:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        paymentTermDesc:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        phoneCountryCode:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        phoneNumber:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        phoneExt:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        email:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        faxCountryCode:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        faxNumber:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        faxExt:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        customFields:
+                          anyOf:
+                          - type: object
+                            required: []
+                            properties: {}
+                            additionalProperties:
+                              title: unknown
+                          - type: 'null'
+                        createdBy:
+                          type: string
+                        updatedBy:
+                          type: string
+                        isDeleted:
+                          anyOf:
+                          - type: boolean
+                          - type: 'null'
+                        deletedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        createdAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        updatedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        addresses:
+                          anyOf:
+                          - type: array
+                            items:
+                              $ref: '#/components/schemas/AddressModel.json'
+                          - type: 'null'
+                        paymentMethods:
+                          anyOf:
+                          - type: array
+                            items:
+                              $ref: '#/components/schemas/PaymentMethodModel.json'
+                          - type: 'null'
+                        contacts:
+                          anyOf:
+                          - type: array
+                            items:
+                              $ref: '#/components/schemas/ContactModel.json'
+                          - type: 'null'
+                        certificates:
+                          anyOf:
+                          - type: array
+                            items:
+                              $ref: '#/components/schemas/CertificateModel.json'
+                          - type: 'null'
+                        categories:
+                          anyOf:
+                          - type: array
+                            items:
+                              $ref: '#/components/schemas/VendorCategoriesModel.json'
+                          - type: 'null'
+                        confidenceScore:
+                          type: number
+                      additionalProperties: false
+                  meta:
+                    type: object
+                    required:
+                    - total
+                    properties:
+                      total:
+                        type: number
+                    additionalProperties: false
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              - paging
+              - sortBy
+              properties:
+                query:
+                  type: object
+                  required:
+                  - searchString
+                  - columns
+                  properties:
+                    searchString:
+                      type: string
+                    columns:
+                      type: array
+                      items:
+                        type: string
+                    addressSearchScope:
+                      type: string
+                      enum:
+                      - primary
+                      - all
+                    fuzzyMatch:
+                      type: boolean
+                  additionalProperties: false
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - field
+                    - operator
+                    properties:
+                      field:
+                        type: string
+                      operator:
+                        type: string
+                        enum:
+                        - eq
+                        - neq
+                        - contains
+                        - notContains
+                        - startsWith
+                        - endsWith
+                        - gt
+                        - gte
+                        - lt
+                        - lte
+                        - between
+                        - in
+                        - notIn
+                        - isNull
+                        - isNotNull
+                        - isEmpty
+                        - isNotEmpty
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: array
+                          items:
+                            type: string
+                    additionalProperties: false
+                paging:
+                  type: object
+                  required:
+                  - offset
+                  - limit
+                  properties:
+                    offset:
+                      type: number
+                    limit:
+                      type: number
+                  additionalProperties: false
+                sortBy:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - field
+                    - order
+                    properties:
+                      field:
+                        type: string
+                      order:
+                        type: string
+                        enum:
+                        - asc
+                        - desc
+                    additionalProperties: false
+              additionalProperties: false
+        required: true
+  /api/v1/entities/{entityId}/vendors/searchByVendorKeys:
+    post:
+      tags:
+      - vendor-search
+      operationId: vendor-search.searchVendorsByVendorKeys
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - vendors
+                properties:
+                  vendors:
+                    type: array
+                    items:
+                      anyOf:
+                      - $ref: '#/components/schemas/VendorModel'
+                      - type: 'null'
+                additionalProperties: false
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendorKeys
+              properties:
+                vendorKeys:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VendorKey'
+              additionalProperties: false
+        required: true
+  /api/v1/entities/{entityId}/vendors/export:
+    post:
+      tags:
+      - vendor-search
+      operationId: vendor-search.exportVendorsCsv
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          default: Bearer <your-jwt-token>
+        example: Bearer <your-jwt-token>
+      - name: entityId
+        in: path
+        schema:
+          type: string
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: a string
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: The request did not match the expected schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/HttpApiDecodeError'
+                - $ref: '#/components/schemas/BadRequestHttpError'
+        '401':
+          description: AuthError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AuthError'
+                - $ref: '#/components/schemas/UnauthenticatedHttpError'
+        '403':
+          description: UnauthorizedHttpError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedHttpError'
+        '404':
+          description: EntityNotFoundError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/EntityNotFoundError'
+                - $ref: '#/components/schemas/NotFoundHttpError'
+        '500':
+          description: InfrastructureError
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  required:
+                  - message
+                  - _tag
+                  properties:
+                    message:
+                      type: string
+                    cause:
+                      not: {}
+                      title: never
+                    _tag:
+                      type: string
+                      enum:
+                      - InfrastructureError
+                  additionalProperties: false
+                - $ref: '#/components/schemas/InternalServerHttpError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              - sortBy
+              properties:
+                query:
+                  type: object
+                  required:
+                  - searchString
+                  - columns
+                  properties:
+                    searchString:
+                      type: string
+                    columns:
+                      type: array
+                      items:
+                        type: string
+                    addressSearchScope:
+                      type: string
+                      enum:
+                      - primary
+                      - all
+                    fuzzyMatch:
+                      type: boolean
+                  additionalProperties: false
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - field
+                    - operator
+                    properties:
+                      field:
+                        type: string
+                      operator:
+                        type: string
+                        enum:
+                        - eq
+                        - neq
+                        - contains
+                        - notContains
+                        - startsWith
+                        - endsWith
+                        - gt
+                        - gte
+                        - lt
+                        - lte
+                        - between
+                        - in
+                        - notIn
+                        - isNull
+                        - isNotNull
+                        - isEmpty
+                        - isNotEmpty
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: array
+                          items:
+                            type: string
+                    additionalProperties: false
+                sortBy:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - field
+                    - order
+                    properties:
+                      field:
+                        type: string
+                      order:
+                        type: string
+                        enum:
+                        - asc
+                        - desc
+                    additionalProperties: false
+                exportColumns:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - colId
+                    - name
+                    properties:
+                      colId:
+                        type: string
+                      name:
+                        type: string
+                    additionalProperties: false
+              additionalProperties: false
+        required: true
+components:
+  schemas:
+    ContactId:
+      type: number
+      description: Unique identifier for a contact
+    PaymentMethodModel.json:
+      type: object
+      required:
+      - paymentId
+      - paymentMethodRefId
+      - paymentMethodType
+      - paymentMethodDetails
+      - isDefault
+      properties:
+        paymentId:
+          $ref: '#/components/schemas/PaymentId'
+        paymentLabel:
+          anyOf:
+          - type: string
+          - type: 'null'
+        paymentMethodRefId:
+          type: string
+        paymentMethodType:
+          type: string
+        paymentMethodDetails:
+          title: unknown
+        isDefault:
+          type: boolean
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: PaymentMethodModel.json
+    CertificateId:
+      type: number
+      description: Unique identifier for a certificate
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    PaymentId:
+      type: number
+      description: Unique identifier for a payment method
+    AddressModel.json:
+      type: object
+      required:
+      - addressId
+      - addressLine1
+      - city
+      - state
+      - zipCode
+      - country
+      properties:
+        addressId:
+          $ref: '#/components/schemas/AddressId'
+        addressLine1:
+          type: string
+        addressLine2:
+          anyOf:
+          - type: string
+          - type: 'null'
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+        defaultFor:
+          anyOf:
+          - type: array
+            items:
+              type: string
+              enum:
+              - PRIMARY
+              - REMIT TO
+              - ORDER FROM
+          - type: 'null'
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: AddressModel.json
+    ContactModel.json:
+      type: object
+      required:
+      - contactId
+      properties:
+        contactId:
+          $ref: '#/components/schemas/ContactId'
+        firstName:
+          anyOf:
+          - type: string
+          - type: 'null'
+        lastName:
+          anyOf:
+          - type: string
+          - type: 'null'
+        jobTitle:
+          anyOf:
+          - type: string
+          - type: 'null'
+        phoneCountryCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+        phoneNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        phoneExt:
+          anyOf:
+          - type: string
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: ContactModel.json
+    VendorCategoriesModel.json:
+      type: object
+      required:
+      - categoryId
+      - setId
+      - categoryRefId
+      - categoryCode
+      - categoryDescription
+      properties:
+        categoryId:
+          $ref: '#/components/schemas/CategoryId'
+        setId:
+          type: string
+        categoryRefId:
+          type: string
+        categoryCode:
+          type: string
+        categoryDescription:
+          type: string
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: VendorCategoriesModel.json
+    NonEmptyString:
+      type: string
+      description: a non empty string
+      title: nonEmptyString
+      minLength: 1
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    CategoryId:
+      type: number
+      description: Unique identifier for a category
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    AddressId:
+      type: number
+      description: Unique identifier for an address
+    AttachmentModel.json:
+      type: object
+      required:
+      - attachmentId
+      - path
+      - bucket
+      - filename
+      - attachmentType
+      - size
+      properties:
+        attachmentId:
+          $ref: '#/components/schemas/AttachmentId'
+        path:
+          type: string
+        bucket:
+          type: string
+        filename:
+          type: string
+        attachmentType:
+          type: string
+        size:
+          type: number
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: AttachmentModel.json
+    VendorModel:
+      type: object
+      required:
+      - vendorKey
+      - entityId
+      - vendorId
+      - legalCompanyName
+      - vendorCreationSource
+      - status
+      - createdBy
+      - updatedBy
+      properties:
+        vendorKey:
+          $ref: '#/components/schemas/VendorKey'
+        entityId:
+          type: string
+        vendorId:
+          type: string
+        legalCompanyName:
+          $ref: '#/components/schemas/NonEmptyString'
+        doingBusinessAs:
+          anyOf:
+          - type: string
+          - type: 'null'
+        businessType:
+          anyOf:
+          - type: string
+          - type: 'null'
+        localProfiles:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+        ethnicity:
+          anyOf:
+          - type: string
+          - type: 'null'
+        stateOfIncorporation:
+          anyOf:
+          - type: string
+          - type: 'null'
+        companyWebsite:
+          anyOf:
+          - type: string
+          - type: 'null'
+        companyDescription:
+          anyOf:
+          - type: string
+          - type: 'null'
+        externalSystemCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+        vendorParent:
+          anyOf:
+          - type: number
+          - type: 'null'
+        vendorParentName:
+          anyOf:
+          - type: string
+          - type: 'null'
+        additionalLanguages:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+        vendorPublicProfileId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        taxType:
+          anyOf:
+          - type: string
+          - type: 'null'
+        taxId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        is1099Applicable:
+          type: boolean
+        uei:
+          anyOf:
+          - type: string
+          - type: 'null'
+        duns:
+          anyOf:
+          - type: string
+          - type: 'null'
+        vendorCreationSource:
+          type: string
+        vendorCreationSourceId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        status:
+          type: string
+          enum:
+          - Draft
+          - Awaiting_Review
+          - In_Review
+          - Approved
+          - Not_Approved
+          - Deactivated
+          - Change_Requested
+        paymentTermRefId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        paymentTerm:
+          anyOf:
+          - type: string
+          - type: 'null'
+        paymentTermDesc:
+          anyOf:
+          - type: string
+          - type: 'null'
+        phoneCountryCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+        phoneNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        phoneExt:
+          anyOf:
+          - type: string
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+        faxCountryCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+        faxNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        faxExt:
+          anyOf:
+          - type: string
+          - type: 'null'
+        customFields:
+          anyOf:
+          - type: object
+            required: []
+            properties: {}
+            additionalProperties:
+              title: unknown
+          - type: 'null'
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        addresses:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/AddressModel.json'
+          - type: 'null'
+        paymentMethods:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/PaymentMethodModel.json'
+          - type: 'null'
+        contacts:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ContactModel.json'
+          - type: 'null'
+        certificates:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/CertificateModel.json'
+          - type: 'null'
+        categories:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/VendorCategoriesModel.json'
+          - type: 'null'
+      additionalProperties: false
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    CertificateModel.json:
+      type: object
+      required:
+      - certificateId
+      properties:
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        attachmentId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        certificateType:
+          anyOf:
+          - type: string
+          - type: 'null'
+        certificateCategory:
+          anyOf:
+          - type: string
+          - type: 'null'
+        certificateDetails:
+          title: unknown
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        attachment:
+          anyOf:
+          - $ref: '#/components/schemas/AttachmentModel.json'
+          - type: 'null'
+      additionalProperties: false
+      title: CertificateModel.json
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    VendorKey:
+      type: number
+      description: Unique identifier for a vendor
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    AttachmentId:
+      type: number
+      description: Unique identifier for an attachment
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme

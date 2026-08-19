@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Type Fees API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Type Fees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List fees for a record type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/:recordTypeID/fees"
+          },
+          "docs": "Retrieve a list of fees configured for the specified record type.\n### Permissions Required\n`Record Type Read`"
+        },
+        {
+          "info": {
+            "name": "Get Record Type Fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/fees/:recordTypeFeeID",
+            "params": [
+              {
+                "name": "recordTypeFeeID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record type fee"
+              }
+            ]
+          },
+          "docs": "Retrieve a record type fee by ID.\n### Permissions Required\n`Record Type Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

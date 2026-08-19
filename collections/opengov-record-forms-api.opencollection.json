@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Forms API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get record form data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/form",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include related resources"
+              }
+            ]
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Update record form data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/form",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Get all form collections for a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/collections"
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Get a form collection for a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/collections/:collectionID",
+            "params": [
+              {
+                "name": "collectionID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the collection"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include related resources"
+              }
+            ]
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Create a new entry in a record form collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/collections/:collectionID",
+            "params": [
+              {
+                "name": "collectionID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the collection"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Get all form entries for a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/collections/:collectionID/entries",
+            "params": [
+              {
+                "name": "collectionID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the collection"
+              }
+            ]
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Get fields for a specific form data collection entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/collections/:collectionID/entries/:collectionEntryID",
+            "params": [
+              {
+                "name": "collectionID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the collection"
+              },
+              {
+                "name": "collectionEntryID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an entry within a form data collection"
+              }
+            ]
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        },
+        {
+          "info": {
+            "name": "Update fields for a specific form data collection entry for a record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/records/:recordID/collections/:collectionID/entries/:collectionEntryID",
+            "params": [
+              {
+                "name": "collectionID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the collection"
+              },
+              {
+                "name": "collectionEntryID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an entry within a form data collection"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Inspection Results API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inspection Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inspection results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-results",
+            "params": [
+              {
+                "name": "filter[inspectionEventID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inspection event ID"
+              },
+              {
+                "name": "filter[inspectionTypeTemplateID]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inspection template ID"
+              },
+              {
+                "name": "filter[result]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inspection result"
+              }
+            ]
+          },
+          "docs": "List inspection results. At least one of the filters must be provided.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Get inspection result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-results/:inspectionResultID",
+            "params": [
+              {
+                "name": "inspectionResultID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inspection result"
+              }
+            ]
+          },
+          "docs": "Retrieve an inspection result by ID.\n### Permissions Required\n`Workflow Read`"
+        },
+        {
+          "info": {
+            "name": "Update inspection result",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-results/:inspectionResultID",
+            "params": [
+              {
+                "name": "inspectionResultID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inspection result"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an inspection result.\n### Permissions Required\n`Workflow Write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

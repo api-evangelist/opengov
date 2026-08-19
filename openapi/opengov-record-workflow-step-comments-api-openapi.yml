@@ -1,0 +1,458 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Workflow Step Comments API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Workflow Step Comments
+  description: Step Comments APIs allow you to retrieve, add or remove comments on workflow steps of a record.
+paths:
+  /v2/{community}/records/{recordID}/workflow-steps/{stepID}/comments:
+    get:
+      summary: List comments
+      description: 'List comments on a record workflow step.
+
+        ### Permissions Required
+
+        `Comment Read`'
+      operationId: listRecordStepComments
+      x-og-claims-required:
+      - PLC_RECORD_STEP_COMMENT_READ
+      tags:
+      - Record Workflow Step Comments
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}/delete/parameters/2'
+      responses:
+        '200':
+          description: Comments on a workflow step of a record
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Record Workflow Step Comments
+                      title: Comment
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          example: comment-901234
+                        type:
+                          type: string
+                          enum:
+                          - workflowStepComment
+                          example: workflowStepComment
+                        attributes:
+                          type: object
+                          properties:
+                            commentType:
+                              type: string
+                              enum:
+                              - COMMENT
+                              - INTERNAL_NOTE
+                              description: Value indicates the type of comment
+                              example: COMMENT
+                            comment:
+                              type: string
+                              description: Contents of the comment
+                              example: Application looks complete, moving to next review stage
+                            createdBy:
+                              $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdBy'
+                            createdAt:
+                              $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdAt'
+                        relationships:
+                          type: object
+                          properties:
+                            record:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The record associated with the record step.
+                            workflowStep:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: Step comments associated with the record step.
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    post:
+      summary: Add a comment
+      description: 'Add a comment to a record workflow step.
+
+        ### Permissions Required
+
+        `Comment Write`'
+      operationId: postStepComment
+      x-og-claims-required:
+      - PLC_RECORD_STEP_COMMENT_WRITE
+      tags:
+      - Record Workflow Step Comments
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}/delete/parameters/2'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - workflowStepComment
+                      example: workflowStepComment
+                    attributes:
+                      type: object
+                      required:
+                      - commentType
+                      - comment
+                      properties:
+                        commentType:
+                          type: string
+                          enum:
+                          - COMMENT
+                          - INTERNAL_NOTE
+                          description: Value indicates the type of comment
+                          example: COMMENT
+                        comment:
+                          type: string
+                          description: Contents of the comment
+                          example: All documents have been reviewed and meet the requirements. Approved for next step.
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Workflow Step Comments
+                    title: Comment
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        example: comment-901234
+                      type:
+                        type: string
+                        enum:
+                        - workflowStepComment
+                        example: workflowStepComment
+                      attributes:
+                        type: object
+                        properties:
+                          commentType:
+                            type: string
+                            enum:
+                            - COMMENT
+                            - INTERNAL_NOTE
+                            description: Value indicates the type of comment
+                            example: COMMENT
+                          comment:
+                            type: string
+                            description: Contents of the comment
+                            example: Application looks complete, moving to next review stage
+                          createdBy:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdBy'
+                          createdAt:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdAt'
+                      relationships:
+                        type: object
+                        properties:
+                          record:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}~1comments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/record'
+                          workflowStep:
+                            $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}~1comments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/workflowStep'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/records/{recordID}/workflow-steps/{stepID}/comments/{commentID}:
+    get:
+      summary: Retrieve a step comment
+      description: 'Retrieve a step comment.
+
+        ### Permissions Required
+
+        `Comment Read`'
+      operationId: getStepComment
+      x-og-claims-required:
+      - PLC_RECORD_STEP_COMMENT_READ
+      tags:
+      - Record Workflow Step Comments
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}/delete/parameters/2'
+      - name: commentID
+        in: path
+        description: ID of a comment on a workflow step of a record
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Workflow step comment of a record
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}~1comments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    delete:
+      summary: Remove a step comment
+      description: 'Remove a step comment.
+
+        ### Permissions Required
+
+        `Comment Write`'
+      operationId: removeStepComment
+      x-og-claims-required:
+      - PLC_RECORD_STEP_COMMENT_WRITE
+      tags:
+      - Record Workflow Step Comments
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
+      - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1workflow-steps~1{stepID}/delete/parameters/2'
+      - name: commentID
+        in: path
+        description: ID of a comment on a workflow step of a record
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

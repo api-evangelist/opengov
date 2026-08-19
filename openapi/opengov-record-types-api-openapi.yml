@@ -1,0 +1,636 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Record Types API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Record Types
+  description: A Record Type defines the configuration for individual Records of that Record Type.
+paths:
+  /v2/{community}/record-types:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    get:
+      summary: List record types
+      description: 'List record types.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getRecordTypes
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Types
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      - name: filter[departmentID]
+        in: query
+        description: Filter by the department ID
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns Record Types
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Record Types
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      title: Record Type
+                      properties:
+                        id:
+                          type: string
+                          description: Unique internal ID of a record type
+                          example: rt-456789
+                        type:
+                          type: string
+                          enum:
+                          - recordType
+                          example: recordType
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              nullable: true
+                              description: Name of the record type.
+                              example: Building Permit
+                            applyAccess:
+                              type: string
+                              enum:
+                              - Public
+                              - Internal-Only
+                              description: Access level required to apply for this record type.
+                              example: Public
+                            isEnabled:
+                              type: boolean
+                              description: Indicates whether the record type is enabled.
+                              default: true
+                              example: true
+                            applicant:
+                              type: boolean
+                              description: Indicates whether an applicant is required.
+                              default: true
+                              example: true
+                            location:
+                              type: boolean
+                              description: Indicates whether a location is required.
+                              default: true
+                              example: true
+                            offlinePayments:
+                              type: boolean
+                              description: Indicates whether offline payments are allowed.
+                              default: false
+                              example: false
+                            viewAccess:
+                              type: string
+                              enum:
+                              - Public
+                              - Internal and Applicant
+                              description: Access level required to view this record type.
+                              example: Public
+                            allowProjects:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether this record type can be associated with projects.
+                              example: true
+                            htmlcontent:
+                              type: string
+                              nullable: true
+                              description: HTML content for the record type's public portal page.
+                              example: <p>Submit your building permit application here. Please ensure all required documents are attached.</p>
+                            status:
+                              type: string
+                              enum:
+                              - Draft
+                              - Published
+                              description: Status of the record type.
+                              example: Published
+                            renews:
+                              type: boolean
+                              description: Indicates whether the record type supports renewals.
+                              default: false
+                              example: false
+                            orderNo:
+                              type: integer
+                              nullable: true
+                              description: Ordering number for sorting record types.
+                              example: 10
+                            adHocAttachmentViewAccess:
+                              type: string
+                              enum:
+                              - Public
+                              - Internal and Applicant
+                              description: Access level required to view ad hoc attachments.
+                              example: Internal and Applicant
+                            clonedDate:
+                              type: string
+                              format: date-time
+                              nullable: true
+                              description: Timestamp when the record type was cloned.
+                            parentRecordTypeID:
+                              type: string
+                              nullable: true
+                              description: Identifier of the source of the cloned record type if applicable.
+                              example: rt-parent-123
+                            allowPointLocations:
+                              type: boolean
+                              description: Indicates whether point locations are allowed.
+                              default: false
+                              example: false
+                            allowAddressLocations:
+                              type: boolean
+                              description: Indicates whether address-based locations are allowed.
+                              default: true
+                              example: true
+                            allowSegmentLocations:
+                              type: boolean
+                              description: Indicates whether segment-based locations are allowed.
+                              default: false
+                              example: false
+                            maxLocations:
+                              type: integer
+                              description: Maximum number of locations allowed for this record type.
+                              default: 1
+                              example: 1
+                            pointLocationsHelpText:
+                              type: string
+                              nullable: true
+                              description: Help text for point locations.
+                              example: Select a specific point on the map for your permit location
+                            addressLocationsHelpText:
+                              type: string
+                              nullable: true
+                              description: Help text for address locations.
+                              example: Enter the full address where the work will be performed
+                            segmentLocationsHelpText:
+                              type: string
+                              nullable: true
+                              description: Help text for segment locations.
+                              example: Draw a line segment to indicate the area of work
+                            allowAdditionalLocations:
+                              type: boolean
+                              description: Indicates whether additional locations are allowed.
+                              default: false
+                              example: false
+                            automaticExpirationDateExtension:
+                              type: boolean
+                              description: Indicates whether expiration date extensions are automatic.
+                              default: false
+                              example: false
+                            automaticProjectRecordsExpirationDateExtension:
+                              type: boolean
+                              description: Indicates whether project record expiration date extensions are automatic.
+                              default: false
+                              example: false
+                            disableRecordAttachments:
+                              type: boolean
+                              description: Indicates whether record attachments are disabled.
+                              default: false
+                              example: false
+                            createdAt:
+                              type: string
+                              description: Date and time (UTC) when the resource was created.
+                              format: date-time
+                              readOnly: true
+                            updatedAt:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                            createdBy:
+                              type: string
+                              description: ID of the user who created this resource.
+                              readOnly: true
+                              example: user-applicant-880002
+                            updatedBy:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                        relationships:
+                          type: object
+                          properties:
+                            department:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The record type's department
+                            formFields:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: The record typep's form template
+                            templateSteps:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: The record's template steps
+                            attachmentTemplates:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: Attachment templates
+                            templateFees:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: Template fees
+                            documentTemplates:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/recordTypes/properties'
+                              description: Document Templates
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/record-types/{recordTypeID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: recordTypeID
+      in: path
+      description: ID of the record type
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get a Record type
+      description: 'Retrieve a record type by ID.
+
+        ### Permissions Required
+
+        `Record Type Read`'
+      operationId: getRecordType
+      x-og-claims-required:
+      - PLC_RECORD_TYPE_READ
+      tags:
+      - Record Types
+      responses:
+        '200':
+          description: Returns Record Type
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Record Types
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    title: Record Type
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of a record type
+                        example: rt-456789
+                      type:
+                        type: string
+                        enum:
+                        - recordType
+                        example: recordType
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            nullable: true
+                            description: Name of the record type.
+                            example: Building Permit
+                          applyAccess:
+                            type: string
+                            enum:
+                            - Public
+                            - Internal-Only
+                            description: Access level required to apply for this record type.
+                            example: Public
+                          isEnabled:
+                            type: boolean
+                            description: Indicates whether the record type is enabled.
+                            default: true
+                            example: true
+                          applicant:
+                            type: boolean
+                            description: Indicates whether an applicant is required.
+                            default: true
+                            example: true
+                          location:
+                            type: boolean
+                            description: Indicates whether a location is required.
+                            default: true
+                            example: true
+                          offlinePayments:
+                            type: boolean
+                            description: Indicates whether offline payments are allowed.
+                            default: false
+                            example: false
+                          viewAccess:
+                            type: string
+                            enum:
+                            - Public
+                            - Internal and Applicant
+                            description: Access level required to view this record type.
+                            example: Public
+                          allowProjects:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether this record type can be associated with projects.
+                            example: true
+                          htmlcontent:
+                            type: string
+                            nullable: true
+                            description: HTML content for the record type's public portal page.
+                            example: <p>Submit your building permit application here. Please ensure all required documents are attached.</p>
+                          status:
+                            type: string
+                            enum:
+                            - Draft
+                            - Published
+                            description: Status of the record type.
+                            example: Published
+                          renews:
+                            type: boolean
+                            description: Indicates whether the record type supports renewals.
+                            default: false
+                            example: false
+                          orderNo:
+                            type: integer
+                            nullable: true
+                            description: Ordering number for sorting record types.
+                            example: 10
+                          adHocAttachmentViewAccess:
+                            type: string
+                            enum:
+                            - Public
+                            - Internal and Applicant
+                            description: Access level required to view ad hoc attachments.
+                            example: Internal and Applicant
+                          clonedDate:
+                            type: string
+                            format: date-time
+                            nullable: true
+                            description: Timestamp when the record type was cloned.
+                          parentRecordTypeID:
+                            type: string
+                            nullable: true
+                            description: Identifier of the source of the cloned record type if applicable.
+                            example: rt-parent-123
+                          allowPointLocations:
+                            type: boolean
+                            description: Indicates whether point locations are allowed.
+                            default: false
+                            example: false
+                          allowAddressLocations:
+                            type: boolean
+                            description: Indicates whether address-based locations are allowed.
+                            default: true
+                            example: true
+                          allowSegmentLocations:
+                            type: boolean
+                            description: Indicates whether segment-based locations are allowed.
+                            default: false
+                            example: false
+                          maxLocations:
+                            type: integer
+                            description: Maximum number of locations allowed for this record type.
+                            default: 1
+                            example: 1
+                          pointLocationsHelpText:
+                            type: string
+                            nullable: true
+                            description: Help text for point locations.
+                            example: Select a specific point on the map for your permit location
+                          addressLocationsHelpText:
+                            type: string
+                            nullable: true
+                            description: Help text for address locations.
+                            example: Enter the full address where the work will be performed
+                          segmentLocationsHelpText:
+                            type: string
+                            nullable: true
+                            description: Help text for segment locations.
+                            example: Draw a line segment to indicate the area of work
+                          allowAdditionalLocations:
+                            type: boolean
+                            description: Indicates whether additional locations are allowed.
+                            default: false
+                            example: false
+                          automaticExpirationDateExtension:
+                            type: boolean
+                            description: Indicates whether expiration date extensions are automatic.
+                            default: false
+                            example: false
+                          automaticProjectRecordsExpirationDateExtension:
+                            type: boolean
+                            description: Indicates whether project record expiration date extensions are automatic.
+                            default: false
+                            example: false
+                          disableRecordAttachments:
+                            type: boolean
+                            description: Indicates whether record attachments are disabled.
+                            default: false
+                            example: false
+                          createdAt:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdAt'
+                          updatedAt:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                          createdBy:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/createdBy'
+                          updatedBy:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                      relationships:
+                        type: object
+                        properties:
+                          department:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/department'
+                          formFields:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/formFields'
+                          templateSteps:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/templateSteps'
+                          attachmentTemplates:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/attachmentTemplates'
+                          templateFees:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/templateFees'
+                          documentTemplates:
+                            $ref: '#/paths/~1v2~1{community}~1record-types/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/documentTemplates'
+                  included:
+                    $ref: '#/paths/~1v2~1{community}~1departments~1{departmentID}/get/responses/200/content/application~1vnd.api+json/schema/properties/included'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

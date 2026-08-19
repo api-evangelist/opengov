@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Record Type Document Templates API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Record Type Document Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List document templates for a record type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/:recordTypeID/document-templates"
+          },
+          "docs": "Retrieve a list of document templates configured for the specified record type.\n### Permissions Required\n`Record Type Read`"
+        },
+        {
+          "info": {
+            "name": "Get document template by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/record-types/document-templates/:recordTypeDocumentID",
+            "params": [
+              {
+                "name": "recordTypeDocumentID",
+                "value": "",
+                "type": "path",
+                "description": "ID of the record type document template"
+              }
+            ]
+          },
+          "docs": "Retrieve a document template for a record type by ID.\n### Permissions Required\n`Record Type Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

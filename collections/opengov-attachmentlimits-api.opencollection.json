@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Attachment Limits API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "attachmentLimits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get attachment upload limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/attachments/limits",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns purpose-grouped attachment limits (MIME allow-lists, per-file size caps, count caps). Frontend uses these to drive dropzone `accept`, size validation, and count gating without duplicating constants. `general` applies to comments and feed attachments; `termsAndConditions` is narrower (2 MB / 5 files, strict MIME set)."
+        },
+        {
+          "info": {
+            "name": "Get attachment upload limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/entities/:entityId/attachments/limits",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the configured MIME allow-list, per-file size cap, per-request file count cap, and per-receipt active count cap. The frontend uses these to drive dropzone `accept`, size validation, and count gating without duplicating constants."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

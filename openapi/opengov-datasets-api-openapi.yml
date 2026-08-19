@@ -1,0 +1,1880 @@
+openapi: 3.2.0
+info:
+  title: Opengov Datasets API
+  version: '1.0'
+  description: 'Operations tagged Datasets across 2 of this provider''s published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.procurement.opengov.com
+  description: Production
+tags:
+- name: Datasets
+  description: "**Datasets** are collections of data that can be retrieved using the API.\n\nDatasets can be retrieved by using `GET` requests. The base url for datasets is `https://api.procurement.opengov.com/gateway/datasets/v1/`\n\nNote: All dates and times returned by this API are in the time zone selected by the agency.\n## Datasets Legacy Authentication Methods\nIn addition to the OpenGov standard Authorization header, for historic purposes we support two additional ways for the Datasets APIs.\n### 1. HTTP Basic Auth\n\nUse your OpenGov account email as the username and your API key as the password.\n\n```bash curl -u \"alice@example.com:YOUR_API_KEY\" \\ https://api.procurement.opengov.com/gateway/datasets/v1/solicitations ```\n### 2. X-api-key header\n\nYou may also authenticate using the `x-api-key` request header:\n```bash curl -H \"x-api-key: YOUR_API_KEY\" \\ https://api.procurement.opengov.com/gateway/datasets/v1/solicitations ```\n> **Security note:** Some third-party systems may log or store custom headers in plaintext.  \n\nTo obtain an API key, please follow the steps outlined in this guide [OpenGov Procurement API Reference](https://opengov.my.site.com/support/s/article/87a452ae-254c-4b62-8336-d475c2e30723) or contact OpenGov support.\n\nThe API will return a 401 error if the key is invalid.\n"
+  x-displayName: Datasets
+paths:
+  /gateway/datasets/v1/contracts:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Contracts
+      operationId: getContractsDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of contracts data. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| created_at | 2024-01-01 09:00:00 |\n| updated_at | 2023-01-25 09:00:00 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Contracts dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/Contract'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/datasets/v1/contract-documents:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Contract Documents
+      operationId: getContractDocumentsDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of contract document projects. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | Carroll Bog Boardwalk Construction |\n| project_id | P-2024-001 |\n| template | Standard Construction Template |\n| template_abbreviation | SCT |\n| requisition_id | REQ-45678 |\n| department | Facilities Management |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| status | Review |\n| status_sort | 2 |\n| workload_points_remaining | 50.5 |\n| created_by | admin_user |\n| created_at | 2024-03-01 22:20:31 |\n| last_updated_at | 2024-03-03 23:29:00 |\n| procurement_classification | Invitation to Bid |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | 0 |\n| internal_contract_id | 12345 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Contract Documents dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/ContractDocument'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/datasets/v1/contracts-with-spend:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Contracts with Spend
+      operationId: getContractsWithSpendDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of contracts with spend data. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| internal_po_id | 12345 |\n| po_issue_date | 2024-01-15 |\n| po_fiscal_year | FY2024 |\n| po_department | Finance |\n| po_created_by | John Doe |\n| po_order_status | Approved |\n| po_order_amount | 5000.75 |\n| po_amount_paid | 3000.50 |\n| po_number | PO-67890 |\n| po_description | Purchase of office furniture |\n| po_comments | Urgent request due to office expansion. |\n| po_created_at | 2024-01-01 09:00:00 |\n| po_updated_at | 2024-01-02 09:00:00 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Contracts with Spend dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/ContractWithSpend'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/datasets/v1/intakes:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Intakes
+      operationId: getIntakesDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of intake projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | FIN-2024-001 |\n| type | Construction |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre_proposal_date | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_start_date | 2024-04-05 14:00:00 |\n| reverse_auction_end_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| status | Draft |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| assigned_to | Bob Approver |\n| assigned_at | 2024-02-21 09:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Intakes dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/Intake'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/datasets/v1/solicitations:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Solicitations
+      operationId: getSolicitationDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of solicitation projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | RFP-2024-001 |\n| template | Standard RFP Template |\n| template_abbreviation | RFP-T |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre-proposal_meeting | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_starting_date | 2024-04-05 14:00:00 |\n| reverse_auction_ending_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| contract_end_date | 2025-04-01 00:00:00 |\n| status | Open |\n| status_sort | 1 |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n| notified | 152 |\n| viewed | 0 |\n| followers | 34 |\n| downloaders | 30 |\n| applicants | 10 |\n| no_bids | 2 |\n| submissions | 8 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Solicitations dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/Solicitation'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/datasets/v1/vendor-companies:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Vendor Companies
+      operationId: getVendorCompaniesDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: 'Generates a csv of vendor companies.
+
+
+        Example:
+
+        | Column name | Example value |
+
+        | --- | --- |
+
+        | internal_vendor_id | 9876 |
+
+        | date_added | 2024-03-01 |
+
+        | vendor_name | Acme Supplies, Inc. |
+
+        | doing_business_as | Acme |
+
+        | uei | UEI-ABC123 |
+
+        | duns | 123456789 |
+
+        | nigp_categories | 05500, 06006 |
+
+        | naics_categories | 541330 |
+
+        | unspsc_categories | 80141600 |
+
+        | state_of_incorporation | CA |
+
+        | business_type | LLC |
+
+        | languages | English, Spanish |
+
+        | no_dbe | WBE |
+
+        | self_reported_certifications | MBE, WBE |
+
+        | verified_certifications | WBE |
+
+        | primary_address_line_1 | 123 Main St |
+
+        | primary_address_line_2 | Suite 200 |
+
+        | primary_city | San Francisco |
+
+        | primary_state | CA |
+
+        | primary_postal_code | 94105 |
+
+        | primary_country | US |
+
+        | billing_address_line_1 | 456 Market St |
+
+        | billing_address_line_2 | Floor 3 |
+
+        | billing_city | San Francisco |
+
+        | billing_state | CA |
+
+        | billing_postal_code | 94105 |
+
+        | billing_country | US |
+
+        | website | https://acme.nil |
+
+        | phone | +1 (415) 555-9876 |
+
+        | fax_phone | +1 (415) 555-0000 |
+
+        '
+      responses:
+        '200':
+          description: Successfully retrieved Vendor Companies dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/VendorCompany'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/datasets/v1/vendor-subscribers:
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Vendor Subscribers
+      operationId: getVendorSubscribersDataset
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: 'Generates a csv of vendor subscribers joined with vendor company profile data.
+
+
+        Example:
+
+        | Column name | Example value |
+
+        | --- | --- |
+
+        | subscriber_id | u_12345 |
+
+        | subscriber_name | Alice Johnson |
+
+        | subscriber_title | Purchasing Manager |
+
+        | subscriber_email | alice@example.nil |
+
+        | subscriber_phone | +1 (415) 555-1234 x22 |
+
+        | subscriber_status | Active |
+
+        | internal_vendor_id | 9876 |
+
+        | date_added | 2024-03-01 |
+
+        | vendor_name | Acme Supplies, Inc. |
+
+        | doing_business_as | Acme |
+
+        | uei | UEI-ABC123 |
+
+        | duns | 123456789 |
+
+        | nigp_categories | 05500, 06006 |
+
+        | naics_categories | 541330 |
+
+        | unspsc_categories | 80141600 |
+
+        | state_of_incorporation | CA |
+
+        | business_type | LLC |
+
+        | languages | English, Spanish |
+
+        | no_dbe | WBE |
+
+        | self_reported_certifications | MBE, WBE |
+
+        | verified_certifications | WBE |
+
+        | primary_address_line_1 | 123 Main St |
+
+        | primary_address_line_2 | Suite 200 |
+
+        | primary_city | San Francisco |
+
+        | primary_state | CA |
+
+        | primary_postal_code | 94105 |
+
+        | primary_country | US |
+
+        | billing_address_line_1 | 456 Market St |
+
+        | billing_address_line_2 | Floor 3 |
+
+        | billing_city | San Francisco |
+
+        | billing_state | CA |
+
+        | billing_postal_code | 94105 |
+
+        | billing_country | US |
+
+        | website | https://acme.nil |
+
+        | phone | +1 (415) 555-9876 |
+
+        | fax_phone | +1 (415) 555-0000 |
+
+        '
+      responses:
+        '200':
+          description: Successfully retrieved Vendor Subscribers dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/VendorSubscriber'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/contracts:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Contracts
+      operationId: getContractsDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of contracts data. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| created_at | 2024-01-01 09:00:00 |\n| updated_at | 2023-01-25 09:00:00 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Contracts dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/Contract'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/contract-documents:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Contract Documents
+      operationId: getContractDocumentsDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of contract document projects. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | Carroll Bog Boardwalk Construction |\n| project_id | P-2024-001 |\n| template | Standard Construction Template |\n| template_abbreviation | SCT |\n| requisition_id | REQ-45678 |\n| department | Facilities Management |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| status | Review |\n| status_sort | 2 |\n| workload_points_remaining | 50.5 |\n| created_by | admin_user |\n| created_at | 2024-03-01 22:20:31 |\n| last_updated_at | 2024-03-03 23:29:00 |\n| procurement_classification | Invitation to Bid |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | 0 |\n| internal_contract_id | 12345 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Contract Documents dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/ContractDocument'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/contracts-with-spend:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Contracts with Spend
+      operationId: getContractsWithSpendDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of contracts with spend data. \n\n\nExample:\n| Column name | Example value |\n| --- | --- |\n| vendor_name | Acme Corp |\n| vendor_email | contact@acme.nil |\n| vendor_city | New York |\n| vendor_state | NY |\n| vendor_country | USA |\n| vendor_zip_code | 10001 |\n| external_vendor_id | VENDOR-001 |\n| vendor_number | ACME-001 |\n| internal_contract_id | 456 |\n| contract_title | Office Supplies Contract |\n| contract_id | CON-789 |\n| external_reference_id | EXT-CON-001 |\n| requisition_id | REQ-101 |\n| term_type | Continuos |\n| status | Active |\n| start_date | 2024-01-01 |\n| end_date | 2024-12-31 |\n| initial_term_length | 12 |\n| initial_term_unit | Months |\n| has_renewal_option | 1 |\n| renewals | 2 |\n| renewals_remaining | 1 |\n| contract_amount | 10000.00 |\n| amount_spent | 5000.00 |\n| department | Finance |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| contract_type | General |\n| procurement_classification | Goods |\n| category_codes | 1234 |\n| notes | Notes about the contract |\n| is_active_for_financial_transactions | 1 |\n| is_public | 1 |\n| allows_cooperative | 1 |\n| will_rebid | 0 |\n| is_emergency | 0 |\n| assembled_contract_document_count | 5 |\n| contract_document_count | 10 |\n| internal_po_id | 12345 |\n| po_issue_date | 2024-01-15 |\n| po_fiscal_year | FY2024 |\n| po_department | Finance |\n| po_created_by | John Doe |\n| po_order_status | Approved |\n| po_order_amount | 5000.75 |\n| po_amount_paid | 3000.50 |\n| po_number | PO-67890 |\n| po_description | Purchase of office furniture |\n| po_comments | Urgent request due to office expansion. |\n| po_created_at | 2024-01-01 09:00:00 |\n| po_updated_at | 2024-01-02 09:00:00 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Contracts with Spend dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/ContractWithSpend'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/intakes:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Intakes
+      operationId: getIntakesDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of intake projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | FIN-2024-001 |\n| type | Construction |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre_proposal_date | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_start_date | 2024-04-05 14:00:00 |\n| reverse_auction_end_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| status | Draft |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| assigned_to | Bob Approver |\n| assigned_at | 2024-02-21 09:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Intakes dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/Intake'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/solicitations:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Solicitations
+      operationId: getSolicitationDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: "Generates a csv of solicitation projects. \n\nExample:\n| Column name | Example value |\n| --- | --- |\n| internal_project_id | 12345 |\n| title | New Office Building Construction |\n| project_id | RFP-2024-001 |\n| template | Standard RFP Template |\n| template_abbreviation | RFP-T |\n| requisition_id | REQ-78910 |\n| department | Public Works |\n| project_contact | John Doe |\n| procurement_contact | Jane Smith |\n| release_project_date | 2024-03-01 00:00:00 |\n| pre-proposal_meeting | 2024-03-15 10:00:00 |\n| question_submission_deadline | 2024-03-20 00:00:00 |\n| question_response_deadline | 2024-03-25 00:00:00 |\n| proposal_submission_deadline | 2024-04-01 00:00:00 |\n| reverse_auction_starting_date | 2024-04-05 14:00:00 |\n| reverse_auction_ending_date | 2024-04-05 16:00:00 |\n| contractor_selection_date | 2024-04-10 00:00:00 |\n| contract_end_date | 2025-04-01 00:00:00 |\n| status | Open |\n| status_sort | 1 |\n| workload_points_remaining | 50 |\n| created_by | alice_admin |\n| created_at | 2024-02-15 08:30:00 |\n| last_updated_at | 2024-02-20 12:00:00 |\n| budget_amount | 500000.00 |\n| budget_account | ACC-123456 |\n| budget_description | Office construction fund |\n| procurement_classification | Construction |\n| category_codes | 05500, 06006, 06516, 06523 |\n| is_emergency | false |\n| notified | 152 |\n| viewed | 0 |\n| followers | 34 |\n| downloaders | 30 |\n| applicants | 10 |\n| no_bids | 2 |\n| submissions | 8 |\n"
+      responses:
+        '200':
+          description: Successfully retrieved Solicitations dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/Solicitation'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/vendor-companies:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Vendor Companies
+      operationId: getVendorCompaniesDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: 'Generates a csv of vendor companies.
+
+
+        Example:
+
+        | Column name | Example value |
+
+        | --- | --- |
+
+        | internal_vendor_id | 9876 |
+
+        | date_added | 2024-03-01 |
+
+        | vendor_name | Acme Supplies, Inc. |
+
+        | doing_business_as | Acme |
+
+        | uei | UEI-ABC123 |
+
+        | duns | 123456789 |
+
+        | nigp_categories | 05500, 06006 |
+
+        | naics_categories | 541330 |
+
+        | unspsc_categories | 80141600 |
+
+        | state_of_incorporation | CA |
+
+        | business_type | LLC |
+
+        | languages | English, Spanish |
+
+        | no_dbe | WBE |
+
+        | self_reported_certifications | MBE, WBE |
+
+        | verified_certifications | WBE |
+
+        | primary_address_line_1 | 123 Main St |
+
+        | primary_address_line_2 | Suite 200 |
+
+        | primary_city | San Francisco |
+
+        | primary_state | CA |
+
+        | primary_postal_code | 94105 |
+
+        | primary_country | US |
+
+        | billing_address_line_1 | 456 Market St |
+
+        | billing_address_line_2 | Floor 3 |
+
+        | billing_city | San Francisco |
+
+        | billing_state | CA |
+
+        | billing_postal_code | 94105 |
+
+        | billing_country | US |
+
+        | website | https://acme.nil |
+
+        | phone | +1 (415) 555-9876 |
+
+        | fax_phone | +1 (415) 555-0000 |
+
+        '
+      responses:
+        '200':
+          description: Successfully retrieved Vendor Companies dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/VendorCompany'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+  /gateway/v2/entities/{entityUuid}/datasets/vendor-subscribers:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
+    get:
+      tags:
+      - Datasets
+      summary: Vendor Subscribers
+      operationId: getVendorSubscribersDatasetV2
+      security:
+      - basicAuth: []
+      - apiKeyAuth: []
+      - xApiKeyHeaderAuth: []
+      parameters:
+      - name: utcTime
+        description: 'If true, all dates and times will be returned in UTC.
+
+          If false or not provided, all dates and times will be returned in the time zone selected by the agency.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      description: 'Generates a csv of vendor subscribers joined with vendor company profile data.
+
+
+        Example:
+
+        | Column name | Example value |
+
+        | --- | --- |
+
+        | subscriber_id | u_12345 |
+
+        | subscriber_name | Alice Johnson |
+
+        | subscriber_title | Purchasing Manager |
+
+        | subscriber_email | alice@example.nil |
+
+        | subscriber_phone | +1 (415) 555-1234 x22 |
+
+        | subscriber_status | Active |
+
+        | internal_vendor_id | 9876 |
+
+        | date_added | 2024-03-01 |
+
+        | vendor_name | Acme Supplies, Inc. |
+
+        | doing_business_as | Acme |
+
+        | uei | UEI-ABC123 |
+
+        | duns | 123456789 |
+
+        | nigp_categories | 05500, 06006 |
+
+        | naics_categories | 541330 |
+
+        | unspsc_categories | 80141600 |
+
+        | state_of_incorporation | CA |
+
+        | business_type | LLC |
+
+        | languages | English, Spanish |
+
+        | no_dbe | WBE |
+
+        | self_reported_certifications | MBE, WBE |
+
+        | verified_certifications | WBE |
+
+        | primary_address_line_1 | 123 Main St |
+
+        | primary_address_line_2 | Suite 200 |
+
+        | primary_city | San Francisco |
+
+        | primary_state | CA |
+
+        | primary_postal_code | 94105 |
+
+        | primary_country | US |
+
+        | billing_address_line_1 | 456 Market St |
+
+        | billing_address_line_2 | Floor 3 |
+
+        | billing_city | San Francisco |
+
+        | billing_state | CA |
+
+        | billing_postal_code | 94105 |
+
+        | billing_country | US |
+
+        | website | https://acme.nil |
+
+        | phone | +1 (415) 555-9876 |
+
+        | fax_phone | +1 (415) 555-0000 |
+
+        '
+      responses:
+        '200':
+          description: Successfully retrieved Vendor Subscribers dataset.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+                items:
+                  $ref: '#/components/schemas/VendorSubscriber'
+        '401':
+          description: Unauthorized, invalid or missing API token.
+        '403':
+          $ref: '#/components/responses/MissingProEntitlement'
+        '404':
+          description: Government not found or resource does not exist.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    Intake:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_project_id:
+          type: integer
+          description: The internal OpenGov intake project ID.
+          example: 12345
+        title:
+          type: string
+          description: The title of the intake.
+          example: New Office Building Construction
+        project_id:
+          type: string
+          description: External identifier for the project (often a financial system ID).
+          example: FIN-2024-001
+        type:
+          type: string
+          description: Project type.
+          example: Construction
+        requisition_id:
+          type: string
+          description: Identifier for the associated requisition.
+          example: REQ-78910
+        department:
+          type: string
+          description: Department responsible for the intake.
+          example: Public Works
+        project_contact:
+          type: string
+          description: First Name + Last Name of the Project Contact.
+          example: John Doe
+        procurement_contact:
+          type: string
+          description: First Name + Last Name of the Procurement Contact.
+          example: Jane Smith
+        release_project_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Date the project is released to the public.'
+          example: '2024-03-01 00:00:00'
+        pre_proposal_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Date and time of the pre-proposal meeting.'
+          example: '2024-03-15 10:00:00'
+        question_submission_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for submitting questions.'
+          example: '2024-03-20 00:00:00'
+        question_response_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for responses to questions.'
+          example: '2024-03-25 00:00:00'
+        proposal_submission_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for submitting proposals.'
+          example: '2024-04-01 00:00:00'
+        reverse_auction_start_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Start date and time for the reverse auction.'
+          example: '2024-04-05 14:00:00'
+        reverse_auction_end_date:
+          type: string
+          format: date-time
+          description: 'Timeline: End date and time for the reverse auction.'
+          example: '2024-04-05 16:00:00'
+        contractor_selection_date:
+          type: string
+          format: date
+          description: 'Timeline: Date the contractor is selected.'
+          example: '2024-04-10 00:00:00'
+        status:
+          type: string
+          description: 'One of: Draft, Review, Post Pending, Open, Auction Pending, Reverse Auction, Pending, Evaluation, Award Pending, Closed.'
+          example: Draft
+        status_sort:
+          type: integer
+          description: Numeric value used for sorting by status.
+          example: 1
+        workload_points_remaining:
+          type: integer
+          description: Number of workload points still remaining to complete the intake.
+          example: 50
+        created_by:
+          type: string
+          description: User who created the intake.
+          example: alice_admin
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the intake was created.
+          example: '2024-02-15 08:30:00'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: Date and time of the last update to the intake.
+          example: '2024-02-20 12:00:00'
+        assigned_to:
+          type: string
+          description: Name of the assigned approver.
+          example: Bob Approver
+        assigned_at:
+          type: string
+          format: date-time
+          description: Date and time when the project was assigned.
+          example: '2024-02-21 09:00:00'
+        budget_amount:
+          type: number
+          format: float
+          description: Total budget amount for the intake.
+          example: 500000
+        budget_account:
+          type: string
+          description: Account number associated with the budget.
+          example: ACC-123456
+        budget_description:
+          type: string
+          description: Description of the budget allocation.
+          example: Office construction fund
+        procurement_classification:
+          type: string
+          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
+          example: Construction
+        category_codes:
+          type: string
+          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
+          example: 05500, 06006, 06516, 06523
+        is_emergency:
+          type: boolean
+          description: This is an intake for emergency goods or services.
+          example: false
+    Contract:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        vendor_name:
+          type: string
+          description: 'If vendor subscriber is chosen as the Associated Vendor during contract record creation, this will be the company name from the vendor''s company profile.
+
+
+            If no vendor subscriber is chosen, this is the Vendor Name as entered into the new contract form.
+
+            '
+          example: Acme Corp
+        vendor_email:
+          type: string
+          description: 'If vendor subscriber is chosen as the Associated Vendor during contract creation, this is copied from that vendor subscriber''s user profile.
+
+
+            If no vendor subscriber is chosen, this is the Vendor Email as entered into the new contract form.
+
+            '
+          example: contact@acme.nil
+        vendor_city:
+          type: string
+          description: Vendor company city; only available when vendor subscriber is chosen as the Associated Vendor during contract creation.
+          example: New York
+        vendor_state:
+          type: string
+          description: Vendor company state; only available when vendor subscriber is chosen as the Associated Vendor during contract creation.
+          example: NY
+        vendor_country:
+          type: string
+          description: Vendor company country; only available when vendor subscriber is chosen as the Associated Vendor during contract creation.
+          example: USA
+        vendor_zip_code:
+          type: string
+          description: Vendor company zip code; only available when vendor subscriber is chosen as the Associated Vendor during contract creation.
+          example: 10001
+        external_vendor_id:
+          type: string
+          description: The optional External Vendor ID that identifies the Vendor in your financial system.
+          example: VENDOR-001
+        vendor_number:
+          type: string
+          description: The optional Vendor Assigned Number that identifies the Vendor in your ERP.
+          example: ACME-001
+        internal_contract_id:
+          type: integer
+          description: The internal OpenGov contract ID.
+          example: 456
+        contract_title:
+          type: string
+          description: The title of the contract.
+          example: Office Supplies Contract
+        contract_id:
+          type: string
+          description: The public-facing contract ID or code.
+          example: CON-789
+        external_reference_id:
+          type: string
+          description: The optional External Reference ID that identifies the Contract in your financial system.
+          example: EXT-CON-001
+        requisition_id:
+          type: string
+          description: The requisition ID.
+          example: REQ-101
+        term_type:
+          type: string
+          description: 'One of: Limited Term, Continuous, or Upon Completion.'
+          example: Continuous
+        status:
+          type: string
+          description: 'One of: upcoming, active, ended.'
+          example: active
+        start_date:
+          type: string
+          format: date
+          description: The start date of the contract.
+          example: '2024-01-01'
+        end_date:
+          type: string
+          format: date
+          description: The end date of the contract.
+          example: '2024-12-31'
+        initial_term_length:
+          type: integer
+          description: The initial term length of the contract.
+          example: 12
+        initial_term_unit:
+          type: string
+          description: 'The unit of the initial term length. One of: years, months, weeks, days'
+          example: Months
+        has_renewal_option:
+          type: boolean
+          description: If any renewal options have not been activated, value is 1. Otherwise 0.
+          example: 1
+        renewals:
+          type: integer
+          description: Count of all renewal options (both activated and not activated).
+          example: 2
+        renewals_remaining:
+          type: integer
+          description: Count of renewal options that have not been activated.
+          example: 1
+        contract_amount:
+          type: number
+          format: double
+          description: The total amount of the contract.
+          example: 10000
+        amount_spent:
+          type: number
+          format: double
+          description: Contract Spend - total of Amount Issued for all orders.
+          example: 5000
+        department:
+          type: string
+          description: The department primarily responsible for the contract.
+          example: Finance
+        project_contact:
+          type: string
+          description: First Name + Last Name of the Project Contact.
+          example: John Doe
+        procurement_contact:
+          type: string
+          description: First Name + Last Name of the Procurement Contact.
+          example: Jane Smith
+        contract_type:
+          type: string
+          description: Comma-separated list of Contract Type tags. Each tag name may be up to 256 characters.
+          example: General
+        procurement_classification:
+          type: string
+          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
+          example: Goods
+        category_codes:
+          type: string
+          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
+          example: 1234
+        notes:
+          type: string
+          description: Internal notes about the contract. Contains HTML formatting.
+          example: Notes about the contract
+        is_active_for_financial_transactions:
+          type: boolean
+          description: Whether a contract is available for selection in financial workflows, such as purchase requests.
+          example: 1
+        is_public:
+          type: boolean
+          description: Whether or not the contract is included in the public portal.
+          example: 1
+        allows_cooperative:
+          type: boolean
+          description: Whether or not the contract contains cooperative or “piggyback” language.
+          example: 1
+        acquired_via_cooperative:
+          type: boolean
+          description: Whether or not the contract was acquired via cooperative purchasing.
+        will_rebid:
+          type: boolean
+          description: Contract will be renewed through a competitive process when it ends.
+          example: 0
+        is_emergency:
+          type: boolean
+          description: This is a contract for emergency goods or services.
+          example: 0
+        assembled_contract_document_count:
+          type: integer
+          description: Count of assembled contract documents (linked contract document projects).
+          example: 5
+        contract_document_count:
+          type: integer
+          description: Count of contract document attachments (both public and non-public).
+          example: 10
+        created_at:
+          type: string
+          format: date
+          description: The creation date of the contract.
+          example: '2024-01-01'
+        updated_at:
+          type: string
+          format: date
+          description: The last update date of the contract.
+          example: '2024-01-25'
+    Solicitation:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_project_id:
+          type: string
+          description: The internal OpenGov solicitation ID.
+          example: '12345'
+        title:
+          type: string
+          description: The title of the solicitation.
+          example: New Office Building Construction
+        project_id:
+          type: string
+          description: The public project identifier.
+          example: RFP-2024-001
+        template:
+          type: string
+          description: Name of the document template used for the solicitation.
+          example: Standard RFP Template
+        template_abbreviation:
+          type: string
+          description: Abbreviated version of the document template name.
+          example: RFP-T
+        requisition_id:
+          type: string
+          description: Identifier for the associated requisition.
+          example: REQ-78910
+        department:
+          type: string
+          description: Department responsible for the solicitation.
+          example: Public Works
+        project_contact:
+          type: string
+          description: First Name + Last Name of the Project Contact.
+          example: John Doe
+        procurement_contact:
+          type: string
+          description: First Name + Last Name of the Procurement Contact.
+          example: Jane Smith
+        release_project_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Date the project is released to the public.'
+          example: '2024-03-01 00:00:00'
+        pre-proposal_meeting:
+          type: string
+          format: date-time
+          description: 'Timeline: Date and time of the pre-proposal meeting.'
+          example: '2024-03-15 10:00:00'
+        question_submission_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for submitting questions.'
+          example: '2024-03-20 00:00:00'
+        question_response_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for responses to questions.'
+          example: '2024-03-25 00:00:00'
+        proposal_submission_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for submitting proposals.'
+          example: '2024-04-01 00:00:00'
+        reverse_auction_starting_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Start date and time for the reverse auction. '
+          example: '2024-04-05 14:00:00'
+        reverse_auction_ending_date:
+          type: string
+          format: date-time
+          description: 'Timeline: End date and time for the reverse auction.'
+          example: '2024-04-05 16:00:00'
+        contractor_selection_date:
+          type: string
+          format: date
+          description: 'Timeline: Date the contractor is selected. '
+          example: '2024-04-10 00:00:00'
+        contract_end_date:
+          type: string
+          format: date
+          description: Expected end date of the contract.
+          example: '2025-04-01 00:00:00'
+        status:
+          type: string
+          description: 'One of: Draft, Review, Post Pending, Open, Auction Pending, Reverse Auction, Pending, Evaluation, Award Pending, Closed.'
+          example: Open
+        status_sort:
+          type: integer
+          description: Numeric value used for sorting by status.
+          example: 1
+        workload_points_remaining:
+          type: integer
+          description: Number of workload points still remaining to complete the solicitation.
+          example: 50
+        created_by:
+          type: string
+          description: User who created the solicitation.
+          example: alice_admin
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the solicitation was created.
+          example: '2024-02-15 08:30:00'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: Date and time of the last update to the solicitation.
+          example: '2024-02-20 12:00:00'
+        budget_amount:
+          type: number
+          format: float
+          description: Total budget amount for the solicitation.
+          example: 500000
+        budget_account:
+          type: string
+          description: Account number associated with the budget.
+          example: ACC-123456
+        budget_description:
+          type: string
+          description: Description of the budget allocation.
+          example: Office construction fund
+        procurement_classification:
+          type: string
+          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
+          example: Construction
+        category_codes:
+          type: string
+          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
+          example: 05500, 06006, 06516, 06523
+        is_emergency:
+          type: boolean
+          description: This is a contract document for emergency goods or services.
+          example: false
+        notified:
+          type: integer
+          description: 'Vendor Analytics: Number of vendor contacts notified. This field has a 10 minute delay to reflect the latest data.'
+          example: 152
+        viewed:
+          type: integer
+          description: 'Vendor Analytics: Number of times the public post page has been seen. This field is not available for solicitation records and is always 0.'
+          example: 0
+        followers:
+          type: integer
+          description: 'Vendor Analytics: Number of vendor contacts following the solicitation.'
+          example: 34
+        downloaders:
+          type: integer
+          description: 'Vendor Analytics: Number of vendor contacts who have downloaded the solicitation document.'
+          example: 30
+        applicants:
+          type: integer
+          description: 'Vendor Analytics: Number of vendor contacts who have begun a response to the solicitation.'
+          example: 10
+        no_bids:
+          type: integer
+          description: 'Vendor Analytics: Number of vendor contacts who have checked the No Bid box for the solicitation.'
+          example: 2
+        submissions:
+          type: integer
+          description: 'Vendor Analytics: Number of vendors who have submitted a response.'
+          example: 8
+    ContractDocument:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_project_id:
+          type: integer
+          description: The internal OpenGov contract document ID.
+          example: 12345
+        title:
+          type: string
+          description: The title of the document.
+          example: Carroll Bog Boardwalk Construction
+        project_id:
+          type: string
+          description: External identifier for the project.
+          example: P-2024-001
+        template:
+          type: string
+          description: Name of the document template used for the contract document.
+          example: Standard Construction Template
+        template_abbreviation:
+          type: string
+          description: Abbreviated version of the document template name.
+          example: SCT
+        requisition_id:
+          type: string
+          description: Identifier for the requisition linked to the contract  project.
+          example: REQ-45678
+        department:
+          type: string
+          description: Department responsible for the project.
+          example: Facilities Management
+        project_contact:
+          type: string
+          description: First Name + Last Name of the Project Contact.
+          example: John Doe
+        procurement_contact:
+          type: string
+          description: First Name + Last Name of the Procurement Contact.
+          example: Jane Smith
+        status:
+          type: string
+          description: 'One of: Draft, Review, Final, Closed.'
+          example: Review
+        status_sort:
+          type: integer
+          description: Numeric representation for sorting based on status.
+          example: 2
+        workload_points_remaining:
+          type: number
+          description: Number of workload points left to complete the contract document.
+          example: 50.5
+        created_by:
+          type: string
+          description: User who created the project.
+          example: admin_user
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp for when the project was created.
+          example: '2024-03-01 22:20:31'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: Timestamp for the last update made to the project.
+          example: '2024-03-03 23:29:00'
+        procurement_classification:
+          type: string
+          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
+          example: Invitation to Bid
+        category_codes:
+          type: string
+          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
+          example: 05500, 06006, 06516, 06523
+        is_emergency:
+          type: boolean
+          description: This is a contract document for emergency goods or services.
+          example: 0
+        internal_contract_id:
+          type: integer
+          description: The internal OpenGov contract ID that this contract document is associated with.
+          example: 12345
+    ContractWithSpend:
+      x-tags:
+      - Datasets
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Contract'
+      - type: object
+        properties:
+          internal_po_id:
+            type: integer
+            description: Internal OpenGov unique identifier for the purchase order.
+            example: 12345
+          po_issue_date:
+            type: string
+            format: date
+            description: The date that the purchase order was issued.
+            example: '2024-01-15'
+          po_fiscal_year:
+            type: string
+            description: The fiscal year for the purchase (from Fiscal Year tags).
+            example: FY2024
+          po_department:
+            type: string
+            description: The department responsible for the purchase order.
+            example: Finance
+          po_created_by:
+            type: string
+            description: The First Name + Last Name of the person who created the purchase order.
+            example: John Doe
+          po_order_status:
+            type: string
+            description: 'One of: Requested, Approved, Denied, Issued.'
+            example: Issued
+          po_order_amount:
+            type: number
+            format: double
+            description: The total amount of the purchase order.
+            example: 5000.75
+          po_amount_paid:
+            type: number
+            format: double
+            description: The amount paid to date for the purchase order.
+            example: 3000.5
+          po_number:
+            type: string
+            description: The unique number assigned to the purchase order in the ERP.
+            example: PO-67890
+          po_description:
+            type: string
+            description: A description of the purchased goods or services.
+            example: Purchase of office furniture
+          po_comments:
+            type: string
+            description: Additional comments or notes related to the purchase order.
+            example: Urgent request due to office expansion.
+          po_created_at:
+            type: string
+            format: date
+            description: The timestamp when the purchase order was created within or imported into OpenGov.
+            example: '2024-01-01'
+          po_updated_at:
+            type: string
+            format: date
+            description: The timestamp when the purchase order was last updated within OpenGov.
+            example: '2024-01-02'
+    VendorCompany:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_vendor_id:
+          type: integer
+          description: Internal OpenGov vendor ID.
+          example: 9876
+        date_added:
+          type: string
+          format: date
+          description: The date the vendor record was created.
+          example: '2024-03-01'
+        vendor_name:
+          type: string
+          description: Vendor organization legal name.
+          example: Acme Supplies, Inc.
+        doing_business_as:
+          type: string
+          description: Doing Business As (DBA) name, if applicable.
+          example: Acme
+        uei:
+          type: string
+          description: Unique Entity Identifier.
+          example: UEI-ABC123
+        duns:
+          type: string
+          description: DUNS number.
+          example: '123456789'
+        nigp_categories:
+          type: string
+          description: Comma-separated NIGP category codes.
+          example: 05500, 06006
+        naics_categories:
+          type: string
+          description: Comma-separated NAICS category codes.
+          example: '541330'
+        unspsc_categories:
+          type: string
+          description: Comma-separated UNSPSC category codes.
+          example: '80141600'
+        state_of_incorporation:
+          type: string
+          description: State or province of incorporation.
+          example: CA
+        business_type:
+          type: string
+          description: Business type.
+          example: LLC
+        languages:
+          type: string
+          description: Comma-separated languages.
+          example: English, Spanish
+        no_dbe:
+          type: string
+          description: No DBE designations.
+          example: WBE
+        self_reported_certifications:
+          type: string
+          description: Comma-separated list of self-reported certification codes.
+          example: MBE, WBE
+        verified_certifications:
+          type: string
+          description: Comma-separated list of verified certification codes.
+          example: WBE
+        primary_address_line_1:
+          type: string
+          description: Primary address line 1.
+          example: 123 Main St
+        primary_address_line_2:
+          type: string
+          description: Primary address line 2.
+          example: Suite 200
+        primary_city:
+          type: string
+          description: Primary address city.
+          example: San Francisco
+        primary_state:
+          type: string
+          description: Primary address state or province.
+          example: CA
+        primary_postal_code:
+          type: string
+          description: Primary address postal code.
+          example: '94105'
+        primary_country:
+          type: string
+          description: Primary address country code.
+          example: US
+        billing_address_line_1:
+          type: string
+          description: Billing address line 1.
+          example: 456 Market St
+        billing_address_line_2:
+          type: string
+          description: Billing address line 2.
+          example: Floor 3
+        billing_city:
+          type: string
+          description: Billing address city.
+          example: San Francisco
+        billing_state:
+          type: string
+          description: Billing address state or province.
+          example: CA
+        billing_postal_code:
+          type: string
+          description: Billing address postal code.
+          example: '94105'
+        billing_country:
+          type: string
+          description: Billing address country code.
+          example: US
+        website:
+          type: string
+          description: Vendor website URL.
+          example: https://acme.nil
+        phone:
+          type: string
+          description: Vendor organization phone.
+          example: +1 (415) 555-9876
+        fax_phone:
+          type: string
+          description: Vendor organization fax phone.
+          example: +1 (415) 555-0000
+    VendorSubscriber:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        subscriber_id:
+          type: string
+          description: Unique identifier of the subscriber user. It is prefixed with "pending" for invited users.
+          example: 12345
+        subscriber_name:
+          type: string
+          description: First Name + Last Name of the subscriber user.
+          example: Alice Johnson
+        subscriber_title:
+          type: string
+          description: Job title of the subscriber user.
+          example: Purchasing Manager
+        subscriber_email:
+          type: string
+          description: Email of the subscriber user.
+          example: alice@example.nil
+        subscriber_phone:
+          type: string
+          description: Subscriber phone combined with extension and country when available.
+          example: +1 (415) 555-1234 x22
+        subscriber_status:
+          type: string
+          description: Status of the subscriber account.
+          example: Active
+        internal_vendor_id:
+          type: integer
+          description: Internal OpenGov vendor ID.
+          example: 9876
+        date_added:
+          type: string
+          format: date
+          description: The date the vendor record was created.
+          example: '2024-03-01'
+        vendor_name:
+          type: string
+          description: Vendor organization legal name.
+          example: Acme Supplies, Inc.
+        doing_business_as:
+          type: string
+          description: Doing Business As (DBA) name, if applicable.
+          example: Acme
+        uei:
+          type: string
+          description: Unique Entity Identifier.
+          example: UEI-ABC123
+        duns:
+          type: string
+          description: DUNS number.
+          example: '123456789'
+        nigp_categories:
+          type: string
+          description: Comma-separated NIGP category codes.
+          example: 05500, 06006
+        naics_categories:
+          type: string
+          description: Comma-separated NAICS category codes.
+          example: '541330'
+        unspsc_categories:
+          type: string
+          description: Comma-separated UNSPSC category codes.
+          example: '80141600'
+        state_of_incorporation:
+          type: string
+          description: State or province of incorporation.
+          example: CA
+        business_type:
+          type: string
+          description: Business type.
+          example: LLC
+        languages:
+          type: string
+          description: Comma-separated languages.
+          example: English, Spanish
+        no_dbe:
+          type: string
+          description: No DBE designations.
+          example: WBE
+        self_reported_certifications:
+          type: string
+          description: Comma-separated list of self-reported certification codes.
+          example: MBE, WBE
+        verified_certifications:
+          type: string
+          description: Comma-separated list of verified certification codes.
+          example: WBE
+        primary_address_line_1:
+          type: string
+          description: Primary address line 1.
+          example: 123 Main St
+        primary_address_line_2:
+          type: string
+          description: Primary address line 2.
+          example: Suite 200
+        primary_city:
+          type: string
+          description: Primary address city.
+          example: San Francisco
+        primary_state:
+          type: string
+          description: Primary address state or province.
+          example: CA
+        primary_postal_code:
+          type: string
+          description: Primary address postal code.
+          example: '94105'
+        primary_country:
+          type: string
+          description: Primary address country code.
+          example: US
+        billing_address_line_1:
+          type: string
+          description: Billing address line 1.
+          example: 456 Market St
+        billing_address_line_2:
+          type: string
+          description: Billing address line 2.
+          example: Floor 3
+        billing_city:
+          type: string
+          description: Billing address city.
+          example: San Francisco
+        billing_state:
+          type: string
+          description: Billing address state or province.
+          example: CA
+        billing_postal_code:
+          type: string
+          description: Billing address postal code.
+          example: '94105'
+        billing_country:
+          type: string
+          description: Billing address country code.
+          example: US
+        website:
+          type: string
+          description: Vendor website URL.
+          example: https://acme.nil
+        phone:
+          type: string
+          description: Vendor organization phone.
+          example: +1 (415) 555-9876
+        fax_phone:
+          type: string
+          description: Vendor organization fax phone.
+          example: +1 (415) 555-0000
+  responses:
+    MissingProEntitlement:
+      description: 'Your OpenGov account does not have OpenGov Procurement access on the requested entity.
+
+        '
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: API key does not have PRO access to this entity
+  parameters:
+    EntityUuidPathParam:
+      name: entityUuid
+      in: path
+      required: true
+      description: 'UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.
+
+        '
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+    xApiKeyHeaderAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    APIKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Format: `Token your-api-key-here`'
+    BearerToken:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      description: Enter Bearer Token without Bearer prefix
+x-refined-from:
+- opengov-procurement-v1-openapi.yml
+- opengov-procurement-v2-openapi.yml
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

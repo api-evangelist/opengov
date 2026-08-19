@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: OpenGov Enterprise Asset Management Classes API
+  version: 1.0.0
+  description: 'OpenGov Enterprise Asset Management API
+
+    '
+  contact:
+    name: OpenGov Enterprise Asset Management API
+    url: developers@opengov.com
+  license:
+    name: OpenGov Enterprise Asset Management API
+    url: https://opengov.com
+servers:
+- url: '{serverURL}'
+  description: Your EAM Server Instance
+tags:
+- name: Classes
+paths:
+  /api/v1/classes/{className}/{oid}:
+    get:
+      $ref: components/BusinessObjects/getSingleRecord.yaml#/get
+      tags:
+      - Classes
+    put:
+      $ref: components/BusinessObjects/updateSingleRecord.yaml#/put
+      tags:
+      - Classes
+    delete:
+      $ref: components/BusinessObjects/deleteSingleRecord.yaml#/delete
+      tags:
+      - Classes
+  /api/v1/classes/{className}:
+    get:
+      $ref: components/BusinessObjects/getMultipleRecords.yaml#/get
+      tags:
+      - Classes
+    post:
+      $ref: components/BusinessObjects/createOneOrMoreRecords.yaml#/post
+      tags:
+      - Classes
+    put:
+      $ref: components/BusinessObjects/updateMultipleRecords.yaml#/put
+      tags:
+      - Classes
+    delete:
+      $ref: components/BusinessObjects/deleteMultipleRecords.yaml#/delete
+      tags:
+      - Classes
+  /api/v1/classes/{className}/{oid}/{childClassName}:
+    get:
+      $ref: components/BusinessObjects/getChildRecords.yaml#/get
+      tags:
+      - Classes
+    post:
+      $ref: components/BusinessObjects/createChildRecord.yaml#/post
+      tags:
+      - Classes
+x-tagGroups:
+- name: Authentication
+  tags:
+  - Authentication
+- name: User
+  tags:
+  - User
+- name: Discover
+  tags:
+  - Discover
+- name: Metadata
+  tags:
+  - Meta/Classes
+  - Meta/TargetedLists
+- name: Business Objects
+  tags:
+  - BusinessObjects/Create
+  - BusinessObjects/Read
+  - BusinessObjects/Update
+  - BusinessObjects/Delete
+- name: Attachments
+  tags:
+  - Attachments/Create
+  - Attachments/Read
+  - Attachments/Delete
+- name: Security
+  tags:
+  - Security
+- name: Layout
+  tags:
+  - Layout
+- name: Commands
+  tags:
+  - Commands/ScenarioCommands
+  - Commands/AssetCommands
+- name: Files
+  tags:
+  - Files
+- name: Structure
+  tags:
+  - Structure

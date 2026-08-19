@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Line Item API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "lineItem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new line item on a purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/line-items",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new line item with optional nested splits. Line items can only be added to Purchase Orders in DRAFT status. Maximum 5 splits per line item. Returns 201 with Location header on success."
+        },
+        {
+          "info": {
+            "name": "Update a line item on a purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/line-items/:lineItemId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lineItemId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a line item and its splits. Line items can only be updated on Purchase Orders in DRAFT status. Splits with id are updated, splits without id are inserted, existing splits omitted are soft-deleted. Maximum 5 splits per line item. "
+        },
+        {
+          "info": {
+            "name": "Delete a line item on a purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/line-items/:lineItemId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lineItemId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes a line item and its splits. Only allowed on Draft POs by the PO creator. Subtracts line item amount from PO total. Returns 204 No Content on success."
+        },
+        {
+          "info": {
+            "name": "Close line items in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/line-items/close",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Closes one or more line items on an Issued PO. Liquidates remaining encumbrance on closed lines (split → line item → PO rollup). Auto-closes the PO with 'Auto-Closed' label when all non-deleted lines are closed. Already-closed lines are silently skipped. Returns 204 No Content on success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

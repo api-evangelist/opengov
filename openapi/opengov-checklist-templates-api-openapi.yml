@@ -1,0 +1,342 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Checklist Templates API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Checklist Templates
+  description: A Checklist Template is a single item in an Inspection Type Template's checklist.
+paths:
+  /v2/{community}/inspection-type-templates/{inspectionTypeTemplateID}/checklist-templates:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: inspectionTypeTemplateID
+      in: path
+      description: ID of an inspection type template
+      required: true
+      schema:
+        type: string
+    get:
+      summary: List checklist templates
+      description: 'Retrieve a list of checklist templates for an Inspection Type Template.
+
+        ### Permissions Required
+
+        `System Config Read`'
+      operationId: getChecklistTemplates
+      x-og-claims-required:
+      - PLC_SYSTEM_CONFIG_READ
+      tags:
+      - Checklist Templates
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      responses:
+        '200':
+          description: Returns Checklist Templates
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Checklist Templates
+                      title: Checklist Template
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                          description: Unique internal ID of a checklist template
+                          example: checklist-template-161718
+                        type:
+                          type: string
+                          enum:
+                          - checklistTemplate
+                          example: checklistTemplate
+                        attributes:
+                          type: object
+                          properties:
+                            itemText:
+                              type: string
+                              nullable: true
+                              description: Text of the checklist item.
+                              example: Verify electrical permits are in place
+                            codeReference:
+                              type: string
+                              maxLength: 500
+                              nullable: true
+                              description: Reference to a specific code or regulation related to this checklist item.
+                              example: NEC Article 210.12(A) - Arc-Fault Circuit Interrupter Protection
+                            isEnabled:
+                              type: boolean
+                              nullable: true
+                              description: Indicates whether the checklist item is enabled.
+                              example: true
+                            updatedAt:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                            updatedBy:
+                              $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                        relationships:
+                          type: object
+                          properties:
+                            inspectionTypeTemplate:
+                              type: object
+                              properties:
+                                $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/step/properties'
+                              description: The inspection type template
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/inspection-type-templates/{inspectionTypeTemplateID}/checklist-templates/{checklistTemplateID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - $ref: '#/paths/~1v2~1{community}~1inspection-type-templates~1{inspectionTypeTemplateID}~1checklist-templates/parameters/1'
+    - name: checklistTemplateID
+      in: path
+      description: ID of a checklist template
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get checklist template
+      description: 'Retrieve a checklist template by ID.
+
+        ### Permissions Required
+
+        `System Config Read`'
+      operationId: getChecklistTemplate
+      x-og-claims-required:
+      - PLC_SYSTEM_CONFIG_READ
+      tags:
+      - Checklist Templates
+      responses:
+        '200':
+          description: Returns Checklist Template
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Checklist Templates
+                    title: Checklist Template
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Unique internal ID of a checklist template
+                        example: checklist-template-161718
+                      type:
+                        type: string
+                        enum:
+                        - checklistTemplate
+                        example: checklistTemplate
+                      attributes:
+                        type: object
+                        properties:
+                          itemText:
+                            type: string
+                            nullable: true
+                            description: Text of the checklist item.
+                            example: Verify electrical permits are in place
+                          codeReference:
+                            type: string
+                            maxLength: 500
+                            nullable: true
+                            description: Reference to a specific code or regulation related to this checklist item.
+                            example: NEC Article 210.12(A) - Arc-Fault Circuit Interrupter Protection
+                          isEnabled:
+                            type: boolean
+                            nullable: true
+                            description: Indicates whether the checklist item is enabled.
+                            example: true
+                          updatedAt:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedAt'
+                          updatedBy:
+                            $ref: '#/paths/~1v2~1{community}~1departments/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/attributes/properties/updatedBy'
+                      relationships:
+                        type: object
+                        properties:
+                          inspectionTypeTemplate:
+                            $ref: '#/paths/~1v2~1{community}~1inspection-type-templates~1{inspectionTypeTemplateID}~1checklist-templates/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items/properties/relationships/properties/inspectionTypeTemplate'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

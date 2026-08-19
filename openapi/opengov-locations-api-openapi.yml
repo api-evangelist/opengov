@@ -1,0 +1,1467 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: Permitting & Licensing Locations API
+  contact:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+    email: developers@opengov.com
+  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  license:
+    name: OpenGov Permitting & Licensing API
+    url: https://opengov.com
+servers:
+- url: https://api.plce.opengov.com/plce
+  description: Production
+  x-og-envs:
+  - production
+  - staging
+  - development
+  - local
+security:
+- bearerAuth: []
+- basicHttpAuthentication: []
+- auth0Prod: []
+- auth0Dev: []
+tags:
+- name: Locations
+  description: A Location can be added as the Primary Location or an Additional Location of a Record. A Location can be a Point, Segment, or Parcel.
+paths:
+  /v2/{community}/locations:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    post:
+      summary: Create a location
+      description: 'Create a location.
+
+        ### Permissions Required
+
+        `Location Write`'
+      operationId: postLocation
+      x-og-claims-required:
+      - PLC_LOCATION_WRITE
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  oneOf:
+                  - type: object
+                    x-tags:
+                    - Location
+                    title: Location Parcel
+                    description: Body Schema for Parcel Location
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                      id:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          locationType:
+                            type: string
+                            enum:
+                            - PARCEL
+                            - POINT
+                            - SEGMENT
+                            description: Type of location -> Must be PARCEL
+                          streetNo:
+                            type: string
+                            description: Street number of a parcel location
+                          streetName:
+                            type: string
+                            description: Street name of a parcel location
+                          unit:
+                            type: string
+                            description: Unit identifier of a parcel location
+                          city:
+                            type: string
+                            description: City of a parcel location
+                          state:
+                            type: string
+                            description: State of a parcel location
+                          postalCode:
+                            type: string
+                            description: Postal code of a parcel location
+                          country:
+                            type: string
+                            description: Country of a parcel location
+                          ownerName:
+                            type: string
+                            description: Name of the otnwer
+                          ownerStreetNumber:
+                            type: string
+                            description: owner's street Number
+                          ownerStreetName:
+                            type: string
+                            description: owner's street name
+                          ownerUnit:
+                            type: string
+                            description: owner's unit number
+                          ownerCity:
+                            type: string
+                            description: owner's city
+                          ownerState:
+                            type: string
+                            description: owner's state
+                          ownerPostalCode:
+                            type: string
+                            description: owner's postal code
+                          ownerCountry:
+                            type: string
+                            description: owner's country
+                          ownerPhoneNo:
+                            type: string
+                            description: owner's phone number
+                          ownerEmail:
+                            type: string
+                            description: owner's email
+                          name:
+                            type: string
+                            description: User defined name of the location
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                          notes:
+                            type: string
+                            description: Notes on the location
+                          latitude:
+                            type: number
+                            format: double
+                            description: Latitude of the location
+                          longitude:
+                            type: number
+                            format: double
+                            description: Longitude of the location
+                          lotArea:
+                            type: number
+                            format: double
+                            description: Area of the lot
+                          matID:
+                            type: string
+                            nullable: true
+                            description: Unique identifier of the location in source system
+                          gisID:
+                            type: string
+                            nullable: true
+                            description: Identifier for GIS
+                          mbl:
+                            type: string
+                            description: The parcel identifier
+                          occupancyType:
+                            type: string
+                            description: Occupancy Type
+                          propertyUse:
+                            type: string
+                            description: Property Use
+                          sewage:
+                            type: string
+                            description: Sewage
+                          water:
+                            type: string
+                            description: Water
+                          yearBuilt:
+                            type: number
+                            description: Year Built
+                          zoning:
+                            type: string
+                            description: Zoning
+                          buildingType:
+                            type: string
+                            description: Building Type
+                          subdivision:
+                            type: string
+                            description: Subdivision
+                        required:
+                        - locationType
+                        - streetNo
+                        - streetName
+                        - city
+                        - state
+                        - postalCode
+                  - type: object
+                    x-tags:
+                    - Location
+                    title: Location Point
+                    description: Body Schema for Point Location
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                      id:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          locationType:
+                            type: string
+                            enum:
+                            - PARCEL
+                            - POINT
+                            - SEGMENT
+                            description: Type of location -> Must be POINT
+                          latitude:
+                            type: number
+                            format: double
+                            description: Latitude of the location
+                          longitude:
+                            type: number
+                            format: double
+                            description: Longitude of the location
+                          name:
+                            type: string
+                            description: User defined name of the location
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                          notes:
+                            type: string
+                            description: Notes on the location
+                        required:
+                        - locationType
+                        - latitude
+                        - longitude
+                  - type: object
+                    x-tags:
+                    - Location
+                    title: Location Segment
+                    description: Body Schema for Segment Location
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                      id:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          locationType:
+                            type: string
+                            enum:
+                            - PARCEL
+                            - POINT
+                            - SEGMENT
+                            description: Type of location -> Must be SEGMENT
+                          latitude:
+                            type: number
+                            format: double
+                            description: Latitude of the location
+                          longitude:
+                            type: number
+                            format: double
+                            description: Longitude of the location
+                          secondaryLatitude:
+                            type: number
+                            format: double
+                            description: Secondary latitude of a segment location
+                          secondaryLongitude:
+                            type: number
+                            format: double
+                            description: Secondary longitude of a segment location
+                          segmentLength:
+                            type: number
+                            format: double
+                            description: Length of a segment location
+                          segmentPrimaryLabel:
+                            type: string
+                            description: Primary label of a segment location
+                          segmentSecondaryLabel:
+                            type: string
+                            description: Secondary label of a segment location
+                          segmentLabel:
+                            type: string
+                            description: Label of a segment location
+                          name:
+                            type: string
+                            description: User defined name of the location
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                          notes:
+                            type: string
+                            description: Notes on the location
+                        required:
+                        - locationType
+                        - latitude
+                        - longitude
+                        - secondaryLatitude
+                        - secondaryLongitude
+                        - segmentLength
+              required:
+              - data
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+            Location:
+              $ref: '#/paths/~1v2~1{community}~1inspection-events/post/responses/201/headers/Location'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    x-tags:
+                    - Locations
+                    - Record Additional Locations
+                    title: Location
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                        example: location
+                      id:
+                        type: string
+                        example: loc-123456
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - latitude
+                        - longitude
+                        - locationType
+                        - owner
+                        - streetNo
+                        - streetName
+                        - unit
+                        - city
+                        - state
+                        - postalCode
+                        - country
+                        - secondaryLatitude
+                        - secondaryLongitude
+                        - segmentPrimaryLabel
+                        - segmentSecondaryLabel
+                        - segmentLabel
+                        - segmentLength
+                        - ownerName
+                        - ownerStreetNumber
+                        - ownerStreetName
+                        - ownerUnit
+                        - ownerCity
+                        - ownerState
+                        - ownerPostalCode
+                        - ownerCountry
+                        - ownerEmail
+                        properties:
+                          name:
+                            type: string
+                            nullable: true
+                            description: User defined name of the location
+                            example: Main Office Building
+                          latitude:
+                            type: number
+                            format: double
+                            nullable: true
+                            description: Latitude of the location
+                            example: 40.7128
+                          longitude:
+                            type: number
+                            format: double
+                            nullable: true
+                            description: Longitude of the location
+                            example: -74.006
+                          locationType:
+                            type: string
+                            enum:
+                            - PARCEL
+                            - POINT
+                            - SEGMENT
+                            description: Type of location Parcel, Point, segment etc.
+                            example: PARCEL
+                          ownerName:
+                            type: string
+                            nullable: true
+                            description: Name of the otnwer
+                            example: John Smith
+                          ownerStreetNumber:
+                            type: string
+                            nullable: true
+                            description: owner's street Number
+                            example: '123'
+                          ownerStreetName:
+                            type: string
+                            nullable: true
+                            description: owner's street name
+                            example: Main Street
+                          ownerUnit:
+                            type: string
+                            nullable: true
+                            description: owner's unit number
+                            example: Apt 4B
+                          ownerCity:
+                            type: string
+                            nullable: true
+                            description: owner's city
+                            example: New York
+                          ownerState:
+                            type: string
+                            nullable: true
+                            description: owner's state
+                            example: NY
+                          ownerPostalCode:
+                            type: string
+                            nullable: true
+                            description: owner's postal code
+                            example: '10001'
+                          ownerCountry:
+                            type: string
+                            nullable: true
+                            description: owner's country
+                            example: USA
+                          ownerPhoneNo:
+                            type: string
+                            nullable: true
+                            description: owner's phone number
+                            example: 555-123-4567
+                          ownerEmail:
+                            type: string
+                            nullable: true
+                            description: owner's email
+                            example: owner@example.com
+                          streetNo:
+                            type: string
+                            nullable: true
+                            description: Street number of a parcel location.
+                            example: '456'
+                          streetName:
+                            type: string
+                            nullable: true
+                            description: Street name of a parcel location
+                            example: Oak Avenue
+                          unit:
+                            type: string
+                            nullable: true
+                            description: Unit identifier of a parcel location
+                            example: Suite 200
+                          city:
+                            type: string
+                            description: City of a parcel location
+                            example: San Francisco
+                          state:
+                            type: string
+                            description: State of a parcel location
+                            example: CA
+                          postalCode:
+                            type: string
+                            description: Postal code of a parcel location
+                            example: '94102'
+                          country:
+                            type: string
+                            description: Country of a parcel location
+                            example: USA
+                          secondaryLatitude:
+                            type: number
+                            format: double
+                            nullable: true
+                            description: Secondary latitude of a segment location
+                            example: 40.7589
+                          secondaryLongitude:
+                            type: number
+                            format: double
+                            nullable: true
+                            description: Secondary longitude of a segment location
+                            example: -73.9851
+                          segmentPrimaryLabel:
+                            type: string
+                            nullable: true
+                            description: Primary label of a segment location
+                            example: Intersection A
+                          segmentSecondaryLabel:
+                            type: string
+                            nullable: true
+                            description: Secondary label of a segment location
+                            example: Intersection B
+                          segmentLabel:
+                            type: string
+                            nullable: true
+                            description: Label of a segment location
+                            example: Main Road Segment
+                          segmentLength:
+                            type: number
+                            format: double
+                            nullable: true
+                            description: Length of a segment location
+                            example: 250.5
+                          lotArea:
+                            type: number
+                            nullable: true
+                            description: Area of the lot
+                            example: 5000.25
+                          matID:
+                            type: string
+                            nullable: true
+                            description: Unique identifier of the location in source system
+                            example: MAT-987654
+                          mbl:
+                            type: string
+                            nullable: true
+                            description: The parcel identifier
+                            example: 123-456-789
+                          occupancyType:
+                            type: string
+                            nullable: true
+                            description: Occupancy Type
+                            example: Commercial
+                          propertyUse:
+                            type: string
+                            nullable: true
+                            description: Property Use
+                            example: Office Building
+                          sewage:
+                            type: string
+                            nullable: true
+                            description: Sewage
+                            example: Municipal
+                          water:
+                            type: string
+                            nullable: true
+                            description: Water
+                            example: City Water
+                          yearBuilt:
+                            type: number
+                            nullable: true
+                            description: Year Built
+                            example: 1995
+                          zoning:
+                            type: string
+                            nullable: true
+                            description: Zoning
+                            example: C-1 Commercial
+                          buildingType:
+                            type: string
+                            nullable: true
+                            description: Building Type
+                            example: Multi-story Office
+                          notes:
+                            type: string
+                            nullable: true
+                            description: Notes on the location
+                            example: Recently renovated, elevator access available
+                          subdivision:
+                            type: string
+                            nullable: true
+                            description: Subdivision
+                            example: Downtown Business District
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                            example: false
+                          updatedAt:
+                            type: string
+                            format: date-time
+                            description: Last updated date
+                          gisID:
+                            type: string
+                            nullable: true
+                            description: Identifier for GIS
+                            example: GIS-12345
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    get:
+      summary: List locations
+      description: 'Retrieve locations in the community that match the specified filters.
+
+        ### Permissions Required
+
+        `Location Read`'
+      operationId: getLocations
+      x-og-claims-required:
+      - PLC_LOCATION_READ
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/0'
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps/get/parameters/1'
+      - name: filter[city]
+        in: query
+        description: Filter by the city of a location
+        required: false
+        schema:
+          type: string
+      - name: filter[name]
+        in: query
+        description: Filter by the name of a location.
+        required: false
+        schema:
+          type: string
+      - name: filter[ownerName]
+        in: query
+        description: Filter by the name of the owner of a location
+        required: false
+        schema:
+          type: string
+      - name: filter[unit]
+        in: query
+        description: Filter by the unit of a location.
+        required: false
+        schema:
+          type: string
+      - name: filter[mbl]
+        in: query
+        description: Filter by the mbl of a location.
+        required: false
+        schema:
+          type: string
+      - name: filter[postalCode]
+        in: query
+        description: Filter by the postal code of a location.
+        required: false
+        schema:
+          type: string
+      - name: filter[state]
+        in: query
+        description: Filter by the state of a location
+        required: false
+        schema:
+          type: string
+      - name: filter[streetNumber]
+        in: query
+        description: Filter by the street number of a location. Can be combined with filter[streetName] to filter by street address.
+        required: false
+        schema:
+          type: string
+      - name: filter[streetName]
+        in: query
+        description: Filter by the street name of a location
+        required: false
+        schema:
+          type: string
+      - name: filter[locationType]
+        in: query
+        description: Filter by the type of a location
+        required: false
+        schema:
+          type: string
+          enum:
+          - PARCEL
+          - POINT
+          - SEGMENT
+          description: Type of a location
+      - name: filter[archived]
+        in: query
+        description: Filter by the archived status of a location.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Returns locations
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      x-tags:
+                      - Locations
+                      - Record Additional Locations
+                      title: Location
+                      required:
+                      - type
+                      - id
+                      - attributes
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - location
+                          example: location
+                        id:
+                          type: string
+                          example: loc-123456
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - latitude
+                          - longitude
+                          - locationType
+                          - owner
+                          - streetNo
+                          - streetName
+                          - unit
+                          - city
+                          - state
+                          - postalCode
+                          - country
+                          - secondaryLatitude
+                          - secondaryLongitude
+                          - segmentPrimaryLabel
+                          - segmentSecondaryLabel
+                          - segmentLabel
+                          - segmentLength
+                          - ownerName
+                          - ownerStreetNumber
+                          - ownerStreetName
+                          - ownerUnit
+                          - ownerCity
+                          - ownerState
+                          - ownerPostalCode
+                          - ownerCountry
+                          - ownerEmail
+                          properties:
+                            name:
+                              type: string
+                              nullable: true
+                              description: User defined name of the location
+                              example: Main Office Building
+                            latitude:
+                              type: number
+                              format: double
+                              nullable: true
+                              description: Latitude of the location
+                              example: 40.7128
+                            longitude:
+                              type: number
+                              format: double
+                              nullable: true
+                              description: Longitude of the location
+                              example: -74.006
+                            locationType:
+                              type: string
+                              enum:
+                              - PARCEL
+                              - POINT
+                              - SEGMENT
+                              description: Type of location Parcel, Point, segment etc.
+                              example: PARCEL
+                            ownerName:
+                              type: string
+                              nullable: true
+                              description: Name of the otnwer
+                              example: John Smith
+                            ownerStreetNumber:
+                              type: string
+                              nullable: true
+                              description: owner's street Number
+                              example: '123'
+                            ownerStreetName:
+                              type: string
+                              nullable: true
+                              description: owner's street name
+                              example: Main Street
+                            ownerUnit:
+                              type: string
+                              nullable: true
+                              description: owner's unit number
+                              example: Apt 4B
+                            ownerCity:
+                              type: string
+                              nullable: true
+                              description: owner's city
+                              example: New York
+                            ownerState:
+                              type: string
+                              nullable: true
+                              description: owner's state
+                              example: NY
+                            ownerPostalCode:
+                              type: string
+                              nullable: true
+                              description: owner's postal code
+                              example: '10001'
+                            ownerCountry:
+                              type: string
+                              nullable: true
+                              description: owner's country
+                              example: USA
+                            ownerPhoneNo:
+                              type: string
+                              nullable: true
+                              description: owner's phone number
+                              example: 555-123-4567
+                            ownerEmail:
+                              type: string
+                              nullable: true
+                              description: owner's email
+                              example: owner@example.com
+                            streetNo:
+                              type: string
+                              nullable: true
+                              description: Street number of a parcel location.
+                              example: '456'
+                            streetName:
+                              type: string
+                              nullable: true
+                              description: Street name of a parcel location
+                              example: Oak Avenue
+                            unit:
+                              type: string
+                              nullable: true
+                              description: Unit identifier of a parcel location
+                              example: Suite 200
+                            city:
+                              type: string
+                              description: City of a parcel location
+                              example: San Francisco
+                            state:
+                              type: string
+                              description: State of a parcel location
+                              example: CA
+                            postalCode:
+                              type: string
+                              description: Postal code of a parcel location
+                              example: '94102'
+                            country:
+                              type: string
+                              description: Country of a parcel location
+                              example: USA
+                            secondaryLatitude:
+                              type: number
+                              format: double
+                              nullable: true
+                              description: Secondary latitude of a segment location
+                              example: 40.7589
+                            secondaryLongitude:
+                              type: number
+                              format: double
+                              nullable: true
+                              description: Secondary longitude of a segment location
+                              example: -73.9851
+                            segmentPrimaryLabel:
+                              type: string
+                              nullable: true
+                              description: Primary label of a segment location
+                              example: Intersection A
+                            segmentSecondaryLabel:
+                              type: string
+                              nullable: true
+                              description: Secondary label of a segment location
+                              example: Intersection B
+                            segmentLabel:
+                              type: string
+                              nullable: true
+                              description: Label of a segment location
+                              example: Main Road Segment
+                            segmentLength:
+                              type: number
+                              format: double
+                              nullable: true
+                              description: Length of a segment location
+                              example: 250.5
+                            lotArea:
+                              type: number
+                              nullable: true
+                              description: Area of the lot
+                              example: 5000.25
+                            matID:
+                              type: string
+                              nullable: true
+                              description: Unique identifier of the location in source system
+                              example: MAT-987654
+                            mbl:
+                              type: string
+                              nullable: true
+                              description: The parcel identifier
+                              example: 123-456-789
+                            occupancyType:
+                              type: string
+                              nullable: true
+                              description: Occupancy Type
+                              example: Commercial
+                            propertyUse:
+                              type: string
+                              nullable: true
+                              description: Property Use
+                              example: Office Building
+                            sewage:
+                              type: string
+                              nullable: true
+                              description: Sewage
+                              example: Municipal
+                            water:
+                              type: string
+                              nullable: true
+                              description: Water
+                              example: City Water
+                            yearBuilt:
+                              type: number
+                              nullable: true
+                              description: Year Built
+                              example: 1995
+                            zoning:
+                              type: string
+                              nullable: true
+                              description: Zoning
+                              example: C-1 Commercial
+                            buildingType:
+                              type: string
+                              nullable: true
+                              description: Building Type
+                              example: Multi-story Office
+                            notes:
+                              type: string
+                              nullable: true
+                              description: Notes on the location
+                              example: Recently renovated, elevator access available
+                            subdivision:
+                              type: string
+                              nullable: true
+                              description: Subdivision
+                              example: Downtown Business District
+                            archived:
+                              type: boolean
+                              description: Whether the location is archived
+                              example: false
+                            updatedAt:
+                              type: string
+                              format: date-time
+                              description: Last updated date
+                            gisID:
+                              type: string
+                              nullable: true
+                              description: Identifier for GIS
+                              example: GIS-12345
+                  links:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/links'
+                  meta:
+                    $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/200/content/application~1vnd.api+json/schema/properties/meta'
+                required:
+                - data
+                - links
+                - meta
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+  /v2/{community}/locations/{locationID}:
+    parameters:
+    - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
+    - name: locationID
+      in: path
+      description: ID of the location
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve a location
+      description: 'Retrieve a location by ID.
+
+        ### Permissions Required
+
+        `Location Read`'
+      operationId: getLocation
+      x-og-claims-required:
+      - PLC_LOCATION_READ
+      tags:
+      - Locations
+      responses:
+        '200':
+          description: Returns the location object
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1locations/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    patch:
+      summary: Update a location
+      description: 'Update a location.
+
+        ### Permissions Required
+
+        `Location Write`'
+      operationId: patchLocation
+      x-og-claims-required:
+      - PLC_LOCATION_WRITE
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  oneOf:
+                  - type: object
+                    x-tags:
+                    - Location
+                    title: Location Parcel
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                      id:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: User defined name of the location
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                          notes:
+                            type: string
+                            description: Notes on the location
+                          streetNo:
+                            type: string
+                            description: Street number of a parcel location
+                          streetName:
+                            type: string
+                            description: Street name of a parcel location
+                          unit:
+                            type: string
+                            description: Unit identifier of a parcel location
+                          city:
+                            type: string
+                            description: City of a parcel location
+                          state:
+                            type: string
+                            description: State of a parcel location
+                          postalCode:
+                            type: string
+                            description: Postal code of a parcel location
+                          country:
+                            type: string
+                            description: Country of a parcel location
+                          ownerName:
+                            type: string
+                            description: Name of the otnwer
+                          ownerStreetNumber:
+                            type: string
+                            description: owner's street Number
+                          ownerStreetName:
+                            type: string
+                            description: owner's street name
+                          ownerUnit:
+                            type: string
+                            description: owner's unit number
+                          ownerCity:
+                            type: string
+                            description: owner's city
+                          ownerState:
+                            type: string
+                            description: owner's state
+                          ownerPostalCode:
+                            type: string
+                            description: owner's postal code
+                          ownerCountry:
+                            type: string
+                            description: owner's country
+                          ownerPhoneNo:
+                            type: string
+                            description: owner's phone number
+                          ownerEmail:
+                            type: string
+                            description: owner's email
+                          latitude:
+                            type: number
+                            format: double
+                            description: Latitude of the location
+                          longitude:
+                            type: number
+                            format: double
+                            description: Longitude of the location
+                          lotArea:
+                            type: number
+                            format: double
+                            description: Area of the lot
+                          matID:
+                            type: string
+                            nullable: true
+                            description: Unique identifier of the location in source system
+                          gisID:
+                            type: string
+                            nullable: true
+                            description: Identifier for GIS
+                          mbl:
+                            type: string
+                            description: The parcel identifier
+                          occupancyType:
+                            type: string
+                            description: Occupancy Type
+                          propertyUse:
+                            type: string
+                            description: Property Use
+                          sewage:
+                            type: string
+                            description: Sewage
+                          water:
+                            type: string
+                            description: Water
+                          yearBuilt:
+                            type: number
+                            description: Year Built
+                          zoning:
+                            type: string
+                            description: Zoning
+                          buildingType:
+                            type: string
+                            description: Building Type
+                          subdivision:
+                            type: string
+                            description: Subdivision
+                  - type: object
+                    x-tags:
+                    - Location
+                    title: Location Point
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                      id:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: User defined name of the location
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                          notes:
+                            type: string
+                            description: Notes on the location
+                          latitude:
+                            type: number
+                            format: double
+                            description: Latitude of the location
+                          longitude:
+                            type: number
+                            format: double
+                            description: Longitude of the location
+                  - type: object
+                    x-tags:
+                    - Location
+                    title: Location Segment
+                    required:
+                    - type
+                    - id
+                    - attributes
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - location
+                      id:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: User defined name of the location
+                          archived:
+                            type: boolean
+                            description: Whether the location is archived
+                          notes:
+                            type: string
+                            description: Notes on the location
+                          latitude:
+                            type: number
+                            format: double
+                            description: Latitude of the location
+                          longitude:
+                            type: number
+                            format: double
+                            description: Longitude of the location
+                          secondaryLatitude:
+                            type: number
+                            format: double
+                            description: Secondary latitude of a segment location
+                          secondaryLongitude:
+                            type: number
+                            format: double
+                            description: Secondary longitude of a segment location
+                          segmentLength:
+                            type: number
+                            format: double
+                            description: Length of a segment location
+                          segmentPrimaryLabel:
+                            type: string
+                            description: Primary label of a segment location
+                          segmentSecondaryLabel:
+                            type: string
+                            description: Secondary label of a segment location
+                          segmentLabel:
+                            type: string
+                            description: Label of a segment location
+              required:
+              - data
+      responses:
+        '200':
+          description: Updated
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1v2~1{community}~1locations/get/responses/200/content/application~1vnd.api+json/schema/properties/data/items'
+                required:
+                - data
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '409':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/409'
+        '415':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps~1{approvalStepID}/patch/responses/415'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+    delete:
+      summary: Delete a location
+      description: 'Delete a location.
+
+        ### Permissions Required
+
+        `Location Write`'
+      operationId: deleteLocation
+      x-og-claims-required:
+      - PLC_LOCATION_WRITE
+      tags:
+      - Locations
+      responses:
+        '204':
+          description: Deleted
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/paths/~1v2~1{community}~1files/post/responses/201/headers/X-RateLimit-Remaining'
+        '400':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/400'
+        '401':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/401'
+        '403':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/403'
+        '404':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/404'
+        '406':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/406'
+        '500':
+          $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
+components:
+  securitySchemes:
+    basicHttpAuthentication:
+      type: http
+      scheme: basic
+      description: 'Basic HTTP Authentication
+
+        '
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        Access tokens are obtained by making a POST request to `https://accounts.viewpointcloud.com/oauth/token`
+
+        '
+    auth0Prod:
+      type: openIdConnect
+      openIdConnectUrl: https://accounts.viewpointcloud.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+    auth0Dev:
+      type: openIdConnect
+      openIdConnectUrl: https://login.vpctest.com/.well-known/openid-configuration
+      description: 'The OpenGov Permitting & Licensing API is authenticated using the OAuth2 Client Credentials flow. Access tokens are provided as a bearer token Authorization header in all API requests.
+
+        To obtain an access token, you must have an OpenGov-provided Client ID and Client Secret.
+
+        '
+x-og-spec-id: plc-api-v2
+x-og-claims:
+  PLC_RECORD_READ: Record Read
+  PLC_RECORD_WRITE: Record Write
+  PLC_RECORD_ARCHIVE: Record Archive
+  PLC_RECORD_STEP_READ: Workflow Read
+  PLC_RECORD_STEP_CREATE: Workflow Write
+  PLC_RECORD_STEP_UPDATE: Workflow Write
+  PLC_RECORD_STEP_COMMENT_READ: Comment Read
+  PLC_RECORD_STEP_COMMENT_WRITE: Comment Write
+  PLC_USER_READ: User Read
+  PLC_USER_WRITE: User Write
+  PLC_RECORD_TYPE_READ: Record Type Read
+  PLC_SYSTEM_CONFIG_READ: System Config Read
+  PLC_LOCATION_READ: Location Read
+  PLC_LOCATION_WRITE: Location Write
+  PLC_PAYMENT_READ: Payment Read
+  PLC_PAYMENT_WRITE: Payment Write
+  PLC_FILE_READ: File Read
+  PLC_FILE_WRITE: File Write
+  PLC_ACTIVITY_LOG_READ: Activity Log Read
+x-tagGroups:
+- name: Records
+  tags:
+  - Record
+  - Record Applicant
+  - Record Guests
+  - Record Primary Location
+  - Record Additional Locations
+  - Record Forms
+  - Record Change Requests
+  - Record Attachments
+  - Record Workflow Steps
+  - Record Workflow Step Comments
+- name: Locations
+  tags:
+  - Locations
+  - Location Flags
+- name: Users
+  tags:
+  - Users
+  - User Flags
+- name: Approvals
+  tags:
+  - Approval Steps
+- name: Documents
+  tags:
+  - Document Steps
+  - Issued Documents
+- name: Inspections
+  tags:
+  - Inspection Steps
+  - Inspection Types
+  - Inspection Events
+  - Inspection Results
+  - Checklist Results
+- name: Payments
+  tags:
+  - Payment Steps
+  - Fees
+  - Transactions
+  - Ledger Entries
+- name: Projects
+  tags:
+  - Projects
+- name: Files
+  tags:
+  - Files
+- name: Configuration
+  tags:
+  - Organization
+  - Departments
+  - Record Types
+  - Record Type Form
+  - Record Type Attachments
+  - Record Type Document Templates
+  - Record Type Fees
+  - Record Type Workflow
+  - Inspection Type Templates
+  - Checklist Templates
+- name: Activity Logs
+  tags:
+  - Activity Logs

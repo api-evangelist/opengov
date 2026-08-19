@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Budgeting & Performance Budget API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Budget",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Budgets by Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/budgets",
+            "params": [
+              {
+                "name": "filter[entityId]",
+                "value": "",
+                "type": "query",
+                "description": "Filter budgets by entity ID."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Budgets filtered by the associated Entity ID."
+        },
+        {
+          "info": {
+            "name": "Get Budget by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/budgets/:budgetId",
+            "params": [
+              {
+                "name": "budgetId",
+                "value": "",
+                "type": "path",
+                "description": "Get a Budget by its ID."
+              }
+            ]
+          },
+          "docs": "Retrieve a Budget by its ID."
+        },
+        {
+          "info": {
+            "name": "Get the Amounts Summary for a Budget by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/budgets/:budgetId/amounts-summary",
+            "params": [
+              {
+                "name": "budgetId",
+                "value": "",
+                "type": "path",
+                "description": "Budget Identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the Amounts Summary for a Budget by its ID."
+        },
+        {
+          "info": {
+            "name": "Get Budget Amounts by Budget ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/budgets/:budgetId/budget-amounts",
+            "params": [
+              {
+                "name": "budgetId",
+                "value": "",
+                "type": "path",
+                "description": "Budget Identifier"
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include the budget metadata"
+              }
+            ]
+          },
+          "docs": "Retrieve budget amounts for a given budget ID"
+        },
+        {
+          "info": {
+            "name": "Retrieves the exportable data resources for an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/data-exports/resources",
+            "params": [
+              {
+                "name": "filter[entityId]",
+                "value": "",
+                "type": "query",
+                "description": "Filter resources by entity ID (UUID)"
+              },
+              {
+                "name": "filter[includeCustom]",
+                "value": "",
+                "type": "query",
+                "description": "Includes custom financial datasets"
+              }
+            ]
+          },
+          "docs": "Returns all standard dataset instances available for export from the Budget and Workforce applications for the specified entity. If includeCustom=true, custom financial datasets are also included. Use the Get Data Export Resource Metadata endpoint to retrieve additional details for a resource, including its column schema, and use the Export Data Resource as CSV endpoint to download the resource as a CSV file.\n"
+        },
+        {
+          "info": {
+            "name": "Get Data Export Resource Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/data-exports/metadata/:resourceId",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the data resource (may contain forward slashes)"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed metadata information for a specific data export resource,\nincluding the name, description, standard type, column schema, and timestamps indicating when the \nresource was created and updated.\n"
+        },
+        {
+          "info": {
+            "name": "Export Data Resource as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnp.opengov.com/api/v1/data-exports/export/:resourceId",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the data resource to export"
+              }
+            ]
+          },
+          "docs": "Exports a budget data resource as a CSV file by redirecting to a presigned URL.\nThe response includes a Location header that clients should follow to download the data.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

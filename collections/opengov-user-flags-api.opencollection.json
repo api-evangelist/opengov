@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing User Flags API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/users/:userID/flags"
+          },
+          "docs": "List user flags on a user.\n### Permissions Required\n`User Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

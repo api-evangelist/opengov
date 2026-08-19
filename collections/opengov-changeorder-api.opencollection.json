@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Change Order API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "changeOrder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Change Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-orders/search",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search change orders with optional filters: status, poNumber, searchTerm (coNumber/poNumber/vendorName). Cursor-based pagination. Applies reason nullification (BR-CR05) for Draft COs with deleted reasons."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

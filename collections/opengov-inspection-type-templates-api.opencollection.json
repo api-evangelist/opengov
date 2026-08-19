@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Permitting & Licensing Inspection Type Templates API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inspection Type Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inspection type templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-type-templates"
+          },
+          "docs": "Retrieve inspection type templates that match the specified filters.\n### Permissions Required\n`System Config Read`"
+        },
+        {
+          "info": {
+            "name": "Get inspection type template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.plce.opengov.com/plce/v2/:community/inspection-type-templates/:inspectionTypeTemplateID",
+            "params": [
+              {
+                "name": "inspectionTypeTemplateID",
+                "value": "",
+                "type": "path",
+                "description": "ID of an inspection type template"
+              }
+            ]
+          },
+          "docs": "Retrieve an inspection type template by ID.\n### Permissions Required\n`System Config Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

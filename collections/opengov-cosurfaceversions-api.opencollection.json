@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Co Surface Versions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coSurfaceVersions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get surface version status for a Change Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/surface-versions",
+            "params": [
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "surfaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns CO-scoped current max entry IDs for each surface (COMMENTS, ATTACHMENTS, ACTIVITY_LOG) and the user's last viewed entry ID for each. Mirrors the PO endpoint but scopes by `(poId, coId)`."
+        },
+        {
+          "info": {
+            "name": "Record that user has viewed CO-scoped surfaces up to specific entry IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/surface-versions",
+            "params": [
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "CO-scoped sibling of POST /purchase-orders/:poId/surface-versions. Backend upserts (poId, coId)-scoped po_user_surface_views records. Returns 204 No Content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

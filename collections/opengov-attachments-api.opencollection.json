@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Attachments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/attachments/{className}/{oid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{serverURL}/api/v1/attachments/:className/:oid"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/attachments/{className}/{oid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{serverURL}/api/v1/attachments/:className/:oid"
+          }
+        },
+        {
+          "info": {
+            "name": "attachments.getAttachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{serverURL}/api/v1/entities/:entityId/vendors/:vendorKey/attachments/:attachmentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "vendorKey",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "attachments.getAttachmentContent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{serverURL}/api/v1/entities/:entityId/vendors/:vendorKey/attachments/:attachmentId/content",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "vendorKey",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "attachments.createAttachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{serverURL}/api/v1/entities/:entityId/vendors/:vendorKey/attachments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "vendorKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "attachments.deleteAttachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{serverURL}/api/v1/entities/:entityId/vendors/:vendorKey/attachments/bulk-delete",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <your-jwt-token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "vendorKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

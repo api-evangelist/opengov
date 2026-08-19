@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Opengov Organization API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a list of the names of the site's organizations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/organization_list",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return a list of the names of the site's organizations."
+        },
+        {
+          "info": {
+            "name": "Return the details of a organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/organization_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_datasets",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_dataset_count",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return the details of a organization."
+        },
+        {
+          "info": {
+            "name": "Retrieve an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloudcity.ogopendata.com/api/3/action/v2/:community/organization",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details about the organization.\n### Permissions Required\n`System Config Read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -3,11 +3,12 @@ method: derived
 status: candidate
 source: openapi/ (operationIds verified against the harvested specs)
 published_by_provider: false
-note: OpenGov publishes NO first-party Model Context Protocol server. The npm package named opengov-mcp-server is third-party
-  (srobbin) and targets Socrata open-data portals, not the OpenGov Public Service Platform — it is NOT this. The tool list
-  below is a CANDIDATE derived from a curated subset of the 358 published OpenAPI operations, offered as a starting point;
-  every tool names the real operationId it would bind to, and each tool inherits that operation's parameters + requestBody
-  as its input schema. Nothing here is claimed to exist.
+note: OpenGov publishes NO first-party Model Context Protocol server. The npm package named opengov-mcp-server
+  is third-party (srobbin) and targets Socrata open-data portals, not the OpenGov Public Service Platform
+  — it is NOT this. The tool list below is a CANDIDATE derived from a curated subset of the 358 published
+  OpenAPI operations, offered as a starting point; every tool names the real operationId it would bind
+  to, and each tool inherits that operation's parameters + requestBody as its input schema. Nothing here
+  is claimed to exist.
 server:
   name: opengov
   transport: http
@@ -20,8 +21,9 @@ third_party_confusion:
   official: false
   url: https://www.npmjs.com/package/opengov-mcp-server
 auth:
-  note: 'A real OpenGov MCP server would need to carry the per-integration API key (Authorization: Token) or an Auth0 client_credentials
-    bearer token, and would inherit the integration permission grants and per-record-type access described in scopes/opengov-scopes.yml.'
+  note: 'A real OpenGov MCP server would need to carry the per-integration API key (Authorization: Token)
+    or an Auth0 client_credentials bearer token, and would inherit the integration permission grants and
+    per-record-type access described in scopes/opengov-scopes.yml.'
 coverage:
   rest_operations_published: 358
   tools_proposed: 46
@@ -302,3 +304,9 @@ tools:
   path: /organization_list
   source_operation: openapi/opengov-open-data-ckan-openapi.yml#organizationList
   input_schema_source: parameters + requestBody of organizationList in openapi/opengov-open-data-ckan-openapi.yml
+deployment:
+  mode: none
+  verified: derived
+  tools: 46
+  checked: '2026-08-12'
+  source: catalog MCP census

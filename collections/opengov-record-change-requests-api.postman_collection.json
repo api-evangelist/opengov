@@ -1,0 +1,2162 @@
+{
+  "item": [
+    {
+      "id": "5a306efa-b03f-4d7b-8978-111222c2c490",
+      "name": "Record Change Requests",
+      "description": {
+        "content": "A Record Change Request represents a request from an employee to the applicant for changes to the form or attachments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7778780c-4ef2-495c-a7ba-0ab363d7ab0d",
+          "name": "Create change requests",
+          "request": {
+            "name": "Create change requests",
+            "description": {
+              "content": "Create a record change request.\n\n### Permissions Required\n`Record Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "change-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"overallNote\": \"<string>\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"attributes\": {\n            \"note\": \"<string>\"\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"attributes\": {\n            \"note\": \"<string>\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"attributes\": {\n            \"note\": \"<string>\"\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"attributes\": {\n            \"note\": \"<string>\"\n          }\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37793350-12c0-4e6e-8d3b-315cbe660a86",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"recordChangeRequest\",\n    \"id\": \"change-request-112233\",\n    \"attributes\": {\n      \"overallNote\": \"Need to update building height from 3 stories to 4 stories due to design changes\",\n      \"version\": \"v2.1\",\n      \"requestedBy\": \"user-applicant-445566\",\n      \"respondedBy\": \"user-reviewer-778899\",\n      \"status\": \"Open\",\n      \"createdAt\": \"1978-07-28T10:24:49.185Z\",\n      \"completedAt\": \"2002-08-04T14:32:04.400Z\",\n      \"formFields\": [\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestFormFieldEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        },\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestFormFieldEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        }\n      ],\n      \"attachments\": [\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestAttachmentEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        },\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestAttachmentEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        }\n      ]\n    },\n    \"relationships\": {\n      \"record\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3c068f2-c961-4b4d-8064-21f0037e3b41",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3004329-0067-4dcf-aaf7-b8552bbf7f7c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "146e454a-085e-4653-843a-21c05f837b8a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f356142-0383-4d4b-89ff-4c55862697f5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "debc87ea-9580-4268-a203-99457a5c3c9a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e51d8df6-a4da-4763-9a32-f8231104cabc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "099fa730-e9e2-4c7f-9ea6-3192196c3283",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb15d85f-2c28-4915-9a24-c374c53da0ed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0075fc72-c380-42b1-af3a-e60713e94e2b",
+              "name": "**Not Implemented**: The server does not support the functionality required to fulfill the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"changeRequests\",\n    \"attributes\": {\n      \"overallNote\": \"Need to modify building height and add additional parking spaces per revised plans\",\n      \"formFieldEntities\": [\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        },\n        {\n          \"type\": \"changeRequestFormFieldEntity\",\n          \"id\": \"change-request-form-entity-1000011\",\n          \"attributes\": {\n            \"note\": \"Please update the building height from 3 stories to 4 stories as per revised architectural plans\"\n          }\n        }\n      ],\n      \"attachmentEntities\": [\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        },\n        {\n          \"type\": \"changeRequestAttachmentEntity\",\n          \"id\": \"change-request-attachment-entity-1000012\",\n          \"attributes\": {\n            \"note\": \"Updated structural drawings to reflect the increased building height and additional load requirements\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-501-001\",\n      \"code\": \"NOT_IMPLEMENTED\",\n      \"detail\": \"The request method is not implemented by the server and cannot be handled.\",\n      \"status\": \"501\",\n      \"title\": \"Not Implemented\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae01e0e4-4f4b-4fbd-a776-f93646373d49",
+          "name": "Get most recent change request for a record",
+          "request": {
+            "name": "Get most recent change request for a record",
+            "description": {
+              "content": "Retrieve the most recent change request for a record\n\n### Permissions Required\n`Record Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "change-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90b2ba38-49af-49e4-ab87-29c1bf8fc611",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"recordChangeRequest\",\n    \"id\": \"change-request-112233\",\n    \"attributes\": {\n      \"overallNote\": \"Need to update building height from 3 stories to 4 stories due to design changes\",\n      \"version\": \"v2.1\",\n      \"requestedBy\": \"user-applicant-445566\",\n      \"respondedBy\": \"user-reviewer-778899\",\n      \"status\": \"Open\",\n      \"createdAt\": \"1978-07-28T10:24:49.185Z\",\n      \"completedAt\": \"2002-08-04T14:32:04.400Z\",\n      \"formFields\": [\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestFormFieldEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        },\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestFormFieldEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        }\n      ],\n      \"attachments\": [\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestAttachmentEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        },\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestAttachmentEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        }\n      ]\n    },\n    \"relationships\": {\n      \"record\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1310e3e7-c40c-4f1a-b879-82f37540d38f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3611813-53aa-4dd6-a9e1-44cf76f80498",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "311fa435-7555-407a-b80e-ce84cde19745",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b493b14-8ae2-46c9-8e56-817aacfb02e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "beb2acb1-653e-4263-a960-f2e7377748e5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0fb00f24-e3fd-46f7-b02d-5379dd338c83",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a40bea64-1f46-4633-a98d-e3718e6b2778",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9b1420a-e816-419c-b397-0db2230b4539",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19a30174-f6d0-409a-8c9d-ef4accdf92a9",
+              "name": "**Not Implemented**: The server does not support the functionality required to fulfill the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-501-001\",\n      \"code\": \"NOT_IMPLEMENTED\",\n      \"detail\": \"The request method is not implemented by the server and cannot be handled.\",\n      \"status\": \"501\",\n      \"title\": \"Not Implemented\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61a781c9-f56d-4d44-9b6f-a72cfbcbfd50",
+          "name": "Get change request",
+          "request": {
+            "name": "Get change request",
+            "description": {
+              "content": "Retrieve a record change request by ID.\n\n### Permissions Required\n`Record Read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "change-requests",
+                ":changeRequestID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "changeRequestID",
+                  "description": "(Required) ID of the change request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e72d644e-ee04-41b0-bd0e-2e17615c704f",
+              "name": "Record Change Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of requests allowed",
+                  "key": "X-RateLimit-Limit",
+                  "value": "8883"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "8883"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"recordChangeRequest\",\n    \"id\": \"change-request-112233\",\n    \"attributes\": {\n      \"overallNote\": \"Need to update building height from 3 stories to 4 stories due to design changes\",\n      \"version\": \"v2.1\",\n      \"requestedBy\": \"user-applicant-445566\",\n      \"respondedBy\": \"user-reviewer-778899\",\n      \"status\": \"Open\",\n      \"createdAt\": \"2016-04-18T13:08:07.784Z\",\n      \"completedAt\": \"1974-03-14T12:26:44.126Z\",\n      \"formFields\": [\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestFormFieldEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        },\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestFormFieldEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        }\n      ],\n      \"attachments\": [\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestAttachmentEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        },\n        {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"changeRequestAttachmentEntity\",\n            \"attributes\": {\n              \"note\": \"string\"\n            }\n          }\n        }\n      ]\n    },\n    \"relationships\": {\n      \"record\": {\n        \"$ref\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd6be5aa-4ff3-44f5-b600-503a0940a83d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f74c120-ad13-4809-a0ef-ff62b321d189",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9841a313-ecdb-4b76-b546-ecdce3e51ae2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aceb9bab-f764-4b51-a9d6-f54c07fdc96d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b6aa411-4bc8-4f6a-8c25-e11c7898631c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d50ef39c-6a7e-41d3-a559-61a0985de68c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55b2b5fb-4d02-45f8-928b-ccc05f0b8f02",
+              "name": "**Not Implemented**: The server does not support the functionality required to fulfill the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-501-001\",\n      \"code\": \"NOT_IMPLEMENTED\",\n      \"detail\": \"The request method is not implemented by the server and cannot be handled.\",\n      \"status\": \"501\",\n      \"title\": \"Not Implemented\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7d25ef5-b344-4305-bde2-bc75c980814f",
+          "name": "Cancel change request",
+          "request": {
+            "name": "Cancel change request",
+            "description": {
+              "content": "Cancel a record change request\n\n### Permissions Required\n`Record Write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":community",
+                "records",
+                ":recordID",
+                "change-requests",
+                ":changeRequestID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "changeRequestID",
+                  "description": "(Required) ID of the change request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d552396d-be89-408e-bc51-a10adf7a8583",
+              "name": "Change request cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Limit",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-RateLimit-Remaining",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8cf81781-2529-459f-a4a8-c44bc23a2e45",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11b2a872-f395-4e3e-b301-f6b5bc7d149a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "724de7c7-79c2-4b1d-9b5e-34feb0e73d7d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "92af9f6e-0744-44d1-9008-64c405c444da",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e240f790-886e-4185-b51d-a547e6280108",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2913ad5-e8b6-489a-a7c4-fc5ee367e599",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "179310cd-8360-4ec1-8e42-6958901549ec",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de560628-9989-4458-a1d8-45cc339856bc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71b44ded-0fba-4efe-af5f-82a2d5fe9c42",
+              "name": "**Not Implemented**: The server does not support the functionality required to fulfill the request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":community",
+                    "records",
+                    ":recordID",
+                    "change-requests",
+                    ":changeRequestID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeRequestID",
+                      "description": "(Required) ID of the change request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"id\": \"error-501-001\",\n      \"code\": \"NOT_IMPLEMENTED\",\n      \"detail\": \"The request method is not implemented by the server and cannot be handled.\",\n      \"status\": \"501\",\n      \"title\": \"Not Implemented\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.plce.opengov.com/plce",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9052224f-721a-4852-b636-f06a1b2c7e90",
+    "name": "Permitting & Licensing Record Change Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n\n\nContact Support:\n Name: OpenGov Permitting & Licensing API\n Email: developers@opengov.com",
+      "type": "text/plain"
+    }
+  }
+}

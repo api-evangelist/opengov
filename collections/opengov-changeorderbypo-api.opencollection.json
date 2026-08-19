@@ -1,0 +1,428 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Change Order By Po API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "changeOrderByPo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new change order for a purchase order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Draft Change Order for a PO in Approved or Issued status. Auto-generates CO number and sequence. Snapshots PO financial fields. Returns 201 with Location header on success."
+        },
+        {
+          "info": {
+            "name": "Get a change order with full PO context",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Change Order with enriched PO snapshot, all PO lines annotated with changeType (LineModified, LineAdded, or null), and nested splits. Implements BR-CR05 reason nullification for Draft COs."
+        },
+        {
+          "info": {
+            "name": "Update a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a Draft Change Order header fields including non-financial changes. Only the CO creator (or elevated user) can update. Returns 200 with updated CO on success."
+        },
+        {
+          "info": {
+            "name": "Delete a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes a Draft Change Order and clears the PO's hasPendingCo flag. Only the CO creator (or elevated user) can delete. Returns 204 No Content on success."
+        },
+        {
+          "info": {
+            "name": "Add a line to a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/lines",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a line to a Draft CO — either modifying an existing PO line (LineModified) or adding a new line (LineAdded). Enforces line-type validation rules (BR-L01, BR-L02, BR-L03, BR-L06, BR-L12, BR-L13, BR-L14). Returns 201 with Location header on success."
+        },
+        {
+          "info": {
+            "name": "Update a line on a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/lines/:lineId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lineId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing CO line. For adjustment lines, only primary value/type fields are editable (BR-L14). For base lines, increase-only rules apply (BR-L06). Returns 200 OK on success."
+        },
+        {
+          "info": {
+            "name": "Remove a line from a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/lines/:lineId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lineId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-deletes a LineAdded CO line and its associated splits, then recalculates the CO header totals. CO lines that modify an existing PO line (LineModified) cannot be removed. The underlying PO line item is never deleted by this endpoint. Returns 204 No Content on success."
+        },
+        {
+          "info": {
+            "name": "Clear tolerance fields on a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/clear-tolerances",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clears all tolerance and over-invoicing fields from every non-deleted CO line. Only allowed when the CO is in Draft status and the caller is a CO Editor."
+        },
+        {
+          "info": {
+            "name": "Submit a Draft change order for approval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/submit",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transitions a Draft Change Order to PendingApproval status. Runs all 12 pre-submit validation rules (collect-all-violations). Sets submittedAt, submittedBy, clears label, and records a CO_SUBMITTED activity log entry. Pass dryRun: true to run all checks and persist results as operation errors without transitioning."
+        },
+        {
+          "info": {
+            "name": "Cancel a Draft change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/cancel",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Transitions a Draft Change Order to Cancelled status. No request body. Sets cancelledAt, cancelledBy. Clears po.hasPendingCo. Records CO_CANCELLED activity log entry."
+        },
+        {
+          "info": {
+            "name": "Approve a pending change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/approve",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Transitions a PendingApproval Change Order to Approved status. No request body. Enforces separation of duties: creator and submitter cannot approve. Sets approvedAt, approvedBy. Clears po.hasPendingCo. Records CO_APPROVED activity log entry."
+        },
+        {
+          "info": {
+            "name": "Reject a pending change order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/reject",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rejects a PendingApproval Change Order back to Draft status with 'Rejected' label. No request body. Enforces separation of duties: creator and submitter cannot reject. Sets rejectedAt, rejectedBy. Records CO_REJECTED activity log entry."
+        },
+        {
+          "info": {
+            "name": "List unresolved operation errors for a Change Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/purchase-orders/:poId/change-orders/:coId/operation-errors",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "poId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all unresolved operation errors for the given change order, such as vendor not approved, GL account inactive, and project account inactive validation failures."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

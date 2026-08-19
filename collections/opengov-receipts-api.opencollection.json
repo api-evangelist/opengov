@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Receipt Receipts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "receipts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new receipt"
+        },
+        {
+          "info": {
+            "name": "Find Receipt by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a receipt by ID"
+        },
+        {
+          "info": {
+            "name": "Update Receipt with Line Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Full replacement update of receipt header and line items."
+        },
+        {
+          "info": {
+            "name": "Update Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an existing receipt. Only allowed in Draft status by the creator."
+        },
+        {
+          "info": {
+            "name": "Delete Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Soft delete a receipt by ID. Only allowed in Draft status by the creator."
+        },
+        {
+          "info": {
+            "name": "Search Receipts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/search",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search receipts with optional filters: status, searchTerm (receiptNumber/description), eVendorId. Cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Copy Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/copy",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new receipt by copying fields from an existing receipt. The new receipt will have a new receipt number and Draft status."
+        },
+        {
+          "info": {
+            "name": "Cancel Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/cancel",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancel a Draft or Submitted receipt. Requires the Canceller claim. No ownership check."
+        },
+        {
+          "info": {
+            "name": "List validation errors for a Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/operation-errors",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns all validation errors for the given receipt, computed using the same rules applied by submit. Returns an empty list when the receipt is valid. Not gated on status — callable on receipts in any status."
+        },
+        {
+          "info": {
+            "name": "Submit Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/submit",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Submit a draft receipt for processing. Validates completeness and PO data."
+        },
+        {
+          "info": {
+            "name": "Approve Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/approve",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Approve a submitted receipt. Runs PO validation and syncs received quantity with the PO system."
+        },
+        {
+          "info": {
+            "name": "Reject Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-receipts.procurement.opengov.com/api/v1/entities/:entityId/receipts/:id/reject",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "a string to be decoded into a number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Reject a submitted receipt, returning it to Draft status. Preserves submission history (submittedAt/submittedBy)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

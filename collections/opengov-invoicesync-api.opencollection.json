@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Invoice Sync API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "invoiceSync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sync invoice allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/invoice-allocations",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Processes delta-based invoice allocation updates. Accepts invoice header, line items (with quantities), and splits (with amounts). Upserts by invoiceLineId (allocations) and invoiceLineDistributionId (splits). Applies deltas to running totals and triggers financial recompute. Idempotent: replayed requests (same idempotencyKey) return 200; new requests return 202."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

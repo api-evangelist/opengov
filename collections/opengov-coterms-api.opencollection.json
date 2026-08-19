@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenGov Purchase Order Co Terms API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coTerms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Terms & Conditions for a Change Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-orders/:coId/terms",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the CO-scoped Terms & Conditions snapshot (body + selected attachments) plus the baseline body captured from the parent PO at CO-create time. Returns `terms: null` only for COs created before the snapshot feature shipped."
+        },
+        {
+          "info": {
+            "name": "Upsert Terms & Conditions for a Change Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-purchase-order.procurement.opengov.com/api/v1/po/entities/:entityId/change-orders/:coId/terms",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the Platform entity"
+              },
+              {
+                "name": "coId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the CO-scoped T&C body and replaces its attachment selection atomically. Only allowed while the CO is in Draft. Attachment IDs must be CO-scoped T&C attachments (same PO and `poChangeOrderId` = this CO). Enforces 5-attachment cap, 2MB per-file limit, and MIME allow-list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
