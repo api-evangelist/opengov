@@ -1,6 +1,8 @@
 openapi: 3.2.0
 info:
   title: Opengov Categories API
+  x-logo:
+    url: https://assets.procurement.opengov.com/brand/pro-logo-padded.png
   version: '1.0'
   description: 'Operations tagged Categories across 2 of this provider''s published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
@@ -11,9 +13,6 @@ tags:
   x-displayName: Categories
 paths:
   /public/api/v1/contracts/categories:
-    servers:
-    - url: https://api.procurement.opengov.com
-      description: Production
     get:
       description: This endpoint fetches a paginated list of categories for a given category set (NIGP, NAICS, or UNSPSC), ordered by ID, with cursor-based pagination.
       operationId: CategoriesV1Controller_listCategories
@@ -165,10 +164,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/categories:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/categories:
     get:
       description: This endpoint fetches a paginated list of categories for a given category set (NIGP, NAICS, or UNSPSC), ordered by ID, with cursor-based pagination.
       operationId: CategoriesV2Controller_listCategories
@@ -327,6 +326,9 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
 components:
   schemas:
     PageInfo:
@@ -349,6 +351,20 @@ components:
       - totalResultsCount
       - endCursor
       - hasMoreResults
+    CategoryEdge:
+      type: object
+      properties:
+        node:
+          description: The category data.
+          allOf:
+          - $ref: '#/components/schemas/CategoryDetails'
+        cursor:
+          type: string
+          description: A cursor for use in pagination.
+          example: Y2F0ZWdvcnkuaWQ9NDI=
+      required:
+      - node
+      - cursor
     ListCategoriesResponseDto:
       type: object
       properties:
@@ -364,20 +380,6 @@ components:
       required:
       - results
       - pageInfo
-    CategoryEdge:
-      type: object
-      properties:
-        node:
-          description: The category data.
-          allOf:
-          - $ref: '#/components/schemas/CategoryDetails'
-        cursor:
-          type: string
-          description: A cursor for use in pagination.
-          example: Y2F0ZWdvcnkuaWQ9NDI=
-      required:
-      - node
-      - cursor
     CategoryDetails:
       type: object
       properties:

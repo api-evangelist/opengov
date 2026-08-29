@@ -482,6 +482,203 @@ paths:
                 - $ref: '#/components/schemas/InternalServerHttpError'
 components:
   schemas:
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    NoteId:
+      type: number
+      description: Unique identifier for a vendor note
+    AttachmentModel.json:
+      type: object
+      required:
+      - attachmentId
+      - path
+      - bucket
+      - filename
+      - attachmentType
+      - size
+      properties:
+        attachmentId:
+          $ref: '#/components/schemas/AttachmentId'
+        path:
+          type: string
+        bucket:
+          type: string
+        filename:
+          type: string
+        attachmentType:
+          type: string
+        size:
+          type: number
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: AttachmentModel.json
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    AttachmentId:
+      type: number
+      description: Unique identifier for an attachment
     VendorNoteModel.json:
       type: object
       required:
@@ -534,24 +731,6 @@ components:
             $ref: '#/components/schemas/AttachmentModel.json'
       additionalProperties: false
       title: VendorNoteModel.json
-    NoteId:
-      type: number
-      description: Unique identifier for a vendor note
-    NotFoundHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
-      additionalProperties: false
     InternalServerHttpError:
       type: object
       required:
@@ -564,74 +743,6 @@ components:
           type: string
           enum:
           - InternalServerHttpError
-      additionalProperties: false
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
-      additionalProperties: false
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
       additionalProperties: false
     UnauthorizedHttpError:
       type: object
@@ -650,117 +761,6 @@ components:
           enum:
           - UnauthorizedHttpError
       additionalProperties: false
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    AttachmentId:
-      type: number
-      description: Unique identifier for an attachment
-    HttpApiDecodeError:
-      type: object
-      required:
-      - issues
-      - message
-      - _tag
-      properties:
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/Issue'
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - HttpApiDecodeError
-      additionalProperties: false
-      description: The request did not match the expected schema
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
-    AttachmentModel.json:
-      type: object
-      required:
-      - attachmentId
-      - path
-      - bucket
-      - filename
-      - attachmentType
-      - size
-      properties:
-        attachmentId:
-          $ref: '#/components/schemas/AttachmentId'
-        path:
-          type: string
-        bucket:
-          type: string
-        filename:
-          type: string
-        attachmentType:
-          type: string
-        size:
-          type: number
-        isDeleted:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-        deletedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        createdAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        updatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-      additionalProperties: false
-      title: AttachmentModel.json
   securitySchemes:
     bearerAuth:
       type: http

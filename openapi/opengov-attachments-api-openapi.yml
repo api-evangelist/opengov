@@ -16,9 +16,6 @@ tags:
 - name: Attachments
 paths:
   /api/v1/attachments/{className}/{oid}:
-    servers:
-    - url: '{serverURL}'
-      description: Your EAM Server Instance
     get:
       $ref: components/Attachments/getAttachment.yaml#/get
       tags:
@@ -27,14 +24,10 @@ paths:
       $ref: components/Attachments/deleteAttachment.yaml#/delete
       tags:
       - Attachments
-  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments/{attachmentId}:
     servers:
-    - url: https://api.vendor.opengov.com
-      description: Production Server
-    - url: https://api.vendor.ogstaging.us
-      description: Staging Server
-    - url: https://api-vendor.procurement.ogintegration.us
-      description: Integration Server
+    - url: '{serverURL}'
+      description: Your EAM Server Instance
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments/{attachmentId}:
     get:
       tags:
       - Attachments
@@ -167,7 +160,6 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
-  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments/{attachmentId}/content:
     servers:
     - url: https://api.vendor.opengov.com
       description: Production Server
@@ -175,6 +167,7 @@ paths:
       description: Staging Server
     - url: https://api-vendor.procurement.ogintegration.us
       description: Integration Server
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments/{attachmentId}/content:
     get:
       tags:
       - Attachments
@@ -265,7 +258,6 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
-  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments:
     servers:
     - url: https://api.vendor.opengov.com
       description: Production Server
@@ -273,6 +265,7 @@ paths:
       description: Staging Server
     - url: https://api-vendor.procurement.ogintegration.us
       description: Integration Server
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments:
     post:
       tags:
       - Attachments
@@ -394,7 +387,6 @@ paths:
                     $ref: '#/components/schemas/PersistedFile'
               additionalProperties: false
         required: true
-  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments/bulk-delete:
     servers:
     - url: https://api.vendor.opengov.com
       description: Production Server
@@ -402,6 +394,7 @@ paths:
       description: Staging Server
     - url: https://api-vendor.procurement.ogintegration.us
       description: Integration Server
+  /api/v1/entities/{entityId}/vendors/{vendorKey}/attachments/bulk-delete:
     post:
       tags:
       - Attachments
@@ -508,51 +501,104 @@ paths:
                     type: number
               additionalProperties: false
         required: true
+    servers:
+    - url: https://api.vendor.opengov.com
+      description: Production Server
+    - url: https://api.vendor.ogstaging.us
+      description: Staging Server
+    - url: https://api-vendor.procurement.ogintegration.us
+      description: Integration Server
 components:
   schemas:
-    PersistedFile:
-      type: string
-      format: binary
-    NotFoundHttpError:
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+    Issue:
       type: object
       required:
-      - message
       - _tag
+      - path
+      - message
       properties:
-        message:
-          type: string
-        resourceType:
-          type: string
         _tag:
           type: string
           enum:
-          - NotFoundHttpError
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
       additionalProperties: false
-    InternalServerHttpError:
+      description: Represents an error encountered while parsing a value to match the schema
+    EntityNotFoundError:
       type: object
       required:
-      - message
+      - entityId
       - _tag
       properties:
-        message:
+        entityId:
           type: string
         _tag:
           type: string
           enum:
-          - InternalServerHttpError
+          - EntityNotFoundError
       additionalProperties: false
-    UnauthenticatedHttpError:
+    HttpApiDecodeError:
       type: object
       required:
+      - issues
       - message
       - _tag
       properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
         message:
           type: string
         _tag:
           type: string
           enum:
-          - UnauthenticatedHttpError
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
       additionalProperties: false
     BadRequestHttpError:
       type: object
@@ -584,30 +630,52 @@ components:
           enum:
           - BadRequestHttpError
       additionalProperties: false
-    AuthError:
+    NotFoundHttpError:
       type: object
       required:
+      - message
       - _tag
       properties:
-        cause:
-          title: unknown
+        message:
+          type: string
+        resourceType:
+          type: string
         _tag:
           type: string
           enum:
-          - AuthError
+          - NotFoundHttpError
       additionalProperties: false
-    EntityNotFoundError:
+    UnauthenticatedHttpError:
       type: object
       required:
-      - entityId
+      - message
       - _tag
       properties:
-        entityId:
+        message:
           type: string
         _tag:
           type: string
           enum:
-          - EntityNotFoundError
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    PersistedFile:
+      type: string
+      format: binary
+    AttachmentId:
+      type: number
+      description: Unique identifier for an attachment
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
       additionalProperties: false
     UnauthorizedHttpError:
       type: object
@@ -626,74 +694,6 @@ components:
           enum:
           - UnauthorizedHttpError
       additionalProperties: false
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    AttachmentId:
-      type: number
-      description: Unique identifier for an attachment
-    HttpApiDecodeError:
-      type: object
-      required:
-      - issues
-      - message
-      - _tag
-      properties:
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/Issue'
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - HttpApiDecodeError
-      additionalProperties: false
-      description: The request did not match the expected schema
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
   securitySchemes:
     bearerAuth:
       type: http

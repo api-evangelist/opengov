@@ -1,10 +1,10 @@
 openapi: 3.2.0
 info:
+  title: Opengov Event Types API
   version: v1
-  title: Permitting Licensing & Code Enforcement Event Types API
   x-logo:
     url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
-  description: "The OpenGov Permitting & Licensing API is organized around REST. The API is based on the JSON API specification and uses standard HTTP response codes, authentication, and verbs.\n\n## Authentication\nThe OpenGov Permitting & Licensing API is authenticated using the [OAuth2](https://www.rfc-editor.org/rfc/rfc6749) Client Credentials flow. Access tokens are provided as a [bearer token](https://datatracker.ietf.org/doc/html/rfc6750) Authorization header in all API requests.\n\nTo obtain an access token, you must have an OpenGov-provided **Client ID** and **Client Secret** and make a POST request to https://accounts.viewpointcloud.com/oauth/token\n\nExample request:\n\n```bash\ncurl --request POST \\\n  --url https://accounts.viewpointcloud.com/oauth/token \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'grant_type=client_credentials' \\\n  --data 'client_id=YOUR_CLIENT_ID' \\\n  --data 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data 'audience=viewpointcloud.com/api/production'\n```\n\nThe response will include:\n- `access_token`: Access token issued by the authorization server\n- `token_type`: Type of token issued (typically `Bearer`)\n- `expires_in`: The lifetime in seconds of the access token\n<br />\n<br />\nThe API will return a 401 error if a token is invalid.\n<br />\n<br />\n"
+  description: 'Operations tagged Event Types across 2 of this provider''s published API definitions: opengov-permitting-licensing-v1-openapi-original.yml, opengov-permitting-licensing-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.plce.opengov.com/plce
   description: Production
@@ -32,51 +32,11 @@ webhooks:
       responses:
         '200':
           description: Return 200 status for successfully acknowledging the webhook delivery
+    servers:
+    - url: https://api.plce.opengov.com/plce
+      description: Production
 components:
   schemas:
-    event_common_props:
-      type: object
-      properties:
-        id:
-          type: string
-          description: An ID that uniquely identifies the occurrence of an event
-          example: b1d98e92-38cc-11ed-a261-0242ac120002
-        type:
-          type: string
-          description: A value that describes the event. See for the complete list of event types
-          example: workflow.step.status_changed
-        occurred_at:
-          type: string
-          format: date-time
-          description: Timestamp (UTC) when the event has occurred
-        community:
-          type: string
-          description: Name of the community where the event occurred
-          example: demo-support
-        record:
-          type: object
-          description: Details of the record whose activity triggered the event
-          properties:
-            id:
-              type: string
-              description: ID of the record whose activity triggered the event
-            type_id:
-              type: string
-              description: Type of the record whose activity triggered the event
-            url:
-              type: string
-              format: url
-              description: URL of the record whose activity triggered the event
-              example: https://plce.api.opengov.com/plce/v1/community/records/73543
-        details:
-          type: object
-          description: An object that describes the details of the event
-          properties:
-            object:
-              type: object
-              description: Details of the resource whose activity triggered the event
-            previous:
-              type: object
     step_status_changed:
       type: object
       properties:
@@ -126,6 +86,49 @@ components:
       - SKIPPED
       - ON_HOLD
       description: Status of the workflow step
+    event_common_props:
+      type: object
+      properties:
+        id:
+          type: string
+          description: An ID that uniquely identifies the occurrence of an event
+          example: b1d98e92-38cc-11ed-a261-0242ac120002
+        type:
+          type: string
+          description: A value that describes the event. See for the complete list of event types
+          example: workflow.step.status_changed
+        occurred_at:
+          type: string
+          format: date-time
+          description: Timestamp (UTC) when the event has occurred
+        community:
+          type: string
+          description: Name of the community where the event occurred
+          example: demo-support
+        record:
+          type: object
+          description: Details of the record whose activity triggered the event
+          properties:
+            id:
+              type: string
+              description: ID of the record whose activity triggered the event
+            type_id:
+              type: string
+              description: Type of the record whose activity triggered the event
+            url:
+              type: string
+              format: url
+              description: URL of the record whose activity triggered the event
+              example: https://plce.api.opengov.com/plce/v1/community/records/73543
+        details:
+          type: object
+          description: An object that describes the details of the event
+          properties:
+            object:
+              type: object
+              description: Details of the resource whose activity triggered the event
+            previous:
+              type: object
     step_type:
       type: string
       enum:
@@ -139,17 +142,10 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-tagGroups:
-- name: Records
-  tags:
-  - Records
-  - Record Contacts
-  - Record Locations
-  - Record Form
-- name: Workflow
-  tags:
-  - Steps
-  - Step Comments
-- name: Events
-  tags:
-  - Event Types
+x-refined-from:
+- opengov-permitting-licensing-v1-openapi-original.yml
+- opengov-permitting-licensing-v1-openapi.yml
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

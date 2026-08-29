@@ -8448,9 +8448,42 @@ paths:
         required: true
 components:
   schemas:
-    Decimal_13_5:
+    SignedDecimal_18_2:
       type: string
-      title: Decimal (13,5)
+      title: Signed Decimal (18,2)
+    PoRevisionParam:
+      type: string
+      description: a string to be decoded into a number
+    PoStatus:
+      type: string
+      enum:
+      - Draft
+      - PendingApproval
+      - Approved
+      - Issued
+      - Closed
+      - Cancelled
+      description: 'Purchase order status: Draft, PendingApproval, Approved, Issued, Closed, Cancelled'
+      title: PO Status
+    Decimal_18_5:
+      type: string
+      title: Decimal (18,5)
+    ISODate:
+      type: string
+      description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
+      title: ISO Date (YYYY-MM-DD)
+      pattern: ^\d{4}-\d{2}-\d{2}$
+    LineItemType:
+      type: string
+      enum:
+      - Item
+      - Service
+      - Tax
+      - Discount
+      - Freight
+      - Miscellaneous
+      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
+      title: Line Item Type
     LineItemSplitModel.jsonCreate:
       type: object
       required: []
@@ -8495,108 +8528,6 @@ components:
           type: boolean
       additionalProperties: false
       title: LineItemSplitModel.jsonCreate
-    SignedDecimal_18_5:
-      type: string
-      title: Signed Decimal (18,5)
-    VendorModel.json:
-      type: object
-      required:
-      - id
-      - entityId
-      - eVendorId
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: number
-        entityId:
-          $ref: '#/components/schemas/UUID'
-        eVendorId:
-          type: number
-        vendorDisplayId:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        name:
-          type: string
-          description: a string at most 256 character(s) long
-          title: maxLength(256)
-          maxLength: 256
-        eVendorContactId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        contactName:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        address:
-          anyOf:
-          - type: string
-            description: a string at most 700 character(s) long
-            title: maxLength(700)
-            maxLength: 700
-          - type: 'null'
-        contactNumber:
-          anyOf:
-          - type: string
-            description: a string at most 20 character(s) long
-            title: maxLength(20)
-            maxLength: 20
-          - type: 'null'
-        email:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        isMutable:
-          type: boolean
-        createdAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-        updatedAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-      additionalProperties: false
-      title: VendorModel.json
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    Decimal_11_5:
-      type: string
-      title: Decimal (11,5)
-    ValueOrPercent:
-      type: string
-      enum:
-      - Value
-      - Percent
-      description: Indicates whether the input is an absolute value or a percentage
-      title: Value or Percent
-    PoRevisionParam:
-      type: string
-      description: a string to be decoded into a number
-    PoType:
-      type: string
-      enum:
-      - Standard
-      - Blanket
-      - Emergency
-      description: 'Purchase order type: Standard, Blanket, Emergency'
-      title: PO Type
-    UUID:
-      type: string
-      description: a Universally Unique Identifier
-      format: uuid
-      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-    SignedDecimal_18_2:
-      type: string
-      title: Signed Decimal (18,2)
     PurchaseOrderModel.jsonUpdate:
       type: object
       required: []
@@ -8808,222 +8739,6 @@ components:
           - type: 'null'
       additionalProperties: false
       title: PurchaseOrderModel.jsonUpdate
-    ISODate:
-      type: string
-      description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
-      title: ISO Date (YYYY-MM-DD)
-      pattern: ^\d{4}-\d{2}-\d{2}$
-    LineItemSplitModel.json:
-      type: object
-      required:
-      - id
-      - poLineItemId
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: number
-        poLineItemId:
-          type: number
-        accountNumber:
-          anyOf:
-          - type: string
-          - type: 'null'
-        accountPseudoKey:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        amount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        eProjectAccountId:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountNumber:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountDescription:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        reimbursable:
-          type: boolean
-        encumberedAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        encLiquidatedAccrualAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        openEncumbranceAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        percentAmount:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        displayId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        createdAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-        updatedAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-      additionalProperties: false
-      title: LineItemSplitModel.json
-    LineItemType:
-      type: string
-      enum:
-      - Item
-      - Service
-      - Tax
-      - Discount
-      - Freight
-      - Miscellaneous
-      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
-      title: Line Item Type
-    PoSource:
-      type: string
-      enum:
-      - PurchaseRequest
-      - Contract
-      - Manual
-      description: 'Purchase order source: PurchaseRequest, Contract, Manual'
-      title: PO Source
-    VendorApiCreate:
-      type: object
-      required:
-      - eVendorId
-      - name
-      properties:
-        eVendorId:
-          type: number
-        eVendorContactId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        vendorDisplayId:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        name:
-          type: string
-          description: a string at most 256 character(s) long
-          title: maxLength(256)
-          minLength: 1
-          maxLength: 256
-        address:
-          anyOf:
-          - type: string
-            description: a string at most 700 character(s) long
-            title: maxLength(700)
-            maxLength: 700
-          - type: 'null'
-        contactNumber:
-          anyOf:
-          - type: string
-            description: a string at most 20 character(s) long
-            title: maxLength(20)
-            maxLength: 20
-          - type: 'null'
-        email:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-      additionalProperties: false
-    Decimal_18_2:
-      type: string
-      title: Decimal (18,2)
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
-    PoStatus:
-      type: string
-      enum:
-      - Draft
-      - PendingApproval
-      - Approved
-      - Issued
-      - Closed
-      - Cancelled
-      description: 'Purchase order status: Draft, PendingApproval, Approved, Issued, Closed, Cancelled'
-      title: PO Status
-    Decimal_18_5:
-      type: string
-      title: Decimal (18,5)
-    VendorModel.jsonCreate:
-      type: object
-      required:
-      - eVendorId
-      properties:
-        eVendorId:
-          type: number
-        vendorDisplayId:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        name:
-          type: string
-          description: a string at most 256 character(s) long
-          title: maxLength(256)
-          maxLength: 256
-        eVendorContactId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        contactName:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        address:
-          anyOf:
-          - type: string
-            description: a string at most 700 character(s) long
-            title: maxLength(700)
-            maxLength: 700
-          - type: 'null'
-        contactNumber:
-          anyOf:
-          - type: string
-            description: a string at most 20 character(s) long
-            title: maxLength(20)
-            maxLength: 20
-          - type: 'null'
-        email:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-      additionalProperties: false
-      title: VendorModel.jsonCreate
     LineItemModel.json:
       type: object
       required:
@@ -9222,6 +8937,291 @@ components:
           $ref: '#/components/schemas/DateTimeUtc'
       additionalProperties: false
       title: LineItemModel.json
+    VendorModel.json:
+      type: object
+      required:
+      - id
+      - entityId
+      - eVendorId
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: number
+        entityId:
+          $ref: '#/components/schemas/UUID'
+        eVendorId:
+          type: number
+        vendorDisplayId:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        name:
+          type: string
+          description: a string at most 256 character(s) long
+          title: maxLength(256)
+          maxLength: 256
+        eVendorContactId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        contactName:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        address:
+          anyOf:
+          - type: string
+            description: a string at most 700 character(s) long
+            title: maxLength(700)
+            maxLength: 700
+          - type: 'null'
+        contactNumber:
+          anyOf:
+          - type: string
+            description: a string at most 20 character(s) long
+            title: maxLength(20)
+            maxLength: 20
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        isMutable:
+          type: boolean
+        createdAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+        updatedAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+      additionalProperties: false
+      title: VendorModel.json
+    PoType:
+      type: string
+      enum:
+      - Standard
+      - Blanket
+      - Emergency
+      description: 'Purchase order type: Standard, Blanket, Emergency'
+      title: PO Type
+    LineItemSplitModel.json:
+      type: object
+      required:
+      - id
+      - poLineItemId
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: number
+        poLineItemId:
+          type: number
+        accountNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        accountPseudoKey:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        amount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        eProjectAccountId:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        projectAccountNumber:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        projectAccountDescription:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        reimbursable:
+          type: boolean
+        encumberedAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        encLiquidatedAccrualAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        openEncumbranceAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        percentAmount:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        displayId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        createdAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+        updatedAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+      additionalProperties: false
+      title: LineItemSplitModel.json
+    ValueOrPercent:
+      type: string
+      enum:
+      - Value
+      - Percent
+      description: Indicates whether the input is an absolute value or a percentage
+      title: Value or Percent
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
+    Decimal_18_2:
+      type: string
+      title: Decimal (18,2)
+    VendorModel.jsonCreate:
+      type: object
+      required:
+      - eVendorId
+      properties:
+        eVendorId:
+          type: number
+        vendorDisplayId:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        name:
+          type: string
+          description: a string at most 256 character(s) long
+          title: maxLength(256)
+          maxLength: 256
+        eVendorContactId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        contactName:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        address:
+          anyOf:
+          - type: string
+            description: a string at most 700 character(s) long
+            title: maxLength(700)
+            maxLength: 700
+          - type: 'null'
+        contactNumber:
+          anyOf:
+          - type: string
+            description: a string at most 20 character(s) long
+            title: maxLength(20)
+            maxLength: 20
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+      additionalProperties: false
+      title: VendorModel.jsonCreate
+    PoSource:
+      type: string
+      enum:
+      - PurchaseRequest
+      - Contract
+      - Manual
+      description: 'Purchase order source: PurchaseRequest, Contract, Manual'
+      title: PO Source
+    UUID:
+      type: string
+      description: a Universally Unique Identifier
+      format: uuid
+      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+    Decimal_11_5:
+      type: string
+      title: Decimal (11,5)
+    VendorApiCreate:
+      type: object
+      required:
+      - eVendorId
+      - name
+      properties:
+        eVendorId:
+          type: number
+        eVendorContactId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        vendorDisplayId:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        name:
+          type: string
+          description: a string at most 256 character(s) long
+          title: maxLength(256)
+          minLength: 1
+          maxLength: 256
+        address:
+          anyOf:
+          - type: string
+            description: a string at most 700 character(s) long
+            title: maxLength(700)
+            maxLength: 700
+          - type: 'null'
+        contactNumber:
+          anyOf:
+          - type: string
+            description: a string at most 20 character(s) long
+            title: maxLength(20)
+            maxLength: 20
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+      additionalProperties: false
+    Decimal_13_5:
+      type: string
+      title: Decimal (13,5)
+    SignedDecimal_18_5:
+      type: string
+      title: Signed Decimal (18,5)
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

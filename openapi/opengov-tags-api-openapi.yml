@@ -1,6 +1,8 @@
 openapi: 3.2.0
 info:
   title: Opengov Tags API
+  x-logo:
+    url: https://assets.procurement.opengov.com/brand/pro-logo-padded.png
   version: '1.0'
   description: 'Operations tagged Tags across 2 of this provider''s published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
@@ -11,9 +13,6 @@ tags:
   x-displayName: Tags
 paths:
   /public/api/v1/contracts/tags/contact:
-    servers:
-    - url: https://api.procurement.opengov.com
-      description: Production
     get:
       description: Returns a list of unique "Contact" tag names for the caller's organization.
       operationId: TagsV1Controller_getContactTags
@@ -125,10 +124,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/contracts:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/contracts:
     get:
       description: Returns a list of unique "Contract" tag names for the caller's organization.
       operationId: TagsV1Controller_getContractTags
@@ -240,10 +239,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/contract-attachments:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/contract-attachments:
     get:
       description: Returns a list of unique "Contract Attachment" tag names for the caller's organization.
       operationId: TagsV1Controller_getContractAttachmentTags
@@ -355,10 +354,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/contract-insurances:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/contract-insurances:
     get:
       description: Returns a list of unique "Contract Insurance" tag names for the caller's organization.
       operationId: TagsV1Controller_getContractInsuranceTags
@@ -470,10 +469,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/delivery-codes:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/delivery-codes:
     get:
       description: Returns a list of unique "Delivery Code" tag names for the caller's organization.
       operationId: TagsV1Controller_getDeliveryCodeTags
@@ -585,10 +584,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/fiscal-years:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/fiscal-years:
     get:
       description: Returns a list of unique "Fiscal Year" tag names for the caller's organization.
       operationId: TagsV1Controller_getFiscalYearTags
@@ -698,10 +697,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/funding-sources:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/funding-sources:
     get:
       description: Returns a list of unique "Funding Source" tag names for the caller's organization.
       operationId: TagsV1Controller_getFundingSourceTags
@@ -813,10 +812,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/payment-terms:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/payment-terms:
     get:
       description: Returns a list of unique "Payment Terms" tag names for the caller's organization.
       operationId: TagsV1Controller_getPaymentTermsTags
@@ -928,10 +927,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/tags/procurement-classifications:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/tags/procurement-classifications:
     get:
       description: Returns a list of unique "Procurement Classification" tag names for the caller's organization.
       operationId: TagsV1Controller_getProcurementClassificationTags
@@ -1043,10 +1042,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/contact:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/contact:
     get:
       description: Returns a list of unique "Contact" tag names for the caller's organization.
       operationId: TagsV2Controller_getContactTags
@@ -1165,10 +1164,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/contracts:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/contracts:
     get:
       description: Returns a list of unique "Contract" tag names for the caller's organization.
       operationId: TagsV2Controller_getContractTags
@@ -1287,10 +1286,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/contract-attachments:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/contract-attachments:
     get:
       description: Returns a list of unique "Contract Attachment" tag names for the caller's organization.
       operationId: TagsV2Controller_getContractAttachmentTags
@@ -1409,10 +1408,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/contract-insurances:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/contract-insurances:
     get:
       description: Returns a list of unique "Contract Insurance" tag names for the caller's organization.
       operationId: TagsV2Controller_getContractInsuranceTags
@@ -1531,10 +1530,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/delivery-codes:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/delivery-codes:
     get:
       description: Returns a list of unique "Delivery Code" tag names for the caller's organization.
       operationId: TagsV2Controller_getDeliveryCodeTags
@@ -1653,10 +1652,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/fiscal-years:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/fiscal-years:
     get:
       description: Returns a list of unique "Fiscal Year" tag names for the caller's organization.
       operationId: TagsV2Controller_getFiscalYearTags
@@ -1773,10 +1772,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/funding-sources:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/funding-sources:
     get:
       description: Returns a list of unique "Funding Source" tag names for the caller's organization.
       operationId: TagsV2Controller_getFundingSourceTags
@@ -1895,10 +1894,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/payment-terms:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/payment-terms:
     get:
       description: Returns a list of unique "Payment Terms" tag names for the caller's organization.
       operationId: TagsV2Controller_getPaymentTermsTags
@@ -2017,10 +2016,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/tags/procurement-classifications:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/tags/procurement-classifications:
     get:
       description: Returns a list of unique "Procurement Classification" tag names for the caller's organization.
       operationId: TagsV2Controller_getProcurementClassificationTags
@@ -2139,38 +2138,11 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
 components:
   schemas:
-    FiscalYearTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique fiscal year-related tag names.
-          example:
-          - FY2023
-          - FY2024
-          - FY2025
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ContactTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique contact-related tag names.
-          example:
-          - Vendor
-          - Prime
-          - Subcontractor
-          - MWBE
-          - SBE
-          type: array
-          items:
-            type: string
-      required:
-      - tags
     PaymentTermsTagsResponseDto:
       type: object
       properties:
@@ -2182,6 +2154,22 @@ components:
           - Due Upon Receipt
           - 2/10 Net 30
           - Milestone-based
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    ContractAttachmentTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contract attachment-related tag names.
+          example:
+          - RFP
+          - SOW
+          - COI
+          - Addendum
+          - Signed Contract
           type: array
           items:
             type: string
@@ -2203,6 +2191,22 @@ components:
             type: string
       required:
       - tags
+    ContactTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contact-related tag names.
+          example:
+          - Vendor
+          - Prime
+          - Subcontractor
+          - MWBE
+          - SBE
+          type: array
+          items:
+            type: string
+      required:
+      - tags
     ProcurementClassificationTagsResponseDto:
       type: object
       properties:
@@ -2214,22 +2218,6 @@ components:
           - RFQ
           - Sole Source
           - Cooperative Purchase
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    DeliveryCodeTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique delivery code-related tag names.
-          example:
-          - FOB Origin
-          - FOB Destination
-          - Expedited
-          - Overnight
-          - Drop-ship
           type: array
           items:
             type: string
@@ -2251,6 +2239,36 @@ components:
             type: string
       required:
       - tags
+    FiscalYearTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique fiscal year-related tag names.
+          example:
+          - FY2023
+          - FY2024
+          - FY2025
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    DeliveryCodeTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique delivery code-related tag names.
+          example:
+          - FOB Origin
+          - FOB Destination
+          - Expedited
+          - Overnight
+          - Drop-ship
+          type: array
+          items:
+            type: string
+      required:
+      - tags
     FundingSourceTagsResponseDto:
       type: object
       properties:
@@ -2262,22 +2280,6 @@ components:
           - 'Grant: ARPA'
           - 'Grant: CDBG'
           - Bond Proceeds
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ContractAttachmentTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique contract attachment-related tag names.
-          example:
-          - RFP
-          - SOW
-          - COI
-          - Addendum
-          - Signed Contract
           type: array
           items:
             type: string

@@ -1,6 +1,8 @@
 openapi: 3.2.0
 info:
   title: Opengov Contracts API
+  x-logo:
+    url: https://assets.procurement.opengov.com/brand/pro-logo-padded.png
   version: '1.0'
   description: 'Operations tagged Contracts across 2 of this provider''s published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
@@ -11,9 +13,6 @@ tags:
   x-displayName: Contracts
 paths:
   /gateway/contract-orders/v1:
-    servers:
-    - url: https://api.procurement.opengov.com
-      description: Production
     post:
       tags:
       - Contracts
@@ -104,10 +103,10 @@ paths:
           description: Not Found, feature is not available in this environment.
         '500':
           description: Internal server error.
-  /public/api/v1/contracts:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts:
     get:
       description: This endpoint fetches a list of contracts, ordered by their ID, and supports cursor-based pagination.
       operationId: ListContractsV1Controller_listContracts
@@ -339,10 +338,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/{id}:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/{id}:
     get:
       description: This endpoint fetches a contract based on its unique ID.
       operationId: ListContractsV1Controller_getContractById
@@ -450,10 +449,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/{id}/attachments:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/{id}/attachments:
     get:
       description: This endpoint fetches all attachments associated with a contract by contract ID.
       operationId: ListContractsV1Controller_getContractAttachments
@@ -563,10 +562,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v1/contracts/{id}/contacts:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v1/contracts/{id}/contacts:
     get:
       description: This endpoint returns the customizable contacts associated with a contract (Contacts subtab).
       operationId: ListContractsV1Controller_getContractContacts
@@ -674,12 +673,12 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /gateway/v2/entities/{entityUuid}/contract-orders:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/contract-orders:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     post:
       tags:
       - Contracts
@@ -762,10 +761,10 @@ paths:
           description: Not Found, feature is not available in this environment.
         '500':
           description: Internal server error.
-  /public/api/v2/entities/{entityUuid}/contracts:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts:
     get:
       description: This endpoint fetches a list of contracts, ordered by their ID, and supports cursor-based pagination.
       operationId: ListContractsV2Controller_listContracts
@@ -1004,10 +1003,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/{id}:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/{id}:
     get:
       description: This endpoint fetches a contract based on its unique ID.
       operationId: ListContractsV2Controller_getContractById
@@ -1122,10 +1121,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/{id}/attachments:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/{id}/attachments:
     get:
       description: This endpoint fetches all attachments associated with a contract by contract ID.
       operationId: ListContractsV2Controller_getContractAttachments
@@ -1242,10 +1241,10 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
-  /public/api/v2/entities/{entityUuid}/contracts/{id}/contacts:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /public/api/v2/entities/{entityUuid}/contracts/{id}/contacts:
     get:
       description: This endpoint returns the customizable contacts associated with a contract (Contacts subtab).
       operationId: ListContractsV2Controller_getContractContacts
@@ -1360,42 +1359,31 @@ paths:
       security:
       - BearerToken: []
       - APIKey: []
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
 components:
   schemas:
-    ContactResponseDetails:
+    PageInfo:
       type: object
       properties:
-        id:
+        totalResultsCount:
           type: number
-          description: The unique identifier for the contact (contact.id, not contract_id).
-          example: 123
-        firstName:
-          type: string
-          description: Contact first name
-          example: John
-        lastName:
-          type: string
-          description: Contact last name
-          example: Doe
-        email:
-          type: string
-          description: Contact email address
-          example: john.doe@example.com
-        phone:
-          type: string
-          description: Contact phone number
-          example: +1 (555) 123-4567
+          description: The total number of categories matching the query.
+          example: 250
+        endCursor:
+          type: object
+          description: The cursor that points to the last category on the current page.
+          example: Y2F0ZWdvcnkuaWQ9MTMz
           nullable: true
-        title:
-          type: string
-          description: Contact title/role
-          example: Procurement Manager
-          nullable: true
+        hasMoreResults:
+          type: boolean
+          description: Indicates whether there are more categories available to fetch.
+          example: true
       required:
-      - id
-      - firstName
-      - lastName
-      - email
+      - totalResultsCount
+      - endCursor
+      - hasMoreResults
     ContractCategoriesResponseDetails:
       type: object
       properties:
@@ -1415,6 +1403,40 @@ components:
       - code
       - title
       - codeType
+    ContractMilestoneResponseDetails:
+      type: object
+      properties:
+        isEndDate:
+          type: boolean
+          description: Whether this milestone is the end date.
+          example: false
+        isStartDate:
+          type: boolean
+          description: Whether this milestone is the start date.
+          example: true
+        isInsuranceExpiration:
+          type: boolean
+          description: Whether this milestone is an insurance expiration.
+          example: false
+        isAnnualEvaluation:
+          type: boolean
+          description: Whether this milestone is an annual evaluation.
+          example: false
+        date:
+          type: string
+          description: The date of the milestone in ISO 8601 format.
+          example: '2025-07-05T15:25:45.511Z'
+        name:
+          type: string
+          description: The name of the milestone.
+          example: Contract Signed
+      required:
+      - isEndDate
+      - isStartDate
+      - isInsuranceExpiration
+      - isAnnualEvaluation
+      - date
+      - name
     ContractRenewalResponseDetails:
       type: object
       properties:
@@ -1434,6 +1456,31 @@ components:
       - length
       - lengthUnit
       - selected
+    AttachmentResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the attachment.
+          example: 1
+        filename:
+          type: string
+          description: The filename of the attachment.
+          example: contract.pdf
+        fileExtension:
+          type: string
+          description: The file extension of the attachment.
+          example: pdf
+        url:
+          type: string
+          description: The URL where the attachment can be accessed.
+          example: https://example.com/contract.pdf
+          nullable: true
+      required:
+      - id
+      - filename
+      - fileExtension
+      - url
     ErroredContractOrder:
       allOf:
       - $ref: '#/components/schemas/ContractOrder'
@@ -1445,25 +1492,6 @@ components:
             items:
               type: string
               example: 'contractId not found: CONTRACT-12345'
-    ContractBudgetResponseDetails:
-      type: object
-      properties:
-        amount:
-          type: number
-          description: The total budget amount.
-          example: 100000
-        issued:
-          type: number
-          description: The amount that has been issued.
-          example: 50000
-        paid:
-          type: number
-          description: The amount that has been paid.
-          example: 25000
-      required:
-      - amount
-      - issued
-      - paid
     ContactsResponseDto:
       type: object
       properties:
@@ -1484,75 +1512,71 @@ components:
             $ref: '#/components/schemas/AttachmentResponseDetails'
       required:
       - results
-    BasicContractDetails:
+    ContractOrder:
+      x-tags:
+      - Contracts
       type: object
+      required:
+      - amount
+      - department
+      - fiscalYear
+      - issueDate
+      - number
+      - paidAmount
+      anyOf:
+      - required:
+        - contractId
+      - required:
+        - vendorAssignedNo
       properties:
-        id:
+        amount:
           type: number
-          description: The unique identifier for the contract.
-          example: 123
-        title:
-          type: string
-          description: The title of the contract.
-          example: Annual Office Supply Contract
-        startDate:
-          type: string
-          description: The start date of the contract in ISO 8601.
-          example: '2023-07-05T15:25:45.511Z'
-        endDate:
-          type: string
-          description: The end date of the contract in ISO 8601.
-          example: '2025-07-05T15:25:45.511Z'
-        status:
-          type: string
-          description: The current status of the contract.
-          example: ended
-        isPublic:
-          type: boolean
-          description: Indicates if the contract is public.
-          example: true
-        isCooperative:
-          type: boolean
-          description: Indicates if the contract is a cooperative contract.
-          example: false
+          description: The contract order amount.
+          example: 1000.5
         contractId:
           type: string
-          description: The contract identifier string.
-          example: CNTR-2023-001
-        internalReferenceId:
+          description: Case sensitive. The ID of the associated contract. Required if `vendorAssignedNo` is not provided. If there are no contract matches or greater than 1 match, the `vendorAssignedNo` will be required.
+          maxLength: 255
+          example: CONTRACT-12345
+        department:
           type: string
-          description: The unique contract identifier per government
-          example: '000000001'
-        updated_at:
+          description: Case insensitive. The name of the department making the purchase.
+          maxLength: 128
+          example: finance
+        description:
           type: string
-          description: The last updated date of the contract in ISO 8601.
-          example: '2025-07-05T15:25:45.511Z'
-        created_at:
+          description: An optional description of the contract order.
+          maxLength: 500
+          example: Purchase of office supplies.
+        fiscalYear:
           type: string
-          description: The created date of the contract in ISO 8601.
-          example: '2025-07-04T15:25:45.511Z'
-        departmentName:
+          description: Case insensitive. The fiscal year associated with the contract order.
+          maxLength: 256
+          example: fy2024-2025
+        issueDate:
           type: string
-          description: The name of the department associated with the contract.
-          example: Public Works
-        durationType:
+          format: date
+          description: The date the contract order was approved and issued. Most common date formats are accepted. Ex. `YYYY-MM-DD` or `MM/DD/YYYY`.
+          example: '2023-10-01'
+        notes:
           type: string
-          description: The type of duration for the contract.
-          example: fixed
-      required:
-      - id
-      - title
-      - startDate
-      - endDate
-      - status
-      - isPublic
-      - isCooperative
-      - contractId
-      - internalReferenceId
-      - updated_at
-      - created_at
-      - departmentName
-      - durationType
+          description: Optional notes for the contract order.
+          maxLength: 500
+          example: Urgent request.
+        number:
+          type: string
+          description: Case sensitive. The contract order number.
+          maxLength: 64
+          example: PO-987654
+        paidAmount:
+          type: number
+          description: The amount that has been paid so far.
+          example: 500
+        vendorAssignedNo:
+          type: string
+          description: Case sensitive. The vendor assigned number for this contract order. Required if `contractId` is not provided. If there are no contract matches or greater than 1 match, the `contractId` will be required.
+          maxLength: 128
+          example: VENDOR-98765
     ContractByIdResponseDetails:
       type: object
       properties:
@@ -1728,6 +1752,39 @@ components:
       - renewals
       - budget
       - categories
+    ContractBudgetResponseDetails:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: The total budget amount.
+          example: 100000
+        issued:
+          type: number
+          description: The amount that has been issued.
+          example: 50000
+        paid:
+          type: number
+          description: The amount that has been paid.
+          example: 25000
+      required:
+      - amount
+      - issued
+      - paid
+    ContractEdge:
+      type: object
+      properties:
+        node:
+          description: The contract data.
+          allOf:
+          - $ref: '#/components/schemas/BasicContractDetails'
+        cursor:
+          type: string
+          description: A cursor for use in pagination.
+          example: Y29udHJhY3QuaWQ9MTIz
+      required:
+      - node
+      - cursor
     ContractPartyResponseDetails:
       type: object
       properties:
@@ -1781,130 +1838,40 @@ components:
       - phoneCountry
       - phone
       - email
-    ContractOrder:
-      x-tags:
-      - Contracts
-      type: object
-      required:
-      - amount
-      - department
-      - fiscalYear
-      - issueDate
-      - number
-      - paidAmount
-      anyOf:
-      - required:
-        - contractId
-      - required:
-        - vendorAssignedNo
-      properties:
-        amount:
-          type: number
-          description: The contract order amount.
-          example: 1000.5
-        contractId:
-          type: string
-          description: Case sensitive. The ID of the associated contract. Required if `vendorAssignedNo` is not provided. If there are no contract matches or greater than 1 match, the `vendorAssignedNo` will be required.
-          maxLength: 255
-          example: CONTRACT-12345
-        department:
-          type: string
-          description: Case insensitive. The name of the department making the purchase.
-          maxLength: 128
-          example: finance
-        description:
-          type: string
-          description: An optional description of the contract order.
-          maxLength: 500
-          example: Purchase of office supplies.
-        fiscalYear:
-          type: string
-          description: Case insensitive. The fiscal year associated with the contract order.
-          maxLength: 256
-          example: fy2024-2025
-        issueDate:
-          type: string
-          format: date
-          description: The date the contract order was approved and issued. Most common date formats are accepted. Ex. `YYYY-MM-DD` or `MM/DD/YYYY`.
-          example: '2023-10-01'
-        notes:
-          type: string
-          description: Optional notes for the contract order.
-          maxLength: 500
-          example: Urgent request.
-        number:
-          type: string
-          description: Case sensitive. The contract order number.
-          maxLength: 64
-          example: PO-987654
-        paidAmount:
-          type: number
-          description: The amount that has been paid so far.
-          example: 500
-        vendorAssignedNo:
-          type: string
-          description: Case sensitive. The vendor assigned number for this contract order. Required if `contractId` is not provided. If there are no contract matches or greater than 1 match, the `contractId` will be required.
-          maxLength: 128
-          example: VENDOR-98765
-    AttachmentResponseDetails:
+    ContactResponseDetails:
       type: object
       properties:
         id:
           type: number
-          description: The unique identifier for the attachment.
-          example: 1
-        filename:
+          description: The unique identifier for the contact (contact.id, not contract_id).
+          example: 123
+        firstName:
           type: string
-          description: The filename of the attachment.
-          example: contract.pdf
-        fileExtension:
+          description: Contact first name
+          example: John
+        lastName:
           type: string
-          description: The file extension of the attachment.
-          example: pdf
-        url:
+          description: Contact last name
+          example: Doe
+        email:
           type: string
-          description: The URL where the attachment can be accessed.
-          example: https://example.com/contract.pdf
+          description: Contact email address
+          example: john.doe@example.com
+        phone:
+          type: string
+          description: Contact phone number
+          example: +1 (555) 123-4567
+          nullable: true
+        title:
+          type: string
+          description: Contact title/role
+          example: Procurement Manager
           nullable: true
       required:
       - id
-      - filename
-      - fileExtension
-      - url
-    ContractMilestoneResponseDetails:
-      type: object
-      properties:
-        isEndDate:
-          type: boolean
-          description: Whether this milestone is the end date.
-          example: false
-        isStartDate:
-          type: boolean
-          description: Whether this milestone is the start date.
-          example: true
-        isInsuranceExpiration:
-          type: boolean
-          description: Whether this milestone is an insurance expiration.
-          example: false
-        isAnnualEvaluation:
-          type: boolean
-          description: Whether this milestone is an annual evaluation.
-          example: false
-        date:
-          type: string
-          description: The date of the milestone in ISO 8601 format.
-          example: '2025-07-05T15:25:45.511Z'
-        name:
-          type: string
-          description: The name of the milestone.
-          example: Contract Signed
-      required:
-      - isEndDate
-      - isStartDate
-      - isInsuranceExpiration
-      - isAnnualEvaluation
-      - date
-      - name
+      - firstName
+      - lastName
+      - email
     ListContractsResponseDto:
       type: object
       properties:
@@ -1920,40 +1887,75 @@ components:
       required:
       - results
       - pageInfo
-    PageInfo:
+    BasicContractDetails:
       type: object
       properties:
-        totalResultsCount:
+        id:
           type: number
-          description: The total number of categories matching the query.
-          example: 250
-        endCursor:
-          type: object
-          description: The cursor that points to the last category on the current page.
-          example: Y2F0ZWdvcnkuaWQ9MTMz
-          nullable: true
-        hasMoreResults:
-          type: boolean
-          description: Indicates whether there are more categories available to fetch.
-          example: true
-      required:
-      - totalResultsCount
-      - endCursor
-      - hasMoreResults
-    ContractEdge:
-      type: object
-      properties:
-        node:
-          description: The contract data.
-          allOf:
-          - $ref: '#/components/schemas/BasicContractDetails'
-        cursor:
+          description: The unique identifier for the contract.
+          example: 123
+        title:
           type: string
-          description: A cursor for use in pagination.
-          example: Y29udHJhY3QuaWQ9MTIz
+          description: The title of the contract.
+          example: Annual Office Supply Contract
+        startDate:
+          type: string
+          description: The start date of the contract in ISO 8601.
+          example: '2023-07-05T15:25:45.511Z'
+        endDate:
+          type: string
+          description: The end date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        status:
+          type: string
+          description: The current status of the contract.
+          example: ended
+        isPublic:
+          type: boolean
+          description: Indicates if the contract is public.
+          example: true
+        isCooperative:
+          type: boolean
+          description: Indicates if the contract is a cooperative contract.
+          example: false
+        contractId:
+          type: string
+          description: The contract identifier string.
+          example: CNTR-2023-001
+        internalReferenceId:
+          type: string
+          description: The unique contract identifier per government
+          example: '000000001'
+        updated_at:
+          type: string
+          description: The last updated date of the contract in ISO 8601.
+          example: '2025-07-05T15:25:45.511Z'
+        created_at:
+          type: string
+          description: The created date of the contract in ISO 8601.
+          example: '2025-07-04T15:25:45.511Z'
+        departmentName:
+          type: string
+          description: The name of the department associated with the contract.
+          example: Public Works
+        durationType:
+          type: string
+          description: The type of duration for the contract.
+          example: fixed
       required:
-      - node
-      - cursor
+      - id
+      - title
+      - startDate
+      - endDate
+      - status
+      - isPublic
+      - isCooperative
+      - contractId
+      - internalReferenceId
+      - updated_at
+      - created_at
+      - departmentName
+      - durationType
   responses:
     MissingProEntitlement:
       description: 'Your OpenGov account does not have OpenGov Procurement access on the requested entity.

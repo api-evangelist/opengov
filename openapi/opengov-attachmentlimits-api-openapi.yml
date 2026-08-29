@@ -20,13 +20,6 @@ tags:
 - name: attachmentLimits
 paths:
   /api/v1/po/entities/{entityId}/attachments/limits:
-    servers:
-    - url: https://api-purchase-order.procurement.opengov.com
-      description: Production
-    - url: https://api-purchase-order.procurement.ogstaging.us
-      description: Staging
-    - url: https://api-purchase-order.procurement.ogintegration.us
-      description: Integration
     get:
       tags:
       - attachmentLimits
@@ -245,14 +238,14 @@ paths:
       security:
       - platformApiKey: []
       - platformBearerToken: []
-  /api/v1/entities/{entityId}/attachments/limits:
     servers:
-    - url: https://api-receipts.procurement.opengov.com
+    - url: https://api-purchase-order.procurement.opengov.com
       description: Production
-    - url: https://api-receipts.procurement.ogstaging.us
+    - url: https://api-purchase-order.procurement.ogstaging.us
       description: Staging
-    - url: https://api-receipts.procurement.ogintegration.us
+    - url: https://api-purchase-order.procurement.ogintegration.us
       description: Integration
+  /api/v1/entities/{entityId}/attachments/limits:
     get:
       tags:
       - attachmentLimits
@@ -541,6 +534,13 @@ paths:
                 - detail
       description: Returns the configured MIME allow-list, per-file size cap, per-request file count cap, and per-receipt active count cap. The frontend uses these to drive dropzone `accept`, size validation, and count gating without duplicating constants.
       summary: Get attachment upload limits
+    servers:
+    - url: https://api-receipts.procurement.opengov.com
+      description: Production
+    - url: https://api-receipts.procurement.ogstaging.us
+      description: Staging
+    - url: https://api-receipts.procurement.ogintegration.us
+      description: Integration
 components:
   securitySchemes:
     platformApiKey:

@@ -197,9 +197,24 @@ paths:
       summary: List unresolved operation errors for a PO
 components:
   schemas:
+    OperationErrorEntityType:
+      type: string
+      enum:
+      - PO
+      - CO
+      title: Whether the error belongs to a PO or a CO
     OperationErrorPhase:
       type: string
       title: Operation error phase
+    OperationErrorCode:
+      type: string
+      title: Operation error code
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    OperationErrorSeverity:
+      type: string
+      title: Operation error severity
     OperationErrorModel.json:
       type: object
       required:
@@ -239,21 +254,6 @@ components:
           type: string
       additionalProperties: false
       title: OperationErrorModel.json
-    OperationErrorEntityType:
-      type: string
-      enum:
-      - PO
-      - CO
-      title: Whether the error belongs to a PO or a CO
-    OperationErrorSeverity:
-      type: string
-      title: Operation error severity
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    OperationErrorCode:
-      type: string
-      title: Operation error code
     EncumbranceTrigger:
       type: string
       title: Trigger action that caused the error

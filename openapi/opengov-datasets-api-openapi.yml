@@ -1,6 +1,8 @@
 openapi: 3.2.0
 info:
   title: Opengov Datasets API
+  x-logo:
+    url: https://assets.procurement.opengov.com/brand/pro-logo-padded.png
   version: '1.0'
   description: 'Operations tagged Datasets across 2 of this provider''s published API definitions: opengov-procurement-v1-openapi.yml, opengov-procurement-v2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
@@ -12,9 +14,6 @@ tags:
   x-displayName: Datasets
 paths:
   /gateway/datasets/v1/contracts:
-    servers:
-    - url: https://api.procurement.opengov.com
-      description: Production
     get:
       tags:
       - Datasets
@@ -52,10 +51,10 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/datasets/v1/contract-documents:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/datasets/v1/contract-documents:
     get:
       tags:
       - Datasets
@@ -93,10 +92,10 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/datasets/v1/contracts-with-spend:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/datasets/v1/contracts-with-spend:
     get:
       tags:
       - Datasets
@@ -134,10 +133,10 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/datasets/v1/intakes:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/datasets/v1/intakes:
     get:
       tags:
       - Datasets
@@ -175,10 +174,10 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/datasets/v1/solicitations:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/datasets/v1/solicitations:
     get:
       tags:
       - Datasets
@@ -216,10 +215,10 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/datasets/v1/vendor-companies:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/datasets/v1/vendor-companies:
     get:
       tags:
       - Datasets
@@ -326,10 +325,10 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/datasets/v1/vendor-subscribers:
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/datasets/v1/vendor-subscribers:
     get:
       tags:
       - Datasets
@@ -448,12 +447,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/contracts:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/contracts:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -493,12 +492,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/contract-documents:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/contract-documents:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -538,12 +537,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/contracts-with-spend:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/contracts-with-spend:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -583,12 +582,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/intakes:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/intakes:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -628,12 +627,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/solicitations:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/solicitations:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -673,12 +672,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/vendor-companies:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/vendor-companies:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -787,12 +786,12 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
-  /gateway/v2/entities/{entityUuid}/datasets/vendor-subscribers:
-    parameters:
-    - $ref: '#/components/parameters/EntityUuidPathParam'
     servers:
     - url: https://api.procurement.opengov.com
       description: Production
+  /gateway/v2/entities/{entityUuid}/datasets/vendor-subscribers:
+    parameters:
+    - $ref: '#/components/parameters/EntityUuidPathParam'
     get:
       tags:
       - Datasets
@@ -913,145 +912,11 @@ paths:
           description: Government not found or resource does not exist.
         '500':
           description: Internal server error.
+    servers:
+    - url: https://api.procurement.opengov.com
+      description: Production
 components:
   schemas:
-    Intake:
-      x-tags:
-      - Datasets
-      type: object
-      properties:
-        internal_project_id:
-          type: integer
-          description: The internal OpenGov intake project ID.
-          example: 12345
-        title:
-          type: string
-          description: The title of the intake.
-          example: New Office Building Construction
-        project_id:
-          type: string
-          description: External identifier for the project (often a financial system ID).
-          example: FIN-2024-001
-        type:
-          type: string
-          description: Project type.
-          example: Construction
-        requisition_id:
-          type: string
-          description: Identifier for the associated requisition.
-          example: REQ-78910
-        department:
-          type: string
-          description: Department responsible for the intake.
-          example: Public Works
-        project_contact:
-          type: string
-          description: First Name + Last Name of the Project Contact.
-          example: John Doe
-        procurement_contact:
-          type: string
-          description: First Name + Last Name of the Procurement Contact.
-          example: Jane Smith
-        release_project_date:
-          type: string
-          format: date-time
-          description: 'Timeline: Date the project is released to the public.'
-          example: '2024-03-01 00:00:00'
-        pre_proposal_date:
-          type: string
-          format: date-time
-          description: 'Timeline: Date and time of the pre-proposal meeting.'
-          example: '2024-03-15 10:00:00'
-        question_submission_deadline:
-          type: string
-          format: date-time
-          description: 'Timeline: Deadline for submitting questions.'
-          example: '2024-03-20 00:00:00'
-        question_response_deadline:
-          type: string
-          format: date-time
-          description: 'Timeline: Deadline for responses to questions.'
-          example: '2024-03-25 00:00:00'
-        proposal_submission_deadline:
-          type: string
-          format: date-time
-          description: 'Timeline: Deadline for submitting proposals.'
-          example: '2024-04-01 00:00:00'
-        reverse_auction_start_date:
-          type: string
-          format: date-time
-          description: 'Timeline: Start date and time for the reverse auction.'
-          example: '2024-04-05 14:00:00'
-        reverse_auction_end_date:
-          type: string
-          format: date-time
-          description: 'Timeline: End date and time for the reverse auction.'
-          example: '2024-04-05 16:00:00'
-        contractor_selection_date:
-          type: string
-          format: date
-          description: 'Timeline: Date the contractor is selected.'
-          example: '2024-04-10 00:00:00'
-        status:
-          type: string
-          description: 'One of: Draft, Review, Post Pending, Open, Auction Pending, Reverse Auction, Pending, Evaluation, Award Pending, Closed.'
-          example: Draft
-        status_sort:
-          type: integer
-          description: Numeric value used for sorting by status.
-          example: 1
-        workload_points_remaining:
-          type: integer
-          description: Number of workload points still remaining to complete the intake.
-          example: 50
-        created_by:
-          type: string
-          description: User who created the intake.
-          example: alice_admin
-        created_at:
-          type: string
-          format: date-time
-          description: Date and time when the intake was created.
-          example: '2024-02-15 08:30:00'
-        last_updated_at:
-          type: string
-          format: date-time
-          description: Date and time of the last update to the intake.
-          example: '2024-02-20 12:00:00'
-        assigned_to:
-          type: string
-          description: Name of the assigned approver.
-          example: Bob Approver
-        assigned_at:
-          type: string
-          format: date-time
-          description: Date and time when the project was assigned.
-          example: '2024-02-21 09:00:00'
-        budget_amount:
-          type: number
-          format: float
-          description: Total budget amount for the intake.
-          example: 500000
-        budget_account:
-          type: string
-          description: Account number associated with the budget.
-          example: ACC-123456
-        budget_description:
-          type: string
-          description: Description of the budget allocation.
-          example: Office construction fund
-        procurement_classification:
-          type: string
-          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
-          example: Construction
-        category_codes:
-          type: string
-          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
-          example: 05500, 06006, 06516, 06523
-        is_emergency:
-          type: boolean
-          description: This is an intake for emergency goods or services.
-          example: false
     Contract:
       x-tags:
       - Datasets
@@ -1236,6 +1101,132 @@ components:
           format: date
           description: The last update date of the contract.
           example: '2024-01-25'
+    VendorCompany:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_vendor_id:
+          type: integer
+          description: Internal OpenGov vendor ID.
+          example: 9876
+        date_added:
+          type: string
+          format: date
+          description: The date the vendor record was created.
+          example: '2024-03-01'
+        vendor_name:
+          type: string
+          description: Vendor organization legal name.
+          example: Acme Supplies, Inc.
+        doing_business_as:
+          type: string
+          description: Doing Business As (DBA) name, if applicable.
+          example: Acme
+        uei:
+          type: string
+          description: Unique Entity Identifier.
+          example: UEI-ABC123
+        duns:
+          type: string
+          description: DUNS number.
+          example: '123456789'
+        nigp_categories:
+          type: string
+          description: Comma-separated NIGP category codes.
+          example: 05500, 06006
+        naics_categories:
+          type: string
+          description: Comma-separated NAICS category codes.
+          example: '541330'
+        unspsc_categories:
+          type: string
+          description: Comma-separated UNSPSC category codes.
+          example: '80141600'
+        state_of_incorporation:
+          type: string
+          description: State or province of incorporation.
+          example: CA
+        business_type:
+          type: string
+          description: Business type.
+          example: LLC
+        languages:
+          type: string
+          description: Comma-separated languages.
+          example: English, Spanish
+        no_dbe:
+          type: string
+          description: No DBE designations.
+          example: WBE
+        self_reported_certifications:
+          type: string
+          description: Comma-separated list of self-reported certification codes.
+          example: MBE, WBE
+        verified_certifications:
+          type: string
+          description: Comma-separated list of verified certification codes.
+          example: WBE
+        primary_address_line_1:
+          type: string
+          description: Primary address line 1.
+          example: 123 Main St
+        primary_address_line_2:
+          type: string
+          description: Primary address line 2.
+          example: Suite 200
+        primary_city:
+          type: string
+          description: Primary address city.
+          example: San Francisco
+        primary_state:
+          type: string
+          description: Primary address state or province.
+          example: CA
+        primary_postal_code:
+          type: string
+          description: Primary address postal code.
+          example: '94105'
+        primary_country:
+          type: string
+          description: Primary address country code.
+          example: US
+        billing_address_line_1:
+          type: string
+          description: Billing address line 1.
+          example: 456 Market St
+        billing_address_line_2:
+          type: string
+          description: Billing address line 2.
+          example: Floor 3
+        billing_city:
+          type: string
+          description: Billing address city.
+          example: San Francisco
+        billing_state:
+          type: string
+          description: Billing address state or province.
+          example: CA
+        billing_postal_code:
+          type: string
+          description: Billing address postal code.
+          example: '94105'
+        billing_country:
+          type: string
+          description: Billing address country code.
+          example: US
+        website:
+          type: string
+          description: Vendor website URL.
+          example: https://acme.nil
+        phone:
+          type: string
+          description: Vendor organization phone.
+          example: +1 (415) 555-9876
+        fax_phone:
+          type: string
+          description: Vendor organization fax phone.
+          example: +1 (415) 555-0000
     Solicitation:
       x-tags:
       - Datasets
@@ -1401,89 +1392,6 @@ components:
           type: integer
           description: 'Vendor Analytics: Number of vendors who have submitted a response.'
           example: 8
-    ContractDocument:
-      x-tags:
-      - Datasets
-      type: object
-      properties:
-        internal_project_id:
-          type: integer
-          description: The internal OpenGov contract document ID.
-          example: 12345
-        title:
-          type: string
-          description: The title of the document.
-          example: Carroll Bog Boardwalk Construction
-        project_id:
-          type: string
-          description: External identifier for the project.
-          example: P-2024-001
-        template:
-          type: string
-          description: Name of the document template used for the contract document.
-          example: Standard Construction Template
-        template_abbreviation:
-          type: string
-          description: Abbreviated version of the document template name.
-          example: SCT
-        requisition_id:
-          type: string
-          description: Identifier for the requisition linked to the contract  project.
-          example: REQ-45678
-        department:
-          type: string
-          description: Department responsible for the project.
-          example: Facilities Management
-        project_contact:
-          type: string
-          description: First Name + Last Name of the Project Contact.
-          example: John Doe
-        procurement_contact:
-          type: string
-          description: First Name + Last Name of the Procurement Contact.
-          example: Jane Smith
-        status:
-          type: string
-          description: 'One of: Draft, Review, Final, Closed.'
-          example: Review
-        status_sort:
-          type: integer
-          description: Numeric representation for sorting based on status.
-          example: 2
-        workload_points_remaining:
-          type: number
-          description: Number of workload points left to complete the contract document.
-          example: 50.5
-        created_by:
-          type: string
-          description: User who created the project.
-          example: admin_user
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp for when the project was created.
-          example: '2024-03-01 22:20:31'
-        last_updated_at:
-          type: string
-          format: date-time
-          description: Timestamp for the last update made to the project.
-          example: '2024-03-03 23:29:00'
-        procurement_classification:
-          type: string
-          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
-          example: Invitation to Bid
-        category_codes:
-          type: string
-          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
-          example: 05500, 06006, 06516, 06523
-        is_emergency:
-          type: boolean
-          description: This is a contract document for emergency goods or services.
-          example: 0
-        internal_contract_id:
-          type: integer
-          description: The internal OpenGov contract ID that this contract document is associated with.
-          example: 12345
     ContractWithSpend:
       x-tags:
       - Datasets
@@ -1549,132 +1457,6 @@ components:
             format: date
             description: The timestamp when the purchase order was last updated within OpenGov.
             example: '2024-01-02'
-    VendorCompany:
-      x-tags:
-      - Datasets
-      type: object
-      properties:
-        internal_vendor_id:
-          type: integer
-          description: Internal OpenGov vendor ID.
-          example: 9876
-        date_added:
-          type: string
-          format: date
-          description: The date the vendor record was created.
-          example: '2024-03-01'
-        vendor_name:
-          type: string
-          description: Vendor organization legal name.
-          example: Acme Supplies, Inc.
-        doing_business_as:
-          type: string
-          description: Doing Business As (DBA) name, if applicable.
-          example: Acme
-        uei:
-          type: string
-          description: Unique Entity Identifier.
-          example: UEI-ABC123
-        duns:
-          type: string
-          description: DUNS number.
-          example: '123456789'
-        nigp_categories:
-          type: string
-          description: Comma-separated NIGP category codes.
-          example: 05500, 06006
-        naics_categories:
-          type: string
-          description: Comma-separated NAICS category codes.
-          example: '541330'
-        unspsc_categories:
-          type: string
-          description: Comma-separated UNSPSC category codes.
-          example: '80141600'
-        state_of_incorporation:
-          type: string
-          description: State or province of incorporation.
-          example: CA
-        business_type:
-          type: string
-          description: Business type.
-          example: LLC
-        languages:
-          type: string
-          description: Comma-separated languages.
-          example: English, Spanish
-        no_dbe:
-          type: string
-          description: No DBE designations.
-          example: WBE
-        self_reported_certifications:
-          type: string
-          description: Comma-separated list of self-reported certification codes.
-          example: MBE, WBE
-        verified_certifications:
-          type: string
-          description: Comma-separated list of verified certification codes.
-          example: WBE
-        primary_address_line_1:
-          type: string
-          description: Primary address line 1.
-          example: 123 Main St
-        primary_address_line_2:
-          type: string
-          description: Primary address line 2.
-          example: Suite 200
-        primary_city:
-          type: string
-          description: Primary address city.
-          example: San Francisco
-        primary_state:
-          type: string
-          description: Primary address state or province.
-          example: CA
-        primary_postal_code:
-          type: string
-          description: Primary address postal code.
-          example: '94105'
-        primary_country:
-          type: string
-          description: Primary address country code.
-          example: US
-        billing_address_line_1:
-          type: string
-          description: Billing address line 1.
-          example: 456 Market St
-        billing_address_line_2:
-          type: string
-          description: Billing address line 2.
-          example: Floor 3
-        billing_city:
-          type: string
-          description: Billing address city.
-          example: San Francisco
-        billing_state:
-          type: string
-          description: Billing address state or province.
-          example: CA
-        billing_postal_code:
-          type: string
-          description: Billing address postal code.
-          example: '94105'
-        billing_country:
-          type: string
-          description: Billing address country code.
-          example: US
-        website:
-          type: string
-          description: Vendor website URL.
-          example: https://acme.nil
-        phone:
-          type: string
-          description: Vendor organization phone.
-          example: +1 (415) 555-9876
-        fax_phone:
-          type: string
-          description: Vendor organization fax phone.
-          example: +1 (415) 555-0000
     VendorSubscriber:
       x-tags:
       - Datasets
@@ -1825,6 +1607,226 @@ components:
           type: string
           description: Vendor organization fax phone.
           example: +1 (415) 555-0000
+    Intake:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_project_id:
+          type: integer
+          description: The internal OpenGov intake project ID.
+          example: 12345
+        title:
+          type: string
+          description: The title of the intake.
+          example: New Office Building Construction
+        project_id:
+          type: string
+          description: External identifier for the project (often a financial system ID).
+          example: FIN-2024-001
+        type:
+          type: string
+          description: Project type.
+          example: Construction
+        requisition_id:
+          type: string
+          description: Identifier for the associated requisition.
+          example: REQ-78910
+        department:
+          type: string
+          description: Department responsible for the intake.
+          example: Public Works
+        project_contact:
+          type: string
+          description: First Name + Last Name of the Project Contact.
+          example: John Doe
+        procurement_contact:
+          type: string
+          description: First Name + Last Name of the Procurement Contact.
+          example: Jane Smith
+        release_project_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Date the project is released to the public.'
+          example: '2024-03-01 00:00:00'
+        pre_proposal_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Date and time of the pre-proposal meeting.'
+          example: '2024-03-15 10:00:00'
+        question_submission_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for submitting questions.'
+          example: '2024-03-20 00:00:00'
+        question_response_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for responses to questions.'
+          example: '2024-03-25 00:00:00'
+        proposal_submission_deadline:
+          type: string
+          format: date-time
+          description: 'Timeline: Deadline for submitting proposals.'
+          example: '2024-04-01 00:00:00'
+        reverse_auction_start_date:
+          type: string
+          format: date-time
+          description: 'Timeline: Start date and time for the reverse auction.'
+          example: '2024-04-05 14:00:00'
+        reverse_auction_end_date:
+          type: string
+          format: date-time
+          description: 'Timeline: End date and time for the reverse auction.'
+          example: '2024-04-05 16:00:00'
+        contractor_selection_date:
+          type: string
+          format: date
+          description: 'Timeline: Date the contractor is selected.'
+          example: '2024-04-10 00:00:00'
+        status:
+          type: string
+          description: 'One of: Draft, Review, Post Pending, Open, Auction Pending, Reverse Auction, Pending, Evaluation, Award Pending, Closed.'
+          example: Draft
+        status_sort:
+          type: integer
+          description: Numeric value used for sorting by status.
+          example: 1
+        workload_points_remaining:
+          type: integer
+          description: Number of workload points still remaining to complete the intake.
+          example: 50
+        created_by:
+          type: string
+          description: User who created the intake.
+          example: alice_admin
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the intake was created.
+          example: '2024-02-15 08:30:00'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: Date and time of the last update to the intake.
+          example: '2024-02-20 12:00:00'
+        assigned_to:
+          type: string
+          description: Name of the assigned approver.
+          example: Bob Approver
+        assigned_at:
+          type: string
+          format: date-time
+          description: Date and time when the project was assigned.
+          example: '2024-02-21 09:00:00'
+        budget_amount:
+          type: number
+          format: float
+          description: Total budget amount for the intake.
+          example: 500000
+        budget_account:
+          type: string
+          description: Account number associated with the budget.
+          example: ACC-123456
+        budget_description:
+          type: string
+          description: Description of the budget allocation.
+          example: Office construction fund
+        procurement_classification:
+          type: string
+          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
+          example: Construction
+        category_codes:
+          type: string
+          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
+          example: 05500, 06006, 06516, 06523
+        is_emergency:
+          type: boolean
+          description: This is an intake for emergency goods or services.
+          example: false
+    ContractDocument:
+      x-tags:
+      - Datasets
+      type: object
+      properties:
+        internal_project_id:
+          type: integer
+          description: The internal OpenGov contract document ID.
+          example: 12345
+        title:
+          type: string
+          description: The title of the document.
+          example: Carroll Bog Boardwalk Construction
+        project_id:
+          type: string
+          description: External identifier for the project.
+          example: P-2024-001
+        template:
+          type: string
+          description: Name of the document template used for the contract document.
+          example: Standard Construction Template
+        template_abbreviation:
+          type: string
+          description: Abbreviated version of the document template name.
+          example: SCT
+        requisition_id:
+          type: string
+          description: Identifier for the requisition linked to the contract  project.
+          example: REQ-45678
+        department:
+          type: string
+          description: Department responsible for the project.
+          example: Facilities Management
+        project_contact:
+          type: string
+          description: First Name + Last Name of the Project Contact.
+          example: John Doe
+        procurement_contact:
+          type: string
+          description: First Name + Last Name of the Procurement Contact.
+          example: Jane Smith
+        status:
+          type: string
+          description: 'One of: Draft, Review, Final, Closed.'
+          example: Review
+        status_sort:
+          type: integer
+          description: Numeric representation for sorting based on status.
+          example: 2
+        workload_points_remaining:
+          type: number
+          description: Number of workload points left to complete the contract document.
+          example: 50.5
+        created_by:
+          type: string
+          description: User who created the project.
+          example: admin_user
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp for when the project was created.
+          example: '2024-03-01 22:20:31'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: Timestamp for the last update made to the project.
+          example: '2024-03-03 23:29:00'
+        procurement_classification:
+          type: string
+          description: Comma-separated list of Procurement Classification tags. Each tag name may be up to 256 characters.
+          example: Invitation to Bid
+        category_codes:
+          type: string
+          description: Comma-separated list of Category codes. Each code may be up to 8 characters.
+          example: 05500, 06006, 06516, 06523
+        is_emergency:
+          type: boolean
+          description: This is a contract document for emergency goods or services.
+          example: 0
+        internal_contract_id:
+          type: integer
+          description: The internal OpenGov contract ID that this contract document is associated with.
+          example: 12345
   responses:
     MissingProEntitlement:
       description: 'Your OpenGov account does not have OpenGov Procurement access on the requested entity.

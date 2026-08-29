@@ -1083,57 +1083,16 @@ paths:
         required: true
 components:
   schemas:
-    NotFoundHttpError:
+    TemplateSheetColumnInfo:
       type: object
       required:
-      - message
-      - _tag
+      - name
       properties:
-        message:
+        name:
           type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
+          description: Column header as in the template
       additionalProperties: false
-    ProcessImportRequest:
-      type: object
-      required:
-      - uploadKey
-      - fileName
-      properties:
-        uploadKey:
-          type: string
-          description: a string at least 1 character(s) long
-          title: minLength(1)
-          minLength: 1
-        fileName:
-          type: string
-          description: a string at most 512 character(s) long
-          title: maxLength(512)
-          minLength: 1
-          maxLength: 512
-      additionalProperties: false
-      description: Start an import job from a previously presigned-uploaded S3 object
-    PayloadTooLargeHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        maxSizeBytes:
-          type: number
-        actualSizeBytes:
-          type: number
-        _tag:
-          type: string
-          enum:
-          - PayloadTooLargeHttpError
-      additionalProperties: false
+      title: Template Sheet Column
     TemplateDownloadResponse:
       type: object
       required:
@@ -1156,124 +1115,6 @@ components:
       additionalProperties: false
       description: Template download response with presigned URL and structured instructions for UI display
       title: Template Download Response
-    TemplateSheetInfo:
-      type: object
-      required:
-      - sheetName
-      - columns
-      properties:
-        sheetName:
-          type: string
-          description: Worksheet tab name
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/TemplateSheetColumnInfo'
-          description: Columns present on this sheet in template order
-      additionalProperties: false
-      description: One import template tab and its columns
-      title: Template Sheet
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    PresignedUploadResponse:
-      type: object
-      required:
-      - uploadUrl
-      - uploadKey
-      - expiresInSeconds
-      properties:
-        uploadUrl:
-          type: string
-          description: Presigned S3 URL for PUT upload
-        uploadKey:
-          type: string
-          description: Opaque key to pass back to processImport
-        expiresInSeconds:
-          type: number
-      additionalProperties: false
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    InternalServerHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - InternalServerHttpError
-      additionalProperties: false
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
-      additionalProperties: false
     TemplateInstructions:
       type: object
       required:
@@ -1304,19 +1145,71 @@ components:
       additionalProperties: false
       description: General instructions, required sheets, and supplementary notes; optional sheet-wise column metadata when available
       title: Template Instructions
-    EntityNotFoundError:
+    PresignedUploadResponse:
       type: object
       required:
-      - entityId
+      - uploadUrl
+      - uploadKey
+      - expiresInSeconds
+      properties:
+        uploadUrl:
+          type: string
+          description: Presigned S3 URL for PUT upload
+        uploadKey:
+          type: string
+          description: Opaque key to pass back to processImport
+        expiresInSeconds:
+          type: number
+      additionalProperties: false
+    TemplateSheetInfo:
+      type: object
+      required:
+      - sheetName
+      - columns
+      properties:
+        sheetName:
+          type: string
+          description: Worksheet tab name
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSheetColumnInfo'
+          description: Columns present on this sheet in template order
+      additionalProperties: false
+      description: One import template tab and its columns
+      title: Template Sheet
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
       - _tag
       properties:
-        entityId:
+        message:
           type: string
         _tag:
           type: string
           enum:
-          - EntityNotFoundError
+          - InternalServerHttpError
       additionalProperties: false
+    ProcessImportRequest:
+      type: object
+      required:
+      - uploadKey
+      - fileName
+      properties:
+        uploadKey:
+          type: string
+          description: a string at least 1 character(s) long
+          title: minLength(1)
+          minLength: 1
+        fileName:
+          type: string
+          description: a string at most 512 character(s) long
+          title: maxLength(512)
+          minLength: 1
+          maxLength: 512
+      additionalProperties: false
+      description: Start an import job from a previously presigned-uploaded S3 object
     HttpApiDecodeError:
       type: object
       required:
@@ -1336,16 +1229,18 @@ components:
           - HttpApiDecodeError
       additionalProperties: false
       description: The request did not match the expected schema
-    TemplateSheetColumnInfo:
+    AuthError:
       type: object
       required:
-      - name
+      - _tag
       properties:
-        name:
+        cause:
+          title: unknown
+        _tag:
           type: string
-          description: Column header as in the template
+          enum:
+          - AuthError
       additionalProperties: false
-      title: Template Sheet Column
     ValidationFailedHttpError:
       type: object
       required:
@@ -1387,17 +1282,65 @@ components:
           enum:
           - ValidationFailedHttpError
       additionalProperties: false
-    AuthError:
+    EntityNotFoundError:
       type: object
       required:
+      - entityId
       - _tag
       properties:
-        cause:
-          title: unknown
+        entityId:
+          type: string
         _tag:
           type: string
           enum:
-          - AuthError
+          - EntityNotFoundError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    PayloadTooLargeHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        maxSizeBytes:
+          type: number
+        actualSizeBytes:
+          type: number
+        _tag:
+          type: string
+          enum:
+          - PayloadTooLargeHttpError
       additionalProperties: false
     UnauthorizedHttpError:
       type: object
@@ -1416,21 +1359,6 @@ components:
           enum:
           - UnauthorizedHttpError
       additionalProperties: false
-    PresignedUploadRequest:
-      type: object
-      required:
-      - fileName
-      properties:
-        fileName:
-          type: string
-          description: a string at most 512 character(s) long
-          title: maxLength(512)
-          minLength: 1
-          maxLength: 512
-        contentType:
-          type: string
-      additionalProperties: false
-      description: Request a presigned S3 PUT URL for direct-from-browser upload
     PropertyKey:
       anyOf:
       - type: string
@@ -1448,6 +1376,78 @@ components:
             type: string
         additionalProperties: false
         description: an object to be decoded into a globally shared symbol
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    PresignedUploadRequest:
+      type: object
+      required:
+      - fileName
+      properties:
+        fileName:
+          type: string
+          description: a string at most 512 character(s) long
+          title: maxLength(512)
+          minLength: 1
+          maxLength: 512
+        contentType:
+          type: string
+      additionalProperties: false
+      description: Request a presigned S3 PUT URL for direct-from-browser upload
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: http

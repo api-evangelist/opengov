@@ -26,13 +26,6 @@ tags:
 - name: claims
 paths:
   /api/v1/po/entities/{entityId}/claims:
-    servers:
-    - url: https://api-purchase-order.procurement.opengov.com
-      description: Production
-    - url: https://api-purchase-order.procurement.ogstaging.us
-      description: Staging
-    - url: https://api-purchase-order.procurement.ogintegration.us
-      description: Integration
     get:
       tags:
       - claims
@@ -203,14 +196,14 @@ paths:
       security:
       - platformApiKey: []
       - platformBearerToken: []
-  /api/v1/entities/{entityId}/claims:
     servers:
-    - url: https://api-receipts.procurement.opengov.com
+    - url: https://api-purchase-order.procurement.opengov.com
       description: Production
-    - url: https://api-receipts.procurement.ogstaging.us
+    - url: https://api-purchase-order.procurement.ogstaging.us
       description: Staging
-    - url: https://api-receipts.procurement.ogintegration.us
+    - url: https://api-purchase-order.procurement.ogintegration.us
       description: Integration
+  /api/v1/entities/{entityId}/claims:
     get:
       tags:
       - claims
@@ -507,7 +500,148 @@ paths:
                 - detail
       description: Retrieve all claims and effective claims for the authenticated user within the current entity context.
       summary: Get User Claims
+    servers:
+    - url: https://api-receipts.procurement.opengov.com
+      description: Production
+    - url: https://api-receipts.procurement.ogstaging.us
+      description: Staging
+    - url: https://api-receipts.procurement.ogintegration.us
+      description: Integration
 components:
+  schemas:
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

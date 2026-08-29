@@ -92,20 +92,66 @@ paths:
       security:
       - ApiTokenAuth: []
 components:
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Authorization Error
+                  message: 'Access denied: User not authorized to perform this action'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
     Group:
       type: object
       description: CKAN Group
@@ -125,6 +171,19 @@ components:
           type: string
         package_count:
           type: integer
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
     ErrorEnvelope:
       type: object
       required:
@@ -145,65 +204,6 @@ components:
               type: string
             message:
               type: string
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Not found error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            not_found_error:
-              summary: Not found
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Not Found Error
-                  message: Not found
-    ServerError:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
-    AuthorizationError:
-      description: Authorization error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            authorization_error:
-              summary: Authorization error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Authorization Error
-                  message: 'Access denied: User not authorized to perform this action'
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

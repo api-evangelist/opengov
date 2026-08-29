@@ -1,10 +1,10 @@
 openapi: 3.2.0
 info:
+  title: Opengov Step Comments API
   version: v1
-  title: Permitting Licensing & Code Enforcement Step Comments API
   x-logo:
     url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
-  description: "The OpenGov Permitting & Licensing API is organized around REST. The API is based on the JSON API specification and uses standard HTTP response codes, authentication, and verbs.\n\n## Authentication\nThe OpenGov Permitting & Licensing API is authenticated using the [OAuth2](https://www.rfc-editor.org/rfc/rfc6749) Client Credentials flow. Access tokens are provided as a [bearer token](https://datatracker.ietf.org/doc/html/rfc6750) Authorization header in all API requests.\n\nTo obtain an access token, you must have an OpenGov-provided **Client ID** and **Client Secret** and make a POST request to https://accounts.viewpointcloud.com/oauth/token\n\nExample request:\n\n```bash\ncurl --request POST \\\n  --url https://accounts.viewpointcloud.com/oauth/token \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'grant_type=client_credentials' \\\n  --data 'client_id=YOUR_CLIENT_ID' \\\n  --data 'client_secret=YOUR_CLIENT_SECRET' \\\n  --data 'audience=viewpointcloud.com/api/production'\n```\n\nThe response will include:\n- `access_token`: Access token issued by the authorization server\n- `token_type`: Type of token issued (typically `Bearer`)\n- `expires_in`: The lifetime in seconds of the access token\n<br />\n<br />\nThe API will return a 401 error if a token is invalid.\n<br />\n<br />\n"
+  description: 'Operations tagged Step Comments across 2 of this provider''s published API definitions: opengov-permitting-licensing-v1-openapi-original.yml, opengov-permitting-licensing-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.plce.opengov.com/plce
   description: Production
@@ -89,6 +89,9 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
+    servers:
+    - url: https://api.plce.opengov.com/plce
+      description: Production
   /v1/{community}/records/{recordID}/workflow-steps/{stepID}/comments/{commentID}:
     delete:
       summary: Delete a step comment
@@ -113,8 +116,65 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
+    servers:
+    - url: https://api.plce.opengov.com/plce
+      description: Production
 components:
+  parameters:
+    commentID:
+      name: commentID
+      in: path
+      description: ID of a comment on a workflow step of a record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    stepID:
+      name: stepID
+      in: path
+      description: ID of workflow step on a record
+      required: true
+      schema:
+        type: integer
   schemas:
+    RecordStepCommentMutable:
+      type: object
+      example:
+        type: record_step_comment
+        attributes:
+          type: COMMENT
+          comment: Hello World
+      properties:
+        type:
+          type: string
+          description: Type of the resource
+          enum:
+          - record_step_comment
+        attributes:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - COMMENT
+              - INTERNAL_NOTE
+              description: Value indicates the type of comment
+            comment:
+              type: string
+              description: Contents of the comment
     RecordStepComment:
       x-tags:
       - Step Comments
@@ -158,76 +218,15 @@ components:
               type: string
               format: date-time
               description: Timestamp that indicates when this comment was created
-    RecordStepCommentMutable:
-      type: object
-      example:
-        type: record_step_comment
-        attributes:
-          type: COMMENT
-          comment: Hello World
-      properties:
-        type:
-          type: string
-          description: Type of the resource
-          enum:
-          - record_step_comment
-        attributes:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - COMMENT
-              - INTERNAL_NOTE
-              description: Value indicates the type of comment
-            comment:
-              type: string
-              description: Contents of the comment
-  parameters:
-    stepID:
-      name: stepID
-      in: path
-      description: ID of workflow step on a record
-      required: true
-      schema:
-        type: integer
-    commentID:
-      name: commentID
-      in: path
-      description: ID of a comment on a workflow step of a record
-      required: true
-      schema:
-        type: integer
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-tagGroups:
-- name: Records
-  tags:
-  - Records
-  - Record Contacts
-  - Record Locations
-  - Record Form
-- name: Workflow
-  tags:
-  - Steps
-  - Step Comments
-- name: Events
-  tags:
-  - Event Types
+x-refined-from:
+- opengov-permitting-licensing-v1-openapi-original.yml
+- opengov-permitting-licensing-v1-openapi.yml
+x-og-spec-id: bnp-api-v1
+x-og-env-servers:
+  production: https://api.bnp.opengov.com
+  development: https://api.bnp.ogintegration.us

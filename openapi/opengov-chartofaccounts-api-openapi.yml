@@ -212,6 +212,148 @@ paths:
           description: Internal Server Error - An unexpected condition was encountered.
 components:
   schemas:
+    PaginatedResponseLinks:
+      type: object
+      description: Standard pagination links for collection responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link to the current page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
+        next:
+          type: string
+          format: uri
+          description: Link to the next page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
+        prev:
+          type: string
+          format: uri
+          description: Link to the previous page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        first:
+          type: string
+          format: uri
+          description: Link to the first page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        last:
+          type: string
+          format: uri
+          description: Link to the last page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
+    ChartOfAccountsListResponse:
+      type: object
+      description: A JSON:API document containing a list of Chart Of Accounts resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartOfAccountsResource'
+        links:
+          $ref: '#/components/schemas/PaginatedResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    ChartOfAccountsResponse:
+      type: object
+      description: A JSON:API document containing a single Chart of Accounts resource.
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ChartOfAccountsResource'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+    ResponseLinks:
+      type: object
+      description: Standard links object for non-paginated responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link of the current request.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1
+    ResponseMeta:
+      type: object
+      description: Standard metadata for collection responses
+      properties:
+        totalRecords:
+          type: integer
+          description: The total number of records matching the query.
+          example: 42
+    AccountsByIdsResponse:
+      type: object
+      description: A JSON:API document containing a list of Account resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - type
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - account
+                description: The type of the resource.
+              id:
+                type: string
+                format: uuid
+                description: The unique identifier for the account.
+              attributes:
+                type: object
+                required:
+                - label
+                - accountType
+                - status
+                - segments
+                properties:
+                  label:
+                    type: string
+                    description: The label of the account.
+                    example: Office Supplies
+                  description:
+                    type: string
+                    description: Optional description of the account.
+                    example: General office supplies and materials
+                  accountType:
+                    type: string
+                    enum:
+                    - EXPENSES
+                    - REVENUES
+                    - ASSETS
+                    - LIABILITIES
+                    - EQUITIES
+                    - FTES
+                    - UNCATEGORIZED
+                    description: The ledger type of the account.
+                    example: EXPENSES
+                  status:
+                    type: string
+                    enum:
+                    - OPERATIONAL
+                    - PROPOSED
+                    description: The status of the account.
+                    example: OPERATIONAL
+                  segments:
+                    type: array
+                    items:
+                      type: string
+                    description: List of segments associated with this account.
+                    example:
+                    - '101'
+                    - '5100'
+                    - '001'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
     ChartOfAccountsResource:
       type: object
       required:
@@ -329,148 +471,6 @@ components:
                 required:
                 - type
                 - application
-    PaginatedResponseLinks:
-      type: object
-      description: Standard pagination links for collection responses
-      properties:
-        self:
-          type: string
-          format: uri
-          description: Link to the current page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
-        next:
-          type: string
-          format: uri
-          description: Link to the next page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
-        prev:
-          type: string
-          format: uri
-          description: Link to the previous page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        first:
-          type: string
-          format: uri
-          description: Link to the first page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        last:
-          type: string
-          format: uri
-          description: Link to the last page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
-    AccountsByIdsResponse:
-      type: object
-      description: A JSON:API document containing a list of Account resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - type
-            - id
-            - attributes
-            properties:
-              type:
-                type: string
-                enum:
-                - account
-                description: The type of the resource.
-              id:
-                type: string
-                format: uuid
-                description: The unique identifier for the account.
-              attributes:
-                type: object
-                required:
-                - label
-                - accountType
-                - status
-                - segments
-                properties:
-                  label:
-                    type: string
-                    description: The label of the account.
-                    example: Office Supplies
-                  description:
-                    type: string
-                    description: Optional description of the account.
-                    example: General office supplies and materials
-                  accountType:
-                    type: string
-                    enum:
-                    - EXPENSES
-                    - REVENUES
-                    - ASSETS
-                    - LIABILITIES
-                    - EQUITIES
-                    - FTES
-                    - UNCATEGORIZED
-                    description: The ledger type of the account.
-                    example: EXPENSES
-                  status:
-                    type: string
-                    enum:
-                    - OPERATIONAL
-                    - PROPOSED
-                    description: The status of the account.
-                    example: OPERATIONAL
-                  segments:
-                    type: array
-                    items:
-                      type: string
-                    description: List of segments associated with this account.
-                    example:
-                    - '101'
-                    - '5100'
-                    - '001'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-    ResponseLinks:
-      type: object
-      description: Standard links object for non-paginated responses
-      properties:
-        self:
-          type: string
-          format: uri
-          description: Link of the current request.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1
-    ResponseMeta:
-      type: object
-      description: Standard metadata for collection responses
-      properties:
-        totalRecords:
-          type: integer
-          description: The total number of records matching the query.
-          example: 42
-    ChartOfAccountsListResponse:
-      type: object
-      description: A JSON:API document containing a list of Chart Of Accounts resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChartOfAccountsResource'
-        links:
-          $ref: '#/components/schemas/PaginatedResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-    ChartOfAccountsResponse:
-      type: object
-      description: A JSON:API document containing a single Chart of Accounts resource.
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ChartOfAccountsResource'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
   securitySchemes:
     BearerAuth:
       type: http

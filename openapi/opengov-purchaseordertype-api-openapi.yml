@@ -186,6 +186,17 @@ paths:
       summary: List PO types
 components:
   schemas:
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
+    PoType:
+      type: string
+      enum:
+      - Standard
+      - Blanket
+      - Emergency
+      description: 'Purchase order type: Standard, Blanket, Emergency'
+      title: PO Type
     PurchaseOrderTypeModel.json:
       type: object
       required:
@@ -214,17 +225,6 @@ components:
           $ref: '#/components/schemas/DateTimeUtc'
       additionalProperties: false
       title: PurchaseOrderTypeModel.json
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
-    PoType:
-      type: string
-      enum:
-      - Standard
-      - Blanket
-      - Emergency
-      description: 'Purchase order type: Standard, Blanket, Emergency'
-      title: PO Type
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

@@ -18,9 +18,6 @@ tags:
   description: Organizations are used to create, manage and publish datasets.
 paths:
   /organization_list:
-    servers:
-    - url: https://cloudcity.ogopendata.com/api/3/action
-      description: Cloud City Open Data
     get:
       operationId: organizationList
       summary: Return a list of the names of the site's organizations.
@@ -59,10 +56,10 @@ paths:
           $ref: '#/components/responses/ServerError'
       security:
       - ApiTokenAuth: []
-  /organization_show:
     servers:
     - url: https://cloudcity.ogopendata.com/api/3/action
       description: Cloud City Open Data
+  /organization_show:
     get:
       operationId: organizationShow
       summary: Return the details of a organization.
@@ -108,17 +105,12 @@ paths:
           $ref: '#/components/responses/ServerError'
       security:
       - ApiTokenAuth: []
+    servers:
+    - url: https://cloudcity.ogopendata.com/api/3/action
+      description: Cloud City Open Data
   /v2/{community}/organization:
     parameters:
     - $ref: '#/paths/~1v2~1{community}~1approval-steps/parameters/0'
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
-      x-og-envs:
-      - production
-      - staging
-      - development
-      - local
     get:
       summary: Retrieve an organization
       description: 'Retrieve details about the organization.
@@ -201,7 +193,74 @@ paths:
       - basicHttpAuthentication: []
       - auth0Prod: []
       - auth0Dev: []
+    servers:
+    - url: https://api.plce.opengov.com/plce
+      description: Production
+      x-og-envs:
+      - production
+      - staging
+      - development
+      - local
 components:
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Authorization Error
+                  message: 'Access denied: User not authorized to perform this action'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
     Envelope:
       type: object
@@ -257,65 +316,6 @@ components:
               type: string
             message:
               type: string
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Not found error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            not_found_error:
-              summary: Not found
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Not Found Error
-                  message: Not found
-    ServerError:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
-    AuthorizationError:
-      description: Authorization error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            authorization_error:
-              summary: Authorization error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Authorization Error
-                  message: 'Access denied: User not authorized to perform this action'
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

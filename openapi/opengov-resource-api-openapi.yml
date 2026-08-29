@@ -167,7 +167,89 @@ paths:
       security:
       - ApiTokenAuth: []
 components:
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Authorization Error
+                  message: 'Access denied: User not authorized to perform this action'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
+    ResourceCreateMultipart:
+      type: object
+      description: Resource create multipart form-data
+      required:
+      - package_id
+      - upload
+      properties:
+        package_id:
+          type: string
+          description: The package ID to add a new resource to
+        name:
+          type: string
+          description: The name of the resource
+        description:
+          type: string
+          description: The description of the resource
+        format:
+          type: string
+          description: The format of the resource
+        upload:
+          type: string
+          format: binary
+          description: The file to upload
     Envelope:
       type: object
       required:
@@ -181,6 +263,49 @@ components:
         result:
           type: object
           additionalProperties: true
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+    ResourcePatchMultipart:
+      type: object
+      description: Resource patch multipart form-data
+      required:
+      - id
+      - upload
+      properties:
+        id:
+          type: string
+          description: The ID of an existing resource to update
+        name:
+          type: string
+          description: The name of the resource
+        description:
+          type: string
+          description: The description of the resource
+        format:
+          type: string
+          description: The format of the resource
+        upload:
+          type: string
+          format: binary
+          description: The file to upload
     Resource:
       type: object
       description: CKAN Resource
@@ -210,131 +335,6 @@ components:
         last_modified:
           type: string
           format: date-time
-    ResourcePatchMultipart:
-      type: object
-      description: Resource patch multipart form-data
-      required:
-      - id
-      - upload
-      properties:
-        id:
-          type: string
-          description: The ID of an existing resource to update
-        name:
-          type: string
-          description: The name of the resource
-        description:
-          type: string
-          description: The description of the resource
-        format:
-          type: string
-          description: The format of the resource
-        upload:
-          type: string
-          format: binary
-          description: The file to upload
-    ErrorEnvelope:
-      type: object
-      required:
-      - help
-      - success
-      - error
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-          default: false
-        error:
-          type: object
-          additionalProperties: true
-          properties:
-            __type:
-              type: string
-            message:
-              type: string
-    ResourceCreateMultipart:
-      type: object
-      description: Resource create multipart form-data
-      required:
-      - package_id
-      - upload
-      properties:
-        package_id:
-          type: string
-          description: The package ID to add a new resource to
-        name:
-          type: string
-          description: The name of the resource
-        description:
-          type: string
-          description: The description of the resource
-        format:
-          type: string
-          description: The format of the resource
-        upload:
-          type: string
-          format: binary
-          description: The file to upload
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Not found error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            not_found_error:
-              summary: Not found
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Not Found Error
-                  message: Not found
-    ServerError:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
-    AuthorizationError:
-      description: Authorization error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            authorization_error:
-              summary: Authorization error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Authorization Error
-                  message: 'Access denied: User not authorized to perform this action'
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

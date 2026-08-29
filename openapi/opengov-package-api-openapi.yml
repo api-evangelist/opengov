@@ -356,67 +356,6 @@ paths:
       - ApiTokenAuth: []
 components:
   schemas:
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
-    Resource:
-      type: object
-      description: CKAN Resource
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        package_id:
-          type: string
-        url:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        format:
-          type: string
-        size:
-          type: integer
-        mimetype:
-          type: string
-        hash:
-          type: string
-        created:
-          type: string
-          format: date-time
-        last_modified:
-          type: string
-          format: date-time
-    Group:
-      type: object
-      description: CKAN Group
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        image_url:
-          type: string
-        state:
-          type: string
-        package_count:
-          type: integer
     Dataset:
       type: object
       description: CKAN Dataset (Package)
@@ -477,6 +416,38 @@ components:
           type: string
         state:
           type: string
+    Group:
+      type: object
+      description: CKAN Group
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        state:
+          type: string
+        package_count:
+          type: integer
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
     ErrorEnvelope:
       type: object
       required:
@@ -497,34 +468,36 @@ components:
               type: string
             message:
               type: string
+    Resource:
+      type: object
+      description: CKAN Resource
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        package_id:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        format:
+          type: string
+        size:
+          type: integer
+        mimetype:
+          type: string
+        hash:
+          type: string
+        created:
+          type: string
+          format: date-time
+        last_modified:
+          type: string
+          format: date-time
   responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Not found error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            not_found_error:
-              summary: Not found
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Not Found Error
-                  message: Not found
-    ServerError:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
     ValidationError:
       description: Validation error
       content:
@@ -541,6 +514,12 @@ components:
                   __type: Validation Error
                   name_or_id:
                   - Missing value
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
     AuthorizationError:
       description: Authorization error
       content:
@@ -556,6 +535,27 @@ components:
                 error:
                   __type: Authorization Error
                   message: 'Access denied: User not authorized to perform this action'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

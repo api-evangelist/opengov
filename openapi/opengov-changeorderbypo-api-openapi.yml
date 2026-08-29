@@ -5219,14 +5219,54 @@ paths:
       summary: List unresolved operation errors for a Change Order
 components:
   schemas:
+    OperationErrorEntityType:
+      type: string
+      enum:
+      - PO
+      - CO
+      title: Whether the error belongs to a PO or a CO
+    OperationErrorPhase:
+      type: string
+      title: Operation error phase
+    OperationErrorCode:
+      type: string
+      title: Operation error code
+    CoChangeKind:
+      type: string
+      enum:
+      - Modify
+      - Delete
+      description: 'Change order line/split change kind: Modify (apply delta) or Delete (remove row)'
+      title: CO Change Kind
     ISODate:
       type: string
       description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
       title: ISO Date (YYYY-MM-DD)
       pattern: ^\d{4}-\d{2}-\d{2}$
-    OperationErrorPhase:
+    LineItemType:
       type: string
-      title: Operation error phase
+      enum:
+      - Item
+      - Service
+      - Tax
+      - Discount
+      - Freight
+      - Miscellaneous
+      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
+      title: Line Item Type
+    ValueOrPercent:
+      type: string
+      enum:
+      - Value
+      - Percent
+      description: Indicates whether the input is an absolute value or a percentage
+      title: Value or Percent
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    OperationErrorSeverity:
+      type: string
+      title: Operation error severity
     OperationErrorModel.json:
       type: object
       required:
@@ -5266,26 +5306,9 @@ components:
           type: string
       additionalProperties: false
       title: OperationErrorModel.json
-    OperationErrorEntityType:
+    EncumbranceTrigger:
       type: string
-      enum:
-      - PO
-      - CO
-      title: Whether the error belongs to a PO or a CO
-    OperationErrorCode:
-      type: string
-      title: Operation error code
-    LineItemType:
-      type: string
-      enum:
-      - Item
-      - Service
-      - Tax
-      - Discount
-      - Freight
-      - Miscellaneous
-      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
-      title: Line Item Type
+      title: Trigger action that caused the error
     CoChangeType:
       type: string
       enum:
@@ -5293,29 +5316,6 @@ components:
       - LineAdded
       description: 'Change order line change type: LineModified, LineAdded'
       title: CO Change Type
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    OperationErrorSeverity:
-      type: string
-      title: Operation error severity
-    ValueOrPercent:
-      type: string
-      enum:
-      - Value
-      - Percent
-      description: Indicates whether the input is an absolute value or a percentage
-      title: Value or Percent
-    EncumbranceTrigger:
-      type: string
-      title: Trigger action that caused the error
-    CoChangeKind:
-      type: string
-      enum:
-      - Modify
-      - Delete
-      description: 'Change order line/split change kind: Modify (apply delta) or Delete (remove row)'
-      title: CO Change Kind
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key
