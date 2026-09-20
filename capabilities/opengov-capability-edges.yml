@@ -1,0 +1,109 @@
+slug: opengov
+provider: OpenGov
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: purchaseOrder
+  spec_file: opengov-purchaseorder-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.95
+  evidence: '"Create a Draft Purchase Order", "Submit Purchase Order for Approval", "Approve Purchase
+    Order", "Issue Purchase Order", "Close Purchase Order"'
+  reason: The operations perform the full purchase-order lifecycle — creation, approval, issuance, cancellation,
+    closure — which is exactly PO creation, approval and execution.
+- tag: changeOrderByPo
+  spec_file: opengov-changeorderbypo-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.9
+  evidence: POST .../purchase-orders/{poId}/change-orders  'Create a new change order for a purchase order';
+    'Submit a Draft change order for approval'; 'Approve a pending change order'
+  reason: Operations manage change orders against purchase orders including line items and approval workflow
+    — squarely Purchase Order Management within Procurement.
+- tag: lineItem
+  spec_file: opengov-lineitem-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.9
+  evidence: '"Create a new line item on a purchase order"; schemas LineItemModel.jsonCreate, LineItemSplitModel.json'
+  reason: Full CRUD plus bulk close of purchase-order line items is squarely purchase order creation and
+    execution.
+- tag: Budget
+  spec_file: opengov-budget-api-openapi.yml
+  capability_id: BC-230.10
+  capability_id_l1: BC-230
+  capability_name: Budgeting Management
+  confidence: 0.85
+  evidence: GET /api/v1/budgets 'List Budgets by Entity'; 'Get Budget Amounts by Budget ID'; schemas BudgetAmountsSummaryResponse
+  reason: Operations read and export budgets and budget amounts from the OpenGov Budgeting & Performance
+    product — squarely budget process management. Some ambiguity as the surface is read/export-only, and
+    data-export operations are incidental plumbing.
+- tag: receipts
+  spec_file: opengov-receipts-api-openapi.yml
+  capability_id: BC-500.40
+  capability_id_l1: BC-500
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.82
+  evidence: Create Receipt ... Update Receipt with Line Items ... Submit Receipt ... Approve Receipt ...
+    Reject Receipt
+  reason: Full lifecycle of goods/receipt documents with line items and submit-approve-reject workflow
+    — day-to-day procure-to-pay operations (receipts) in a government ERP procurement suite.
+- tag: ChartOfAccounts
+  spec_file: opengov-chartofaccounts-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.78
+  evidence: GET /api/v1/chart-of-accounts 'List Chart Of Accounts by Entity'; POST /api/v1/chart-of-accounts/{coaId}/accounts-by-ids
+    'Get accounts by list of account IDs'
+  reason: Operations expose chart of accounts and account structures, which the General Ledger Management
+    capability explicitly names ('Chart of accounts, journals, period close'). Slight ambiguity because
+    the surface sits in the Budgeting & Performance product and is read-only.
+- tag: Contracts
+  spec_file: opengov-contracts-api-openapi.yml
+  capability_id: BC-500.20
+  capability_id_l1: BC-500
+  capability_name: Procurement Contract Management
+  confidence: 0.75
+  evidence: POST /gateway/contract-orders/v1 importContractOrders 'Import Contract Orders'; GET /public/api/v1/contracts
+    'List of Contracts'; schemas ContractMilestoneResponseDetails, ContractRenewalResponseDetails, ContractPartyResponseDetails
+    — published in opengov-procurement-v1/v2 specs
+  reason: Operations expose the lifecycle data of awarded procurement contracts (parties, milestones,
+    renewals, budgets, attachments) within the vendor's procurement product, matching Procurement Contract
+    Management. Slight ambiguity with generic Contract Management (BC-150.10), hence 0.75.
+- tag: changeOrder
+  spec_file: opengov-changeorder-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.7
+  evidence: POST /api/v1/po/entities/{entityId}/change-orders/search  changeOrder.searchChangeOrders  Search
+    Change Orders; API for managing purchase orders, line items, splits, and vendors
+  reason: Change orders in this Purchase Order API are amendments to purchase orders, squarely within
+    PO creation/approval/execution. Only a single search operation is exposed, so confidence is moderate
+    rather than high.
+- tag: vendors
+  spec_file: opengov-vendors-api-openapi.yml
+  capability_id: BC-510.10
+  capability_id_l1: BC-510
+  capability_name: Supplier Onboarding Management
+  confidence: 0.7
+  evidence: vendors.createVendor / vendors.submitVendor / vendors.promoteVendor; schemas VendorModel,
+    CertificateModel.json, PaymentMethodModel.json, VendorCategoriesModel.json
+  reason: Core vendor master CRUD plus submit/promote lifecycle with certificates, payment methods and
+    categories — supplier registration and qualification in a government ERP. L2 onboarding fits the submit/promote
+    flow; some chance it is better read as plain supplier master data.
