@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 9
+edge_count: 34
 edges:
 - tag: purchaseOrder
   spec_file: opengov-purchase-order-api-openapi.yml
@@ -54,6 +54,17 @@ edges:
   reason: Operations read and export budgets and budget amounts from the OpenGov Budgeting & Performance
     product — squarely budget process management. Some ambiguity as the surface is read/export-only, and
     data-export operations are incidental plumbing.
+- tag: Checklist Results
+  spec_file: opengov-checklist-results-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.82
+  evidence: GET /v2/{community}/inspection-results/{inspectionResultID}/checklist-results List checklist
+    results for an inspection result; POST ... Create a checklist result
+  reason: Records the outcomes of inspection checklist items within the Permitting & Licensing product
+    — inspection and compliance verification of licensees/permit conditions.
+  recovered_from: vertical-public-sector-government-edges.json
 - tag: receipts
   spec_file: opengov-receipts-api-openapi.yml
   capability_id: BC-500.40
@@ -64,6 +75,49 @@ edges:
     Reject Receipt
   reason: Full lifecycle of goods/receipt documents with line items and submit-approve-reject workflow
     — day-to-day procure-to-pay operations (receipts) in a government ERP procurement suite.
+- tag: Inspection Events
+  spec_file: opengov-inspection-events-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.8
+  evidence: POST /v2/{community}/inspection-events  postInspectionEvent  Create an inspection event
+  reason: 'Permitting & Licensing inspections: creating and retrieving inspection events is compliance
+    verification against permit conditions, squarely BC-3240.40.'
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Inspection Results
+  spec_file: opengov-inspection-results-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.8
+  evidence: PATCH /v2/{community}/inspection-results/{inspectionResultID}  updateInspectionResult  Update
+    inspection result
+  reason: Recording and updating inspection outcomes within the permitting/licensing system is inspection
+    and compliance verification.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Types
+  spec_file: opengov-record-types-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.8
+  evidence: '"GET /v2/{community}/record-types  getRecordTypes  List record types" in the "OpenGov Permitting
+    & Licensing API"'
+  reason: Record types are the catalogue of permit and licence types configured in the Permitting & Licensing
+    product, a core permits/licences management surface.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Workflow Steps
+  spec_file: opengov-record-workflow-steps-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.8
+  evidence: '"GET /v2/{community}/records/{recordID}/workflow-steps  listRecordSteps  List record workflow
+    steps"'
+  reason: Executes the review/approval workflow steps on individual permit and licence records in OpenGov's
+    Permitting & Licensing product; L1 as steps span intake, assessment and issuance.
+  recovered_from: vertical-public-sector-government-edges.json
 - tag: ChartOfAccounts
   spec_file: opengov-chart-of-accounts-api-openapi.yml
   reanchored_from: opengov-chartofaccounts-api-openapi.yml
@@ -76,6 +130,18 @@ edges:
   reason: Operations expose chart of accounts and account structures, which the General Ledger Management
     capability explicitly names ('Chart of accounts, journals, period close'). Slight ambiguity because
     the surface sits in the Budgeting & Performance product and is read-only.
+- tag: Checklist Templates
+  spec_file: opengov-checklist-templates-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.75
+  evidence: GET /v2/{community}/inspection-type-templates/{inspectionTypeTemplateID}/checklist-templates
+    List checklist templates
+  reason: Templates defining inspection checklists by inspection type in the permitting/licensing system;
+    supports inspection and compliance verification, though it is configuration of that process rather
+    than execution.
+  recovered_from: vertical-public-sector-government-edges.json
 - tag: Contracts
   spec_file: opengov-contracts-api-openapi.yml
   capability_id: BC-500.20
@@ -88,6 +154,196 @@ edges:
   reason: Operations expose the lifecycle data of awarded procurement contracts (parties, milestones,
     renewals, budgets, attachments) within the vendor's procurement product, matching Procurement Contract
     Management. Slight ambiguity with generic Contract Management (BC-150.10), hence 0.75.
+- tag: Inspection Steps
+  spec_file: opengov-inspection-steps-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.75
+  evidence: GET /v2/{community}/inspection-steps  listInspectionTasks  List inspection steps
+  reason: Inspection tasks in the permit record workflow drive the inspection of licensees/permitted work;
+    mapped to inspection and compliance verification, with slight discount because 'steps' are workflow
+    constructs.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record
+  spec_file: opengov-record-api-openapi.yml
+  capability_id: BC-3240.30
+  capability_id_l1: BC-3240
+  capability_name: Issuance & Renewal Operations
+  confidence: 0.75
+  evidence: POST /v2/{community}/records/{recordID}/renew  renewRecord  Renew a record; "Create a record",
+    "Archive a record"
+  reason: Records are the permit/licence application and permission objects of the Permitting & Licensing
+    product; the explicit renew operation points to issuance and renewal operations, though the CRUD set
+    also spans intake.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Applicant
+  spec_file: opengov-record-applicant-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.75
+  evidence: GET /v2/{community}/records/{recordID}/applicant  getRecordApplicant  Get applicant
+  reason: Manages the applicant party on a permit/licence record in OpenGov Permitting & Licensing, squarely
+    within permits, licences and authorisations administration; sub-capability (intake vs qualification)
+    is not distinguishable from these operations.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Forms
+  spec_file: opengov-record-forms-api-openapi.yml
+  capability_id: BC-3240.10
+  capability_id_l1: BC-3240
+  capability_name: Application Intake & Triage
+  confidence: 0.75
+  evidence: '"Get record form data" / "Update record form data" in the "OpenGov Permitting & Licensing
+    API ... exposes resources such as records, inspections, fees, approvals"'
+  reason: Records in this vendor's Permitting & Licensing product are permit/licence applications; the
+    form data and form collections are the application data captured on the record, so this realises permit/licence
+    application intake.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Locations
+  spec_file: opengov-record-locations-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.75
+  evidence: '"GET /v1/{community}/records/{recordID}/locations  listRecordLocations  List record locations"
+    with schemas "PropertyOwner, RecordLocation"'
+  reason: Locations and property owners associated with a permitting/licensing record — part of permit
+    record data, not a land registry function; mapped at L1 only.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Primary Location
+  spec_file: opengov-record-primary-location-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.75
+  evidence: '"getRecordPrimaryLocation  Get primary location" on /records/{recordID}/primary-location
+    in the Permitting & Licensing API'
+  reason: Maintains the site/premises associated with a permit or licence record; supports permits and
+    licences management generally, so L1 only.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Type Fees
+  spec_file: opengov-record-type-fees-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.75
+  evidence: '"GET /v2/{community}/record-types/{recordTypeID}/fees  getRecordTypeFees  List fees for a
+    record type"'
+  reason: Fee schedules attached to permit/licence record types in the Permitting & Licensing product;
+    permit fee configuration rather than general tax administration.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Records
+  spec_file: opengov-records-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.75
+  evidence: GET /v1/{community}/records/{recordID}  getRecord  Retrieve a record — from opengov-permitting-licensing-v1-openapi.yml
+  reason: The 'record' here is the permit/licence application case object of OpenGov's Permitting & Licensing
+    product (the spec 'exposes resources such as records, inspections, fees, approvals'). Retrieval of
+    permit records realises Permits, Licences & Authorisations Management; the single read operation does
+    not pinpoint one sub-capability.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Approval Steps
+  spec_file: opengov-approval-steps-api-openapi.yml
+  capability_id: BC-3240.30
+  capability_id_l1: BC-3240
+  capability_name: Issuance & Renewal Operations
+  confidence: 0.72
+  evidence: GET /v2/{community}/approval-steps listApprovalTasks List approval steps; PATCH /v2/{community}/approval-steps/{approvalStepID}
+    Update approval step
+  reason: Within OpenGov's Permitting & Licensing API ('exposes resources such as records, inspections,
+    fees, approvals'), approval steps are the decision workflow that leads to issuing a permit or licence,
+    so it sits under Permits, Licences & Authorisations Management; some ambiguity as to whether it is
+    issuance/decision or generic workflow, hence moderate confidence.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: termsAttachment
+  spec_file: opengov-termsattachment-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.72
+  evidence: POST /api/v1/po/entities/{entityId}/purchase-orders/{poId}/terms/attachments/upload — 'Initialize
+    a Terms & Conditions file upload'
+  reason: Operations attach Terms & Conditions documents to a purchase order; although file upload is
+    plumbing, the object is the PO, so Purchase Order Management is the honest fit. Moderate confidence
+    because the surface is purely upload mechanics.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Inspection Types
+  spec_file: opengov-inspection-types-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.7
+  evidence: POST /v2/{community}/inspection-steps/{inspectionStepID}/inspection-types  postInspectionType  Create
+    an inspection type
+  reason: Attaching inspection types to an inspection step on a permit record is part of conducting inspection/compliance
+    verification for permits and licences.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Issued Documents
+  spec_file: opengov-issued-documents-api-openapi.yml
+  capability_id: BC-3240.30
+  capability_id_l1: BC-3240
+  capability_name: Issuance & Renewal Operations
+  confidence: 0.7
+  evidence: GET /v2/{community}/document-steps/{documentStepID}/documents  listDocuments  List documents
+  reason: Documents generated and issued from a permitting record's document step correspond to issuance
+    of permits/licences and their credentials; the operations are read-only retrieval, so confidence is
+    moderate.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Type Attachments
+  spec_file: opengov-record-type-attachments-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.7
+  evidence: '"List attachment templates for a record type"'
+  reason: Configuration of required attachment templates per permit/licence record type within the Permitting
+    & Licensing product; a permitting configuration surface, mapped at L1 only.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Type Document Templates
+  spec_file: opengov-record-type-document-templates-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.7
+  evidence: '"List document templates for a record type"'
+  reason: Document templates (e.g. issued permit/licence documents) configured per record type in the
+    Permitting & Licensing API; supports permit issuance but evidence is configuration-level, so L1 only.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Type Form
+  spec_file: opengov-record-type-form-api-openapi.yml
+  capability_id: BC-3240.10
+  capability_id_l1: BC-3240
+  capability_name: Application Intake & Triage
+  confidence: 0.7
+  evidence: '"GET /v2/{community}/record-types/{recordTypeID}/form  getRecordTypeForm  Get form fields"'
+  reason: Defines the application form fields for a permit/licence record type, i.e. the intake form definition
+    for permit applications.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Type Workflow
+  spec_file: opengov-record-type-workflow-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.7
+  evidence: '"List workflow step templates for a record type"'
+  reason: Workflow step templates for permitting/licensing record types define the review and approval
+    process for permits; mapped at L1 as the specific sub-step (intake, assessment, issuance) is not distinguished.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: Steps
+  spec_file: opengov-steps-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.7
+  evidence: GET /v1/{community}/records/{recordID}/workflow-steps  listRecordSteps  List record steps;
+    PUT .../state  setStepState
+  reason: Advancing the state of workflow steps on permitting & licensing records is the processing workflow
+    for permit/licence applications, so it realises Permits, Licences & Authorisations Management; the
+    generic 'step' abstraction spans intake, assessment and issuance so no L2 is asserted.
+  recovered_from: vertical-public-sector-government-edges.json
 - tag: changeOrder
   spec_file: opengov-change-order-api-openapi.yml
   reanchored_from: opengov-changeorder-api-openapi.yml
@@ -100,6 +356,27 @@ edges:
   reason: Change orders in this Purchase Order API are amendments to purchase orders, squarely within
     PO creation/approval/execution. Only a single search operation is exposed, so confidence is moderate
     rather than high.
+- tag: receiptSync
+  spec_file: opengov-receiptsync-api-openapi.yml
+  capability_id: BC-500.40
+  capability_id_l1: BC-500
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.7
+  evidence: POST /api/v1/po/entities/{entityId}/receipt-allocations  Sync receipt allocations
+  reason: Allocates goods receipts against purchase order lines — day-to-day procure-to-pay receipting
+    operations. Single operation keeps confidence moderate.
+  recovered_from: vertical-public-sector-government-edges.json
+- tag: vendor-search
+  spec_file: opengov-vendor-search-api-openapi.yml
+  capability_id: BC-510
+  capability_id_l1: BC-510
+  capability_name: Supplier Management
+  confidence: 0.7
+  evidence: POST /api/v1/entities/{entityId}/vendors/search  vendor-search.searchVendors; schemas VendorModel,
+    CertificateModel.json, PaymentMethodModel.json
+  reason: Search/stats/export over the vendor master record (vendor, certificates, payment methods) is
+    part of Supplier Management; search itself is generic so no L2 asserted.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: vendors
   spec_file: opengov-vendors-api-openapi.yml
   capability_id: BC-510.10
