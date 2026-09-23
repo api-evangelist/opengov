@@ -1,10 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Opengov Record Locations API
   version: v1
+  title: Permitting Licensing & Code Enforcement Record Locations API
   x-logo:
     url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
-  description: 'Operations tagged Record Locations across 2 of this provider''s published API definitions: opengov-permitting-licensing-v1-openapi-original.yml, opengov-permitting-licensing-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: The OpenGov Permitting & Licensing API is organized around REST.
 servers:
 - url: https://api.plce.opengov.com/plce
   description: Production
@@ -15,9 +15,7 @@ tags:
   description: 'A Record can be associated with one **Primary Location** and up to 99 **Additional Locations**.
 
 
-    Record Locations reference **Locations**.
-
-    '
+    Record Locations reference **Locations**.'
 paths:
   /v1/{community}/records/{recordID}/locations:
     get:
@@ -56,58 +54,8 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
 components:
   schemas:
-    PropertyOwner:
-      type: object
-      description: 'Detailed information about the property owner for locations of type `PARCEL`
-
-        '
-      example:
-        name: Proper Properties LLC
-        streetNumber: 1200
-        streetName: N Main St.
-        unit: null
-        city: Front Market
-        state: VA
-        postalCode: 22035
-        country: USA
-        phoneNo: 635-509-1357
-        email: properties@properllc.com
-      properties:
-        name:
-          type: string
-          description: Name of the location
-        streetNumber:
-          type: string
-          description: Street Number
-        streetName:
-          type: string
-          description: Street name
-        unit:
-          type: string
-          description: Unit number
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State
-        postalCode:
-          type: string
-          description: Postal Code
-        country:
-          type: string
-          description: Country
-        phoneNo:
-          type: string
-          description: Phone Number
-        email:
-          type: string
-          description: Email
     RecordLocation:
       x-tags:
       - Record Locations
@@ -226,6 +174,53 @@ components:
               type: number
               format: double
               description: Length of a segment location
+    PropertyOwner:
+      type: object
+      description: 'Detailed information about the property owner for locations of type `PARCEL`
+
+        '
+      example:
+        name: Proper Properties LLC
+        streetNumber: 1200
+        streetName: N Main St.
+        unit: null
+        city: Front Market
+        state: VA
+        postalCode: 22035
+        country: USA
+        phoneNo: 635-509-1357
+        email: properties@properllc.com
+      properties:
+        name:
+          type: string
+          description: Name of the location
+        streetNumber:
+          type: string
+          description: Street Number
+        streetName:
+          type: string
+          description: Street name
+        unit:
+          type: string
+          description: Unit number
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State
+        postalCode:
+          type: string
+          description: Postal Code
+        country:
+          type: string
+          description: Country
+        phoneNo:
+          type: string
+          description: Phone Number
+        email:
+          type: string
+          description: Email
   parameters:
     recordID:
       name: recordID
@@ -246,10 +241,17 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- opengov-permitting-licensing-v1-openapi-original.yml
-- opengov-permitting-licensing-v1-openapi.yml
-x-og-spec-id: bnp-api-v1
-x-og-env-servers:
-  production: https://api.bnp.opengov.com
-  development: https://api.bnp.ogintegration.us
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

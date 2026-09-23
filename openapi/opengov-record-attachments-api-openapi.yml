@@ -6,7 +6,7 @@ info:
     name: OpenGov Permitting & Licensing API
     url: https://opengov.com
     email: developers@opengov.com
-  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  description: The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows.
   license:
     name: OpenGov Permitting & Licensing API
     url: https://opengov.com
@@ -25,10 +25,7 @@ security:
 - auth0Dev: []
 tags:
 - name: Record Attachments
-  description: 'A Record can have attachments which either reference a Record Type Attachment or are ad-hoc. Each attachment can have one or more versions.
-
-
-    '
+  description: A Record can have attachments which either reference a Record Type Attachment or are ad-hoc. Each attachment can have one or more versions.
 paths:
   /v2/{community}/records/{recordID}/attachments:
     parameters:
@@ -154,7 +151,41 @@ paths:
           $ref: '#/paths/~1v2~1{community}~1approval-steps/get/responses/500'
     post:
       summary: Add a record attachment
-      description: "Associates a previously uploaded file with a record as an attachment.\n\n##### Process\n1. First, upload your file using the Files API:\n   - Use [POST /files](operation:external/plce-api/plce-api.oas/files/createFileUpload) to get a pre-signed upload URL\n   - Upload your file using the pre-signed URL\n   - Keep the returned `fileID` for the next step\n2. Then use this endpoint to create the record attachment:\n   - Provide the fileID to associate the file\n   - The file will be cloned, creating an independent copy for this record\n\n##### Attachment Types and Versioning\nAttachments can be either ad-hoc or template-based:\n\nUsing `attachmentTemplateID`:\n- Associates the attachment with a specific template\n- If no attachment exists for this template, creates a new one\n\n### Permissions Required\n`Record Write`"
+      description: 'Associates a previously uploaded file with a record as an attachment.
+
+
+        ##### Process
+
+        1. First, upload your file using the Files API:
+
+        - Use POST /files to get a pre-signed upload URL
+
+        - Upload your file using the pre-signed URL
+
+        - Keep the returned `fileID` for the next step
+
+        2. Then use this endpoint to create the record attachment:
+
+        - Provide the fileID to associate the file
+
+        - The file will be cloned, creating an independent copy for this record
+
+
+        ##### Attachment Types and Versioning
+
+        Attachments can be either ad-hoc or template-based:
+
+
+        Using `attachmentTemplateID`:
+
+        - Associates the attachment with a specific template
+
+        - If no attachment exists for this template, creates a new one
+
+
+        ### Permissions Required
+
+        `Record Write`'
       operationId: addRecordAttachment
       x-og-claims-required:
       - PLC_RECORD_WRITE
@@ -397,7 +428,22 @@ paths:
         type: string
     post:
       summary: Create a new version of a record attachment
-      description: "Use this endpoint to create a new version of a record attachment.\n##### Process\n1. On an existing record attachment:\n   - Provide the `fileID` of the new file to associate with the record attachment\n   - The new file will replace the current version of the record attachment\n   - The previous version of the record attachment will be retained in the `versions` relationship\n\n### Permissions Required\n`Record Write`"
+      description: 'Use this endpoint to create a new version of a record attachment.
+
+        ##### Process
+
+        1. On an existing record attachment:
+
+        - Provide the `fileID` of the new file to associate with the record attachment
+
+        - The new file will replace the current version of the record attachment
+
+        - The previous version of the record attachment will be retained in the `versions` relationship
+
+
+        ### Permissions Required
+
+        `Record Write`'
       operationId: addRecordAttachmentVersion
       x-og-claims-required:
       - PLC_RECORD_WRITE

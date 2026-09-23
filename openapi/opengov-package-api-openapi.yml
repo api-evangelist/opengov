@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Open Data CKAN Action Package API
   version: '2.9'
-  description: "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n"
+  description: Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.
   contact:
     name: CKAN Community
     url: https://ckan.org/community
@@ -13,15 +13,15 @@ servers:
 - url: https://cloudcity.ogopendata.com/api/3/action
   description: Cloud City Open Data
 tags:
-- name: package
+- name: Package
   description: On early CKAN versions, datasets were called packages and this name has stuck in some places, specially internally and on API calls. Package has exactly the same meaning as dataset.
 paths:
   /package_list:
     get:
       operationId: packageList
-      summary: Return a list of the names of the site's datasets (packages).
+      summary: Return a list of the names of the site's datasets (packages)
       tags:
-      - package
+      - Package
       responses:
         '200':
           description: Envelope with string array under `result`
@@ -47,10 +47,10 @@ paths:
   /package_search:
     get:
       operationId: packageSearch
-      summary: Searches for datasets (packages) satisfying a given search criteria.
+      summary: Searches for datasets (packages) satisfying a given search criteria
       description: This action accepts solr search query parameters (details below), and returns a dictionary of results, including dictized datasets that match the search criteria, a search count and also facet information.
       tags:
-      - package
+      - Package
       parameters:
       - in: query
         name: q
@@ -162,9 +162,9 @@ paths:
   /package_show:
     get:
       operationId: packageShow
-      summary: Return the metadata of a dataset (package) and its resources.
+      summary: Return the metadata of a dataset (package) and its resources
       tags:
-      - package
+      - Package
       parameters:
       - in: query
         name: id
@@ -248,10 +248,10 @@ paths:
   /package_create:
     post:
       operationId: packageCreate
-      summary: Create a new dataset (package).
+      summary: Create a new dataset (package)
       description: You must be authorized to create new datasets.
       tags:
-      - package
+      - Package
       requestBody:
         required: true
         content:
@@ -310,7 +310,7 @@ paths:
       summary: Update only specific fields of an existing dataset
       description: Any fields not passed will retain their original values.
       tags:
-      - package
+      - Package
       requestBody:
         required: true
         content:
@@ -356,51 +356,6 @@ paths:
       - ApiTokenAuth: []
 components:
   schemas:
-    Dataset:
-      type: object
-      description: CKAN Dataset (Package)
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        title:
-          type: string
-        notes:
-          type: string
-        url:
-          type: string
-        version:
-          type: string
-        author:
-          type: string
-        author_email:
-          type: string
-        maintainer:
-          type: string
-        maintainer_email:
-          type: string
-        license_id:
-          type: string
-        owner_org:
-          type: string
-        private:
-          type: boolean
-        state:
-          type: string
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
     Tag:
       type: object
       description: CKAN Tag
@@ -416,25 +371,6 @@ components:
           type: string
         state:
           type: string
-    Group:
-      type: object
-      description: CKAN Group
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        image_url:
-          type: string
-        state:
-          type: string
-        package_count:
-          type: integer
     Envelope:
       type: object
       required:
@@ -497,23 +433,71 @@ components:
         last_modified:
           type: string
           format: date-time
+    Group:
+      type: object
+      description: CKAN Group
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        state:
+          type: string
+        package_count:
+          type: integer
+    Dataset:
+      type: object
+      description: CKAN Dataset (Package)
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        notes:
+          type: string
+        url:
+          type: string
+        version:
+          type: string
+        author:
+          type: string
+        author_email:
+          type: string
+        maintainer:
+          type: string
+        maintainer_email:
+          type: string
+        license_id:
+          type: string
+        owner_org:
+          type: string
+        private:
+          type: boolean
+        state:
+          type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
   responses:
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
     ServerError:
       description: Server error
       content:
@@ -535,6 +519,22 @@ components:
                 error:
                   __type: Authorization Error
                   message: 'Access denied: User not authorized to perform this action'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
     NotFound:
       description: Not found error
       content:

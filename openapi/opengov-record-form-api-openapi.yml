@@ -1,10 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Opengov Record Form API
   version: v1
+  title: Permitting Licensing & Code Enforcement Record Form API
   x-logo:
     url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
-  description: 'Operations tagged Record Form across 2 of this provider''s published API definitions: opengov-permitting-licensing-v1-openapi-original.yml, opengov-permitting-licensing-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: The OpenGov Permitting & Licensing API is organized around REST.
 servers:
 - url: https://api.plce.opengov.com/plce
   description: Production
@@ -15,9 +15,7 @@ tags:
   description: 'A Record''s **Form** is based on its **Record Type**.
 
 
-    A Form is comprised of **Fields** which are contained within **Sections**. Each Field is of a specific data Type, and has a **Label** and a **Value**.
-
-    '
+    A Form is comprised of **Fields** which are contained within **Sections**. Each Field is of a specific data Type, and has a **Label** and a **Value**.'
 paths:
   /v1/{community}/records/{recordID}/details:
     get:
@@ -48,25 +46,7 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
 components:
-  parameters:
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
   schemas:
     RecordDetails:
       x-tags:
@@ -172,15 +152,37 @@ components:
                   ordinal:
                     type: integer
                     description: Position of a section within the form
+  parameters:
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- opengov-permitting-licensing-v1-openapi-original.yml
-- opengov-permitting-licensing-v1-openapi.yml
-x-og-spec-id: bnp-api-v1
-x-og-env-servers:
-  production: https://api.bnp.opengov.com
-  development: https://api.bnp.ogintegration.us
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

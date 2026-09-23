@@ -2143,86 +2143,6 @@ paths:
       description: Production
 components:
   schemas:
-    PaymentTermsTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique payment-terms-related tag names.
-          example:
-          - Net 30
-          - Net 45
-          - Due Upon Receipt
-          - 2/10 Net 30
-          - Milestone-based
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ContractAttachmentTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique contract attachment-related tag names.
-          example:
-          - RFP
-          - SOW
-          - COI
-          - Addendum
-          - Signed Contract
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ContractTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique contract-related tag names.
-          example:
-          - Construction
-          - IT Services
-          - Renewal FY2025
-          - Emergency Procurement
-          - Sole Source
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ContactTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique contact-related tag names.
-          example:
-          - Vendor
-          - Prime
-          - Subcontractor
-          - MWBE
-          - SBE
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ProcurementClassificationTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique procurement classification-related tag names.
-          example:
-          - RFP
-          - IFB
-          - RFQ
-          - Sole Source
-          - Cooperative Purchase
-          type: array
-          items:
-            type: string
-      required:
-      - tags
     ContractInsuranceTagsResponseDto:
       type: object
       properties:
@@ -2239,15 +2159,17 @@ components:
             type: string
       required:
       - tags
-    FiscalYearTagsResponseDto:
+    PaymentTermsTagsResponseDto:
       type: object
       properties:
         tags:
-          description: Unique fiscal year-related tag names.
+          description: Unique payment-terms-related tag names.
           example:
-          - FY2023
-          - FY2024
-          - FY2025
+          - Net 30
+          - Net 45
+          - Due Upon Receipt
+          - 2/10 Net 30
+          - Milestone-based
           type: array
           items:
             type: string
@@ -2269,6 +2191,22 @@ components:
             type: string
       required:
       - tags
+    ContractTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contract-related tag names.
+          example:
+          - Construction
+          - IT Services
+          - Renewal FY2025
+          - Emergency Procurement
+          - Sole Source
+          type: array
+          items:
+            type: string
+      required:
+      - tags
     FundingSourceTagsResponseDto:
       type: object
       properties:
@@ -2280,6 +2218,68 @@ components:
           - 'Grant: ARPA'
           - 'Grant: CDBG'
           - Bond Proceeds
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    ProcurementClassificationTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique procurement classification-related tag names.
+          example:
+          - RFP
+          - IFB
+          - RFQ
+          - Sole Source
+          - Cooperative Purchase
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    ContractAttachmentTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contract attachment-related tag names.
+          example:
+          - RFP
+          - SOW
+          - COI
+          - Addendum
+          - Signed Contract
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    FiscalYearTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique fiscal year-related tag names.
+          example:
+          - FY2023
+          - FY2024
+          - FY2025
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    ContactTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contact-related tag names.
+          example:
+          - Vendor
+          - Prime
+          - Subcontractor
+          - MWBE
+          - SBE
           type: array
           items:
             type: string

@@ -6,7 +6,7 @@ info:
     name: OpenGov Permitting & Licensing API
     url: https://opengov.com
     email: developers@opengov.com
-  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  description: The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows.
   license:
     name: OpenGov Permitting & Licensing API
     url: https://opengov.com
@@ -28,10 +28,7 @@ tags:
   description: 'A Record''s Form is based on its Record Type.
 
 
-    A Form is comprised of Fields which are contained within Sections. Each Field is of a specific data Type, and has a Label and a Value.
-
-
-    '
+    A Form is comprised of Fields which are contained within Sections. Each Field is of a specific data Type, and has a Label and a Value.'
 paths:
   /v2/{community}/records/{recordID}/form:
     parameters:
@@ -39,7 +36,17 @@ paths:
     - $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1additional-locations/get/parameters/1'
     get:
       summary: Get record form data
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve the form data for a specific record. This returns single-entry form data only. For multi-entry form data, use Form Collection endpoints.\n### Permissions Required\n`Record Read`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Retrieve the form data for a specific record. This returns single-entry form data only. For multi-entry form data, use Form Collection endpoints.
+
+        ### Permissions Required
+
+        `Record Read`'
       operationId: getRecordFormData
       x-forms-api-warning: true
       x-og-claims-required:
@@ -440,7 +447,17 @@ paths:
                       title: Not Implemented
     patch:
       summary: Update record form data
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nUpdate the form data for a specific record. This updates single-entry form data only. For multi-entry form data, use Form Collection endpoints.\n### Permissions Required\n`Record Write`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Update the form data for a specific record. This updates single-entry form data only. For multi-entry form data, use Form Collection endpoints.
+
+        ### Permissions Required
+
+        `Record Write`'
       operationId: updateRecordFormData
       x-forms-api-warning: true
       x-og-claims-required:
@@ -925,7 +942,17 @@ paths:
   /v2/{community}/records/{recordID}/collections:
     get:
       summary: Get all form collections for a record
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve all form collections (multi-entry form sections) for a specific record.\n### Permissions Required\n`Record Read`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Retrieve all form collections (multi-entry form sections) for a specific record.
+
+        ### Permissions Required
+
+        `Record Read`'
       operationId: getRecordFormCollections
       x-forms-api-warning: true
       x-og-claims-required:
@@ -975,7 +1002,17 @@ paths:
         type: string
     get:
       summary: Get a form collection for a record
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve a form collection (multi-entry form section) by ID.\n### Permissions Required\n`Record Read`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Retrieve a form collection (multi-entry form section) by ID.
+
+        ### Permissions Required
+
+        `Record Read`'
       operationId: getRecordFormCollection
       x-forms-api-warning: true
       x-og-claims-required:
@@ -1286,7 +1323,20 @@ paths:
           $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
     post:
       summary: Create a new entry in a record form collection
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nThis can be used only to append a new entry to the end of the collection.\nTo insert an entry at a specific position, use the `PATCH` method.\n\n### Permissions Required\n`Record Write`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        This can be used only to append a new entry to the end of the collection.
+
+        To insert an entry at a specific position, use the `PATCH` method.
+
+
+        ### Permissions Required
+
+        `Record Write`'
       operationId: createRecordFormCollectionEntry
       x-forms-api-warning: true
       x-og-claims-required:
@@ -1514,7 +1564,17 @@ paths:
   /v2/{community}/records/{recordID}/collections/{collectionID}/entries:
     get:
       summary: Get all form entries for a collection
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve all form entries for a specific collection.\n### Permissions Required\n`Record Read`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Retrieve all form entries for a specific collection.
+
+        ### Permissions Required
+
+        `Record Read`'
       operationId: getRecordFormCollectionEntries
       x-forms-api-warning: true
       x-og-claims-required:
@@ -1600,7 +1660,17 @@ paths:
         type: string
     get:
       summary: Get fields for a specific form data collection entry
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nRetrieve the fields for a specific form data collection entry.\n### Permissions Required\n`Record Read`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Retrieve the fields for a specific form data collection entry.
+
+        ### Permissions Required
+
+        `Record Read`'
       operationId: getRecordFormCollectionEntry
       x-forms-api-warning: true
       x-og-claims-required:
@@ -1664,7 +1734,17 @@ paths:
           $ref: '#/paths/~1v2~1{community}~1records~1{recordID}~1change-requests/post/responses/501'
     patch:
       summary: Update fields for a specific form data collection entry for a record
-      description: "<div style=\"display: flex; gap: 0.75rem; padding: 1rem; background-color: #fffbeb; border: 1px solid #fef08a; border-left: 4px solid #facc15; border-radius: 0.375rem; margin-bottom: 1rem;\">\n  <div style=\"flex-shrink: 0; margin-top: 0.125rem;\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#eab308\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\"></path>\n      <path d=\"M12 9v4\"></path>\n      <path d=\"M12 17h.01\"></path>\n    </svg>\n  </div>\n  <div style=\"flex: 1;\">\n    <div style=\"font-weight: 600; color: #ca8a04; margin-bottom: 0.5rem; font-size: 0.95rem;\">Forms APIs require the latest version of Forms</div>\n    <div style=\"color: #a16207; line-height: 1.6; font-size: 0.9rem;\">Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn't yet on this version. During the limited release, administrators should contact OpenGov to enable access.</div>\n  </div>\n</div>\n\nUpdate fields for a specific form data collection entry for a record.\n### Permissions Required\n`Record Write`"
+      description: 'Forms APIs require the latest version of Forms
+
+
+        Forms APIs are available only on the latest version of Forms, currently in limited release. A 500 error may indicate the community isn''t yet on this version. During the limited release, administrators should contact OpenGov to enable access.
+
+
+        Update fields for a specific form data collection entry for a record.
+
+        ### Permissions Required
+
+        `Record Write`'
       operationId: updateRecordFormCollectionEntry
       x-forms-api-warning: true
       x-og-claims-required:

@@ -10,7 +10,7 @@ info:
 
     ```
 
-    Authorization: Bearer <your-jwt-token>
+    Authorization: Bearer
 
     ```
 
@@ -42,12 +42,12 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: vendors
+- name: Vendors
 paths:
   /api/v1/entities/{entityId}/vendors/{vendorKey}:
     get:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.getVendorById
       parameters:
       - name: Authorization
@@ -134,9 +134,11 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
+      summary: Vendors get vendor by id
+      x-summary-source: derived
     patch:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.updateVendor
       parameters:
       - name: Authorization
@@ -484,9 +486,11 @@ paths:
                     $ref: '#/components/schemas/VendorCategoriesModel.jsonUpdate'
               additionalProperties: false
         required: true
+      summary: Vendors update vendor
+      x-summary-source: derived
     delete:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.deleteVendor
       parameters:
       - name: Authorization
@@ -564,10 +568,12 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
+      summary: Vendors delete vendor
+      x-summary-source: derived
   /api/v1/entities/{entityId}/vendors:
     post:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.createVendor
       parameters:
       - name: Authorization
@@ -801,10 +807,12 @@ paths:
                     $ref: '#/components/schemas/VendorCategoriesModel.jsonCreate'
               additionalProperties: false
         required: true
+      summary: Vendors create vendor
+      x-summary-source: derived
   /api/v1/entities/{entityId}/vendors/{vendorKey}/submit:
     post:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.submitVendor
       parameters:
       - name: Authorization
@@ -886,10 +894,12 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
+      summary: Vendors submit vendor
+      x-summary-source: derived
   /api/v1/entities/{entityId}/vendors/{vendorKey}/promote:
     post:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.promoteVendor
       parameters:
       - name: Authorization
@@ -990,10 +1000,12 @@ paths:
                   type: string
               additionalProperties: false
         required: true
+      summary: Vendors promote vendor
+      x-summary-source: derived
   /api/v1/entities/{entityId}/vendors/{vendorKey}/availability:
     post:
       tags:
-      - vendors
+      - Vendors
       operationId: vendors.updateVendorAvailability
       parameters:
       - name: Authorization
@@ -1117,8 +1129,140 @@ paths:
                   type: boolean
               additionalProperties: false
         required: true
+      summary: Vendors update vendor availability
+      x-summary-source: derived
 components:
   schemas:
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+    AddressModel.jsonCreate:
+      type: object
+      required:
+      - addressLine1
+      - city
+      - state
+      - zipCode
+      - country
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          anyOf:
+          - type: string
+          - type: 'null'
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+        defaultFor:
+          anyOf:
+          - type: array
+            items:
+              type: string
+              enum:
+              - PRIMARY
+              - REMIT TO
+              - ORDER FROM
+          - type: 'null'
+      additionalProperties: false
+      title: AddressModel.jsonCreate
+    PaymentMethodModel.json:
+      type: object
+      required:
+      - paymentId
+      - paymentMethodRefId
+      - paymentMethodType
+      - paymentMethodDetails
+      - isDefault
+      properties:
+        paymentId:
+          $ref: '#/components/schemas/PaymentId'
+        paymentLabel:
+          anyOf:
+          - type: string
+          - type: 'null'
+        paymentMethodRefId:
+          type: string
+        paymentMethodType:
+          type: string
+        paymentMethodDetails:
+          title: unknown
+        isDefault:
+          type: boolean
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: PaymentMethodModel.json
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    PaymentMethodModel.jsonCreate:
+      type: object
+      required:
+      - paymentMethodRefId
+      - paymentMethodType
+      - paymentMethodDetails
+      - isDefault
+      properties:
+        paymentLabel:
+          anyOf:
+          - type: string
+          - type: 'null'
+        paymentMethodRefId:
+          type: string
+        paymentMethodType:
+          type: string
+        paymentMethodDetails:
+          title: unknown
+        isDefault:
+          type: boolean
+      additionalProperties: false
+      title: PaymentMethodModel.jsonCreate
     VendorModel:
       type: object
       required:
@@ -1327,6 +1471,28 @@ components:
               $ref: '#/components/schemas/VendorCategoriesModel.json'
           - type: 'null'
       additionalProperties: false
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    PaymentId:
+      type: number
+      description: Unique identifier for a payment method
+    AddressId:
+      type: number
+      description: Unique identifier for an address
+    AttachmentId:
+      type: number
+      description: Unique identifier for an attachment
     ContactModel.jsonCreate:
       type: object
       required: []
@@ -1365,12 +1531,401 @@ components:
           - type: 'null'
       additionalProperties: false
       title: ContactModel.jsonCreate
-    AddressId:
+    NonEmptyString:
+      type: string
+      description: a non empty string
+      title: nonEmptyString
+      minLength: 1
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    CertificateId:
       type: number
-      description: Unique identifier for an address
+      description: Unique identifier for a certificate
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    VendorCategoriesModel.json:
+      type: object
+      required:
+      - categoryId
+      - setId
+      - categoryRefId
+      - categoryCode
+      - categoryDescription
+      properties:
+        categoryId:
+          $ref: '#/components/schemas/CategoryId'
+        setId:
+          type: string
+        categoryRefId:
+          type: string
+        categoryCode:
+          type: string
+        categoryDescription:
+          type: string
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: VendorCategoriesModel.json
+    CertificateModel.json:
+      type: object
+      required:
+      - certificateId
+      properties:
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        attachmentId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        certificateType:
+          anyOf:
+          - type: string
+          - type: 'null'
+        certificateCategory:
+          anyOf:
+          - type: string
+          - type: 'null'
+        certificateDetails:
+          title: unknown
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        attachment:
+          anyOf:
+          - $ref: '#/components/schemas/AttachmentModel.json'
+          - type: 'null'
+      additionalProperties: false
+      title: CertificateModel.json
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    AttachmentModel.json:
+      type: object
+      required:
+      - attachmentId
+      - path
+      - bucket
+      - filename
+      - attachmentType
+      - size
+      properties:
+        attachmentId:
+          $ref: '#/components/schemas/AttachmentId'
+        path:
+          type: string
+        bucket:
+          type: string
+        filename:
+          type: string
+        attachmentType:
+          type: string
+        size:
+          type: number
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: AttachmentModel.json
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    CategoryId:
+      type: number
+      description: Unique identifier for a category
+    VendorCategoriesModel.jsonUpdate:
+      type: object
+      required:
+      - setId
+      - categoryRefId
+      - categoryCode
+      - categoryDescription
+      properties:
+        setId:
+          type: string
+        categoryRefId:
+          type: string
+        categoryCode:
+          type: string
+        categoryDescription:
+          type: string
+      additionalProperties: false
+      title: VendorCategoriesModel.jsonUpdate
+    VendorCategoriesModel.jsonCreate:
+      type: object
+      required:
+      - setId
+      - categoryRefId
+      - categoryCode
+      - categoryDescription
+      properties:
+        setId:
+          type: string
+        categoryRefId:
+          type: string
+        categoryCode:
+          type: string
+        categoryDescription:
+          type: string
+      additionalProperties: false
+      title: VendorCategoriesModel.jsonCreate
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
     ContactId:
       type: number
       description: Unique identifier for a contact
+    AddressModel.json:
+      type: object
+      required:
+      - addressId
+      - addressLine1
+      - city
+      - state
+      - zipCode
+      - country
+      properties:
+        addressId:
+          $ref: '#/components/schemas/AddressId'
+        addressLine1:
+          type: string
+        addressLine2:
+          anyOf:
+          - type: string
+          - type: 'null'
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+        defaultFor:
+          anyOf:
+          - type: array
+            items:
+              type: string
+              enum:
+              - PRIMARY
+              - REMIT TO
+              - ORDER FROM
+          - type: 'null'
+        isDeleted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+        deletedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        createdAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+        updatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+      additionalProperties: false
+      title: AddressModel.json
+    VendorKey:
+      type: number
+      description: Unique identifier for a vendor
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    CertificateModel.jsonCreate:
+      type: object
+      required: []
+      properties:
+        attachmentId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        certificateType:
+          anyOf:
+          - type: string
+          - type: 'null'
+        certificateCategory:
+          anyOf:
+          - type: string
+          - type: 'null'
+        certificateDetails:
+          title: unknown
+      additionalProperties: false
+      title: CertificateModel.jsonCreate
     ContactModel.json:
       type: object
       required:
@@ -1431,547 +1986,6 @@ components:
           - type: 'null'
       additionalProperties: false
       title: ContactModel.json
-    InternalServerHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - InternalServerHttpError
-      additionalProperties: false
-    CertificateModel.json:
-      type: object
-      required:
-      - certificateId
-      properties:
-        certificateId:
-          $ref: '#/components/schemas/CertificateId'
-        attachmentId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        certificateType:
-          anyOf:
-          - type: string
-          - type: 'null'
-        certificateCategory:
-          anyOf:
-          - type: string
-          - type: 'null'
-        certificateDetails:
-          title: unknown
-        isDeleted:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-        deletedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        createdAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        updatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        attachment:
-          anyOf:
-          - $ref: '#/components/schemas/AttachmentModel.json'
-          - type: 'null'
-      additionalProperties: false
-      title: CertificateModel.json
-    VendorKey:
-      type: number
-      description: Unique identifier for a vendor
-    AddressModel.json:
-      type: object
-      required:
-      - addressId
-      - addressLine1
-      - city
-      - state
-      - zipCode
-      - country
-      properties:
-        addressId:
-          $ref: '#/components/schemas/AddressId'
-        addressLine1:
-          type: string
-        addressLine2:
-          anyOf:
-          - type: string
-          - type: 'null'
-        city:
-          type: string
-        state:
-          type: string
-        zipCode:
-          type: string
-        country:
-          type: string
-        defaultFor:
-          anyOf:
-          - type: array
-            items:
-              type: string
-              enum:
-              - PRIMARY
-              - REMIT TO
-              - ORDER FROM
-          - type: 'null'
-        isDeleted:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-        deletedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        createdAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        updatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-      additionalProperties: false
-      title: AddressModel.json
-    AddressModel.jsonCreate:
-      type: object
-      required:
-      - addressLine1
-      - city
-      - state
-      - zipCode
-      - country
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          anyOf:
-          - type: string
-          - type: 'null'
-        city:
-          type: string
-        state:
-          type: string
-        zipCode:
-          type: string
-        country:
-          type: string
-        defaultFor:
-          anyOf:
-          - type: array
-            items:
-              type: string
-              enum:
-              - PRIMARY
-              - REMIT TO
-              - ORDER FROM
-          - type: 'null'
-      additionalProperties: false
-      title: AddressModel.jsonCreate
-    AttachmentId:
-      type: number
-      description: Unique identifier for an attachment
-    VendorCategoriesModel.jsonCreate:
-      type: object
-      required:
-      - setId
-      - categoryRefId
-      - categoryCode
-      - categoryDescription
-      properties:
-        setId:
-          type: string
-        categoryRefId:
-          type: string
-        categoryCode:
-          type: string
-        categoryDescription:
-          type: string
-      additionalProperties: false
-      title: VendorCategoriesModel.jsonCreate
-    HttpApiDecodeError:
-      type: object
-      required:
-      - issues
-      - message
-      - _tag
-      properties:
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/Issue'
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - HttpApiDecodeError
-      additionalProperties: false
-      description: The request did not match the expected schema
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    PaymentMethodModel.json:
-      type: object
-      required:
-      - paymentId
-      - paymentMethodRefId
-      - paymentMethodType
-      - paymentMethodDetails
-      - isDefault
-      properties:
-        paymentId:
-          $ref: '#/components/schemas/PaymentId'
-        paymentLabel:
-          anyOf:
-          - type: string
-          - type: 'null'
-        paymentMethodRefId:
-          type: string
-        paymentMethodType:
-          type: string
-        paymentMethodDetails:
-          title: unknown
-        isDefault:
-          type: boolean
-        isDeleted:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-        deletedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        createdAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        updatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-      additionalProperties: false
-      title: PaymentMethodModel.json
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
-      additionalProperties: false
-    NonEmptyString:
-      type: string
-      description: a non empty string
-      title: nonEmptyString
-      minLength: 1
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
-      additionalProperties: false
-    CategoryId:
-      type: number
-      description: Unique identifier for a category
-    PaymentMethodModel.jsonCreate:
-      type: object
-      required:
-      - paymentMethodRefId
-      - paymentMethodType
-      - paymentMethodDetails
-      - isDefault
-      properties:
-        paymentLabel:
-          anyOf:
-          - type: string
-          - type: 'null'
-        paymentMethodRefId:
-          type: string
-        paymentMethodType:
-          type: string
-        paymentMethodDetails:
-          title: unknown
-        isDefault:
-          type: boolean
-      additionalProperties: false
-      title: PaymentMethodModel.jsonCreate
-    CertificateModel.jsonCreate:
-      type: object
-      required: []
-      properties:
-        attachmentId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        certificateType:
-          anyOf:
-          - type: string
-          - type: 'null'
-        certificateCategory:
-          anyOf:
-          - type: string
-          - type: 'null'
-        certificateDetails:
-          title: unknown
-      additionalProperties: false
-      title: CertificateModel.jsonCreate
-    UnauthorizedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        requiredPermissions:
-          type: array
-          items:
-            type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthorizedHttpError
-      additionalProperties: false
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
-    VendorCategoriesModel.json:
-      type: object
-      required:
-      - categoryId
-      - setId
-      - categoryRefId
-      - categoryCode
-      - categoryDescription
-      properties:
-        categoryId:
-          $ref: '#/components/schemas/CategoryId'
-        setId:
-          type: string
-        categoryRefId:
-          type: string
-        categoryCode:
-          type: string
-        categoryDescription:
-          type: string
-        isDeleted:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-        deletedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        createdAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        updatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-      additionalProperties: false
-      title: VendorCategoriesModel.json
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    AttachmentModel.json:
-      type: object
-      required:
-      - attachmentId
-      - path
-      - bucket
-      - filename
-      - attachmentType
-      - size
-      properties:
-        attachmentId:
-          $ref: '#/components/schemas/AttachmentId'
-        path:
-          type: string
-        bucket:
-          type: string
-        filename:
-          type: string
-        attachmentType:
-          type: string
-        size:
-          type: number
-        isDeleted:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-        deletedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        createdAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-        updatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-      additionalProperties: false
-      title: AttachmentModel.json
-    PaymentId:
-      type: number
-      description: Unique identifier for a payment method
-    NotFoundHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
-      additionalProperties: false
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    CertificateId:
-      type: number
-      description: Unique identifier for a certificate
-    VendorCategoriesModel.jsonUpdate:
-      type: object
-      required:
-      - setId
-      - categoryRefId
-      - categoryCode
-      - categoryDescription
-      properties:
-        setId:
-          type: string
-        categoryRefId:
-          type: string
-        categoryCode:
-          type: string
-        categoryDescription:
-          type: string
-      additionalProperties: false
-      title: VendorCategoriesModel.jsonUpdate
   securitySchemes:
     bearerAuth:
       type: http

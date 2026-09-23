@@ -10,7 +10,7 @@ info:
 
     ```
 
-    Authorization: Bearer <your-jwt-token>
+    Authorization: Bearer
 
     ```
 
@@ -127,6 +127,8 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
+      summary: Entity settings get entity settings
+      x-summary-source: derived
     patch:
       tags:
       - entity-settings
@@ -210,8 +212,224 @@ paths:
             schema:
               $ref: '#/components/schemas/EntitySettingsModel.jsonUpdate'
         required: true
+      summary: Entity settings update entity settings
+      x-summary-source: derived
 components:
   schemas:
+    NonEmptyString:
+      type: string
+      description: a non empty string
+      title: nonEmptyString
+      minLength: 1
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    Issue:
+      type: object
+      required:
+      - _tag
+      - path
+      - message
+      properties:
+        _tag:
+          type: string
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
+      additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
+    EntitySettingsModel.jsonUpdate:
+      type: object
+      required: []
+      properties:
+        prefix:
+          anyOf:
+          - type: string
+            description: a string matching the pattern ^[A-Za-z0-9]+$
+            title: maxLength(10)
+            pattern: ^[A-Za-z0-9]+$
+            minLength: 1
+            maxLength: 10
+            allOf:
+            - pattern: ^\S[\s\S]*\S$|^\S$|^$
+          - type: 'null'
+        vendorFieldRequirements:
+          anyOf:
+          - type: object
+            required: []
+            properties: {}
+            additionalProperties:
+              type: string
+              enum:
+              - required
+              - optional
+          - type: 'null'
+        sensitiveFields:
+          anyOf:
+          - type: object
+            required: []
+            properties: {}
+            additionalProperties:
+              type: boolean
+          - type: 'null'
+      additionalProperties: false
+      title: EntitySettingsModel.jsonUpdate
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    EntitySettingsModel.json:
+      type: object
+      required: []
+      properties:
+        prefix:
+          anyOf:
+          - type: string
+            description: a string matching the pattern ^[A-Za-z0-9]+$
+            title: maxLength(10)
+            pattern: ^[A-Za-z0-9]+$
+            minLength: 1
+            maxLength: 10
+            allOf:
+            - pattern: ^\S[\s\S]*\S$|^\S$|^$
+          - type: 'null'
+        sequence:
+          anyOf:
+          - type: number
+          - type: 'null'
+        vendorFieldRequirements:
+          anyOf:
+          - type: object
+            required: []
+            properties: {}
+            additionalProperties:
+              type: string
+              enum:
+              - required
+              - optional
+          - type: 'null'
+        sensitiveFields:
+          anyOf:
+          - type: object
+            required: []
+            properties: {}
+            additionalProperties:
+              type: boolean
+          - type: 'null'
+        customFields:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/EntityCustomFieldsModel.json'
+          - type: 'null'
+      additionalProperties: false
+      title: EntitySettingsModel.json
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
     EntityCustomFieldsModel.json:
       type: object
       required:
@@ -292,106 +510,6 @@ components:
           - type: 'null'
       additionalProperties: false
       title: EntityCustomFieldsModel.json
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    EntitySettingsModel.jsonUpdate:
-      type: object
-      required: []
-      properties:
-        prefix:
-          anyOf:
-          - type: string
-            description: a string matching the pattern ^[A-Za-z0-9]+$
-            title: maxLength(10)
-            pattern: ^[A-Za-z0-9]+$
-            minLength: 1
-            maxLength: 10
-            allOf:
-            - pattern: ^\S[\s\S]*\S$|^\S$|^$
-          - type: 'null'
-        vendorFieldRequirements:
-          anyOf:
-          - type: object
-            required: []
-            properties: {}
-            additionalProperties:
-              type: string
-              enum:
-              - required
-              - optional
-          - type: 'null'
-        sensitiveFields:
-          anyOf:
-          - type: object
-            required: []
-            properties: {}
-            additionalProperties:
-              type: boolean
-          - type: 'null'
-      additionalProperties: false
-      title: EntitySettingsModel.jsonUpdate
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
-      additionalProperties: false
-    NonEmptyString:
-      type: string
-      description: a non empty string
-      title: nonEmptyString
-      minLength: 1
     HttpApiDecodeError:
       type: object
       required:
@@ -411,123 +529,9 @@ components:
           - HttpApiDecodeError
       additionalProperties: false
       description: The request did not match the expected schema
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
-      additionalProperties: false
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    EntitySettingsModel.json:
-      type: object
-      required: []
-      properties:
-        prefix:
-          anyOf:
-          - type: string
-            description: a string matching the pattern ^[A-Za-z0-9]+$
-            title: maxLength(10)
-            pattern: ^[A-Za-z0-9]+$
-            minLength: 1
-            maxLength: 10
-            allOf:
-            - pattern: ^\S[\s\S]*\S$|^\S$|^$
-          - type: 'null'
-        sequence:
-          anyOf:
-          - type: number
-          - type: 'null'
-        vendorFieldRequirements:
-          anyOf:
-          - type: object
-            required: []
-            properties: {}
-            additionalProperties:
-              type: string
-              enum:
-              - required
-              - optional
-          - type: 'null'
-        sensitiveFields:
-          anyOf:
-          - type: object
-            required: []
-            properties: {}
-            additionalProperties:
-              type: boolean
-          - type: 'null'
-        customFields:
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/EntityCustomFieldsModel.json'
-          - type: 'null'
-      additionalProperties: false
-      title: EntitySettingsModel.json
     CustomFieldId:
       type: number
       description: Unique identifier for a custom field definition
-    InternalServerHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - InternalServerHttpError
-      additionalProperties: false
     UnauthorizedHttpError:
       type: object
       required:

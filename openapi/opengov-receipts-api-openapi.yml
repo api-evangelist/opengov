@@ -12,12 +12,12 @@ servers:
   description: Integration
 security: []
 tags:
-- name: receipts
+- name: Receipts
 paths:
   /api/v1/entities/{entityId}/receipts:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.create
       parameters:
       - name: entityId
@@ -555,7 +555,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}:
     get:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.findById
       parameters:
       - name: entityId
@@ -1014,7 +1014,7 @@ paths:
       summary: Find Receipt by ID
     patch:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.update
       parameters:
       - name: entityId
@@ -1555,7 +1555,7 @@ paths:
         required: true
     delete:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.delete
       parameters:
       - name: entityId
@@ -1823,7 +1823,7 @@ paths:
       summary: Delete Receipt
     put:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.putReceipt
       parameters:
       - name: entityId
@@ -2477,7 +2477,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/search:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.search
       parameters:
       - name: entityId
@@ -2879,7 +2879,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}/copy:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.copy
       parameters:
       - name: entityId
@@ -3339,7 +3339,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}/cancel:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.cancel
       parameters:
       - name: entityId
@@ -3847,7 +3847,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}/operation-errors:
     get:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.operationErrors
       parameters:
       - name: entityId
@@ -4152,7 +4152,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}/submit:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.submit
       parameters:
       - name: entityId
@@ -4660,7 +4660,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}/approve:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.approve
       parameters:
       - name: entityId
@@ -5168,7 +5168,7 @@ paths:
   /api/v1/entities/{entityId}/receipts/{id}/reject:
     post:
       tags:
-      - receipts
+      - Receipts
       operationId: receipts.reject
       parameters:
       - name: entityId
@@ -5675,12 +5675,14 @@ paths:
       summary: Reject Receipt
 components:
   schemas:
-    Decimal_18_5:
-      type: string
-      title: Decimal (18,5)
     DateTimeUtc:
       type: string
       description: a string to be decoded into a DateTime.Utc
+    UUID:
+      type: string
+      description: a Universally Unique Identifier
+      format: uuid
+      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
     ReceiptLineItemModel.json:
       type: object
       required:
@@ -5788,11 +5790,9 @@ components:
           pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
       additionalProperties: false
       title: ReceiptLineItemModel.json
-    UUID:
+    Decimal_18_5:
       type: string
-      description: a Universally Unique Identifier
-      format: uuid
-      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+      title: Decimal (18,5)
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

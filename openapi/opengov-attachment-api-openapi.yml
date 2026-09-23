@@ -14,12 +14,12 @@ security:
 - platformApiKey: []
 - platformBearerToken: []
 tags:
-- name: attachment
+- name: Attachment
 paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/attachments/upload:
     post:
       tags:
-      - attachment
+      - Attachment
       operationId: attachment.initializeUpload
       parameters:
       - name: entityId
@@ -241,7 +241,7 @@ paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/attachments/{attachmentId}/complete:
     post:
       tags:
-      - attachment
+      - Attachment
       operationId: attachment.completeUpload
       parameters:
       - name: entityId
@@ -499,7 +499,7 @@ paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/attachments/{attachmentId}/download:
     get:
       tags:
-      - attachment
+      - Attachment
       operationId: attachment.downloadAttachment
       parameters:
       - name: entityId
@@ -694,7 +694,7 @@ paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/attachments/{attachmentId}:
     delete:
       tags:
-      - attachment
+      - Attachment
       operationId: attachment.deleteAttachment
       parameters:
       - name: entityId
@@ -893,7 +893,7 @@ paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/attachments/bulk-delete:
     post:
       tags:
-      - attachment
+      - Attachment
       operationId: attachment.bulkDeleteAttachments
       parameters:
       - name: entityId
@@ -1082,7 +1082,7 @@ paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/attachments:
     get:
       tags:
-      - attachment
+      - Attachment
       operationId: attachment.listAttachments
       parameters:
       - name: entityId
@@ -1340,9 +1340,6 @@ components:
     DateTimeUtc:
       type: string
       description: a string to be decoded into a DateTime.Utc
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
     UploadRaw:
       type: object
       required: []
@@ -1350,6 +1347,9 @@ components:
       additionalProperties:
         $id: /schemas/unknown
         title: unknown
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

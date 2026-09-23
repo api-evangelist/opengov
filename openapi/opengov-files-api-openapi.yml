@@ -6,7 +6,7 @@ info:
     name: OpenGov Permitting & Licensing API
     url: https://opengov.com
     email: developers@opengov.com
-  description: "The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows. With this API, you can integrate with other systems, build custom applications, or automate tasks. \n\nThe API is designed around REST principles, supports JSON:API standards, and exposes resources such as records, inspections, fees, approvals, and user accounts. This documentation covers available endpoints, request and response formats, and error codes, helping developers extend and integrate OpenGov Permitting & Licensing securely and efficiently.\n"
+  description: The OpenGov Permitting & Licensing API provides programmatic access to Permitting & Licensing data and workflows.
   license:
     name: OpenGov Permitting & Licensing API
     url: https://opengov.com
@@ -25,7 +25,10 @@ security:
 - auth0Dev: []
 tags:
 - name: Files
-  description: "Files in OpenGov Permitting & Licensing are managed in a two-step process:\n\n1. **File Upload**\n   - First, create a file entry to receive a pre-signed Azure Blob Storage URL\n   - Use this URL to upload your file directly to Azure Blob Storage\n   - The file is now stored but not yet associated with any entity\n\n2. **File Association**\n   - Associate the uploaded file with an entity (currently only Record Attachments)\n   - The file is cloned when associated, allowing the same file to be reused across different entities\n   - Each association creates a new file object with its own lifecycle\n\nThis design allows for efficient file reuse while maintaining independent file management for each entity.\n"
+  description: 'Files in OpenGov Permitting & Licensing are managed in a two-step process:
+
+
+    1.'
 paths:
   /v2/{community}/files:
     parameters:
@@ -37,7 +40,45 @@ paths:
         type: string
     post:
       summary: Upload a file
-      description: "Creates a new file entry and returns a pre-signed URL for uploading.\n\n##### Upload Process\n1. Call this endpoint with the file metadata to receive:\n   - A `fileID` for referencing the file\n   - A pre-signed URL for uploading\n2. Use the pre-signed URL to upload your file:\n   - Send a `PUT` request to the URL\n   - Include the file content in the request body\n   - Set the `Content-Type` header to match the file type\n   - Include the header `x-ms-blob-type` with the value `BlockBlob`\n3. Once uploaded, the file can be associated with entities:\n   - Currently supports association with [Record Attachments](operation:external/plce-api/plce-api.oas/record-attachments/addRecordAttachment)\n   - Each association creates a clone of the original file\n   - The same file can be reused across multiple entities\n\nThe pre-signed URL expires after 1 hour.\n\nFor more information on uploading files, see the [Azure Blob Service REST API documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/put-blob)\n\n### Permissions Required\n`File Write`"
+      description: 'Creates a new file entry and returns a pre-signed URL for uploading.
+
+
+        ##### Upload Process
+
+        1. Call this endpoint with the file metadata to receive:
+
+        - A `fileID` for referencing the file
+
+        - A pre-signed URL for uploading
+
+        2. Use the pre-signed URL to upload your file:
+
+        - Send a `PUT` request to the URL
+
+        - Include the file content in the request body
+
+        - Set the `Content-Type` header to match the file type
+
+        - Include the header `x-ms-blob-type` with the value `BlockBlob`
+
+        3. Once uploaded, the file can be associated with entities:
+
+        - Currently supports association with Record Attachments
+
+        - Each association creates a clone of the original file
+
+        - The same file can be reused across multiple entities
+
+
+        The pre-signed URL expires after 1 hour.
+
+
+        For more information on uploading files, see the Azure Blob Service REST API documentation
+
+
+        ### Permissions Required
+
+        `File Write`'
       operationId: createFileUpload
       x-og-claims-required:
       - PLC_FILE_WRITE

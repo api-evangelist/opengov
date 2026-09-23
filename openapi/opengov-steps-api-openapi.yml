@@ -1,10 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Opengov Steps API
   version: v1
+  title: Permitting Licensing & Code Enforcement Steps API
   x-logo:
     url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
-  description: 'Operations tagged Steps across 2 of this provider''s published API definitions: opengov-permitting-licensing-v1-openapi-original.yml, opengov-permitting-licensing-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: The OpenGov Permitting & Licensing API is organized around REST.
 servers:
 - url: https://api.plce.opengov.com/plce
   description: Production
@@ -15,10 +15,7 @@ tags:
   description: 'A Record''s Workflow is represented as a collection of **Steps**. Steps are automatically created on a Record at the time it is submitted, based on the Workflow Template defined in the Record Type settings of that Record''s Type.
 
 
-    Steps are instantiated on Records and can be added or deleted on individual Records, so a given Record''s Steps may not always match its Workflow Template.
-
-
-    '
+    Steps are instantiated on Records and can be added or deleted on individual Records, so a given Record''s Steps may not always match its Workflow Template.'
 paths:
   /v1/{community}/records/{recordID}/workflow-steps:
     get:
@@ -51,9 +48,6 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
   /v1/{community}/records/{recordID}/workflow-steps/{stepID}:
     get:
       summary: Retrieve a record step
@@ -84,9 +78,6 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
   /v1/{community}/records/{recordID}/workflow-steps/{stepID}/state:
     put:
       summary: Update a record step
@@ -126,18 +117,8 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
 components:
   parameters:
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
     recordID:
       name: recordID
       in: path
@@ -145,6 +126,13 @@ components:
       required: true
       schema:
         type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
     stepID:
       name: stepID
       in: path
@@ -153,25 +141,6 @@ components:
       schema:
         type: integer
   schemas:
-    relationship:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            related:
-              type: string
-              description: Link to the related resource
-    step_status:
-      type: string
-      enum:
-      - REJECTED
-      - INACTIVE
-      - ACTIVE
-      - COMPLETE
-      - SKIPPED
-      - ON_HOLD
-      description: Status of the workflow step
     RecordStep:
       x-tags:
       - Steps
@@ -267,15 +236,41 @@ components:
               - COMPLETED
               - SKIPPED
               - ON_HOLD
+    step_status:
+      type: string
+      enum:
+      - REJECTED
+      - INACTIVE
+      - ACTIVE
+      - COMPLETE
+      - SKIPPED
+      - ON_HOLD
+      description: Status of the workflow step
+    relationship:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              description: Link to the related resource
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- opengov-permitting-licensing-v1-openapi-original.yml
-- opengov-permitting-licensing-v1-openapi.yml
-x-og-spec-id: bnp-api-v1
-x-og-env-servers:
-  production: https://api.bnp.opengov.com
-  development: https://api.bnp.ogintegration.us
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

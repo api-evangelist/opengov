@@ -1384,134 +1384,6 @@ components:
       - totalResultsCount
       - endCursor
       - hasMoreResults
-    ContractCategoriesResponseDetails:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code representing the category.
-          example: '20800'
-        title:
-          type: string
-          description: The category code title.
-          example: Office Supplies
-        codeType:
-          type: string
-          description: The ID of the category set this category belongs to.
-          example: NIGP
-      required:
-      - code
-      - title
-      - codeType
-    ContractMilestoneResponseDetails:
-      type: object
-      properties:
-        isEndDate:
-          type: boolean
-          description: Whether this milestone is the end date.
-          example: false
-        isStartDate:
-          type: boolean
-          description: Whether this milestone is the start date.
-          example: true
-        isInsuranceExpiration:
-          type: boolean
-          description: Whether this milestone is an insurance expiration.
-          example: false
-        isAnnualEvaluation:
-          type: boolean
-          description: Whether this milestone is an annual evaluation.
-          example: false
-        date:
-          type: string
-          description: The date of the milestone in ISO 8601 format.
-          example: '2025-07-05T15:25:45.511Z'
-        name:
-          type: string
-          description: The name of the milestone.
-          example: Contract Signed
-      required:
-      - isEndDate
-      - isStartDate
-      - isInsuranceExpiration
-      - isAnnualEvaluation
-      - date
-      - name
-    ContractRenewalResponseDetails:
-      type: object
-      properties:
-        length:
-          type: number
-          description: The length of the renewal period.
-          example: 12
-        lengthUnit:
-          type: string
-          description: The unit for the renewal period length.
-          example: months
-        selected:
-          type: boolean
-          description: Whether this renewal is selected.
-          example: true
-      required:
-      - length
-      - lengthUnit
-      - selected
-    AttachmentResponseDetails:
-      type: object
-      properties:
-        id:
-          type: number
-          description: The unique identifier for the attachment.
-          example: 1
-        filename:
-          type: string
-          description: The filename of the attachment.
-          example: contract.pdf
-        fileExtension:
-          type: string
-          description: The file extension of the attachment.
-          example: pdf
-        url:
-          type: string
-          description: The URL where the attachment can be accessed.
-          example: https://example.com/contract.pdf
-          nullable: true
-      required:
-      - id
-      - filename
-      - fileExtension
-      - url
-    ErroredContractOrder:
-      allOf:
-      - $ref: '#/components/schemas/ContractOrder'
-      - type: object
-        properties:
-          errors:
-            type: array
-            description: List of validation or processing errors for this Contract Order.
-            items:
-              type: string
-              example: 'contractId not found: CONTRACT-12345'
-    ContactsResponseDto:
-      type: object
-      properties:
-        results:
-          description: List of contacts associated with the contract
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactResponseDetails'
-      required:
-      - results
-    AttachmentResponseDto:
-      type: object
-      properties:
-        results:
-          description: The list of attachments for the contract.
-          type: array
-          items:
-            $ref: '#/components/schemas/AttachmentResponseDetails'
-      required:
-      - results
     ContractOrder:
       x-tags:
       - Contracts
@@ -1577,6 +1449,170 @@ components:
           description: Case sensitive. The vendor assigned number for this contract order. Required if `contractId` is not provided. If there are no contract matches or greater than 1 match, the `contractId` will be required.
           maxLength: 128
           example: VENDOR-98765
+    ContractEdge:
+      type: object
+      properties:
+        node:
+          description: The contract data.
+          allOf:
+          - $ref: '#/components/schemas/BasicContractDetails'
+        cursor:
+          type: string
+          description: A cursor for use in pagination.
+          example: Y29udHJhY3QuaWQ9MTIz
+      required:
+      - node
+      - cursor
+    ContactResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the contact (contact.id, not contract_id).
+          example: 123
+        firstName:
+          type: string
+          description: Contact first name
+          example: John
+        lastName:
+          type: string
+          description: Contact last name
+          example: Doe
+        email:
+          type: string
+          description: Contact email address
+          example: john.doe@example.com
+        phone:
+          type: string
+          description: Contact phone number
+          example: +1 (555) 123-4567
+          nullable: true
+        title:
+          type: string
+          description: Contact title/role
+          example: Procurement Manager
+          nullable: true
+      required:
+      - id
+      - firstName
+      - lastName
+      - email
+    ContractContactResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the contact.
+          example: 1
+        firstName:
+          type: string
+          description: The first name of the contact.
+          example: John
+        lastName:
+          type: string
+          description: The last name of the contact.
+          example: Doe
+        title:
+          type: string
+          description: The title of the contact.
+          example: Contract Manager
+        phoneCountry:
+          type: string
+          description: The country code for the contact phone number.
+          example: '+1'
+        phone:
+          type: string
+          description: The phone number of the contact.
+          example: '1234567890'
+        email:
+          type: string
+          description: The email address of the contact.
+          example: john.doe@acme.com
+      required:
+      - id
+      - firstName
+      - lastName
+      - title
+      - phoneCountry
+      - phone
+      - email
+    ContractRenewalResponseDetails:
+      type: object
+      properties:
+        length:
+          type: number
+          description: The length of the renewal period.
+          example: 12
+        lengthUnit:
+          type: string
+          description: The unit for the renewal period length.
+          example: months
+        selected:
+          type: boolean
+          description: Whether this renewal is selected.
+          example: true
+      required:
+      - length
+      - lengthUnit
+      - selected
+    ContractBudgetResponseDetails:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: The total budget amount.
+          example: 100000
+        issued:
+          type: number
+          description: The amount that has been issued.
+          example: 50000
+        paid:
+          type: number
+          description: The amount that has been paid.
+          example: 25000
+      required:
+      - amount
+      - issued
+      - paid
+    ContractCategoriesResponseDetails:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code representing the category.
+          example: '20800'
+        title:
+          type: string
+          description: The category code title.
+          example: Office Supplies
+        codeType:
+          type: string
+          description: The ID of the category set this category belongs to.
+          example: NIGP
+      required:
+      - code
+      - title
+      - codeType
+    ContactsResponseDto:
+      type: object
+      properties:
+        results:
+          description: List of contacts associated with the contract
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactResponseDetails'
+      required:
+      - results
+    AttachmentResponseDto:
+      type: object
+      properties:
+        results:
+          description: The list of attachments for the contract.
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResponseDetails'
+      required:
+      - results
     ContractByIdResponseDetails:
       type: object
       properties:
@@ -1752,39 +1788,76 @@ components:
       - renewals
       - budget
       - categories
-    ContractBudgetResponseDetails:
+    ContractMilestoneResponseDetails:
       type: object
       properties:
-        amount:
-          type: number
-          description: The total budget amount.
-          example: 100000
-        issued:
-          type: number
-          description: The amount that has been issued.
-          example: 50000
-        paid:
-          type: number
-          description: The amount that has been paid.
-          example: 25000
-      required:
-      - amount
-      - issued
-      - paid
-    ContractEdge:
-      type: object
-      properties:
-        node:
-          description: The contract data.
-          allOf:
-          - $ref: '#/components/schemas/BasicContractDetails'
-        cursor:
+        isEndDate:
+          type: boolean
+          description: Whether this milestone is the end date.
+          example: false
+        isStartDate:
+          type: boolean
+          description: Whether this milestone is the start date.
+          example: true
+        isInsuranceExpiration:
+          type: boolean
+          description: Whether this milestone is an insurance expiration.
+          example: false
+        isAnnualEvaluation:
+          type: boolean
+          description: Whether this milestone is an annual evaluation.
+          example: false
+        date:
           type: string
-          description: A cursor for use in pagination.
-          example: Y29udHJhY3QuaWQ9MTIz
+          description: The date of the milestone in ISO 8601 format.
+          example: '2025-07-05T15:25:45.511Z'
+        name:
+          type: string
+          description: The name of the milestone.
+          example: Contract Signed
       required:
-      - node
-      - cursor
+      - isEndDate
+      - isStartDate
+      - isInsuranceExpiration
+      - isAnnualEvaluation
+      - date
+      - name
+    AttachmentResponseDetails:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier for the attachment.
+          example: 1
+        filename:
+          type: string
+          description: The filename of the attachment.
+          example: contract.pdf
+        fileExtension:
+          type: string
+          description: The file extension of the attachment.
+          example: pdf
+        url:
+          type: string
+          description: The URL where the attachment can be accessed.
+          example: https://example.com/contract.pdf
+          nullable: true
+      required:
+      - id
+      - filename
+      - fileExtension
+      - url
+    ErroredContractOrder:
+      allOf:
+      - $ref: '#/components/schemas/ContractOrder'
+      - type: object
+        properties:
+          errors:
+            type: array
+            description: List of validation or processing errors for this Contract Order.
+            items:
+              type: string
+              example: 'contractId not found: CONTRACT-12345'
     ContractPartyResponseDetails:
       type: object
       properties:
@@ -1799,79 +1872,6 @@ components:
       required:
       - companyName
       - companyEmail
-    ContractContactResponseDetails:
-      type: object
-      properties:
-        id:
-          type: number
-          description: The unique identifier for the contact.
-          example: 1
-        firstName:
-          type: string
-          description: The first name of the contact.
-          example: John
-        lastName:
-          type: string
-          description: The last name of the contact.
-          example: Doe
-        title:
-          type: string
-          description: The title of the contact.
-          example: Contract Manager
-        phoneCountry:
-          type: string
-          description: The country code for the contact phone number.
-          example: '+1'
-        phone:
-          type: string
-          description: The phone number of the contact.
-          example: '1234567890'
-        email:
-          type: string
-          description: The email address of the contact.
-          example: john.doe@acme.com
-      required:
-      - id
-      - firstName
-      - lastName
-      - title
-      - phoneCountry
-      - phone
-      - email
-    ContactResponseDetails:
-      type: object
-      properties:
-        id:
-          type: number
-          description: The unique identifier for the contact (contact.id, not contract_id).
-          example: 123
-        firstName:
-          type: string
-          description: Contact first name
-          example: John
-        lastName:
-          type: string
-          description: Contact last name
-          example: Doe
-        email:
-          type: string
-          description: Contact email address
-          example: john.doe@example.com
-        phone:
-          type: string
-          description: Contact phone number
-          example: +1 (555) 123-4567
-          nullable: true
-        title:
-          type: string
-          description: Contact title/role
-          example: Procurement Manager
-          nullable: true
-      required:
-      - id
-      - firstName
-      - lastName
-      - email
     ListContractsResponseDto:
       type: object
       properties:
@@ -1956,6 +1956,17 @@ components:
       - created_at
       - departmentName
       - durationType
+  parameters:
+    EntityUuidPathParam:
+      name: entityUuid
+      in: path
+      required: true
+      description: 'UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.
+
+        '
+      schema:
+        type: string
+        format: uuid
   responses:
     MissingProEntitlement:
       description: 'Your OpenGov account does not have OpenGov Procurement access on the requested entity.
@@ -1969,17 +1980,6 @@ components:
               message:
                 type: string
                 example: API key does not have PRO access to this entity
-  parameters:
-    EntityUuidPathParam:
-      name: entityUuid
-      in: path
-      required: true
-      description: 'UUID of the OpenGov entity (typically an agency) the request is acting on. Your OpenGov account must have OpenGov Procurement access on this entity, otherwise a 403 will be returned.
-
-        '
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     basicAuth:
       type: http

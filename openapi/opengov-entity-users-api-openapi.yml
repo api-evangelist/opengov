@@ -10,7 +10,7 @@ info:
 
     ```
 
-    Authorization: Bearer <your-jwt-token>
+    Authorization: Bearer
 
     ```
 
@@ -146,8 +146,27 @@ paths:
                       - InfrastructureError
                   additionalProperties: false
                 - $ref: '#/components/schemas/InternalServerHttpError'
+      summary: Entity users get entity users
+      x-summary-source: derived
 components:
   schemas:
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
     PropertyKey:
       anyOf:
       - type: string
@@ -165,6 +184,19 @@ components:
             type: string
         additionalProperties: false
         description: an object to be decoded into a globally shared symbol
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
     Issue:
       type: object
       required:
@@ -194,18 +226,30 @@ components:
           description: A descriptive message explaining the issue
       additionalProperties: false
       description: Represents an error encountered while parsing a value to match the schema
-    EntityNotFoundError:
+    InternalServerHttpError:
       type: object
       required:
-      - entityId
+      - message
       - _tag
       properties:
-        entityId:
+        message:
           type: string
         _tag:
           type: string
           enum:
-          - EntityNotFoundError
+          - InternalServerHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
       additionalProperties: false
     HttpApiDecodeError:
       type: object
@@ -226,60 +270,18 @@ components:
           - HttpApiDecodeError
       additionalProperties: false
       description: The request did not match the expected schema
-    AuthError:
+    EntityNotFoundError:
       type: object
       required:
+      - entityId
       - _tag
       properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
+        entityId:
           type: string
         _tag:
           type: string
           enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    InternalServerHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - InternalServerHttpError
-      additionalProperties: false
-    UnauthorizedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        requiredPermissions:
-          type: array
-          items:
-            type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthorizedHttpError
+          - EntityNotFoundError
       additionalProperties: false
   securitySchemes:
     bearerAuth:

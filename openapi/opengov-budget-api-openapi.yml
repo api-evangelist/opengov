@@ -2,9 +2,7 @@ openapi: 3.2.0
 info:
   title: Budgeting & Performance Budget API
   version: 1.0.0
-  description: 'The OpenGov Budgeting & Performance API
-
-    '
+  description: The OpenGov Budgeting & Performance API
   contact:
     name: B&P Team
     url: https://api.bnp.opengov.com
@@ -226,9 +224,7 @@ paths:
       tags:
       - Budget
       summary: Retrieves the exportable data resources for an entity
-      description: 'Returns all standard dataset instances available for export from the Budget and Workforce applications for the specified entity. If includeCustom=true, custom financial datasets are also included. Use the Get Data Export Resource Metadata endpoint to retrieve additional details for a resource, including its column schema, and use the Export Data Resource as CSV endpoint to download the resource as a CSV file.
-
-        '
+      description: Returns all standard dataset instances available for export from the Budget and Workforce applications for the specified entity. If includeCustom=true, custom financial datasets are also included. Use the Get Data Export Resource Metadata endpoint to retrieve additional details for a resource, including its column schema, and use the Export Data Resource as CSV endpoint to download the resource as a CSV file.
       operationId: listDataExportResources
       parameters:
       - name: filter[entityId]
@@ -287,7 +283,11 @@ paths:
       tags:
       - Budget
       summary: Get Data Export Resource Metadata
-      description: "Retrieves detailed metadata information for a specific data export resource,\nincluding the name, description, standard type, column schema, and timestamps indicating when the \nresource was created and updated.\n"
+      description: 'Retrieves detailed metadata information for a specific data export resource,
+
+        including the name, description, standard type, column schema, and timestamps indicating when the
+
+        resource was created and updated.'
       operationId: getDataExportResourceMetadata
       parameters:
       - name: resourceId
@@ -376,9 +376,7 @@ paths:
       summary: Export Data Resource as CSV
       description: 'Exports a budget data resource as a CSV file by redirecting to a presigned URL.
 
-        The response includes a Location header that clients should follow to download the data.
-
-        '
+        The response includes a Location header that clients should follow to download the data.'
       operationId: exportBudgetDataResource
       parameters:
       - name: resourceId
@@ -439,70 +437,6 @@ paths:
           description: Not Acceptable - The request could not be understood by the server due to a client error.
 components:
   schemas:
-    DataExportResourcesResponse:
-      type: object
-      description: A JSON:API document containing a list of Data Export Resource resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - attributes
-            properties:
-              type:
-                type: string
-                enum:
-                - data-export-resource
-                description: The type of the resource.
-              id:
-                type: string
-                description: Identifier for the resource
-                example: lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
-              attributes:
-                type: object
-                required:
-                - name
-                - description
-                - standardType
-                - createdAt
-                - updatedAt
-                - dataUpdatedAt
-                properties:
-                  name:
-                    type: string
-                    description: Name of the resource
-                    example: Budget Summary Report
-                  description:
-                    type: string
-                    description: Detailed description of what the resource contains
-                    example: Comprehensive budget summary including all line items and totals for the fiscal year
-                  standardType:
-                    type: string
-                    description: URN representing the standard type of this resource
-                    example: urn:opengov:lenses/standard/budgeting/budget-summary/1
-                  createdAt:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the resource was first created
-                    example: '2024-01-15T10:30:00Z'
-                  updatedAt:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the resource metadata was last updated
-                    example: '2024-03-20T14:45:00Z'
-                  dataUpdatedAt:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the underlying data was last updated
-                    example: '2024-03-22T09:15:00Z'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
     BudgetListResource:
       type: object
       required:
@@ -586,35 +520,6 @@ components:
               readOnly: true
               description: The date and time the resource was last updated.
               example: '2025-01-01T00:00:00Z'
-    PaginatedResponseLinks:
-      type: object
-      description: Standard pagination links for collection responses
-      properties:
-        self:
-          type: string
-          format: uri
-          description: Link to the current page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
-        next:
-          type: string
-          format: uri
-          description: Link to the next page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
-        prev:
-          type: string
-          format: uri
-          description: Link to the previous page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        first:
-          type: string
-          format: uri
-          description: Link to the first page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        last:
-          type: string
-          format: uri
-          description: Link to the last page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
     BudgetAmountsSummaryResponse:
       type: object
       description: A summary of the amounts for a Budget.
@@ -740,23 +645,20 @@ components:
           description: Optional included budget resource when requested via include parameter
           items:
             $ref: '#/components/schemas/BudgetListResource'
-    ResponseLinks:
+    BudgetsListResponse:
       type: object
-      description: Standard links object for non-paginated responses
+      description: A JSON:API document containing a list of Budget resources.
+      required:
+      - data
       properties:
-        self:
-          type: string
-          format: uri
-          description: Link of the current request.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1
-    ResponseMeta:
-      type: object
-      description: Standard metadata for collection responses
-      properties:
-        totalRecords:
-          type: integer
-          description: The total number of records matching the query.
-          example: 42
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
     DataExportResourceMetadataResponse:
       type: object
       description: A JSON:API document containing data export resource metadata
@@ -891,6 +793,87 @@ components:
                   format: date-time
                   description: Timestamp when the underlying data was last updated
                   example: '2025-07-09T20:11:06.860339917Z'
+    DataExportResourcesResponse:
+      type: object
+      description: A JSON:API document containing a list of Data Export Resource resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - data-export-resource
+                description: The type of the resource.
+              id:
+                type: string
+                description: Identifier for the resource
+                example: lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
+              attributes:
+                type: object
+                required:
+                - name
+                - description
+                - standardType
+                - createdAt
+                - updatedAt
+                - dataUpdatedAt
+                properties:
+                  name:
+                    type: string
+                    description: Name of the resource
+                    example: Budget Summary Report
+                  description:
+                    type: string
+                    description: Detailed description of what the resource contains
+                    example: Comprehensive budget summary including all line items and totals for the fiscal year
+                  standardType:
+                    type: string
+                    description: URN representing the standard type of this resource
+                    example: urn:opengov:lenses/standard/budgeting/budget-summary/1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the resource was first created
+                    example: '2024-01-15T10:30:00Z'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the resource metadata was last updated
+                    example: '2024-03-20T14:45:00Z'
+                  dataUpdatedAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the underlying data was last updated
+                    example: '2024-03-22T09:15:00Z'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    ResponseLinks:
+      type: object
+      description: Standard links object for non-paginated responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link of the current request.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1
+    ResponseMeta:
+      type: object
+      description: Standard metadata for collection responses
+      properties:
+        totalRecords:
+          type: integer
+          description: The total number of records matching the query.
+          example: 42
     BudgetResponse:
       type: object
       description: A JSON:API document containing a list of Budget resources.
@@ -996,20 +979,35 @@ components:
               format: uri
         meta:
           $ref: '#/components/schemas/ResponseMeta'
-    BudgetsListResponse:
+    PaginatedResponseLinks:
       type: object
-      description: A JSON:API document containing a list of Budget resources.
-      required:
-      - data
+      description: Standard pagination links for collection responses
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BudgetListResource'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
+        self:
+          type: string
+          format: uri
+          description: Link to the current page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
+        next:
+          type: string
+          format: uri
+          description: Link to the next page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
+        prev:
+          type: string
+          format: uri
+          description: Link to the previous page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        first:
+          type: string
+          format: uri
+          description: Link to the first page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        last:
+          type: string
+          format: uri
+          description: Link to the last page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
   securitySchemes:
     BearerAuth:
       type: http

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Open Data CKAN Action System API
   version: '2.9'
-  description: "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n"
+  description: Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.
   contact:
     name: CKAN Community
     url: https://ckan.org/community
@@ -13,14 +13,14 @@ servers:
 - url: https://cloudcity.ogopendata.com/api/3/action
   description: Cloud City Open Data
 tags:
-- name: system
+- name: System
 paths:
   /status_show:
     get:
       operationId: statusShow
       summary: Get the CKAN version and a list of installed extensions
       tags:
-      - system
+      - System
       parameters: []
       responses:
         '200':
@@ -59,40 +59,6 @@ paths:
           $ref: '#/components/responses/ServerError'
       security: []
 components:
-  schemas:
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
-    ErrorEnvelope:
-      type: object
-      required:
-      - help
-      - success
-      - error
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-          default: false
-        error:
-          type: object
-          additionalProperties: true
-          properties:
-            __type:
-              type: string
-            message:
-              type: string
   responses:
     ServerError:
       description: Server error
@@ -121,6 +87,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

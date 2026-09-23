@@ -1,10 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Opengov Step Comments API
   version: v1
+  title: Permitting Licensing & Code Enforcement Step Comments API
   x-logo:
     url: https://viewpointcloud.blob.core.windows.net/profile-pictures/Frame_778_Sun_Nov_12_2023_17:18:36_GMT+0000_(Coordinated_Universal_Time).png
-  description: 'Operations tagged Step Comments across 2 of this provider''s published API definitions: opengov-permitting-licensing-v1-openapi-original.yml, opengov-permitting-licensing-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: The OpenGov Permitting & Licensing API is organized around REST.
 servers:
 - url: https://api.plce.opengov.com/plce
   description: Production
@@ -15,9 +15,7 @@ tags:
   description: 'A Record Step can have **Comments**, which are visible to public Record Contacts, and **Internal Notes**, which are visible to employees only.
 
 
-    Comments send Notifications to any employee assigned to a step.
-
-    '
+    Comments send Notifications to any employee assigned to a step.'
 paths:
   /v1/{community}/records/{recordID}/workflow-steps/{stepID}/comments:
     get:
@@ -89,9 +87,6 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
   /v1/{community}/records/{recordID}/workflow-steps/{stepID}/comments/{commentID}:
     delete:
       summary: Delete a step comment
@@ -116,15 +111,12 @@ paths:
           description: Resource not found
         '500':
           description: Internal Server Error
-    servers:
-    - url: https://api.plce.opengov.com/plce
-      description: Production
 components:
   parameters:
-    commentID:
-      name: commentID
+    recordID:
+      name: recordID
       in: path
-      description: ID of a comment on a workflow step of a record
+      description: ID of the record
       required: true
       schema:
         type: integer
@@ -135,10 +127,10 @@ components:
       required: true
       schema:
         type: string
-    recordID:
-      name: recordID
+    commentID:
+      name: commentID
       in: path
-      description: ID of the record
+      description: ID of a comment on a workflow step of a record
       required: true
       schema:
         type: integer
@@ -223,10 +215,17 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- opengov-permitting-licensing-v1-openapi-original.yml
-- opengov-permitting-licensing-v1-openapi.yml
-x-og-spec-id: bnp-api-v1
-x-og-env-servers:
-  production: https://api.bnp.opengov.com
-  development: https://api.bnp.ogintegration.us
+x-tagGroups:
+- name: Records
+  tags:
+  - Records
+  - Record Contacts
+  - Record Locations
+  - Record Form
+- name: Workflow
+  tags:
+  - Steps
+  - Step Comments
+- name: Events
+  tags:
+  - Event Types

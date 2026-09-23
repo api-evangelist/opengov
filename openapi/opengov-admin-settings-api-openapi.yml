@@ -14,12 +14,12 @@ security:
 - platformApiKey: []
 - platformBearerToken: []
 tags:
-- name: adminSettings
+- name: Admin Settings
 paths:
   /api/v1/po/entities/{entityId}/admin/settings:
     get:
       tags:
-      - adminSettings
+      - Admin Settings
       operationId: adminSettings.getSettings
       parameters:
       - name: entityId
@@ -200,7 +200,7 @@ paths:
       summary: Get admin settings for an entity
     patch:
       tags:
-      - adminSettings
+      - Admin Settings
       operationId: adminSettings.updateSettings
       parameters:
       - name: entityId
@@ -396,6 +396,9 @@ paths:
         required: true
 components:
   schemas:
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
     AdminSettingsModel.json:
       type: object
       required:
@@ -427,9 +430,6 @@ components:
           $ref: '#/components/schemas/DateTimeUtc'
       additionalProperties: false
       title: AdminSettingsModel.json
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

@@ -14,15 +14,15 @@ servers:
   - development
   - local
 tags:
-- name: organization
+- name: Organization
   description: Organizations are used to create, manage and publish datasets.
 paths:
   /organization_list:
     get:
       operationId: organizationList
-      summary: Return a list of the names of the site's organizations.
+      summary: Return a list of the names of the site's organizations
       tags:
-      - organization
+      - Organization
       parameters:
       - in: query
         name: limit
@@ -62,9 +62,9 @@ paths:
   /organization_show:
     get:
       operationId: organizationShow
-      summary: Return the details of a organization.
+      summary: Return the details of a organization
       tags:
-      - organization
+      - Organization
       parameters:
       - in: query
         name: id
@@ -122,7 +122,7 @@ paths:
       x-og-claims-required:
       - PLC_SYSTEM_CONFIG_READ
       tags:
-      - organization
+      - Organization
       responses:
         '200':
           description: Organization
@@ -203,22 +203,6 @@ paths:
       - local
 components:
   responses:
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
     ServerError:
       description: Server error
       content:
@@ -240,6 +224,22 @@ components:
                 error:
                   __type: Authorization Error
                   message: 'Access denied: User not authorized to perform this action'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
     NotFound:
       description: Not found error
       content:
@@ -262,19 +262,26 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Envelope:
+    ErrorEnvelope:
       type: object
       required:
       - help
       - success
+      - error
       properties:
         help:
           type: string
         success:
           type: boolean
-        result:
+          default: false
+        error:
           type: object
           additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
     Organization:
       type: object
       description: CKAN Organization
@@ -296,26 +303,19 @@ components:
           type: string
         package_count:
           type: integer
-    ErrorEnvelope:
+    Envelope:
       type: object
       required:
       - help
       - success
-      - error
       properties:
         help:
           type: string
         success:
           type: boolean
-          default: false
-        error:
+        result:
           type: object
           additionalProperties: true
-          properties:
-            __type:
-              type: string
-            message:
-              type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

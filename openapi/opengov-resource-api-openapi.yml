@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Open Data CKAN Action Resource API
   version: '2.9'
-  description: "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n"
+  description: Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.
   contact:
     name: CKAN Community
     url: https://ckan.org/community
@@ -13,15 +13,15 @@ servers:
 - url: https://cloudcity.ogopendata.com/api/3/action
   description: Cloud City Open Data
 tags:
-- name: resource
+- name: Resource
   description: A resource holds the data itself. A resource can be a CSV or Excel spreadsheet, XML file, PDF document, image file, linked data, etc. A dataset can contain any number of resources.
 paths:
   /resource_show:
     get:
       operationId: resourceShow
-      summary: Return the metadata of a resource.
+      summary: Return the metadata of a resource
       tags:
-      - resource
+      - Resource
       parameters:
       - in: query
         name: id
@@ -63,7 +63,7 @@ paths:
       summary: Add a new resource to a dataset
       description: Add a resource to a dataset (package). POST using multipart/form-data to upload a file.
       tags:
-      - resource
+      - Resource
       requestBody:
         required: true
         content:
@@ -116,10 +116,10 @@ paths:
   /resource_patch:
     post:
       operationId: resourcePatch
-      summary: Update only specific fields of an existing resource.
+      summary: Update only specific fields of an existing resource
       description: Use multipart/form-data when uploading a file.
       tags:
-      - resource
+      - Resource
       requestBody:
         required: true
         content:
@@ -167,122 +167,7 @@ paths:
       security:
       - ApiTokenAuth: []
 components:
-  responses:
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
-    ServerError:
-      description: Server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    AuthorizationError:
-      description: Authorization error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            authorization_error:
-              summary: Authorization error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Authorization Error
-                  message: 'Access denied: User not authorized to perform this action'
-    NotFound:
-      description: Not found error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            not_found_error:
-              summary: Not found
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Not Found Error
-                  message: Not found
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    ResourceCreateMultipart:
-      type: object
-      description: Resource create multipart form-data
-      required:
-      - package_id
-      - upload
-      properties:
-        package_id:
-          type: string
-          description: The package ID to add a new resource to
-        name:
-          type: string
-          description: The name of the resource
-        description:
-          type: string
-          description: The description of the resource
-        format:
-          type: string
-          description: The format of the resource
-        upload:
-          type: string
-          format: binary
-          description: The file to upload
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
-    ErrorEnvelope:
-      type: object
-      required:
-      - help
-      - success
-      - error
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-          default: false
-        error:
-          type: object
-          additionalProperties: true
-          properties:
-            __type:
-              type: string
-            message:
-              type: string
     ResourcePatchMultipart:
       type: object
       description: Resource patch multipart form-data
@@ -306,6 +191,26 @@ components:
           type: string
           format: binary
           description: The file to upload
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
     Resource:
       type: object
       description: CKAN Resource
@@ -335,6 +240,101 @@ components:
         last_modified:
           type: string
           format: date-time
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
+    ResourceCreateMultipart:
+      type: object
+      description: Resource create multipart form-data
+      required:
+      - package_id
+      - upload
+      properties:
+        package_id:
+          type: string
+          description: The package ID to add a new resource to
+        name:
+          type: string
+          description: The name of the resource
+        description:
+          type: string
+          description: The description of the resource
+        format:
+          type: string
+          description: The format of the resource
+        upload:
+          type: string
+          format: binary
+          description: The file to upload
+  responses:
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    AuthorizationError:
+      description: Authorization error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            authorization_error:
+              summary: Authorization error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Authorization Error
+                  message: 'Access denied: User not authorized to perform this action'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

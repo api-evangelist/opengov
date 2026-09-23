@@ -14,12 +14,12 @@ security:
 - platformApiKey: []
 - platformBearerToken: []
 tags:
-- name: terms
+- name: Terms
 paths:
   /api/v1/po/entities/{entityId}/purchase-orders/{poId}/terms:
     get:
       tags:
-      - terms
+      - Terms
       operationId: terms.getTerms
       parameters:
       - name: entityId
@@ -232,7 +232,7 @@ paths:
       summary: Get Terms & Conditions for a Purchase Order
     put:
       tags:
-      - terms
+      - Terms
       operationId: terms.upsertTerms
       parameters:
       - name: entityId
@@ -460,9 +460,6 @@ paths:
         required: true
 components:
   schemas:
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
     DateTimeUtc:
       type: string
       description: a string to be decoded into a DateTime.Utc
@@ -527,6 +524,9 @@ components:
           - type: 'null'
       additionalProperties: false
       title: PoTermsModel.json
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

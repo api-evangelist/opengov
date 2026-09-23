@@ -2,9 +2,7 @@ openapi: 3.2.0
 info:
   title: OpenGov Enterprise Asset Management Classes API
   version: 1.0.0
-  description: 'OpenGov Enterprise Asset Management API
-
-    '
+  description: OpenGov Enterprise Asset Management API
   contact:
     name: OpenGov Enterprise Asset Management API
     url: developers@opengov.com
@@ -22,40 +20,76 @@ paths:
       $ref: components/BusinessObjects/getSingleRecord.yaml#/get
       tags:
       - Classes
+      summary: Get api classes by class name by oid
+      x-summary-source: derived
+      operationId: getApiV1ClassesByClassNameByOid
+      x-operation-id-source: derived
     put:
       $ref: components/BusinessObjects/updateSingleRecord.yaml#/put
       tags:
       - Classes
+      summary: Replace api classes by class name by oid
+      x-summary-source: derived
+      operationId: putApiV1ClassesByClassNameByOid
+      x-operation-id-source: derived
     delete:
       $ref: components/BusinessObjects/deleteSingleRecord.yaml#/delete
       tags:
       - Classes
+      summary: Delete api classes by class name by oid
+      x-summary-source: derived
+      operationId: deleteApiV1ClassesByClassNameByOid
+      x-operation-id-source: derived
   /api/v1/classes/{className}:
     get:
       $ref: components/BusinessObjects/getMultipleRecords.yaml#/get
       tags:
       - Classes
+      summary: Get api classes by class name
+      x-summary-source: derived
+      operationId: getApiV1ClassesByClassName
+      x-operation-id-source: derived
     post:
       $ref: components/BusinessObjects/createOneOrMoreRecords.yaml#/post
       tags:
       - Classes
+      summary: Create api classes by class name
+      x-summary-source: derived
+      operationId: postApiV1ClassesByClassName
+      x-operation-id-source: derived
     put:
       $ref: components/BusinessObjects/updateMultipleRecords.yaml#/put
       tags:
       - Classes
+      summary: Replace api classes by class name
+      x-summary-source: derived
+      operationId: putApiV1ClassesByClassName
+      x-operation-id-source: derived
     delete:
       $ref: components/BusinessObjects/deleteMultipleRecords.yaml#/delete
       tags:
       - Classes
+      summary: Delete api classes by class name
+      x-summary-source: derived
+      operationId: deleteApiV1ClassesByClassName
+      x-operation-id-source: derived
   /api/v1/classes/{className}/{oid}/{childClassName}:
     get:
       $ref: components/BusinessObjects/getChildRecords.yaml#/get
       tags:
       - Classes
+      summary: Get api classes by class name by oid by child class name
+      x-summary-source: derived
+      operationId: getApiV1ClassesByClassNameByOidByChildClassName
+      x-operation-id-source: derived
     post:
       $ref: components/BusinessObjects/createChildRecord.yaml#/post
       tags:
       - Classes
+      summary: Create api classes by class name by oid by child class name
+      x-summary-source: derived
+      operationId: postApiV1ClassesByClassNameByOidByChildClassName
+      x-operation-id-source: derived
 x-tagGroups:
 - name: Authentication
   tags:

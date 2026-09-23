@@ -284,7 +284,21 @@ paths:
                 - status
                 - code
                 - detail
-      description: "Returns up to `limit` (default 15, max 50) historical PO line items whose descriptions contain any of the input `descriptions` keywords (case-insensitive substring match), along with their splits and PO context. Filters: status != Cancelled, line item has at least one non-deleted split. Designed for an AI-agent consumer to rerank.\n\nPass 1..10 semantically-related keywords for the same logical line item (e.g. `[\"laptop\", \"macbook\"]`). Each candidate is matched against any input term; candidates are deduplicated by line item and the winning term is reported in `matchedTerm`.\n\nEach candidate carries:\n- `matchedTerm`: the input keyword (one of `descriptions`) that produced this candidate's match. Lets the agent cite which query won.\n- `matchSource`:\n  - `\"like\"`: matched via case-insensitive substring containment (`ILIKE '%term%'`). `similarityScore` is 1.0 — every hit is an exact substring match (high precision; preferred).\n  - `\"levenshtein\"`: matched via word-aware Levenshtein character-edit distance after the LIKE path returned no candidates for that term. Use for typo tolerance; `similarityScore` is computed as the average of best per-query-word match scores (each `1 - levenshtein(word, target_word) / max_len`) and lives in the 0..1 range. Agents should weight Levenshtein matches more cautiously."
+      description: 'Returns up to `limit` (default 15, max 50) historical PO line items whose descriptions contain any of the input `descriptions` keywords (case-insensitive substring match), along with their splits and PO context. Filters: status != Cancelled, line item has at least one non-deleted split. Designed for an AI-agent consumer to rerank.
+
+
+        Pass 1..10 semantically-related keywords for the same logical line item (e.g. `["laptop", "macbook"]`). Each candidate is matched against any input term; candidates are deduplicated by line item and the winning term is reported in `matchedTerm`.
+
+
+        Each candidate carries:
+
+        - `matchedTerm`: the input keyword (one of `descriptions`) that produced this candidate''s match. Lets the agent cite which query won.
+
+        - `matchSource`:
+
+        - `"like"`: matched via case-insensitive substring containment (`ILIKE ''%term%''`). `similarityScore` is 1.0 — every hit is an exact substring match (high precision; preferred).
+
+        - `"levenshtein"`: matched via word-aware Levenshtein character-edit distance after the LIKE path returned no candidates for that term. Use for typo tolerance; `similarityScore` is computed as the average of best per-query-word match scores (each `1 - levenshtein(word, target_word) / max_len`) and lives in the 0..1 range. Agents should weight Levenshtein matches more cautiously.'
       summary: Search historical line items for GL suggestions
       requestBody:
         content:
@@ -323,6 +337,9 @@ components:
       type: integer
       description: an integer
       title: int
+    Decimal_18_2:
+      type: string
+      title: Decimal (18,2)
     PoStatus:
       type: string
       enum:
@@ -334,9 +351,6 @@ components:
       - Cancelled
       description: 'Purchase order status: Draft, PendingApproval, Approved, Issued, Closed, Cancelled'
       title: PO Status
-    Decimal_18_2:
-      type: string
-      title: Decimal (18,2)
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

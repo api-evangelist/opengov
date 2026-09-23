@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Open Data CKAN Action Tag API
   version: '2.9'
-  description: "Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.\n\nDatasets are managed as packages of metadata and resources.\n\nAll endpoints are available under `/api/3/action/<action_name>`.\n\nEndpoints support POST requests with an application/json or a multipart/form-data body.\n  - Use an application/json POST request when nested json parameters are required\n  - Use a multipart/form-data POST request when file uploads are required\n\nRead-only endpoints (`*_show`, `*_list`, `*_search` etc.) accept GET requests with query parameters.\nResponses are returned in a JSON envelope on success:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": true,\n  \"result\": {...}\n}\n```\nor on errors:\n```json\n{\n  \"help\": \"url to complete endpoint help\",\n  \"success\": false,\n  \"error\": {\n    \"__type\": \"error type\",\n    \"message\": \"error message\",\n    \"field-with-error\": [\"first-error\", \"second-error\"],\n    ...\n  }\n}\n```\n"
+  description: Open Data CKAN's Action API is a powerful, RPC-style API that exposes several features.
   contact:
     name: CKAN Community
     url: https://ckan.org/community
@@ -13,14 +13,14 @@ servers:
 - url: https://cloudcity.ogopendata.com/api/3/action
   description: Cloud City Open Data
 tags:
-- name: tag
+- name: Tag
 paths:
   /tag_list:
     get:
       operationId: tagList
-      summary: Return a list of the site's tags.
+      summary: Return a list of the site's tags
       tags:
-      - tag
+      - Tag
       parameters:
       - in: query
         name: query
@@ -60,9 +60,9 @@ paths:
   /tag_search:
     get:
       operationId: tagSearch
-      summary: Return a list of tags whose names contain a given string.
+      summary: Return a list of tags whose names contain a given string
       tags:
-      - tag
+      - Tag
       parameters:
       - in: query
         name: query
@@ -105,9 +105,9 @@ paths:
   /tag_show:
     get:
       operationId: tagShow
-      summary: Return the details of a tag and its datasets.
+      summary: Return the details of a tag and its datasets
       tags:
-      - tag
+      - Tag
       parameters:
       - in: query
         name: id
@@ -148,23 +148,56 @@ paths:
       security:
       - ApiTokenAuth: []
 components:
+  schemas:
+    Tag:
+      type: object
+      description: CKAN Tag
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        vocabulary_id:
+          type: string
+        state:
+          type: string
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
   responses:
-    ValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            validation_error:
-              summary: Validation error
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Validation Error
-                  name_or_id:
-                  - Missing value
     ServerError:
       description: Server error
       content:
@@ -186,6 +219,22 @@ components:
                 error:
                   __type: Authorization Error
                   message: 'Access denied: User not authorized to perform this action'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Validation Error
+                  name_or_id:
+                  - Missing value
     NotFound:
       description: Not found error
       content:
@@ -207,55 +256,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-  schemas:
-    Tag:
-      type: object
-      description: CKAN Tag
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        display_name:
-          type: string
-        vocabulary_id:
-          type: string
-        state:
-          type: string
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
-    ErrorEnvelope:
-      type: object
-      required:
-      - help
-      - success
-      - error
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-          default: false
-        error:
-          type: object
-          additionalProperties: true
-          properties:
-            __type:
-              type: string
-            message:
-              type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey
