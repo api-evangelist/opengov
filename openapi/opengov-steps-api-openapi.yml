@@ -118,29 +118,26 @@ paths:
         '500':
           description: Internal Server Error
 components:
-  parameters:
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
-    stepID:
-      name: stepID
-      in: path
-      description: ID of workflow step on a record
-      required: true
-      schema:
-        type: integer
   schemas:
+    step_status:
+      type: string
+      enum:
+      - REJECTED
+      - INACTIVE
+      - ACTIVE
+      - COMPLETE
+      - SKIPPED
+      - ON_HOLD
+      description: Status of the workflow step
+    relationship:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              description: Link to the related resource
     RecordStep:
       x-tags:
       - Steps
@@ -236,25 +233,28 @@ components:
               - COMPLETED
               - SKIPPED
               - ON_HOLD
-    step_status:
-      type: string
-      enum:
-      - REJECTED
-      - INACTIVE
-      - ACTIVE
-      - COMPLETE
-      - SKIPPED
-      - ON_HOLD
-      description: Status of the workflow step
-    relationship:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            related:
-              type: string
-              description: Link to the related resource
+  parameters:
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    stepID:
+      name: stepID
+      in: path
+      description: ID of workflow step on a record
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

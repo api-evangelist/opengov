@@ -47,6 +47,21 @@ paths:
         '500':
           description: Internal Server Error
 components:
+  parameters:
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
   schemas:
     RecordDetails:
       x-tags:
@@ -152,21 +167,6 @@ components:
                   ordinal:
                     type: integer
                     description: Position of a section within the form
-  parameters:
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

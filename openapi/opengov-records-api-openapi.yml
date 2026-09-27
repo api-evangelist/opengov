@@ -48,6 +48,15 @@ paths:
           description: Internal Server Error
 components:
   schemas:
+    relationship:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              description: Link to the related resource
     Record:
       x-tags:
       - Records
@@ -156,23 +165,7 @@ components:
             workflowSteps:
               description: Steps of the record's workflow
               $ref: '#/components/schemas/relationship'
-    relationship:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            related:
-              type: string
-              description: Link to the related resource
   parameters:
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
     community:
       name: community
       in: path
@@ -180,6 +173,13 @@ components:
       required: true
       schema:
         type: string
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

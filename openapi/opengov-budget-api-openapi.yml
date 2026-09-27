@@ -437,89 +437,276 @@ paths:
           description: Not Acceptable - The request could not be understood by the server due to a client error.
 components:
   schemas:
-    BudgetListResource:
+    ResponseLinks:
       type: object
-      required:
-      - id
-      - attributes
+      description: Standard links object for non-paginated responses
       properties:
-        type:
+        self:
           type: string
-          enum:
-          - budget
-          description: The type of the resource.
-        id:
-          type: string
-          description: The unique identifier for the budget.
-        attributes:
-          type: object
-          required:
-          - name
-          - entityId
-          - coaId
-          - budgetPeriods
-          - createdAt
-          - updatedAt
-          properties:
-            name:
-              type: string
-              description: The name of the budget.
-            entityId:
-              type: string
-              format: uuid
-              description: The ID of the entity this budget belongs to.
-              example: a1b2c3d4-e5f6-7890-1234-567890abcdef
-            coaId:
-              type: string
-              format: uuid
-              description: The ID of the chart of accounts this budget belongs to.
-              example: 88a72f43-f419-4a23-93ec-8f0f2261ea9a
-            budgetPeriods:
-              type: array
-              items:
+          format: uri
+          description: Link of the current request.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1
+    DataExportResourcesResponse:
+      type: object
+      description: A JSON:API document containing a list of Data Export Resource resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - data-export-resource
+                description: The type of the resource.
+              id:
+                type: string
+                description: Identifier for the resource
+                example: lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
+              attributes:
                 type: object
                 required:
-                - id
                 - name
-                - startDate
-                - endDate
-                - visible
+                - description
+                - standardType
+                - createdAt
+                - updatedAt
+                - dataUpdatedAt
                 properties:
-                  id:
-                    type: string
-                    format: uuid
-                    description: The unique identifier for the budget period.
                   name:
                     type: string
-                    description: The name of the budget period.
-                  startDate:
+                    description: Name of the resource
+                    example: Budget Summary Report
+                  description:
                     type: string
-                    format: date
-                    description: The start date of the budget period.
-                  endDate:
+                    description: Detailed description of what the resource contains
+                    example: Comprehensive budget summary including all line items and totals for the fiscal year
+                  standardType:
                     type: string
-                    format: date
-                    description: The end date of the budget period.
-                  visible:
-                    type: boolean
-                    description: Whether the budget period is visible to the user.
-            workforceId:
+                    description: URN representing the standard type of this resource
+                    example: urn:opengov:lenses/standard/budgeting/budget-summary/1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the resource was first created
+                    example: '2024-01-15T10:30:00Z'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the resource metadata was last updated
+                    example: '2024-03-20T14:45:00Z'
+                  dataUpdatedAt:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the underlying data was last updated
+                    example: '2024-03-22T09:15:00Z'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+    PaginatedResponseLinks:
+      type: object
+      description: Standard pagination links for collection responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link to the current page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
+        next:
+          type: string
+          format: uri
+          description: Link to the next page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
+        prev:
+          type: string
+          format: uri
+          description: Link to the previous page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        first:
+          type: string
+          format: uri
+          description: Link to the first page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        last:
+          type: string
+          format: uri
+          description: Link to the last page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
+    BudgetAmountsResponse:
+      type: object
+      description: A JSON:API document containing a list of Budget Amount resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - budget-amount
+                description: The type of the resource.
+              id:
+                type: string
+                description: The unique identifier for the  budget amount. This is the account ID and fiscal year concatenated.
+              attributes:
+                type: object
+                required:
+                - fiscalYear
+                - amount
+                - accountNumberId
+                properties:
+                  fiscalYear:
+                    type: integer
+                    description: The fiscal year of the budget amount.
+                    example: 2025
+                  amount:
+                    type: string
+                    format: decimal
+                    description: The budgeted amount for the given account number and fiscal year.
+                    example: '241000.00'
+                  accountNumberId:
+                    type: string
+                    format: uuid
+                    description: The account number id of the budget amount.
+                  accountNumber:
+                    type: string
+                    description: The account number is generated by combining all segment codes.
+                    example: 101-1234-2123-10021
+        links:
+          $ref: '#/components/schemas/PaginatedResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        included:
+          type: array
+          description: Optional included budget resource when requested via include parameter
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
+    ResponseMeta:
+      type: object
+      description: Standard metadata for collection responses
+      properties:
+        totalRecords:
+          type: integer
+          description: The total number of records matching the query.
+          example: 42
+    BudgetResponse:
+      type: object
+      description: A JSON:API document containing a list of Budget resources.
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - attributes
+          properties:
+            type:
               type: string
-              format: uuid
-              description: The ID of the workforce this budget belongs to.
-              example: 91cdba8a-4e75-4083-a5c6-159c8ef7aec0
-            createdAt:
+              enum:
+              - budget
+              description: The type of the resource.
+            id:
               type: string
-              format: date-time
-              readOnly: true
-              description: The date and time the resource was created.
-              example: '2025-01-01T00:00:00Z'
-            updatedAt:
+              description: The unique identifier for the budget.
+            attributes:
+              type: object
+              required:
+              - name
+              - entityId
+              - coaId
+              - budgetPeriods
+              - createdAt
+              - updatedAt
+              properties:
+                name:
+                  type: string
+                  description: The name of the budget.
+                entityId:
+                  type: string
+                  format: uuid
+                  description: The ID of the entity this budget belongs to.
+                  example: a1b2c3d4-e5f6-7890-1234-567890abcdef
+                coaId:
+                  type: string
+                  format: uuid
+                  description: The ID of the chart of accounts this budget belongs to.
+                  example: 88a72f43-f419-4a23-93ec-8f0f2261ea9a
+                budgetPeriods:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - id
+                    - name
+                    - startDate
+                    - endDate
+                    - visible
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The unique identifier for the budget period.
+                      name:
+                        type: string
+                        description: The name of the budget period.
+                      startDate:
+                        type: string
+                        format: date
+                        description: The start date of the budget period.
+                      endDate:
+                        type: string
+                        format: date
+                        description: The end date of the budget period.
+                      visible:
+                        type: boolean
+                        description: Whether the budget period is visible to the user.
+                      workforceId:
+                        type: string
+                        format: uuid
+                        description: The ID of the workforce this budget belongs to.
+                        example: 91cdba8a-4e75-4083-a5c6-159c8ef7aec0
+                      createdAt:
+                        type: string
+                        format: date-time
+                        readOnly: true
+                        description: The date and time the resource was created.
+                        example: '2025-01-01T00:00:00Z'
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        readOnly: true
+                        description: The date and time the resource was last updated.
+                        example: '2025-01-01T00:00:00Z'
+        links:
+          type: object
+          properties:
+            self:
               type: string
-              format: date-time
-              readOnly: true
-              description: The date and time the resource was last updated.
-              example: '2025-01-01T00:00:00Z'
+              format: uri
+              description: Link to the current page of results.
+            next:
+              type: string
+              format: uri
+              description: Link to the next page of results.
+            prev:
+              type: string
+              format: uri
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
     BudgetAmountsSummaryResponse:
       type: object
       description: A summary of the amounts for a Budget.
@@ -590,75 +777,6 @@ components:
                           type: string
                           format: decimal
                           description: The proposed amount for the revenues.
-    BudgetAmountsResponse:
-      type: object
-      description: A JSON:API document containing a list of Budget Amount resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - attributes
-            properties:
-              type:
-                type: string
-                enum:
-                - budget-amount
-                description: The type of the resource.
-              id:
-                type: string
-                description: The unique identifier for the  budget amount. This is the account ID and fiscal year concatenated.
-              attributes:
-                type: object
-                required:
-                - fiscalYear
-                - amount
-                - accountNumberId
-                properties:
-                  fiscalYear:
-                    type: integer
-                    description: The fiscal year of the budget amount.
-                    example: 2025
-                  amount:
-                    type: string
-                    format: decimal
-                    description: The budgeted amount for the given account number and fiscal year.
-                    example: '241000.00'
-                  accountNumberId:
-                    type: string
-                    format: uuid
-                    description: The account number id of the budget amount.
-                  accountNumber:
-                    type: string
-                    description: The account number is generated by combining all segment codes.
-                    example: 101-1234-2123-10021
-        links:
-          $ref: '#/components/schemas/PaginatedResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        included:
-          type: array
-          description: Optional included budget resource when requested via include parameter
-          items:
-            $ref: '#/components/schemas/BudgetListResource'
-    BudgetsListResponse:
-      type: object
-      description: A JSON:API document containing a list of Budget resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BudgetListResource'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
     DataExportResourceMetadataResponse:
       type: object
       description: A JSON:API document containing data export resource metadata
@@ -793,221 +911,103 @@ components:
                   format: date-time
                   description: Timestamp when the underlying data was last updated
                   example: '2025-07-09T20:11:06.860339917Z'
-    DataExportResourcesResponse:
-      type: object
-      description: A JSON:API document containing a list of Data Export Resource resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - attributes
-            properties:
-              type:
-                type: string
-                enum:
-                - data-export-resource
-                description: The type of the resource.
-              id:
-                type: string
-                description: Identifier for the resource
-                example: lens/entity/budget-summary/780edc1b-a3f2-40f4-8489-f03a2d3aa9b1
-              attributes:
-                type: object
-                required:
-                - name
-                - description
-                - standardType
-                - createdAt
-                - updatedAt
-                - dataUpdatedAt
-                properties:
-                  name:
-                    type: string
-                    description: Name of the resource
-                    example: Budget Summary Report
-                  description:
-                    type: string
-                    description: Detailed description of what the resource contains
-                    example: Comprehensive budget summary including all line items and totals for the fiscal year
-                  standardType:
-                    type: string
-                    description: URN representing the standard type of this resource
-                    example: urn:opengov:lenses/standard/budgeting/budget-summary/1
-                  createdAt:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the resource was first created
-                    example: '2024-01-15T10:30:00Z'
-                  updatedAt:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the resource metadata was last updated
-                    example: '2024-03-20T14:45:00Z'
-                  dataUpdatedAt:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the underlying data was last updated
-                    example: '2024-03-22T09:15:00Z'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-    ResponseLinks:
-      type: object
-      description: Standard links object for non-paginated responses
-      properties:
-        self:
-          type: string
-          format: uri
-          description: Link of the current request.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1
-    ResponseMeta:
-      type: object
-      description: Standard metadata for collection responses
-      properties:
-        totalRecords:
-          type: integer
-          description: The total number of records matching the query.
-          example: 42
-    BudgetResponse:
+    BudgetsListResponse:
       type: object
       description: A JSON:API document containing a list of Budget resources.
       required:
       - data
       properties:
         data:
-          type: object
-          required:
-          - id
-          - attributes
-          properties:
-            type:
-              type: string
-              enum:
-              - budget
-              description: The type of the resource.
-            id:
-              type: string
-              description: The unique identifier for the budget.
-            attributes:
-              type: object
-              required:
-              - name
-              - entityId
-              - coaId
-              - budgetPeriods
-              - createdAt
-              - updatedAt
-              properties:
-                name:
-                  type: string
-                  description: The name of the budget.
-                entityId:
-                  type: string
-                  format: uuid
-                  description: The ID of the entity this budget belongs to.
-                  example: a1b2c3d4-e5f6-7890-1234-567890abcdef
-                coaId:
-                  type: string
-                  format: uuid
-                  description: The ID of the chart of accounts this budget belongs to.
-                  example: 88a72f43-f419-4a23-93ec-8f0f2261ea9a
-                budgetPeriods:
-                  type: array
-                  items:
-                    type: object
-                    required:
-                    - id
-                    - name
-                    - startDate
-                    - endDate
-                    - visible
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                        description: The unique identifier for the budget period.
-                      name:
-                        type: string
-                        description: The name of the budget period.
-                      startDate:
-                        type: string
-                        format: date
-                        description: The start date of the budget period.
-                      endDate:
-                        type: string
-                        format: date
-                        description: The end date of the budget period.
-                      visible:
-                        type: boolean
-                        description: Whether the budget period is visible to the user.
-                      workforceId:
-                        type: string
-                        format: uuid
-                        description: The ID of the workforce this budget belongs to.
-                        example: 91cdba8a-4e75-4083-a5c6-159c8ef7aec0
-                      createdAt:
-                        type: string
-                        format: date-time
-                        readOnly: true
-                        description: The date and time the resource was created.
-                        example: '2025-01-01T00:00:00Z'
-                      updatedAt:
-                        type: string
-                        format: date-time
-                        readOnly: true
-                        description: The date and time the resource was last updated.
-                        example: '2025-01-01T00:00:00Z'
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
         links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-              description: Link to the current page of results.
-            next:
-              type: string
-              format: uri
-              description: Link to the next page of results.
-            prev:
-              type: string
-              format: uri
+          $ref: '#/components/schemas/ResponseLinks'
         meta:
           $ref: '#/components/schemas/ResponseMeta'
-    PaginatedResponseLinks:
+    BudgetListResource:
       type: object
-      description: Standard pagination links for collection responses
+      required:
+      - id
+      - attributes
       properties:
-        self:
+        type:
           type: string
-          format: uri
-          description: Link to the current page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
-        next:
+          enum:
+          - budget
+          description: The type of the resource.
+        id:
           type: string
-          format: uri
-          description: Link to the next page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
-        prev:
-          type: string
-          format: uri
-          description: Link to the previous page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        first:
-          type: string
-          format: uri
-          description: Link to the first page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        last:
-          type: string
-          format: uri
-          description: Link to the last page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
+          description: The unique identifier for the budget.
+        attributes:
+          type: object
+          required:
+          - name
+          - entityId
+          - coaId
+          - budgetPeriods
+          - createdAt
+          - updatedAt
+          properties:
+            name:
+              type: string
+              description: The name of the budget.
+            entityId:
+              type: string
+              format: uuid
+              description: The ID of the entity this budget belongs to.
+              example: a1b2c3d4-e5f6-7890-1234-567890abcdef
+            coaId:
+              type: string
+              format: uuid
+              description: The ID of the chart of accounts this budget belongs to.
+              example: 88a72f43-f419-4a23-93ec-8f0f2261ea9a
+            budgetPeriods:
+              type: array
+              items:
+                type: object
+                required:
+                - id
+                - name
+                - startDate
+                - endDate
+                - visible
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The unique identifier for the budget period.
+                  name:
+                    type: string
+                    description: The name of the budget period.
+                  startDate:
+                    type: string
+                    format: date
+                    description: The start date of the budget period.
+                  endDate:
+                    type: string
+                    format: date
+                    description: The end date of the budget period.
+                  visible:
+                    type: boolean
+                    description: Whether the budget period is visible to the user.
+            workforceId:
+              type: string
+              format: uuid
+              description: The ID of the workforce this budget belongs to.
+              example: 91cdba8a-4e75-4083-a5c6-159c8ef7aec0
+            createdAt:
+              type: string
+              format: date-time
+              readOnly: true
+              description: The date and time the resource was created.
+              example: '2025-01-01T00:00:00Z'
+            updatedAt:
+              type: string
+              format: date-time
+              readOnly: true
+              description: The date and time the resource was last updated.
+              example: '2025-01-01T00:00:00Z'
   securitySchemes:
     BearerAuth:
       type: http

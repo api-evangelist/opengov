@@ -478,11 +478,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NonEmptyString:
-      type: string
-      description: a non empty string
-      title: nonEmptyString
-      minLength: 1
+    UnauthenticatedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthenticatedHttpError
+      additionalProperties: false
     NotFoundHttpError:
       type: object
       required:
@@ -498,122 +506,7 @@ components:
           enum:
           - NotFoundHttpError
       additionalProperties: false
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
-      additionalProperties: false
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
-      additionalProperties: false
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    InternalServerHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - InternalServerHttpError
-      additionalProperties: false
-    EntityCustomFieldsModel.jsonUpdate:
+    EntityCustomFieldsModel.jsonCreate:
       type: object
       required:
       - fieldType
@@ -667,18 +560,19 @@ components:
         allowMultiple:
           type: boolean
       additionalProperties: false
-      title: EntityCustomFieldsModel.jsonUpdate
-    AuthError:
+      title: EntityCustomFieldsModel.jsonCreate
+    EntityNotFoundError:
       type: object
       required:
+      - entityId
       - _tag
       properties:
-        cause:
-          title: unknown
+        entityId:
+          type: string
         _tag:
           type: string
           enum:
-          - AuthError
+          - EntityNotFoundError
       additionalProperties: false
     EntityCustomFieldsModel.json:
       type: object
@@ -760,6 +654,23 @@ components:
           - type: 'null'
       additionalProperties: false
       title: EntityCustomFieldsModel.json
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
     HttpApiDecodeError:
       type: object
       required:
@@ -782,7 +693,84 @@ components:
     CustomFieldId:
       type: number
       description: Unique identifier for a custom field definition
-    EntityCustomFieldsModel.jsonCreate:
+    InternalServerHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - InternalServerHttpError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    NonEmptyString:
+      type: string
+      description: a non empty string
+      title: nonEmptyString
+      minLength: 1
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    EntityCustomFieldsModel.jsonUpdate:
       type: object
       required:
       - fieldType
@@ -836,24 +824,36 @@ components:
         allowMultiple:
           type: boolean
       additionalProperties: false
-      title: EntityCustomFieldsModel.jsonCreate
-    UnauthorizedHttpError:
+      title: EntityCustomFieldsModel.jsonUpdate
+    Issue:
       type: object
       required:
-      - message
       - _tag
+      - path
+      - message
       properties:
-        message:
-          type: string
-        requiredPermissions:
-          type: array
-          items:
-            type: string
         _tag:
           type: string
           enum:
-          - UnauthorizedHttpError
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
       additionalProperties: false
+      description: Represents an error encountered while parsing a value to match the schema
   securitySchemes:
     bearerAuth:
       type: http

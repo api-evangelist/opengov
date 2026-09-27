@@ -2143,17 +2143,17 @@ paths:
       description: Production
 components:
   schemas:
-    ContractInsuranceTagsResponseDto:
+    ProcurementClassificationTagsResponseDto:
       type: object
       properties:
         tags:
-          description: Unique contract insurance-related tag names.
+          description: Unique procurement classification-related tag names.
           example:
-          - General Liability
-          - Workers' Compensation
-          - Auto Liability
-          - Professional Liability
-          - Umbrella
+          - RFP
+          - IFB
+          - RFQ
+          - Sole Source
+          - Cooperative Purchase
           type: array
           items:
             type: string
@@ -2175,17 +2175,15 @@ components:
             type: string
       required:
       - tags
-    DeliveryCodeTagsResponseDto:
+    FiscalYearTagsResponseDto:
       type: object
       properties:
         tags:
-          description: Unique delivery code-related tag names.
+          description: Unique fiscal year-related tag names.
           example:
-          - FOB Origin
-          - FOB Destination
-          - Expedited
-          - Overnight
-          - Drop-ship
+          - FY2023
+          - FY2024
+          - FY2025
           type: array
           items:
             type: string
@@ -2207,6 +2205,54 @@ components:
             type: string
       required:
       - tags
+    ContactTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contact-related tag names.
+          example:
+          - Vendor
+          - Prime
+          - Subcontractor
+          - MWBE
+          - SBE
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    DeliveryCodeTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique delivery code-related tag names.
+          example:
+          - FOB Origin
+          - FOB Destination
+          - Expedited
+          - Overnight
+          - Drop-ship
+          type: array
+          items:
+            type: string
+      required:
+      - tags
+    ContractInsuranceTagsResponseDto:
+      type: object
+      properties:
+        tags:
+          description: Unique contract insurance-related tag names.
+          example:
+          - General Liability
+          - Workers' Compensation
+          - Auto Liability
+          - Professional Liability
+          - Umbrella
+          type: array
+          items:
+            type: string
+      required:
+      - tags
     FundingSourceTagsResponseDto:
       type: object
       properties:
@@ -2223,22 +2269,6 @@ components:
             type: string
       required:
       - tags
-    ProcurementClassificationTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique procurement classification-related tag names.
-          example:
-          - RFP
-          - IFB
-          - RFQ
-          - Sole Source
-          - Cooperative Purchase
-          type: array
-          items:
-            type: string
-      required:
-      - tags
     ContractAttachmentTagsResponseDto:
       type: object
       properties:
@@ -2250,36 +2280,6 @@ components:
           - COI
           - Addendum
           - Signed Contract
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    FiscalYearTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique fiscal year-related tag names.
-          example:
-          - FY2023
-          - FY2024
-          - FY2025
-          type: array
-          items:
-            type: string
-      required:
-      - tags
-    ContactTagsResponseDto:
-      type: object
-      properties:
-        tags:
-          description: Unique contact-related tag names.
-          example:
-          - Vendor
-          - Prime
-          - Subcontractor
-          - MWBE
-          - SBE
           type: array
           items:
             type: string

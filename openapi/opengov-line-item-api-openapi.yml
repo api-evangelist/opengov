@@ -770,188 +770,13 @@ paths:
         required: true
 components:
   schemas:
-    LineItemModel.jsonUpdate:
-      type: object
-      required: []
-      properties:
-        lineItemType:
-          $ref: '#/components/schemas/LineItemType'
-        description:
-          anyOf:
-          - type: string
-            description: a string at most 2048 character(s) long
-            title: maxLength(2048)
-            maxLength: 2048
-          - type: 'null'
-        quantity:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_11_5'
-          - type: 'null'
-        unitOfMeasure:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        unitRate:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_13_5'
-          - type: 'null'
-        referenceNumber:
-          anyOf:
-          - type: string
-            description: a string at most 50 character(s) long
-            title: maxLength(50)
-            maxLength: 50
-          - type: 'null'
-        toleranceAmountValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        toleranceAmountType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        toleranceQuantityValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_5'
-          - type: 'null'
-        toleranceQuantityType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        toleranceUnitRateValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_13_5'
-          - type: 'null'
-        toleranceUnitRateType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        taxValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        taxType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        discountValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        discountType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        freightValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        freightType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        miscellaneousValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        miscellaneousType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        includeInThreeWayMatch:
-          type: boolean
-        includeAmountInMatch:
-          type: boolean
-        lineItemSplits:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItemSplitModel.jsonUpdate'
-      additionalProperties: false
-      title: LineItemModel.jsonUpdate
-    NumberFromString:
+    ValueOrPercent:
       type: string
-      description: a string to be decoded into a number
-    Decimal_18_5:
-      type: string
-      title: Decimal (18,5)
-    LineItemSplitModel.json:
-      type: object
-      required:
-      - id
-      - poLineItemId
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: number
-        poLineItemId:
-          type: number
-        accountNumber:
-          anyOf:
-          - type: string
-          - type: 'null'
-        accountPseudoKey:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        amount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        eProjectAccountId:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountNumber:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountDescription:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        reimbursable:
-          type: boolean
-        encumberedAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        encLiquidatedAccrualAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        openEncumbranceAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        percentAmount:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        displayId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        createdAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-        updatedAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-      additionalProperties: false
-      title: LineItemSplitModel.json
-    Decimal_13_5:
-      type: string
-      title: Decimal (13,5)
+      enum:
+      - Value
+      - Percent
+      description: Indicates whether the input is an absolute value or a percentage
+      title: Value or Percent
     LineItemModel.jsonCreate:
       type: object
       required:
@@ -1054,9 +879,53 @@ components:
             $ref: '#/components/schemas/LineItemSplitModel.jsonCreate'
       additionalProperties: false
       title: LineItemModel.jsonCreate
-    SignedDecimal_18_2:
+    Decimal_18_5:
       type: string
-      title: Signed Decimal (18,2)
+      title: Decimal (18,5)
+    LineItemSplitModel.jsonCreate:
+      type: object
+      required: []
+      properties:
+        accountNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        accountPseudoKey:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        amount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        eProjectAccountId:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        projectAccountNumber:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        projectAccountDescription:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        reimbursable:
+          type: boolean
+      additionalProperties: false
+      title: LineItemSplitModel.jsonCreate
     LineItemSplitModel.jsonUpdate:
       type: object
       required: []
@@ -1103,6 +972,211 @@ components:
           type: boolean
       additionalProperties: false
       title: LineItemSplitModel.jsonUpdate
+    LineItemSplitModel.json:
+      type: object
+      required:
+      - id
+      - poLineItemId
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: number
+        poLineItemId:
+          type: number
+        accountNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        accountPseudoKey:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        amount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        eProjectAccountId:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        projectAccountNumber:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        projectAccountDescription:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        reimbursable:
+          type: boolean
+        encumberedAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        encLiquidatedAccrualAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        openEncumbranceAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        percentAmount:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        displayId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        createdAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+        updatedAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+      additionalProperties: false
+      title: LineItemSplitModel.json
+    Decimal_13_5:
+      type: string
+      title: Decimal (13,5)
+    Decimal_18_2:
+      type: string
+      title: Decimal (18,2)
+    LineItemType:
+      type: string
+      enum:
+      - Item
+      - Service
+      - Tax
+      - Discount
+      - Freight
+      - Miscellaneous
+      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
+      title: Line Item Type
+    Decimal_11_5:
+      type: string
+      title: Decimal (11,5)
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
+    SignedDecimal_18_5:
+      type: string
+      title: Signed Decimal (18,5)
+    LineItemModel.jsonUpdate:
+      type: object
+      required: []
+      properties:
+        lineItemType:
+          $ref: '#/components/schemas/LineItemType'
+        description:
+          anyOf:
+          - type: string
+            description: a string at most 2048 character(s) long
+            title: maxLength(2048)
+            maxLength: 2048
+          - type: 'null'
+        quantity:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_11_5'
+          - type: 'null'
+        unitOfMeasure:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        unitRate:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_13_5'
+          - type: 'null'
+        referenceNumber:
+          anyOf:
+          - type: string
+            description: a string at most 50 character(s) long
+            title: maxLength(50)
+            maxLength: 50
+          - type: 'null'
+        toleranceAmountValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        toleranceAmountType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        toleranceQuantityValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_5'
+          - type: 'null'
+        toleranceQuantityType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        toleranceUnitRateValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_13_5'
+          - type: 'null'
+        toleranceUnitRateType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        taxValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        taxType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        discountValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        discountType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        freightValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        freightType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        miscellaneousValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        miscellaneousType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        includeInThreeWayMatch:
+          type: boolean
+        includeAmountInMatch:
+          type: boolean
+        lineItemSplits:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemSplitModel.jsonUpdate'
+      additionalProperties: false
+      title: LineItemModel.jsonUpdate
+    SignedDecimal_18_2:
+      type: string
+      title: Signed Decimal (18,2)
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
     LineItemModel.json:
       type: object
       required:
@@ -1301,80 +1375,6 @@ components:
           $ref: '#/components/schemas/DateTimeUtc'
       additionalProperties: false
       title: LineItemModel.json
-    LineItemSplitModel.jsonCreate:
-      type: object
-      required: []
-      properties:
-        accountNumber:
-          anyOf:
-          - type: string
-          - type: 'null'
-        accountPseudoKey:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        amount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        eProjectAccountId:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountNumber:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountDescription:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        reimbursable:
-          type: boolean
-      additionalProperties: false
-      title: LineItemSplitModel.jsonCreate
-    SignedDecimal_18_5:
-      type: string
-      title: Signed Decimal (18,5)
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
-    Decimal_18_2:
-      type: string
-      title: Decimal (18,2)
-    LineItemType:
-      type: string
-      enum:
-      - Item
-      - Service
-      - Tax
-      - Discount
-      - Freight
-      - Miscellaneous
-      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
-      title: Line Item Type
-    ValueOrPercent:
-      type: string
-      enum:
-      - Value
-      - Percent
-      description: Indicates whether the input is an absolute value or a percentage
-      title: Value or Percent
-    Decimal_11_5:
-      type: string
-      title: Decimal (11,5)
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

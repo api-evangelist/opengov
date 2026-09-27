@@ -1345,6 +1345,12 @@ paths:
       summary: Delete a comment (soft-delete with cascade)
 components:
   schemas:
+    VisibilityScope:
+      type: string
+      enum:
+      - INTERNAL
+      - EXTERNAL
+      title: Comment visibility scope
     ActivityLogEntryType:
       type: string
       enum:
@@ -1359,12 +1365,6 @@ components:
       - RECEIPT_APPROVED
       - RECEIPT_REJECTED
       title: Activity log entry type
-    VisibilityScope:
-      type: string
-      enum:
-      - INTERNAL
-      - EXTERNAL
-      title: Comment visibility scope
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

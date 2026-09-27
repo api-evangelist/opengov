@@ -426,6 +426,12 @@ paths:
       summary: List the activity feed for a receipt
 components:
   schemas:
+    VisibilityScope:
+      type: string
+      enum:
+      - INTERNAL
+      - EXTERNAL
+      title: Comment visibility scope
     ActivityLogEntryType:
       type: string
       enum:
@@ -443,12 +449,6 @@ components:
     NumberFromString:
       type: string
       description: a string to be decoded into a number
-    VisibilityScope:
-      type: string
-      enum:
-      - INTERNAL
-      - EXTERNAL
-      title: Comment visibility scope
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

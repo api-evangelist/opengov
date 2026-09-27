@@ -249,7 +249,7 @@ paths:
     get:
       tags:
       - attachmentLimits
-      operationId: attachmentLimits.getAttachmentLimits
+      operationId: getApiV1EntitiesByEntityIdAttachmentsLimits
       parameters:
       - name: entityId
         in: path
@@ -534,6 +534,8 @@ paths:
                 - detail
       description: Returns the configured MIME allow-list, per-file size cap, per-request file count cap, and per-receipt active count cap. The frontend uses these to drive dropzone `accept`, size validation, and count gating without duplicating constants.
       summary: Get attachment upload limits
+      x-operation-id-source: normalized
+      x-operation-id-original: attachmentLimits.getAttachmentLimits
     servers:
     - url: https://api-receipts.procurement.opengov.com
       description: Production
