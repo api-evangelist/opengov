@@ -8448,20 +8448,18 @@ paths:
         required: true
 components:
   schemas:
-    ValueOrPercent:
-      type: string
-      enum:
-      - Value
-      - Percent
-      description: Indicates whether the input is an absolute value or a percentage
-      title: Value or Percent
-    Decimal_18_5:
-      type: string
-      title: Decimal (18,5)
-    LineItemSplitModel.jsonCreate:
+    LineItemSplitModel.json:
       type: object
-      required: []
+      required:
+      - id
+      - poLineItemId
+      - createdAt
+      - updatedAt
       properties:
+        id:
+          type: number
+        poLineItemId:
+          type: number
         accountNumber:
           anyOf:
           - type: string
@@ -8500,128 +8498,229 @@ components:
           - type: 'null'
         reimbursable:
           type: boolean
-      additionalProperties: false
-      title: LineItemSplitModel.jsonCreate
-    VendorModel.jsonCreate:
-      type: object
-      required:
-      - eVendorId
-      properties:
-        eVendorId:
-          type: number
-        vendorDisplayId:
+        encumberedAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        encLiquidatedAccrualAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        openEncumbranceAmount:
           anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
           - type: 'null'
-        name:
-          type: string
-          description: a string at most 256 character(s) long
-          title: maxLength(256)
-          maxLength: 256
-        eVendorContactId:
+        percentAmount:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        displayId:
           anyOf:
           - type: number
           - type: 'null'
-        contactName:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        address:
-          anyOf:
-          - type: string
-            description: a string at most 700 character(s) long
-            title: maxLength(700)
-            maxLength: 700
-          - type: 'null'
-        contactNumber:
-          anyOf:
-          - type: string
-            description: a string at most 20 character(s) long
-            title: maxLength(20)
-            maxLength: 20
-          - type: 'null'
-        email:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-      additionalProperties: false
-      title: VendorModel.jsonCreate
-    VendorModel.json:
-      type: object
-      required:
-      - id
-      - entityId
-      - eVendorId
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: number
-        entityId:
-          $ref: '#/components/schemas/UUID'
-        eVendorId:
-          type: number
-        vendorDisplayId:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        name:
-          type: string
-          description: a string at most 256 character(s) long
-          title: maxLength(256)
-          maxLength: 256
-        eVendorContactId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        contactName:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        address:
-          anyOf:
-          - type: string
-            description: a string at most 700 character(s) long
-            title: maxLength(700)
-            maxLength: 700
-          - type: 'null'
-        contactNumber:
-          anyOf:
-          - type: string
-            description: a string at most 20 character(s) long
-            title: maxLength(20)
-            maxLength: 20
-          - type: 'null'
-        email:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        isMutable:
-          type: boolean
         createdAt:
           $ref: '#/components/schemas/DateTimeUtc'
         updatedAt:
           $ref: '#/components/schemas/DateTimeUtc'
       additionalProperties: false
-      title: VendorModel.json
+      title: LineItemSplitModel.json
+    LineItemModel.json:
+      type: object
+      required:
+      - id
+      - poPurchaseOrderId
+      - lineItemType
+      - lineItemSplits
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: number
+        poPurchaseOrderId:
+          type: number
+        lineItemType:
+          $ref: '#/components/schemas/LineItemType'
+        description:
+          anyOf:
+          - type: string
+            description: a string at most 2048 character(s) long
+            title: maxLength(2048)
+            maxLength: 2048
+          - type: 'null'
+        quantity:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_11_5'
+          - type: 'null'
+        unitOfMeasure:
+          anyOf:
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
+          - type: 'null'
+        unitRate:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_13_5'
+          - type: 'null'
+        referenceNumber:
+          anyOf:
+          - type: string
+            description: a string at most 50 character(s) long
+            title: maxLength(50)
+            maxLength: 50
+          - type: 'null'
+        acceptedQuantity:
+          $ref: '#/components/schemas/Decimal_18_5'
+        availableAcceptedQuantity:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_5'
+          - type: 'null'
+        toleranceAmountValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        toleranceAmountType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        toleranceAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        toleranceQuantityValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_5'
+          - type: 'null'
+        toleranceQuantityType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        toleranceQuantity:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_5'
+          - type: 'null'
+        toleranceUnitRateValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_13_5'
+          - type: 'null'
+        toleranceUnitRateType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        toleranceUnitRate:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_13_5'
+          - type: 'null'
+        taxValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        taxType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        taxAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        discountValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        discountType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        discountAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        freightValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        freightType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        freightAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        miscellaneousValue:
+          anyOf:
+          - $ref: '#/components/schemas/Decimal_18_2'
+          - type: 'null'
+        miscellaneousType:
+          anyOf:
+          - $ref: '#/components/schemas/ValueOrPercent'
+          - type: 'null'
+        miscellaneousAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        includeInThreeWayMatch:
+          type: boolean
+        includeAmountInMatch:
+          type: boolean
+        extendedAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        amount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        encumberedAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        matchedQuantity:
+          $ref: '#/components/schemas/SignedDecimal_18_5'
+        matchedAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        invoicedQuantity:
+          $ref: '#/components/schemas/SignedDecimal_18_5'
+        invoicedAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        paidAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        encLiquidatedAccrualAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        availableQuantity:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_5'
+          - type: 'null'
+        availableAmount:
+          $ref: '#/components/schemas/SignedDecimal_18_2'
+        openEncumbranceAmount:
+          anyOf:
+          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: 'null'
+        isClosed:
+          type: boolean
+        closedAt:
+          anyOf:
+          - type: string
+          - type: 'null'
+        closedBy:
+          anyOf:
+          - type: string
+            description: a Universally Unique Identifier
+            format: uuid
+            pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          - type: 'null'
+        displayId:
+          anyOf:
+          - type: number
+          - type: 'null'
+        lineItemSplits:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemSplitModel.json'
+        createdAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+        updatedAt:
+          $ref: '#/components/schemas/DateTimeUtc'
+      additionalProperties: false
+      title: LineItemModel.json
+    PoRevisionParam:
+      type: string
+      description: a string to be decoded into a number
     PurchaseOrderModel.jsonUpdate:
       type: object
       required: []
@@ -8833,9 +8932,9 @@ components:
           - type: 'null'
       additionalProperties: false
       title: PurchaseOrderModel.jsonUpdate
-    PoRevisionParam:
+    DateTimeUtc:
       type: string
-      description: a string to be decoded into a number
+      description: a string to be decoded into a DateTime.Utc
     PoStatus:
       type: string
       enum:
@@ -8847,102 +8946,14 @@ components:
       - Cancelled
       description: 'Purchase order status: Draft, PendingApproval, Approved, Issued, Closed, Cancelled'
       title: PO Status
-    LineItemSplitModel.json:
-      type: object
-      required:
-      - id
-      - poLineItemId
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: number
-        poLineItemId:
-          type: number
-        accountNumber:
-          anyOf:
-          - type: string
-          - type: 'null'
-        accountPseudoKey:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        amount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        eProjectAccountId:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountNumber:
-          anyOf:
-          - type: string
-            description: a string at most 64 character(s) long
-            title: maxLength(64)
-            maxLength: 64
-          - type: 'null'
-        projectAccountDescription:
-          anyOf:
-          - type: string
-            description: a string at most 256 character(s) long
-            title: maxLength(256)
-            maxLength: 256
-          - type: 'null'
-        reimbursable:
-          type: boolean
-        encumberedAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        encLiquidatedAccrualAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        openEncumbranceAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        percentAmount:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        displayId:
-          anyOf:
-          - type: number
-          - type: 'null'
-        createdAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-        updatedAt:
-          $ref: '#/components/schemas/DateTimeUtc'
-      additionalProperties: false
-      title: LineItemSplitModel.json
-    LineItemType:
+    PoType:
       type: string
       enum:
-      - Item
-      - Service
-      - Tax
-      - Discount
-      - Freight
-      - Miscellaneous
-      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
-      title: Line Item Type
-    ISODate:
-      type: string
-      description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
-      title: ISO Date (YYYY-MM-DD)
-      pattern: ^\d{4}-\d{2}-\d{2}$
-    UUID:
-      type: string
-      description: a Universally Unique Identifier
-      format: uuid
-      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
+      - Standard
+      - Blanket
+      - Emergency
+      description: 'Purchase order type: Standard, Blanket, Emergency'
+      title: PO Type
     VendorApiCreate:
       type: object
       required:
@@ -8990,221 +9001,205 @@ components:
             maxLength: 256
           - type: 'null'
       additionalProperties: false
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    PoType:
-      type: string
-      enum:
-      - Standard
-      - Blanket
-      - Emergency
-      description: 'Purchase order type: Standard, Blanket, Emergency'
-      title: PO Type
-    SignedDecimal_18_5:
-      type: string
-      title: Signed Decimal (18,5)
     Decimal_11_5:
       type: string
       title: Decimal (11,5)
-    LineItemModel.json:
+    UUID:
+      type: string
+      description: a Universally Unique Identifier
+      format: uuid
+      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+    Decimal_13_5:
+      type: string
+      title: Decimal (13,5)
+    SignedDecimal_18_2:
+      type: string
+      title: Signed Decimal (18,2)
+    ISODate:
+      type: string
+      description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
+      title: ISO Date (YYYY-MM-DD)
+      pattern: ^\d{4}-\d{2}-\d{2}$
+    VendorModel.jsonCreate:
       type: object
       required:
-      - id
-      - poPurchaseOrderId
-      - lineItemType
-      - lineItemSplits
-      - createdAt
-      - updatedAt
+      - eVendorId
       properties:
-        id:
+        eVendorId:
           type: number
-        poPurchaseOrderId:
-          type: number
-        lineItemType:
-          $ref: '#/components/schemas/LineItemType'
-        description:
+        vendorDisplayId:
           anyOf:
           - type: string
-            description: a string at most 2048 character(s) long
-            title: maxLength(2048)
-            maxLength: 2048
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
           - type: 'null'
-        quantity:
+        name:
+          type: string
+          description: a string at most 256 character(s) long
+          title: maxLength(256)
+          maxLength: 256
+        eVendorContactId:
           anyOf:
-          - $ref: '#/components/schemas/Decimal_11_5'
+          - type: number
           - type: 'null'
-        unitOfMeasure:
+        contactName:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        address:
+          anyOf:
+          - type: string
+            description: a string at most 700 character(s) long
+            title: maxLength(700)
+            maxLength: 700
+          - type: 'null'
+        contactNumber:
+          anyOf:
+          - type: string
+            description: a string at most 20 character(s) long
+            title: maxLength(20)
+            maxLength: 20
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+      additionalProperties: false
+      title: VendorModel.jsonCreate
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    LineItemSplitModel.jsonCreate:
+      type: object
+      required: []
+      properties:
+        accountNumber:
+          anyOf:
+          - type: string
+          - type: 'null'
+        accountPseudoKey:
           anyOf:
           - type: string
             description: a string at most 64 character(s) long
             title: maxLength(64)
             maxLength: 64
           - type: 'null'
-        unitRate:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_13_5'
-          - type: 'null'
-        referenceNumber:
-          anyOf:
-          - type: string
-            description: a string at most 50 character(s) long
-            title: maxLength(50)
-            maxLength: 50
-          - type: 'null'
-        acceptedQuantity:
-          $ref: '#/components/schemas/Decimal_18_5'
-        availableAcceptedQuantity:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_5'
-          - type: 'null'
-        toleranceAmountValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        toleranceAmountType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        toleranceAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        toleranceQuantityValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_5'
-          - type: 'null'
-        toleranceQuantityType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        toleranceQuantity:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_5'
-          - type: 'null'
-        toleranceUnitRateValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_13_5'
-          - type: 'null'
-        toleranceUnitRateType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        toleranceUnitRate:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_13_5'
-          - type: 'null'
-        taxValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        taxType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        taxAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        discountValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        discountType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        discountAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        freightValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        freightType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        freightAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        miscellaneousValue:
-          anyOf:
-          - $ref: '#/components/schemas/Decimal_18_2'
-          - type: 'null'
-        miscellaneousType:
-          anyOf:
-          - $ref: '#/components/schemas/ValueOrPercent'
-          - type: 'null'
-        miscellaneousAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
-        includeInThreeWayMatch:
-          type: boolean
-        includeAmountInMatch:
-          type: boolean
-        extendedAmount:
-          anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
-          - type: 'null'
         amount:
           anyOf:
           - $ref: '#/components/schemas/SignedDecimal_18_2'
           - type: 'null'
-        encumberedAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        matchedQuantity:
-          $ref: '#/components/schemas/SignedDecimal_18_5'
-        matchedAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        invoicedQuantity:
-          $ref: '#/components/schemas/SignedDecimal_18_5'
-        invoicedAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        paidAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        encLiquidatedAccrualAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        availableQuantity:
+        eProjectAccountId:
           anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_5'
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
           - type: 'null'
-        availableAmount:
-          $ref: '#/components/schemas/SignedDecimal_18_2'
-        openEncumbranceAmount:
+        projectAccountNumber:
           anyOf:
-          - $ref: '#/components/schemas/SignedDecimal_18_2'
+          - type: string
+            description: a string at most 64 character(s) long
+            title: maxLength(64)
+            maxLength: 64
           - type: 'null'
-        isClosed:
+        projectAccountDescription:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        reimbursable:
           type: boolean
-        closedAt:
+      additionalProperties: false
+      title: LineItemSplitModel.jsonCreate
+    Decimal_18_5:
+      type: string
+      title: Decimal (18,5)
+    VendorModel.json:
+      type: object
+      required:
+      - id
+      - entityId
+      - eVendorId
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: number
+        entityId:
+          $ref: '#/components/schemas/UUID'
+        eVendorId:
+          type: number
+        vendorDisplayId:
           anyOf:
           - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
           - type: 'null'
-        closedBy:
-          anyOf:
-          - type: string
-            description: a Universally Unique Identifier
-            format: uuid
-            pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          - type: 'null'
-        displayId:
+        name:
+          type: string
+          description: a string at most 256 character(s) long
+          title: maxLength(256)
+          maxLength: 256
+        eVendorContactId:
           anyOf:
           - type: number
           - type: 'null'
-        lineItemSplits:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItemSplitModel.json'
+        contactName:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        address:
+          anyOf:
+          - type: string
+            description: a string at most 700 character(s) long
+            title: maxLength(700)
+            maxLength: 700
+          - type: 'null'
+        contactNumber:
+          anyOf:
+          - type: string
+            description: a string at most 20 character(s) long
+            title: maxLength(20)
+            maxLength: 20
+          - type: 'null'
+        email:
+          anyOf:
+          - type: string
+            description: a string at most 256 character(s) long
+            title: maxLength(256)
+            maxLength: 256
+          - type: 'null'
+        isMutable:
+          type: boolean
         createdAt:
           $ref: '#/components/schemas/DateTimeUtc'
         updatedAt:
           $ref: '#/components/schemas/DateTimeUtc'
       additionalProperties: false
-      title: LineItemModel.json
+      title: VendorModel.json
+    ValueOrPercent:
+      type: string
+      enum:
+      - Value
+      - Percent
+      description: Indicates whether the input is an absolute value or a percentage
+      title: Value or Percent
+    SignedDecimal_18_5:
+      type: string
+      title: Signed Decimal (18,5)
     PoSource:
       type: string
       enum:
@@ -9213,15 +9208,20 @@ components:
       - Manual
       description: 'Purchase order source: PurchaseRequest, Contract, Manual'
       title: PO Source
+    LineItemType:
+      type: string
+      enum:
+      - Item
+      - Service
+      - Tax
+      - Discount
+      - Freight
+      - Miscellaneous
+      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
+      title: Line Item Type
     Decimal_18_2:
       type: string
       title: Decimal (18,2)
-    Decimal_13_5:
-      type: string
-      title: Decimal (13,5)
-    SignedDecimal_18_2:
-      type: string
-      title: Signed Decimal (18,2)
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

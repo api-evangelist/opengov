@@ -197,18 +197,24 @@ paths:
       summary: List unresolved operation errors for a PO
 components:
   schemas:
-    OperationErrorSeverity:
+    NumberFromString:
       type: string
-      title: Operation error severity
-    EncumbranceTrigger:
-      type: string
-      title: Trigger action that caused the error
+      description: a string to be decoded into a number
     OperationErrorEntityType:
       type: string
       enum:
       - PO
       - CO
       title: Whether the error belongs to a PO or a CO
+    OperationErrorSeverity:
+      type: string
+      title: Operation error severity
+    EncumbranceTrigger:
+      type: string
+      title: Trigger action that caused the error
+    OperationErrorPhase:
+      type: string
+      title: Operation error phase
     OperationErrorModel.json:
       type: object
       required:
@@ -251,12 +257,6 @@ components:
     OperationErrorCode:
       type: string
       title: Operation error code
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    OperationErrorPhase:
-      type: string
-      title: Operation error phase
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

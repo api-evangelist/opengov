@@ -511,18 +511,17 @@ paths:
       description: Integration
 components:
   schemas:
-    UnauthenticatedHttpError:
+    AuthError:
       type: object
       required:
-      - message
       - _tag
       properties:
-        message:
-          type: string
+        cause:
+          title: unknown
         _tag:
           type: string
           enum:
-          - UnauthenticatedHttpError
+          - AuthError
       additionalProperties: false
     EntityNotFoundError:
       type: object
@@ -537,23 +536,23 @@ components:
           enum:
           - EntityNotFoundError
       additionalProperties: false
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
             type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
     HttpApiDecodeError:
       type: object
       required:
@@ -586,19 +585,7 @@ components:
           enum:
           - InternalServerHttpError
       additionalProperties: false
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    UnauthorizedHttpError:
+    UnauthenticatedHttpError:
       type: object
       required:
       - message
@@ -606,15 +593,28 @@ components:
       properties:
         message:
           type: string
-        requiredPermissions:
-          type: array
-          items:
-            type: string
         _tag:
           type: string
           enum:
-          - UnauthorizedHttpError
+          - UnauthenticatedHttpError
       additionalProperties: false
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
     Issue:
       type: object
       required:

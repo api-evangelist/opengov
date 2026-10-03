@@ -490,47 +490,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UnauthenticatedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthenticatedHttpError
-      additionalProperties: false
-    NotFoundHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
-      additionalProperties: false
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
-      additionalProperties: false
     AttachmentModel.json:
       type: object
       required:
@@ -574,6 +533,46 @@ components:
           - type: 'null'
       additionalProperties: false
       title: AttachmentModel.json
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
     PropertyKey:
       anyOf:
       - type: string
@@ -591,9 +590,56 @@ components:
             type: string
         additionalProperties: false
         description: an object to be decoded into a globally shared symbol
-    AttachmentId:
+    NoteId:
       type: number
-      description: Unique identifier for an attachment
+      description: Unique identifier for a vendor note
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
     HttpApiDecodeError:
       type: object
       required:
@@ -626,7 +672,7 @@ components:
           enum:
           - InternalServerHttpError
       additionalProperties: false
-    BadRequestHttpError:
+    UnauthenticatedHttpError:
       type: object
       required:
       - message
@@ -634,27 +680,10 @@ components:
       properties:
         message:
           type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
         _tag:
           type: string
           enum:
-          - BadRequestHttpError
+          - UnauthenticatedHttpError
       additionalProperties: false
     VendorNoteModel.json:
       type: object
@@ -708,38 +737,9 @@ components:
             $ref: '#/components/schemas/AttachmentModel.json'
       additionalProperties: false
       title: VendorNoteModel.json
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    NoteId:
+    AttachmentId:
       type: number
-      description: Unique identifier for a vendor note
-    UnauthorizedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        requiredPermissions:
-          type: array
-          items:
-            type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthorizedHttpError
-      additionalProperties: false
+      description: Unique identifier for an attachment
     Issue:
       type: object
       required:

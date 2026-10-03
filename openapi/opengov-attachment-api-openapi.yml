@@ -1327,6 +1327,19 @@ paths:
       summary: List attachments for a PO, grouped by purpose
 components:
   schemas:
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    UploadRaw:
+      type: object
+      required: []
+      properties: {}
+      additionalProperties:
+        $id: /schemas/unknown
+        title: unknown
     UploadStatus:
       type: string
       enum:
@@ -1337,19 +1350,6 @@ components:
       - DELETED
       - PURGED
       title: Attachment upload and link status
-    UploadRaw:
-      type: object
-      required: []
-      properties: {}
-      additionalProperties:
-        $id: /schemas/unknown
-        title: unknown
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

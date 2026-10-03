@@ -119,6 +119,15 @@ paths:
           description: Internal Server Error
 components:
   schemas:
+    relationship:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            related:
+              type: string
+              description: Link to the related resource
     step_status:
       type: string
       enum:
@@ -129,15 +138,29 @@ components:
       - SKIPPED
       - ON_HOLD
       description: Status of the workflow step
-    relationship:
+    RecordStepState:
       type: object
       properties:
-        links:
+        id:
+          type: string
+          description: ID of the resource
+        type:
+          type: string
+          description: Type of the resource
+          enum:
+          - record_step_state
+        attributes:
           type: object
           properties:
-            related:
+            state:
               type: string
-              description: Link to the related resource
+              enum:
+              - REJECTED
+              - INACTIVATED
+              - ACTIVATED
+              - COMPLETED
+              - SKIPPED
+              - ON_HOLD
     RecordStep:
       x-tags:
       - Steps
@@ -210,30 +233,14 @@ components:
           properties:
             comments:
               $ref: '#/components/schemas/relationship'
-    RecordStepState:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the resource
-        type:
-          type: string
-          description: Type of the resource
-          enum:
-          - record_step_state
-        attributes:
-          type: object
-          properties:
-            state:
-              type: string
-              enum:
-              - REJECTED
-              - INACTIVATED
-              - ACTIVATED
-              - COMPLETED
-              - SKIPPED
-              - ON_HOLD
   parameters:
+    stepID:
+      name: stepID
+      in: path
+      description: ID of workflow step on a record
+      required: true
+      schema:
+        type: integer
     community:
       name: community
       in: path
@@ -245,13 +252,6 @@ components:
       name: recordID
       in: path
       description: ID of the record
-      required: true
-      schema:
-        type: integer
-    stepID:
-      name: stepID
-      in: path
-      description: ID of workflow step on a record
       required: true
       schema:
         type: integer

@@ -331,6 +331,26 @@ paths:
       description: Production
 components:
   schemas:
+    PageInfo:
+      type: object
+      properties:
+        totalResultsCount:
+          type: number
+          description: The total number of categories matching the query.
+          example: 250
+        endCursor:
+          type: object
+          description: The cursor that points to the last category on the current page.
+          example: Y2F0ZWdvcnkuaWQ9MTMz
+          nullable: true
+        hasMoreResults:
+          type: boolean
+          description: Indicates whether there are more categories available to fetch.
+          example: true
+      required:
+      - totalResultsCount
+      - endCursor
+      - hasMoreResults
     ListCategoriesResponseDto:
       type: object
       properties:
@@ -379,26 +399,6 @@ components:
       - code
       - title
       - codeType
-    PageInfo:
-      type: object
-      properties:
-        totalResultsCount:
-          type: number
-          description: The total number of categories matching the query.
-          example: 250
-        endCursor:
-          type: object
-          description: The cursor that points to the last category on the current page.
-          example: Y2F0ZWdvcnkuaWQ9MTMz
-          nullable: true
-        hasMoreResults:
-          type: boolean
-          description: Indicates whether there are more categories available to fetch.
-          example: true
-      required:
-      - totalResultsCount
-      - endCursor
-      - hasMoreResults
   securitySchemes:
     basicAuth:
       type: http

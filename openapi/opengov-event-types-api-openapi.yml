@@ -34,53 +34,6 @@ webhooks:
           description: Return 200 status for successfully acknowledging the webhook delivery
 components:
   schemas:
-    step_type:
-      type: string
-      enum:
-      - APPROVAL
-      - PAYMENT
-      - INSPECTION
-      - DOCUMENT
-      description: A value that indicates the kind of process that this step represents
-    step_status_changed:
-      type: object
-      properties:
-        details:
-          type: object
-          properties:
-            object:
-              type: object
-              properties:
-                object_type:
-                  type: string
-                  description: Type of the resource whose activity triggered the event
-                  enum:
-                  - record_step
-                object_id:
-                  type: string
-                  description: ID of the workflow step whose status changed
-                  example: 1234
-                object_url:
-                  type: string
-                  format: url
-                  description: URL of the record step whose activity triggered the event
-                  example: https://plce.api.opengov.com/plce/v1/community/records/73543/workflow-steps/1234
-                type:
-                  $ref: '#/components/schemas/step_type'
-                  example: APPROVAL
-                template_id:
-                  type: number
-                  description: Unique identifier for the workflow step template
-                status:
-                  $ref: '#/components/schemas/step_status'
-                  example: ACTIVE
-            previous:
-              type: object
-              properties:
-                status:
-                  $ref: '#/components/schemas/step_status'
-                  description: Previous status of the workflow step
-                  example: COMPLETE
     event_common_props:
       type: object
       properties:
@@ -124,6 +77,45 @@ components:
               description: Details of the resource whose activity triggered the event
             previous:
               type: object
+    step_status_changed:
+      type: object
+      properties:
+        details:
+          type: object
+          properties:
+            object:
+              type: object
+              properties:
+                object_type:
+                  type: string
+                  description: Type of the resource whose activity triggered the event
+                  enum:
+                  - record_step
+                object_id:
+                  type: string
+                  description: ID of the workflow step whose status changed
+                  example: 1234
+                object_url:
+                  type: string
+                  format: url
+                  description: URL of the record step whose activity triggered the event
+                  example: https://plce.api.opengov.com/plce/v1/community/records/73543/workflow-steps/1234
+                type:
+                  $ref: '#/components/schemas/step_type'
+                  example: APPROVAL
+                template_id:
+                  type: number
+                  description: Unique identifier for the workflow step template
+                status:
+                  $ref: '#/components/schemas/step_status'
+                  example: ACTIVE
+            previous:
+              type: object
+              properties:
+                status:
+                  $ref: '#/components/schemas/step_status'
+                  description: Previous status of the workflow step
+                  example: COMPLETE
     step_status:
       type: string
       enum:
@@ -134,6 +126,14 @@ components:
       - SKIPPED
       - ON_HOLD
       description: Status of the workflow step
+    step_type:
+      type: string
+      enum:
+      - APPROVAL
+      - PAYMENT
+      - INSPECTION
+      - DOCUMENT
+      description: A value that indicates the kind of process that this step represents
   securitySchemes:
     bearerAuth:
       type: http

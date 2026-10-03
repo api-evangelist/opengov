@@ -1099,6 +1099,76 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PresignedUploadResponse:
+      type: object
+      required:
+      - uploadUrl
+      - uploadKey
+      - expiresInSeconds
+      properties:
+        uploadUrl:
+          type: string
+          description: Presigned S3 URL for PUT upload
+        uploadKey:
+          type: string
+          description: Opaque key to pass back to processImport
+        expiresInSeconds:
+          type: number
+      additionalProperties: false
+    PayloadTooLargeHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        maxSizeBytes:
+          type: number
+        actualSizeBytes:
+          type: number
+        _tag:
+          type: string
+          enum:
+          - PayloadTooLargeHttpError
+      additionalProperties: false
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    TemplateDownloadResponse:
+      type: object
+      required:
+      - downloadUrl
+      - s3Key
+      - fileName
+      - instructions
+      properties:
+        downloadUrl:
+          type: string
+          description: Presigned S3 URL for template download
+        s3Key:
+          type: string
+          description: S3 object key where the template is stored
+        fileName:
+          type: string
+          description: Suggested filename for the download
+        instructions:
+          $ref: '#/components/schemas/TemplateInstructions'
+      additionalProperties: false
+      description: Template download response with presigned URL and structured instructions for UI display
+      title: Template Download Response
     EntityNotFoundError:
       type: object
       required:
@@ -1112,24 +1182,159 @@ components:
           enum:
           - EntityNotFoundError
       additionalProperties: false
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
+    TemplateInstructions:
+      type: object
+      required:
+      - generalInstructions
+      - requiredSheets
+      - notes
+      properties:
+        generalInstructions:
+          type: array
+          items:
             type: string
-            enum:
-            - symbol
-          key:
+          description: General rules for filling the import template (same as Instructions sheet)
+        requiredSheets:
+          type: array
+          items:
             type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
-    InternalServerHttpError:
+          description: Sheet names that are required and cannot be excluded
+        notes:
+          type: array
+          items:
+            type: string
+          description: Short UI hints; field-level help is in the downloaded template
+        sheets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSheetInfo'
+          description: 'Optional extension: when present, data sheets in the template with ordered column definitions (omitted when no template was generated)'
+      additionalProperties: false
+      description: General instructions, required sheets, and supplementary notes; optional sheet-wise column metadata when available
+      title: Template Instructions
+    ProcessImportRequest:
+      type: object
+      required:
+      - uploadKey
+      - fileName
+      properties:
+        uploadKey:
+          type: string
+          description: a string at least 1 character(s) long
+          title: minLength(1)
+          minLength: 1
+        fileName:
+          type: string
+          description: a string at most 512 character(s) long
+          title: maxLength(512)
+          minLength: 1
+          maxLength: 512
+      additionalProperties: false
+      description: Start an import job from a previously presigned-uploaded S3 object
+    TemplateSheetColumnInfo:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Column header as in the template
+      additionalProperties: false
+      title: Template Sheet Column
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
+      additionalProperties: false
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    PresignedUploadRequest:
+      type: object
+      required:
+      - fileName
+      properties:
+        fileName:
+          type: string
+          description: a string at most 512 character(s) long
+          title: maxLength(512)
+          minLength: 1
+          maxLength: 512
+        contentType:
+          type: string
+      additionalProperties: false
+      description: Request a presigned S3 PUT URL for direct-from-browser upload
+    UnauthenticatedHttpError:
       type: object
       required:
       - message
@@ -1140,25 +1345,37 @@ components:
         _tag:
           type: string
           enum:
-          - InternalServerHttpError
+          - UnauthenticatedHttpError
       additionalProperties: false
-    TemplateSheetInfo:
+    Issue:
       type: object
       required:
-      - sheetName
-      - columns
+      - _tag
+      - path
+      - message
       properties:
-        sheetName:
+        _tag:
           type: string
-          description: Worksheet tab name
-        columns:
+          enum:
+          - Pointer
+          - Unexpected
+          - Missing
+          - Composite
+          - Refinement
+          - Transformation
+          - Type
+          - Forbidden
+          description: The tag identifying the type of parse issue
+        path:
           type: array
           items:
-            $ref: '#/components/schemas/TemplateSheetColumnInfo'
-          description: Columns present on this sheet in template order
+            $ref: '#/components/schemas/PropertyKey'
+          description: The path to the property where the issue occurred
+        message:
+          type: string
+          description: A descriptive message explaining the issue
       additionalProperties: false
-      description: One import template tab and its columns
-      title: Template Sheet
+      description: Represents an error encountered while parsing a value to match the schema
     ValidationFailedHttpError:
       type: object
       required:
@@ -1200,22 +1417,7 @@ components:
           enum:
           - ValidationFailedHttpError
       additionalProperties: false
-    PresignedUploadRequest:
-      type: object
-      required:
-      - fileName
-      properties:
-        fileName:
-          type: string
-          description: a string at most 512 character(s) long
-          title: maxLength(512)
-          minLength: 1
-          maxLength: 512
-        contentType:
-          type: string
-      additionalProperties: false
-      description: Request a presigned S3 PUT URL for direct-from-browser upload
-    UnauthenticatedHttpError:
+    InternalServerHttpError:
       type: object
       required:
       - message
@@ -1226,244 +1428,42 @@ components:
         _tag:
           type: string
           enum:
-          - UnauthenticatedHttpError
+          - InternalServerHttpError
       additionalProperties: false
-    PresignedUploadResponse:
+    TemplateSheetInfo:
       type: object
       required:
-      - uploadUrl
-      - uploadKey
-      - expiresInSeconds
+      - sheetName
+      - columns
       properties:
-        uploadUrl:
+        sheetName:
           type: string
-          description: Presigned S3 URL for PUT upload
-        uploadKey:
-          type: string
-          description: Opaque key to pass back to processImport
-        expiresInSeconds:
-          type: number
-      additionalProperties: false
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
+          description: Worksheet tab name
+        columns:
           type: array
           items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
+            $ref: '#/components/schemas/TemplateSheetColumnInfo'
+          description: Columns present on this sheet in template order
       additionalProperties: false
-    ProcessImportRequest:
-      type: object
-      required:
-      - uploadKey
-      - fileName
-      properties:
-        uploadKey:
-          type: string
-          description: a string at least 1 character(s) long
-          title: minLength(1)
-          minLength: 1
-        fileName:
-          type: string
-          description: a string at most 512 character(s) long
-          title: maxLength(512)
-          minLength: 1
-          maxLength: 512
-      additionalProperties: false
-      description: Start an import job from a previously presigned-uploaded S3 object
-    UnauthorizedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        requiredPermissions:
-          type: array
-          items:
+      description: One import template tab and its columns
+      title: Template Sheet
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
             type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthorizedHttpError
-      additionalProperties: false
-    TemplateDownloadResponse:
-      type: object
-      required:
-      - downloadUrl
-      - s3Key
-      - fileName
-      - instructions
-      properties:
-        downloadUrl:
-          type: string
-          description: Presigned S3 URL for template download
-        s3Key:
-          type: string
-          description: S3 object key where the template is stored
-        fileName:
-          type: string
-          description: Suggested filename for the download
-        instructions:
-          $ref: '#/components/schemas/TemplateInstructions'
-      additionalProperties: false
-      description: Template download response with presigned URL and structured instructions for UI display
-      title: Template Download Response
-    Issue:
-      type: object
-      required:
-      - _tag
-      - path
-      - message
-      properties:
-        _tag:
-          type: string
-          enum:
-          - Pointer
-          - Unexpected
-          - Missing
-          - Composite
-          - Refinement
-          - Transformation
-          - Type
-          - Forbidden
-          description: The tag identifying the type of parse issue
-        path:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyKey'
-          description: The path to the property where the issue occurred
-        message:
-          type: string
-          description: A descriptive message explaining the issue
-      additionalProperties: false
-      description: Represents an error encountered while parsing a value to match the schema
-    TemplateSheetColumnInfo:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Column header as in the template
-      additionalProperties: false
-      title: Template Sheet Column
-    NotFoundHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
-      additionalProperties: false
-    TemplateInstructions:
-      type: object
-      required:
-      - generalInstructions
-      - requiredSheets
-      - notes
-      properties:
-        generalInstructions:
-          type: array
-          items:
+            enum:
+            - symbol
+          key:
             type: string
-          description: General rules for filling the import template (same as Instructions sheet)
-        requiredSheets:
-          type: array
-          items:
-            type: string
-          description: Sheet names that are required and cannot be excluded
-        notes:
-          type: array
-          items:
-            type: string
-          description: Short UI hints; field-level help is in the downloaded template
-        sheets:
-          type: array
-          items:
-            $ref: '#/components/schemas/TemplateSheetInfo'
-          description: 'Optional extension: when present, data sheets in the template with ordered column definitions (omitted when no template was generated)'
-      additionalProperties: false
-      description: General instructions, required sheets, and supplementary notes; optional sheet-wise column metadata when available
-      title: Template Instructions
-    HttpApiDecodeError:
-      type: object
-      required:
-      - issues
-      - message
-      - _tag
-      properties:
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/Issue'
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - HttpApiDecodeError
-      additionalProperties: false
-      description: The request did not match the expected schema
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    PayloadTooLargeHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        maxSizeBytes:
-          type: number
-        actualSizeBytes:
-          type: number
-        _tag:
-          type: string
-          enum:
-          - PayloadTooLargeHttpError
-      additionalProperties: false
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
   securitySchemes:
     bearerAuth:
       type: http

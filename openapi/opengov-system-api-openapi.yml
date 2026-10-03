@@ -60,12 +60,6 @@ paths:
       security: []
 components:
   responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
     AuthorizationError:
       description: Authorization error
       content:
@@ -81,6 +75,12 @@ components:
                 error:
                   __type: Authorization Error
                   message: 'Access denied: User not authorized to perform this action'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
     ServerError:
       description: Server error
       content:
@@ -88,6 +88,19 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
     ErrorEnvelope:
       type: object
       required:
@@ -108,19 +121,6 @@ components:
               type: string
             message:
               type: string
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

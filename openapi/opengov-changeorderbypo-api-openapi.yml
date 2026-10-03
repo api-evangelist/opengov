@@ -5219,6 +5219,18 @@ paths:
       summary: List unresolved operation errors for a Change Order
 components:
   schemas:
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    OperationErrorEntityType:
+      type: string
+      enum:
+      - PO
+      - CO
+      title: Whether the error belongs to a PO or a CO
+    OperationErrorSeverity:
+      type: string
+      title: Operation error severity
     ValueOrPercent:
       type: string
       enum:
@@ -5226,18 +5238,19 @@ components:
       - Percent
       description: Indicates whether the input is an absolute value or a percentage
       title: Value or Percent
-    OperationErrorSeverity:
+    OperationErrorCode:
       type: string
-      title: Operation error severity
+      title: Operation error code
     EncumbranceTrigger:
       type: string
       title: Trigger action that caused the error
-    OperationErrorEntityType:
+    CoChangeKind:
       type: string
       enum:
-      - PO
-      - CO
-      title: Whether the error belongs to a PO or a CO
+      - Modify
+      - Delete
+      description: 'Change order line/split change kind: Modify (apply delta) or Delete (remove row)'
+      title: CO Change Kind
     OperationErrorModel.json:
       type: object
       required:
@@ -5277,6 +5290,13 @@ components:
           type: string
       additionalProperties: false
       title: OperationErrorModel.json
+    CoChangeType:
+      type: string
+      enum:
+      - LineModified
+      - LineAdded
+      description: 'Change order line change type: LineModified, LineAdded'
+      title: CO Change Type
     LineItemType:
       type: string
       enum:
@@ -5288,34 +5308,14 @@ components:
       - Miscellaneous
       description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
       title: Line Item Type
+    OperationErrorPhase:
+      type: string
+      title: Operation error phase
     ISODate:
       type: string
       description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
       title: ISO Date (YYYY-MM-DD)
       pattern: ^\d{4}-\d{2}-\d{2}$
-    OperationErrorCode:
-      type: string
-      title: Operation error code
-    CoChangeKind:
-      type: string
-      enum:
-      - Modify
-      - Delete
-      description: 'Change order line/split change kind: Modify (apply delta) or Delete (remove row)'
-      title: CO Change Kind
-    CoChangeType:
-      type: string
-      enum:
-      - LineModified
-      - LineAdded
-      description: 'Change order line change type: LineModified, LineAdded'
-      title: CO Change Type
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    OperationErrorPhase:
-      type: string
-      title: Operation error phase
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key
