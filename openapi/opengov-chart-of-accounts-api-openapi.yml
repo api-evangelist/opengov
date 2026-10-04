@@ -210,49 +210,6 @@ paths:
           description: Internal Server Error - An unexpected condition was encountered.
 components:
   schemas:
-    ChartOfAccountsListResponse:
-      type: object
-      description: A JSON:API document containing a list of Chart Of Accounts resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChartOfAccountsResource'
-        links:
-          $ref: '#/components/schemas/PaginatedResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-    PaginatedResponseLinks:
-      type: object
-      description: Standard pagination links for collection responses
-      properties:
-        self:
-          type: string
-          format: uri
-          description: Link to the current page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
-        next:
-          type: string
-          format: uri
-          description: Link to the next page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
-        prev:
-          type: string
-          format: uri
-          description: Link to the previous page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        first:
-          type: string
-          format: uri
-          description: Link to the first page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
-        last:
-          type: string
-          format: uri
-          description: Link to the last page of results.
-          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
     ChartOfAccountsResource:
       type: object
       required:
@@ -370,6 +327,67 @@ components:
                 required:
                 - type
                 - application
+    PaginatedResponseLinks:
+      type: object
+      description: Standard pagination links for collection responses
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Link to the current page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=2
+        next:
+          type: string
+          format: uri
+          description: Link to the next page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=3
+        prev:
+          type: string
+          format: uri
+          description: Link to the previous page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        first:
+          type: string
+          format: uri
+          description: Link to the first page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=1
+        last:
+          type: string
+          format: uri
+          description: Link to the last page of results.
+          example: https://api.bnp.opengov.com/api/v1/budgets/1/budget-amounts?page[size]=100&page[number]=12
+    ChartOfAccountsResponse:
+      type: object
+      description: A JSON:API document containing a single Chart of Accounts resource.
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ChartOfAccountsResource'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+    ResponseMeta:
+      type: object
+      description: Standard metadata for collection responses
+      properties:
+        totalRecords:
+          type: integer
+          description: The total number of records matching the query.
+          example: 42
+    ChartOfAccountsListResponse:
+      type: object
+      description: A JSON:API document containing a list of Chart Of Accounts resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartOfAccountsResource'
+        links:
+          $ref: '#/components/schemas/PaginatedResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
     AccountsByIdsResponse:
       type: object
       description: A JSON:API document containing a list of Account resources.
@@ -442,24 +460,6 @@ components:
           $ref: '#/components/schemas/ResponseLinks'
         meta:
           $ref: '#/components/schemas/ResponseMeta'
-    ChartOfAccountsResponse:
-      type: object
-      description: A JSON:API document containing a single Chart of Accounts resource.
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ChartOfAccountsResource'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-    ResponseMeta:
-      type: object
-      description: Standard metadata for collection responses
-      properties:
-        totalRecords:
-          type: integer
-          description: The total number of records matching the query.
-          example: 42
     ResponseLinks:
       type: object
       description: Standard links object for non-paginated responses

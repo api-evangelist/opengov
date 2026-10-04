@@ -366,20 +366,6 @@ components:
       required:
       - results
       - pageInfo
-    CategoryEdge:
-      type: object
-      properties:
-        node:
-          description: The category data.
-          allOf:
-          - $ref: '#/components/schemas/CategoryDetails'
-        cursor:
-          type: string
-          description: A cursor for use in pagination.
-          example: Y2F0ZWdvcnkuaWQ9NDI=
-      required:
-      - node
-      - cursor
     CategoryDetails:
       type: object
       properties:
@@ -399,6 +385,20 @@ components:
       - code
       - title
       - codeType
+    CategoryEdge:
+      type: object
+      properties:
+        node:
+          description: The category data.
+          allOf:
+          - $ref: '#/components/schemas/CategoryDetails'
+        cursor:
+          type: string
+          description: A cursor for use in pagination.
+          example: Y2F0ZWdvcnkuaWQ9NDI=
+      required:
+      - node
+      - cursor
   securitySchemes:
     basicAuth:
       type: http

@@ -910,6 +910,9 @@ paths:
       summary: Delete a comment (soft-delete with cascade)
 components:
   schemas:
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
     ActivityLogEntryType:
       type: string
       enum:
@@ -949,9 +952,6 @@ components:
       - CO_LINE_REOPENED
       - CO_LINE_ATTACHMENTS_REMOVED
       title: Activity log entry type
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

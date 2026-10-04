@@ -59,6 +59,40 @@ paths:
           $ref: '#/components/responses/ServerError'
       security: []
 components:
+  schemas:
+    ErrorEnvelope:
+      type: object
+      required:
+      - help
+      - success
+      - error
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+          default: false
+        error:
+          type: object
+          additionalProperties: true
+          properties:
+            __type:
+              type: string
+            message:
+              type: string
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
   responses:
     AuthorizationError:
       description: Authorization error
@@ -87,40 +121,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-  schemas:
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
-    ErrorEnvelope:
-      type: object
-      required:
-      - help
-      - success
-      - error
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-          default: false
-        error:
-          type: object
-          additionalProperties: true
-          properties:
-            __type:
-              type: string
-            message:
-              type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

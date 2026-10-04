@@ -116,6 +116,14 @@ components:
                   $ref: '#/components/schemas/step_status'
                   description: Previous status of the workflow step
                   example: COMPLETE
+    step_type:
+      type: string
+      enum:
+      - APPROVAL
+      - PAYMENT
+      - INSPECTION
+      - DOCUMENT
+      description: A value that indicates the kind of process that this step represents
     step_status:
       type: string
       enum:
@@ -126,14 +134,6 @@ components:
       - SKIPPED
       - ON_HOLD
       description: Status of the workflow step
-    step_type:
-      type: string
-      enum:
-      - APPROVAL
-      - PAYMENT
-      - INSPECTION
-      - DOCUMENT
-      description: A value that indicates the kind of process that this step represents
   securitySchemes:
     bearerAuth:
       type: http

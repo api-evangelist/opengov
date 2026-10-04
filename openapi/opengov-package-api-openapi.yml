@@ -356,98 +356,6 @@ paths:
       - ApiTokenAuth: []
 components:
   schemas:
-    Group:
-      type: object
-      description: CKAN Group
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        image_url:
-          type: string
-        state:
-          type: string
-        package_count:
-          type: integer
-    Tag:
-      type: object
-      description: CKAN Tag
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        display_name:
-          type: string
-        vocabulary_id:
-          type: string
-        state:
-          type: string
-    Dataset:
-      type: object
-      description: CKAN Dataset (Package)
-      additionalProperties: true
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        title:
-          type: string
-        notes:
-          type: string
-        url:
-          type: string
-        version:
-          type: string
-        author:
-          type: string
-        author_email:
-          type: string
-        maintainer:
-          type: string
-        maintainer_email:
-          type: string
-        license_id:
-          type: string
-        owner_org:
-          type: string
-        private:
-          type: boolean
-        state:
-          type: string
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-    Envelope:
-      type: object
-      required:
-      - help
-      - success
-      properties:
-        help:
-          type: string
-        success:
-          type: boolean
-        result:
-          type: object
-          additionalProperties: true
     ErrorEnvelope:
       type: object
       required:
@@ -497,6 +405,98 @@ components:
         last_modified:
           type: string
           format: date-time
+    Group:
+      type: object
+      description: CKAN Group
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        state:
+          type: string
+        package_count:
+          type: integer
+    Dataset:
+      type: object
+      description: CKAN Dataset (Package)
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        notes:
+          type: string
+        url:
+          type: string
+        version:
+          type: string
+        author:
+          type: string
+        author_email:
+          type: string
+        maintainer:
+          type: string
+        maintainer_email:
+          type: string
+        license_id:
+          type: string
+        owner_org:
+          type: string
+        private:
+          type: boolean
+        state:
+          type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    Tag:
+      type: object
+      description: CKAN Tag
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        vocabulary_id:
+          type: string
+        state:
+          type: string
+    Envelope:
+      type: object
+      required:
+      - help
+      - success
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result:
+          type: object
+          additionalProperties: true
   responses:
     ValidationError:
       description: Validation error
@@ -514,21 +514,6 @@ components:
                   __type: Validation Error
                   name_or_id:
                   - Missing value
-    NotFound:
-      description: Not found error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-          examples:
-            not_found_error:
-              summary: Not found
-              value:
-                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
-                success: false
-                error:
-                  __type: Not Found Error
-                  message: Not found
     AuthorizationError:
       description: Authorization error
       content:
@@ -550,6 +535,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Not found error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            not_found_error:
+              summary: Not found
+              value:
+                help: https://demo.ckan.org/api/3/action/help_show?name={action_name}
+                success: false
+                error:
+                  __type: Not Found Error
+                  message: Not found
     ServerError:
       description: Server error
       content:

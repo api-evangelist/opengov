@@ -437,140 +437,61 @@ paths:
           description: Not Acceptable - The request could not be understood by the server due to a client error.
 components:
   schemas:
-    DataExportResourceMetadataResponse:
+    BudgetAmountsResponse:
       type: object
-      description: A JSON:API document containing data export resource metadata
+      description: A JSON:API document containing a list of Budget Amount resources.
       required:
       - data
       properties:
         data:
-          type: object
-          description: The primary data for the resource metadata
-          required:
-          - type
-          - id
-          - attributes
-          properties:
-            type:
-              type: string
-              enum:
-              - data-export-resource-metadata
-              description: The type of the resource
-            id:
-              type: string
-              description: The unique identifier for the resource
-              example: lens/entity/budget-summary/58f3556f-f638-49e3-8260-2d98bee5ed5b
-            attributes:
-              type: object
-              description: The resource attributes
-              required:
-              - entityId
-              - name
-              - description
-              - sourceId
-              - managed
-              - standardType
-              - columns
-              - createdAt
-              - updatedAt
-              - visible
-              - dataUpdatedAt
-              properties:
-                entityId:
-                  type: string
-                  format: uuid
-                  description: The entity ID that owns this resource
-                  example: 68c1cc9c-03c1-4786-ba87-300c262b1cc3
-                name:
-                  type: string
-                  description: Human-readable name of the resource
-                  example: Budget with Allocations (Test) Budget Summary - 7/9/2025
-                description:
-                  type: string
-                  description: Detailed description of the resource
-                  example: Budget with Allocations (Test) Budget Summary - 7/9/2025
-                sourceId:
-                  type: string
-                  description: The source dataset identifier
-                  example: dataset/entity/budget-summary/ac339608-86a2-4f47-a125-f2d2d536ed4d
-                managed:
-                  type: object
-                  description: Management information for the resource
-                  required:
-                  - type
-                  - application
-                  properties:
-                    type:
-                      type: string
-                      description: The type of management
-                      example: application
-                    application:
-                      type: string
-                      description: URN of the managing application
-                      example: urn:opengov:application:budget
-                standardType:
-                  type: string
-                  description: URN representing the standard type of this resource
-                  example: urn:opengov:lenses/standard/budgeting/budget-summary/1
-                columns:
-                  type: array
-                  description: Schema definition of the columns in the dataset
-                  items:
-                    type: object
-                    required:
-                    - name
-                    - label
-                    - visible
-                    - semanticTypes
-                    - type
-                    properties:
-                      name:
-                        type: string
-                        description: Internal column name
-                        example: account_number
-                      label:
-                        type: string
-                        description: Human-readable column label
-                        example: Account Number
-                      visible:
-                        type: boolean
-                        description: Whether the column is visible by default
-                        example: true
-                      semanticTypes:
-                        type: array
-                        description: Array of semantic type URNs describing the column meaning
-                        items:
-                          type: string
-                        example:
-                        - urn:opengov:types/semantic/accounting/coa/account-number
-                        - urn:opengov:types/semantic/dataclass/public
-                      type:
-                        type: string
-                        description: URN describing the logical data type
-                        example: urn:opengov:types/logical/text
-                      family:
-                        type: string
-                        description: Optional grouping family for related columns
-                        example: Period
-                createdAt:
-                  type: string
-                  format: date-time
-                  description: Timestamp when the resource was created
-                  example: '2025-07-09T20:11:01.720379413Z'
-                updatedAt:
-                  type: string
-                  format: date-time
-                  description: Timestamp when the resource metadata was last updated
-                  example: '2025-07-09T20:11:01.720379413Z'
-                visible:
-                  type: boolean
-                  description: Whether the resource is visible to users
-                  example: true
-                dataUpdatedAt:
-                  type: string
-                  format: date-time
-                  description: Timestamp when the underlying data was last updated
-                  example: '2025-07-09T20:11:06.860339917Z'
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - attributes
+            properties:
+              type:
+                type: string
+                enum:
+                - budget-amount
+                description: The type of the resource.
+              id:
+                type: string
+                description: The unique identifier for the  budget amount. This is the account ID and fiscal year concatenated.
+              attributes:
+                type: object
+                required:
+                - fiscalYear
+                - amount
+                - accountNumberId
+                properties:
+                  fiscalYear:
+                    type: integer
+                    description: The fiscal year of the budget amount.
+                    example: 2025
+                  amount:
+                    type: string
+                    format: decimal
+                    description: The budgeted amount for the given account number and fiscal year.
+                    example: '241000.00'
+                  accountNumberId:
+                    type: string
+                    format: uuid
+                    description: The account number id of the budget amount.
+                  accountNumber:
+                    type: string
+                    description: The account number is generated by combining all segment codes.
+                    example: 101-1234-2123-10021
+        links:
+          $ref: '#/components/schemas/PaginatedResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        included:
+          type: array
+          description: Optional included budget resource when requested via include parameter
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
     PaginatedResponseLinks:
       type: object
       description: Standard pagination links for collection responses
@@ -769,75 +690,6 @@ components:
           $ref: '#/components/schemas/ResponseLinks'
         meta:
           $ref: '#/components/schemas/ResponseMeta'
-    BudgetsListResponse:
-      type: object
-      description: A JSON:API document containing a list of Budget resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BudgetListResource'
-        links:
-          $ref: '#/components/schemas/ResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-    BudgetAmountsResponse:
-      type: object
-      description: A JSON:API document containing a list of Budget Amount resources.
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - attributes
-            properties:
-              type:
-                type: string
-                enum:
-                - budget-amount
-                description: The type of the resource.
-              id:
-                type: string
-                description: The unique identifier for the  budget amount. This is the account ID and fiscal year concatenated.
-              attributes:
-                type: object
-                required:
-                - fiscalYear
-                - amount
-                - accountNumberId
-                properties:
-                  fiscalYear:
-                    type: integer
-                    description: The fiscal year of the budget amount.
-                    example: 2025
-                  amount:
-                    type: string
-                    format: decimal
-                    description: The budgeted amount for the given account number and fiscal year.
-                    example: '241000.00'
-                  accountNumberId:
-                    type: string
-                    format: uuid
-                    description: The account number id of the budget amount.
-                  accountNumber:
-                    type: string
-                    description: The account number is generated by combining all segment codes.
-                    example: 101-1234-2123-10021
-        links:
-          $ref: '#/components/schemas/PaginatedResponseLinks'
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        included:
-          type: array
-          description: Optional included budget resource when requested via include parameter
-          items:
-            $ref: '#/components/schemas/BudgetListResource'
     ResponseMeta:
       type: object
       description: Standard metadata for collection responses
@@ -846,76 +698,140 @@ components:
           type: integer
           description: The total number of records matching the query.
           example: 42
-    BudgetAmountsSummaryResponse:
+    DataExportResourceMetadataResponse:
       type: object
-      description: A summary of the amounts for a Budget.
+      description: A JSON:API document containing data export resource metadata
       required:
       - data
       properties:
         data:
           type: object
+          description: The primary data for the resource metadata
           required:
+          - type
           - id
           - attributes
           properties:
             type:
               type: string
               enum:
-              - budget-amounts-summary
-              description: The type of the resource.
+              - data-export-resource-metadata
+              description: The type of the resource
             id:
               type: string
-              format: uuid
-              description: The unique identifier for the budget.
+              description: The unique identifier for the resource
+              example: lens/entity/budget-summary/58f3556f-f638-49e3-8260-2d98bee5ed5b
             attributes:
               type: object
+              description: The resource attributes
               required:
-              - amountsSummary
+              - entityId
+              - name
+              - description
+              - sourceId
+              - managed
+              - standardType
+              - columns
+              - createdAt
+              - updatedAt
+              - visible
+              - dataUpdatedAt
               properties:
-                amountsSummary:
+                entityId:
+                  type: string
+                  format: uuid
+                  description: The entity ID that owns this resource
+                  example: 68c1cc9c-03c1-4786-ba87-300c262b1cc3
+                name:
+                  type: string
+                  description: Human-readable name of the resource
+                  example: Budget with Allocations (Test) Budget Summary - 7/9/2025
+                description:
+                  type: string
+                  description: Detailed description of the resource
+                  example: Budget with Allocations (Test) Budget Summary - 7/9/2025
+                sourceId:
+                  type: string
+                  description: The source dataset identifier
+                  example: dataset/entity/budget-summary/ac339608-86a2-4f47-a125-f2d2d536ed4d
+                managed:
                   type: object
+                  description: Management information for the resource
                   required:
-                  - expenses
-                  - revenues
+                  - type
+                  - application
                   properties:
-                    expenses:
-                      type: object
-                      required:
-                      - baseAmount
-                      - adjustmentAmount
-                      - proposedAmount
-                      properties:
-                        baseAmount:
+                    type:
+                      type: string
+                      description: The type of management
+                      example: application
+                    application:
+                      type: string
+                      description: URN of the managing application
+                      example: urn:opengov:application:budget
+                standardType:
+                  type: string
+                  description: URN representing the standard type of this resource
+                  example: urn:opengov:lenses/standard/budgeting/budget-summary/1
+                columns:
+                  type: array
+                  description: Schema definition of the columns in the dataset
+                  items:
+                    type: object
+                    required:
+                    - name
+                    - label
+                    - visible
+                    - semanticTypes
+                    - type
+                    properties:
+                      name:
+                        type: string
+                        description: Internal column name
+                        example: account_number
+                      label:
+                        type: string
+                        description: Human-readable column label
+                        example: Account Number
+                      visible:
+                        type: boolean
+                        description: Whether the column is visible by default
+                        example: true
+                      semanticTypes:
+                        type: array
+                        description: Array of semantic type URNs describing the column meaning
+                        items:
                           type: string
-                          format: decimal
-                          description: The base amount for the expenses.
-                        adjustmentAmount:
-                          type: string
-                          format: decimal
-                          description: The adjustment amount for the expenses.
-                        proposedAmount:
-                          type: string
-                          format: decimal
-                          description: The proposed amount for the expenses.
-                    revenues:
-                      type: object
-                      required:
-                      - baseAmount
-                      - adjustmentAmount
-                      - proposedAmount
-                      properties:
-                        baseAmount:
-                          type: string
-                          format: decimal
-                          description: The base amount for the revenues.
-                        adjustmentAmount:
-                          type: string
-                          format: decimal
-                          description: The adjustment amount for the revenues.
-                        proposedAmount:
-                          type: string
-                          format: decimal
-                          description: The proposed amount for the revenues.
+                        example:
+                        - urn:opengov:types/semantic/accounting/coa/account-number
+                        - urn:opengov:types/semantic/dataclass/public
+                      type:
+                        type: string
+                        description: URN describing the logical data type
+                        example: urn:opengov:types/logical/text
+                      family:
+                        type: string
+                        description: Optional grouping family for related columns
+                        example: Period
+                createdAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the resource was created
+                  example: '2025-07-09T20:11:01.720379413Z'
+                updatedAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the resource metadata was last updated
+                  example: '2025-07-09T20:11:01.720379413Z'
+                visible:
+                  type: boolean
+                  description: Whether the resource is visible to users
+                  example: true
+                dataUpdatedAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the underlying data was last updated
+                  example: '2025-07-09T20:11:06.860339917Z'
     BudgetListResource:
       type: object
       required:
@@ -999,6 +915,90 @@ components:
               readOnly: true
               description: The date and time the resource was last updated.
               example: '2025-01-01T00:00:00Z'
+    BudgetAmountsSummaryResponse:
+      type: object
+      description: A summary of the amounts for a Budget.
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - attributes
+          properties:
+            type:
+              type: string
+              enum:
+              - budget-amounts-summary
+              description: The type of the resource.
+            id:
+              type: string
+              format: uuid
+              description: The unique identifier for the budget.
+            attributes:
+              type: object
+              required:
+              - amountsSummary
+              properties:
+                amountsSummary:
+                  type: object
+                  required:
+                  - expenses
+                  - revenues
+                  properties:
+                    expenses:
+                      type: object
+                      required:
+                      - baseAmount
+                      - adjustmentAmount
+                      - proposedAmount
+                      properties:
+                        baseAmount:
+                          type: string
+                          format: decimal
+                          description: The base amount for the expenses.
+                        adjustmentAmount:
+                          type: string
+                          format: decimal
+                          description: The adjustment amount for the expenses.
+                        proposedAmount:
+                          type: string
+                          format: decimal
+                          description: The proposed amount for the expenses.
+                    revenues:
+                      type: object
+                      required:
+                      - baseAmount
+                      - adjustmentAmount
+                      - proposedAmount
+                      properties:
+                        baseAmount:
+                          type: string
+                          format: decimal
+                          description: The base amount for the revenues.
+                        adjustmentAmount:
+                          type: string
+                          format: decimal
+                          description: The adjustment amount for the revenues.
+                        proposedAmount:
+                          type: string
+                          format: decimal
+                          description: The proposed amount for the revenues.
+    BudgetsListResponse:
+      type: object
+      description: A JSON:API document containing a list of Budget resources.
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetListResource'
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
     ResponseLinks:
       type: object
       description: Standard links object for non-paginated responses
