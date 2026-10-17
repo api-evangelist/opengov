@@ -47,6 +47,21 @@ paths:
         '500':
           description: Internal Server Error
 components:
+  parameters:
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
   schemas:
     Record:
       x-tags:
@@ -165,21 +180,6 @@ components:
             related:
               type: string
               description: Link to the related resource
-  parameters:
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

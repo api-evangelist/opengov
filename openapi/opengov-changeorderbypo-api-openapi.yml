@@ -5219,19 +5219,11 @@ paths:
       summary: List unresolved operation errors for a Change Order
 components:
   schemas:
-    OperationErrorSeverity:
+    ISODate:
       type: string
-      title: Operation error severity
-    EncumbranceTrigger:
-      type: string
-      title: Trigger action that caused the error
-    ValueOrPercent:
-      type: string
-      enum:
-      - Value
-      - Percent
-      description: Indicates whether the input is an absolute value or a percentage
-      title: Value or Percent
+      description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
+      title: ISO Date (YYYY-MM-DD)
+      pattern: ^\d{4}-\d{2}-\d{2}$
     CoChangeKind:
       type: string
       enum:
@@ -5239,28 +5231,19 @@ components:
       - Delete
       description: 'Change order line/split change kind: Modify (apply delta) or Delete (remove row)'
       title: CO Change Kind
-    OperationErrorPhase:
-      type: string
-      title: Operation error phase
-    ISODate:
-      type: string
-      description: a string matching the pattern ^\d{4}-\d{2}-\d{2}$
-      title: ISO Date (YYYY-MM-DD)
-      pattern: ^\d{4}-\d{2}-\d{2}$
-    LineItemType:
+    ValueOrPercent:
       type: string
       enum:
-      - Item
-      - Service
-      - Tax
-      - Discount
-      - Freight
-      - Miscellaneous
-      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
-      title: Line Item Type
+      - Value
+      - Percent
+      description: Indicates whether the input is an absolute value or a percentage
+      title: Value or Percent
     OperationErrorCode:
       type: string
       title: Operation error code
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
     CoChangeType:
       type: string
       enum:
@@ -5268,9 +5251,6 @@ components:
       - LineAdded
       description: 'Change order line change type: LineModified, LineAdded'
       title: CO Change Type
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
     OperationErrorModel.json:
       type: object
       required:
@@ -5310,12 +5290,32 @@ components:
           type: string
       additionalProperties: false
       title: OperationErrorModel.json
+    OperationErrorSeverity:
+      type: string
+      title: Operation error severity
+    OperationErrorPhase:
+      type: string
+      title: Operation error phase
+    LineItemType:
+      type: string
+      enum:
+      - Item
+      - Service
+      - Tax
+      - Discount
+      - Freight
+      - Miscellaneous
+      description: 'Line item type: Item, Service, Tax, Discount, Freight, Miscellaneous'
+      title: Line Item Type
     OperationErrorEntityType:
       type: string
       enum:
       - PO
       - CO
       title: Whether the error belongs to a PO or a CO
+    EncumbranceTrigger:
+      type: string
+      title: Trigger action that caused the error
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

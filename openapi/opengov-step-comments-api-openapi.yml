@@ -112,61 +112,7 @@ paths:
         '500':
           description: Internal Server Error
 components:
-  parameters:
-    recordID:
-      name: recordID
-      in: path
-      description: ID of the record
-      required: true
-      schema:
-        type: integer
-    commentID:
-      name: commentID
-      in: path
-      description: ID of a comment on a workflow step of a record
-      required: true
-      schema:
-        type: integer
-    stepID:
-      name: stepID
-      in: path
-      description: ID of workflow step on a record
-      required: true
-      schema:
-        type: integer
-    community:
-      name: community
-      in: path
-      description: Name of the community
-      required: true
-      schema:
-        type: string
   schemas:
-    RecordStepCommentMutable:
-      type: object
-      example:
-        type: record_step_comment
-        attributes:
-          type: COMMENT
-          comment: Hello World
-      properties:
-        type:
-          type: string
-          description: Type of the resource
-          enum:
-          - record_step_comment
-        attributes:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - COMMENT
-              - INTERNAL_NOTE
-              description: Value indicates the type of comment
-            comment:
-              type: string
-              description: Contents of the comment
     RecordStepComment:
       x-tags:
       - Step Comments
@@ -210,6 +156,60 @@ components:
               type: string
               format: date-time
               description: Timestamp that indicates when this comment was created
+    RecordStepCommentMutable:
+      type: object
+      example:
+        type: record_step_comment
+        attributes:
+          type: COMMENT
+          comment: Hello World
+      properties:
+        type:
+          type: string
+          description: Type of the resource
+          enum:
+          - record_step_comment
+        attributes:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - COMMENT
+              - INTERNAL_NOTE
+              description: Value indicates the type of comment
+            comment:
+              type: string
+              description: Contents of the comment
+  parameters:
+    recordID:
+      name: recordID
+      in: path
+      description: ID of the record
+      required: true
+      schema:
+        type: integer
+    stepID:
+      name: stepID
+      in: path
+      description: ID of workflow step on a record
+      required: true
+      schema:
+        type: integer
+    commentID:
+      name: commentID
+      in: path
+      description: ID of a comment on a workflow step of a record
+      required: true
+      schema:
+        type: integer
+    community:
+      name: community
+      in: path
+      description: Name of the community
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

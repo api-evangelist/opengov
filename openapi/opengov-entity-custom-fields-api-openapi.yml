@@ -478,6 +478,61 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    EntityCustomFieldsModel.jsonCreate:
+      type: object
+      required:
+      - fieldType
+      - fieldTitle
+      - instructionsDisplay
+      properties:
+        fieldType:
+          type: string
+          enum:
+          - text
+          - number
+          - boolean
+          - date
+          - dropdown
+        fieldTitle:
+          $ref: '#/components/schemas/NonEmptyString'
+        instructions:
+          anyOf:
+          - type: string
+          - type: 'null'
+        instructionsDisplay:
+          type: string
+          enum:
+          - description_text
+          - tool_tip
+        isActive:
+          type: boolean
+        isRequired:
+          type: boolean
+        isMasked:
+          type: boolean
+        maskedVisibleChars:
+          anyOf:
+          - type: number
+          - type: 'null'
+        options:
+          anyOf:
+          - type: array
+            items:
+              type: object
+              required:
+              - label
+              - value
+              properties:
+                label:
+                  type: string
+                value:
+                  type: string
+              additionalProperties: false
+          - type: 'null'
+        allowMultiple:
+          type: boolean
+      additionalProperties: false
+      title: EntityCustomFieldsModel.jsonCreate
     EntityCustomFieldsModel.jsonUpdate:
       type: object
       required:
@@ -533,19 +588,6 @@ components:
           type: boolean
       additionalProperties: false
       title: EntityCustomFieldsModel.jsonUpdate
-    InternalServerHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - InternalServerHttpError
-      additionalProperties: false
     EntityCustomFieldsModel.json:
       type: object
       required:
@@ -626,18 +668,71 @@ components:
           - type: 'null'
       additionalProperties: false
       title: EntityCustomFieldsModel.json
-    AuthError:
+    UnauthenticatedHttpError:
       type: object
       required:
+      - message
       - _tag
       properties:
-        cause:
-          title: unknown
+        message:
+          type: string
         _tag:
           type: string
           enum:
-          - AuthError
+          - UnauthenticatedHttpError
       additionalProperties: false
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    NonEmptyString:
+      type: string
+      description: a non empty string
+      title: nonEmptyString
+      minLength: 1
     BadRequestHttpError:
       type: object
       required:
@@ -668,19 +763,6 @@ components:
           enum:
           - BadRequestHttpError
       additionalProperties: false
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
-      additionalProperties: false
     UnauthorizedHttpError:
       type: object
       required:
@@ -698,30 +780,35 @@ components:
           enum:
           - UnauthorizedHttpError
       additionalProperties: false
-    NonEmptyString:
-      type: string
-      description: a non empty string
-      title: nonEmptyString
-      minLength: 1
-    HttpApiDecodeError:
+    AuthError:
       type: object
       required:
-      - issues
-      - message
       - _tag
       properties:
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/Issue'
-        message:
-          type: string
+        cause:
+          title: unknown
         _tag:
           type: string
           enum:
-          - HttpApiDecodeError
+          - AuthError
       additionalProperties: false
-      description: The request did not match the expected schema
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
     Issue:
       type: object
       required:
@@ -754,39 +841,7 @@ components:
     CustomFieldId:
       type: number
       description: Unique identifier for a custom field definition
-    NotFoundHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
-      additionalProperties: false
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
-    UnauthenticatedHttpError:
+    InternalServerHttpError:
       type: object
       required:
       - message
@@ -797,63 +852,8 @@ components:
         _tag:
           type: string
           enum:
-          - UnauthenticatedHttpError
+          - InternalServerHttpError
       additionalProperties: false
-    EntityCustomFieldsModel.jsonCreate:
-      type: object
-      required:
-      - fieldType
-      - fieldTitle
-      - instructionsDisplay
-      properties:
-        fieldType:
-          type: string
-          enum:
-          - text
-          - number
-          - boolean
-          - date
-          - dropdown
-        fieldTitle:
-          $ref: '#/components/schemas/NonEmptyString'
-        instructions:
-          anyOf:
-          - type: string
-          - type: 'null'
-        instructionsDisplay:
-          type: string
-          enum:
-          - description_text
-          - tool_tip
-        isActive:
-          type: boolean
-        isRequired:
-          type: boolean
-        isMasked:
-          type: boolean
-        maskedVisibleChars:
-          anyOf:
-          - type: number
-          - type: 'null'
-        options:
-          anyOf:
-          - type: array
-            items:
-              type: object
-              required:
-              - label
-              - value
-              properties:
-                label:
-                  type: string
-                value:
-                  type: string
-              additionalProperties: false
-          - type: 'null'
-        allowMultiple:
-          type: boolean
-      additionalProperties: false
-      title: EntityCustomFieldsModel.jsonCreate
   securitySchemes:
     bearerAuth:
       type: http

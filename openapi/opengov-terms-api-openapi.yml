@@ -460,6 +460,18 @@ paths:
         required: true
 components:
   schemas:
+    PoTermsSource:
+      type: string
+      enum:
+      - USER
+      - ATLAS
+      title: Provenance of a PO terms row
+    NumberFromString:
+      type: string
+      description: a string to be decoded into a number
+    DateTimeUtc:
+      type: string
+      description: a string to be decoded into a DateTime.Utc
     PoTermsModel.json:
       type: object
       required:
@@ -515,18 +527,6 @@ components:
           - type: 'null'
       additionalProperties: false
       title: PoTermsModel.json
-    PoTermsSource:
-      type: string
-      enum:
-      - USER
-      - ATLAS
-      title: Provenance of a PO terms row
-    NumberFromString:
-      type: string
-      description: a string to be decoded into a number
-    DateTimeUtc:
-      type: string
-      description: a string to be decoded into a DateTime.Utc
   securitySchemes:
     platformApiKey:
       description: OpenGov Platform API Key

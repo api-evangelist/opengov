@@ -490,7 +490,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InternalServerHttpError:
+    UnauthenticatedHttpError:
       type: object
       required:
       - message
@@ -501,7 +501,113 @@ components:
         _tag:
           type: string
           enum:
-          - InternalServerHttpError
+          - UnauthenticatedHttpError
+      additionalProperties: false
+    NotFoundHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        resourceType:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - NotFoundHttpError
+      additionalProperties: false
+    EntityNotFoundError:
+      type: object
+      required:
+      - entityId
+      - _tag
+      properties:
+        entityId:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - EntityNotFoundError
+      additionalProperties: false
+    HttpApiDecodeError:
+      type: object
+      required:
+      - issues
+      - message
+      - _tag
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+        message:
+          type: string
+        _tag:
+          type: string
+          enum:
+          - HttpApiDecodeError
+      additionalProperties: false
+      description: The request did not match the expected schema
+    BadRequestHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        blockingReasons:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - reason
+            properties:
+              source:
+                type: string
+              reason:
+                type: string
+              count:
+                type: number
+            additionalProperties: false
+        _tag:
+          type: string
+          enum:
+          - BadRequestHttpError
+      additionalProperties: false
+    UnauthorizedHttpError:
+      type: object
+      required:
+      - message
+      - _tag
+      properties:
+        message:
+          type: string
+        requiredPermissions:
+          type: array
+          items:
+            type: string
+        _tag:
+          type: string
+          enum:
+          - UnauthorizedHttpError
+      additionalProperties: false
+    AuthError:
+      type: object
+      required:
+      - _tag
+      properties:
+        cause:
+          title: unknown
+        _tag:
+          type: string
+          enum:
+          - AuthError
       additionalProperties: false
     VendorNoteModel.json:
       type: object
@@ -555,78 +661,6 @@ components:
             $ref: '#/components/schemas/AttachmentModel.json'
       additionalProperties: false
       title: VendorNoteModel.json
-    AuthError:
-      type: object
-      required:
-      - _tag
-      properties:
-        cause:
-          title: unknown
-        _tag:
-          type: string
-          enum:
-          - AuthError
-      additionalProperties: false
-    BadRequestHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        field:
-          type: string
-        blockingReasons:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - reason
-            properties:
-              source:
-                type: string
-              reason:
-                type: string
-              count:
-                type: number
-            additionalProperties: false
-        _tag:
-          type: string
-          enum:
-          - BadRequestHttpError
-      additionalProperties: false
-    EntityNotFoundError:
-      type: object
-      required:
-      - entityId
-      - _tag
-      properties:
-        entityId:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - EntityNotFoundError
-      additionalProperties: false
-    UnauthorizedHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        requiredPermissions:
-          type: array
-          items:
-            type: string
-        _tag:
-          type: string
-          enum:
-          - UnauthorizedHttpError
-      additionalProperties: false
     Issue:
       type: object
       required:
@@ -656,6 +690,29 @@ components:
           description: A descriptive message explaining the issue
       additionalProperties: false
       description: Represents an error encountered while parsing a value to match the schema
+    PropertyKey:
+      anyOf:
+      - type: string
+      - type: number
+      - type: object
+        required:
+        - _tag
+        - key
+        properties:
+          _tag:
+            type: string
+            enum:
+            - symbol
+          key:
+            type: string
+        additionalProperties: false
+        description: an object to be decoded into a globally shared symbol
+    NoteId:
+      type: number
+      description: Unique identifier for a vendor note
+    AttachmentId:
+      type: number
+      description: Unique identifier for an attachment
     AttachmentModel.json:
       type: object
       required:
@@ -699,47 +756,7 @@ components:
           - type: 'null'
       additionalProperties: false
       title: AttachmentModel.json
-    AttachmentId:
-      type: number
-      description: Unique identifier for an attachment
-    HttpApiDecodeError:
-      type: object
-      required:
-      - issues
-      - message
-      - _tag
-      properties:
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/Issue'
-        message:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - HttpApiDecodeError
-      additionalProperties: false
-      description: The request did not match the expected schema
-    NoteId:
-      type: number
-      description: Unique identifier for a vendor note
-    NotFoundHttpError:
-      type: object
-      required:
-      - message
-      - _tag
-      properties:
-        message:
-          type: string
-        resourceType:
-          type: string
-        _tag:
-          type: string
-          enum:
-          - NotFoundHttpError
-      additionalProperties: false
-    UnauthenticatedHttpError:
+    InternalServerHttpError:
       type: object
       required:
       - message
@@ -750,25 +767,8 @@ components:
         _tag:
           type: string
           enum:
-          - UnauthenticatedHttpError
+          - InternalServerHttpError
       additionalProperties: false
-    PropertyKey:
-      anyOf:
-      - type: string
-      - type: number
-      - type: object
-        required:
-        - _tag
-        - key
-        properties:
-          _tag:
-            type: string
-            enum:
-            - symbol
-          key:
-            type: string
-        additionalProperties: false
-        description: an object to be decoded into a globally shared symbol
   securitySchemes:
     bearerAuth:
       type: http
