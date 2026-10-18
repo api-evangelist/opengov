@@ -3,6 +3,8 @@ provider: OpenGov
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
+- Infrastructure
+- Public Sector & Government
 - Transportation & Logistics
 min_confidence: 0.7
 capability_model:
@@ -11,8 +13,18 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 34
+edge_count: 45
 edges:
+- tag: Purchase Order
+  spec_file: opengov-purchase-order-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.95
+  evidence: POST /api/v1/po/entities/{entityId}/purchase-orders/{id}/issue 'Issue Purchase Order'; 'Submit
+    Purchase Order for Approval'; 'Approve Purchase Order'
+  reason: Full purchase order lifecycle — create draft, submit, approve, reject, issue, cancel, close
+    — with PoStatus/PoType schemas. Unambiguously PO creation, approval and execution.
 - tag: purchaseOrder
   spec_file: opengov-purchase-order-api-openapi.yml
   reanchored_from: opengov-purchaseorder-api-openapi.yml
@@ -24,6 +36,16 @@ edges:
     Order", "Issue Purchase Order", "Close Purchase Order"'
   reason: The operations perform the full purchase-order lifecycle — creation, approval, issuance, cancellation,
     closure — which is exactly PO creation, approval and execution.
+- tag: Line Item
+  spec_file: opengov-line-item-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.9
+  evidence: POST /api/v1/po/entities/{entityId}/purchase-orders/{poId}/line-items 'Create a new line item
+    on a purchase order'
+  reason: Operations create, update, delete and bulk-close line items on purchase orders, with LineItemModel/LineItemSplitModel
+    schemas — purchase order content management.
 - tag: changeOrderByPo
   spec_file: opengov-changeorderbypo-api-openapi.yml
   capability_id: BC-500.30
@@ -54,6 +76,27 @@ edges:
   reason: Operations read and export budgets and budget amounts from the OpenGov Budgeting & Performance
     product — squarely budget process management. Some ambiguity as the surface is read/export-only, and
     data-export operations are incidental plumbing.
+- tag: Chart Of Accounts
+  spec_file: opengov-chart-of-accounts-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.85
+  evidence: '"listChartOfAccountsByEntity  List Chart Of Accounts by Entity"; "accountsByIds  Get accounts
+    by list of account IDs"'
+  reason: Operations expose chart-of-accounts structures and individual accounts, which is the chart of
+    accounts element of General Ledger Management.
+- tag: Record
+  spec_file: opengov-record-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.85
+  evidence: '"Permitting & Licensing Record API" ... "POST /v2/{community}/records/{recordID}/renew  renewRecord  Renew
+    a record"'
+  reason: Records here are permit/licence application records in OpenGov's Permitting & Licensing product,
+    with create/update/renew lifecycle operations — core permits, licences and authorisations management.
+    Kept at L1 since the operations span intake, issuance and renewal.
 - tag: Checklist Results
   spec_file: opengov-checklist-results-api-openapi.yml
   capability_id: BC-3240.40
@@ -75,6 +118,18 @@ edges:
     Reject Receipt
   reason: Full lifecycle of goods/receipt documents with line items and submit-approve-reject workflow
     — day-to-day procure-to-pay operations (receipts) in a government ERP procurement suite.
+- tag: Contracts
+  spec_file: opengov-contracts-api-openapi.yml
+  capability_id: BC-500.20
+  capability_id_l1: BC-500
+  capability_name: Procurement Contract Management
+  confidence: 0.8
+  evidence: 'GET /public/api/v1/contracts  ListContractsV1Controller_listContracts  List of Contracts;
+    schemas ContractRenewalResponseDetails, ContractMilestoneResponseDetails; vendor: "procurement and
+    contract management"'
+  reason: Operations read and import contracts (parties, renewals, milestones, budgets, attachments) within
+    OpenGov's procurement product, i.e. lifecycle management of procurement contracts. Mapped to Procurement
+    Contract Management rather than general Legal Contract Management because the spec files are opengov-procurement-v1/v2.
 - tag: Inspection Events
   spec_file: opengov-inspection-events-api-openapi.yml
   capability_id: BC-3240.40
@@ -118,6 +173,28 @@ edges:
   reason: Executes the review/approval workflow steps on individual permit and licence records in OpenGov's
     Permitting & Licensing product; L1 as steps span intake, assessment and issuance.
   recovered_from: vertical-public-sector-government-edges.json
+- tag: Revisions
+  spec_file: opengov-revisions-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.8
+  evidence: GET /api/v1/po/entities/{entityId}/purchase-orders/{poId}/revisions  List revision history
+    for a Purchase Order
+  reason: The single operation returns the revision history of a purchase order within an API described
+    as 'managing purchase orders, line items, splits, and vendors', which is squarely purchase order management.
+    Not 0.95 because the tag itself only exposes read-only version history rather than PO creation or
+    approval.
+- tag: Terms
+  spec_file: opengov-terms-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.8
+  evidence: GET /api/v1/po/entities/{entityId}/purchase-orders/{poId}/terms  Get Terms & Conditions for
+    a Purchase Order
+  reason: Operations read and upsert the Terms & Conditions attached to a specific purchase order within
+    an API 'for managing purchase orders, line items, splits, and vendors' — squarely purchase order management.
 - tag: ChartOfAccounts
   spec_file: opengov-chart-of-accounts-api-openapi.yml
   reanchored_from: opengov-chartofaccounts-api-openapi.yml
@@ -130,6 +207,38 @@ edges:
   reason: Operations expose chart of accounts and account structures, which the General Ledger Management
     capability explicitly names ('Chart of accounts, journals, period close'). Slight ambiguity because
     the surface sits in the Budgeting & Performance product and is read-only.
+- tag: Receipts
+  spec_file: opengov-receipts-api-openapi.yml
+  capability_id: BC-500.40
+  capability_id_l1: BC-500
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.78
+  evidence: PUT /api/v1/entities/{entityId}/receipts/{id} receipts.putReceipt 'Update Receipt with Line
+    Items'; 'Submit Receipt'; 'Approve Receipt'
+  reason: Receipt documents with line items, submit/approve/reject and cancel flows in the same procurement
+    suite as the purchase order API indicate goods-receipt processing within procure-to-pay operations;
+    small residual chance these are cash receipts rather than goods receipts.
+- tag: Records
+  spec_file: opengov-records-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.78
+  evidence: GET /v1/{community}/records/{recordID}  'Retrieve a record'; title 'Permitting Licensing &
+    Code Enforcement Records API'; schema 'Record'
+  reason: The record is the permit/licence/code-enforcement case object in OpenGov's permitting product;
+    retrieval of these authoritative permission records maps to permits and licences management.
+- tag: Vendors
+  spec_file: opengov-vendors-api-openapi.yml
+  capability_id: BC-510.10
+  capability_id_l1: BC-510
+  capability_name: Supplier Onboarding Management
+  confidence: 0.78
+  evidence: 'vendors.submitVendor  Vendors submit vendor ... vendors.promoteVendor  Vendors promote vendor;
+    schemas: VendorModel, VendorCategoriesModel.json, CertificateModel.jsonCreate'
+  reason: Vendor registration lifecycle — create, submit, promote and set availability, with vendor categories,
+    certificates, addresses and payment methods — matches supplier onboarding/qualification. Some ambiguity
+    between onboarding and broader supplier master management, hence sub-0.8.
 - tag: Checklist Templates
   spec_file: opengov-checklist-templates-api-openapi.yml
   capability_id: BC-3240.40
@@ -142,18 +251,6 @@ edges:
     supports inspection and compliance verification, though it is configuration of that process rather
     than execution.
   recovered_from: vertical-public-sector-government-edges.json
-- tag: Contracts
-  spec_file: opengov-contracts-api-openapi.yml
-  capability_id: BC-500.20
-  capability_id_l1: BC-500
-  capability_name: Procurement Contract Management
-  confidence: 0.75
-  evidence: POST /gateway/contract-orders/v1 importContractOrders 'Import Contract Orders'; GET /public/api/v1/contracts
-    'List of Contracts'; schemas ContractMilestoneResponseDetails, ContractRenewalResponseDetails, ContractPartyResponseDetails
-    — published in opengov-procurement-v1/v2 specs
-  reason: Operations expose the lifecycle data of awarded procurement contracts (parties, milestones,
-    renewals, budgets, attachments) within the vendor's procurement product, matching Procurement Contract
-    Management. Slight ambiguity with generic Contract Management (BC-150.10), hence 0.75.
 - tag: Inspection Steps
   spec_file: opengov-inspection-steps-api-openapi.yml
   capability_id: BC-3240.40
@@ -164,18 +261,6 @@ edges:
   reason: Inspection tasks in the permit record workflow drive the inspection of licensees/permitted work;
     mapped to inspection and compliance verification, with slight discount because 'steps' are workflow
     constructs.
-  recovered_from: vertical-public-sector-government-edges.json
-- tag: Record
-  spec_file: opengov-record-api-openapi.yml
-  capability_id: BC-3240.30
-  capability_id_l1: BC-3240
-  capability_name: Issuance & Renewal Operations
-  confidence: 0.75
-  evidence: POST /v2/{community}/records/{recordID}/renew  renewRecord  Renew a record; "Create a record",
-    "Archive a record"
-  reason: Records are the permit/licence application and permission objects of the Permitting & Licensing
-    product; the explicit renew operation points to issuance and renewal operations, though the CRUD set
-    also spans intake.
   recovered_from: vertical-public-sector-government-edges.json
 - tag: Record Applicant
   spec_file: opengov-record-applicant-api-openapi.yml
@@ -233,18 +318,6 @@ edges:
   reason: Fee schedules attached to permit/licence record types in the Permitting & Licensing product;
     permit fee configuration rather than general tax administration.
   recovered_from: vertical-public-sector-government-edges.json
-- tag: Records
-  spec_file: opengov-records-api-openapi.yml
-  capability_id: BC-3240
-  capability_id_l1: BC-3240
-  capability_name: Permits, Licences & Authorisations Management
-  confidence: 0.75
-  evidence: GET /v1/{community}/records/{recordID}  getRecord  Retrieve a record — from opengov-permitting-licensing-v1-openapi.yml
-  reason: The 'record' here is the permit/licence application case object of OpenGov's Permitting & Licensing
-    product (the spec 'exposes resources such as records, inspections, fees, approvals'). Retrieval of
-    permit records realises Permits, Licences & Authorisations Management; the single read operation does
-    not pinpoint one sub-capability.
-  recovered_from: vertical-public-sector-government-edges.json
 - tag: Approval Steps
   spec_file: opengov-approval-steps-api-openapi.yml
   capability_id: BC-3240.30
@@ -258,6 +331,17 @@ edges:
     so it sits under Permits, Licences & Authorisations Management; some ambiguity as to whether it is
     issuance/decision or generic workflow, hence moderate confidence.
   recovered_from: vertical-public-sector-government-edges.json
+- tag: Inspection Types
+  spec_file: opengov-inspection-types-api-openapi.yml
+  capability_id: BC-3240.40
+  capability_id_l1: BC-3240
+  capability_name: Inspection and Compliance Verification
+  confidence: 0.72
+  evidence: GET /v2/{community}/inspection-steps/{inspectionStepID}/inspection-types  List inspection
+    types on a step — within the "Permitting & Licensing API"
+  reason: Operations configure the inspection types attached to an inspection step in a government permitting/licensing
+    workflow, which is the inspection and compliance-verification element of permits and licences administration.
+    Slight uncertainty because the surface is configuration of types rather than execution of inspections.
 - tag: termsAttachment
   spec_file: opengov-termsattachment-api-openapi.yml
   capability_id: BC-500.30
@@ -270,17 +354,17 @@ edges:
     plumbing, the object is the PO, so Purchase Order Management is the honest fit. Moderate confidence
     because the surface is purely upload mechanics.
   recovered_from: sweep-20260828T235257Z-edges.json
-- tag: Inspection Types
-  spec_file: opengov-inspection-types-api-openapi.yml
-  capability_id: BC-3240.40
-  capability_id_l1: BC-3240
-  capability_name: Inspection and Compliance Verification
+- tag: Change Order
+  spec_file: opengov-change-order-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
   confidence: 0.7
-  evidence: POST /v2/{community}/inspection-steps/{inspectionStepID}/inspection-types  postInspectionType  Create
-    an inspection type
-  reason: Attaching inspection types to an inspection step on a permit record is part of conducting inspection/compliance
-    verification for permits and licences.
-  recovered_from: vertical-public-sector-government-edges.json
+  evidence: '"POST /api/v1/po/entities/{entityId}/change-orders/search  changeOrder.searchChangeOrders  Search
+    Change Orders" in the "API for managing purchase orders, line items, splits, and vendors"'
+  reason: Change orders here are amendments to purchase orders within the Purchase Order API (CoStatus
+    schema), so the capability is purchase-order lifecycle management. Single search operation keeps confidence
+    moderate.
 - tag: Issued Documents
   spec_file: opengov-issued-documents-api-openapi.yml
   capability_id: BC-3240.30
@@ -292,6 +376,16 @@ edges:
     of permits/licences and their credentials; the operations are read-only retrieval, so confidence is
     moderate.
   recovered_from: vertical-public-sector-government-edges.json
+- tag: Record Additional Locations
+  spec_file: opengov-record-additional-locations-api-openapi.yml
+  capability_id: BC-3240
+  capability_id_l1: BC-3240
+  capability_name: Permits, Licences & Authorisations Management
+  confidence: 0.7
+  evidence: '"GET /v2/{community}/records/{recordID}/additional-locations  listAdditionalRecordLocations"
+    in the Permitting & Licensing API'
+  reason: Sub-resource attaching additional site locations to a permitting/licensing record; supports
+    permit administration but is too generic to pin to a sub-capability.
 - tag: Record Type Attachments
   spec_file: opengov-record-type-attachments-api-openapi.yml
   capability_id: BC-3240
@@ -356,6 +450,24 @@ edges:
   reason: Change orders in this Purchase Order API are amendments to purchase orders, squarely within
     PO creation/approval/execution. Only a single search operation is exposed, so confidence is moderate
     rather than high.
+- tag: coReason
+  spec_file: opengov-coreason-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.7
+  evidence: GET /api/v1/po/entities/{entityId}/change-order-reasons — "List CO reasons for an entity"
+  reason: Maintains the reason codes used when raising change orders against purchase orders — reference
+    data directly supporting PO creation/amendment governance.
+- tag: purchaseOrderType
+  spec_file: opengov-purchaseordertype-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.7
+  evidence: GET /api/v1/po/entities/{entityId}/purchase-order-types — "List PO types" / schema PurchaseOrderTypeModel.json
+  reason: Reference data defining the types of purchase orders an entity can raise; configuration directly
+    serving purchase order creation and approval.
 - tag: receiptSync
   spec_file: opengov-receiptsync-api-openapi.yml
   capability_id: BC-500.40
